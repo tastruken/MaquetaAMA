@@ -1,0 +1,98 @@
+/**
+ * AMA Inmobiliaria - Design Tokens
+ * Conforme al Brandbook Oficial (Páginas 7, 8 y 9)
+ */
+
+:root {
+  /* ========================================================
+     1. PALETA CROMÁTICA OFICIAL (Pág. 7 Brandbook)
+     ======================================================== */
+  --color-petrol: #0F172A;     /* Primario oscuro / Textos / Acentos */
+  --color-cyan: #1AA6B7;       /* Acento principal / CTAs / Enlaces */
+  --color-coral: #FF414D;      /* Acento dinámico / Promociones */
+  --color-orange: #FF8541;     /* Complementario cálido / Badges */
+  --color-cream: #FFFFFF;      /* Fondo base blanco puro estilo Aurvix */
+
+  /* Códigos RGB para opacidades autorizadas */
+  --rgb-petrol: 15, 23, 42;
+  --rgb-cyan: 26, 166, 183;
+  --rgb-coral: 255, 65, 77;
+  --rgb-orange: 255, 133, 65;
+  --rgb-cream: 255, 255, 255;
+
+
+  /* ========================================================
+     2. APLICACIONES CON OPACIDAD AUTORIZADAS (Pág. 7 Brandbook)
+     ======================================================== */
+  /* Textos secundarios y atenuados */
+  --text-muted: rgba(var(--rgb-petrol), 0.72);
+  --text-soft: rgba(var(--rgb-petrol), 0.55);
+  --text-on-dark-muted: rgba(var(--rgb-cream), 0.75);
+
+  /* Bordes y divisores */
+  --border-subtle: rgba(var(--rgb-petrol), 0.10);
+  --border-medium: rgba(var(--rgb-petrol), 0.20);
+  --border-cyan: rgba(var(--rgb-cyan), 0.35);
+  --border-on-dark: rgba(var(--rgb-cream), 0.15);
+
+  /* Fondos y superficies */
+  --bg-surface: #FFFFFF;
+  --bg-surface-cream: var(--color-cream);
+  --bg-surface-translucent: rgba(var(--rgb-cream), 0.85);
+  --bg-petrol-translucent: rgba(var(--rgb-petrol), 0.92);
+  --bg-tint-cyan: rgba(var(--rgb-cyan), 0.08);
+  --bg-tint-coral: rgba(var(--rgb-coral), 0.08);
+  --bg-tint-orange: rgba(var(--rgb-orange), 0.08);
+
+  /* ========================================================
+     3. TIPOGRAFÍA OFICIAL (Pág. 8 Brandbook - Gilroy)
+     ======================================================== */
+  --font-family-base: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-weight-light: 300;     /* Gilroy Light */
+  --font-weight-regular: 400;   /* Gilroy Regular (Corporativa base) */
+  --font-weight-semibold: 600;  /* Gilroy Semibold */
+  --font-weight-black: 800;     /* Gilroy Black */
+  --font-weight-heavy: 900;     /* Gilroy Heavy */
+
+  /* Espaciado tipográfico corporativo (Pág. 5 y 6: "I N M O B I L I A R I A") */
+  --tracking-subtext: 0.38em;
+  --tracking-tight: -0.02em;
+
+  /* ========================================================
+     4. ELEVACIONES Y SOMBRAS (Framer / Multi-capa)
+     ======================================================== */
+  --shadow-sm: 0 2px 8px rgba(var(--rgb-petrol), 0.06);
+  --shadow-md: 0 8px 24px rgba(var(--rgb-petrol), 0.08);
+  --shadow-lg: 0 16px 40px rgba(var(--rgb-petrol), 0.12);
+  --shadow-hover: 0 20px 48px rgba(var(--rgb-petrol), 0.16);
+  --shadow-card: 0 4px 20px -2px rgba(var(--rgb-petrol), 0.05), 0 2px 6px -1px rgba(var(--rgb-petrol), 0.04);
+  --shadow-card-hover: 0 24px 48px -12px rgba(var(--rgb-petrol), 0.14), 0 8px 16px -4px rgba(var(--rgb-petrol), 0.06);
+  --shadow-pill: 0 4px 14px rgba(var(--rgb-petrol), 0.08);
+  --shadow-glass: 0 12px 36px 0 rgba(var(--rgb-petrol), 0.09);
+
+  /* ========================================================
+     5. GEOMETRÍA Y RADIOS (Bento & Pill)
+     ======================================================== */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-bento: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* ========================================================
+     6. GLASSMORPHISM & FONDOS CANVAS
+     ======================================================== */
+  --bg-canvas: #F8FAFC;
+  --bg-light-card: #F4F5F7;
+  --bg-ghost: rgba(var(--rgb-petrol), 0.04);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: 1px solid rgba(var(--rgb-petrol), 0.08);
+  --glass-blur: 20px;
+
+  /* Transiciones */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-elastic: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+

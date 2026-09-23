@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PatternDrops from '../components/brand/PatternDrops.astro';
+
+const promotions = [
+  {
+    badge: 'Campaña Estrella',
+    badgeClass: 'badge-coral',
+    title: 'Bono Pie del 10%',
+    desc: 'Te bonificamos hasta un 10% del valor total de la propiedad para que lo presentes como parte del pie bancario, reduciendo tu ahorro inicial al mínimo.',
+    conditions: 'Válido para compras en blanco en tipologías seleccionadas de AMA Quillayes.',
+    benefit: 'Ahorro directo de hasta 400 UF'
+  },
+  {
+    badge: 'Facilidad de Pago',
+    badgeClass: 'badge-cyan',
+    title: 'Tu Pie en hasta 36 Cuotas sin Interés',
+    desc: 'Fracciona el pago de tu pie durante todo el periodo de edificación del proyecto, pagando mes a mes sin recargos financieros.',
+    conditions: 'Cuotas mensuales fijas hasta la fecha de entrega y escrituración.',
+    benefit: 'Cuotas desde $250.000 / mes'
+  },
+  {
+    badge: 'Especial Inversionista',
+    badgeClass: 'badge-orange',
+    title: 'Garantía de Arriendo por 1 Año',
+    desc: 'Te aseguramos el pago mensual del arriendo durante los primeros 12 meses desde la entrega del departamento, con administración profesional incluida.',
+    conditions: 'Aplica para tipologías 1D+1B y 2D+1B en venta en blanco.',
+    benefit: 'Retorno asegurado desde el día 1'
+  },
+  {
+    badge: 'Flexibilidad Patrimonial',
+    badgeClass: 'badge-petrol',
+    title: 'Cesión de Promesa a Costo $0',
+    desc: 'Si compras para invertir y decides transferir tus derechos de promesa a un tercero antes de escriturar, no cobramos comisión ni multas administrativas.',
+    conditions: 'Solicitud con 60 días de anticipación a la recepción final.',
+    benefit: 'Máxima liquidez y salida oportuna'
+  }
+];
+---
+
+<BaseLayout 
+  title="Ofertas y Campañas Comerciales | AMA Inmobiliaria"
+  description="Aprovecha las promociones y campañas vigentes en AMA Inmobiliaria: Bono Pie 10%, cuotas sin interés y garantía de arriendo en Santiago."
+>
+  <section class="page-hero section-petrol">
+    <PatternDrops color="#1AA6B7" opacity={0.06} />
+    <div class="container relative-z text-center">
+      <span class="badge badge-coral">Campañas Vigentes</span>
+      <h1 class="page-title">Oportunidades & Promociones Comerciales</h1>
+      <p class="page-subtitle">
+        Diseñamos promociones reales y transparentes para que comprar tu departamento sea más accesible, rentable y seguro.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-cream">
+    <div class="container">
+      <div class="promo-grid">
+        {promotions.map((p) => (
+          <div class="promo-card card">
+            <div class="promo-card-top">
+              <span class={`badge ${p.badgeClass}`}>{p.badge}</span>
+              <span class="promo-benefit-pill">{p.benefit}</span>
+            </div>
+            <h3 class="promo-title">{p.title}</h3>
+            <p class="promo-desc">{p.desc}</p>
+            <div class="promo-conditions">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              <span>{p.conditions}</span>
+            </div>
+            <div class="promo-footer">
+              <button 
+                type="button" 
+                class="btn btn-cyan btn-block"
+                onclick="window.openCotizadorModal && window.openCotizadorModal()"
+              >
+                Aplicar Esta Promoción
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- BANNER DE ASESORÍA PERSONALIZADA -->
+      <div class="advice-banner card">
+        <div class="advice-content">
+          <span class="badge badge-cyan">Atención Personalizada</span>
+          <h3 class="advice-title">¿Tienes dudas sobre cómo combinar estas ofertas?</h3>
+          <p class="advice-text">
+            Nuestros ejecutivos financieros analizan tu capacidad de crédito, perfil de renta y subsidios disponibles para recomendarte la combinación de mayor ahorro.
+          </p>
+          <div class="advice-btns">
+            <a href="/contacto" class="btn btn-coral">
+              Agendar Asesoría Gratuita
+            </a>
+            <a href="https://wa.me/56987654321?text=Hola,%20quisiera%20asesoría%20sobre%20las%20ofertas%20vigentes%20en%20AMA%20Inmobiliaria" target="_blank" rel="noopener noreferrer" class="btn btn-outline-white">
+              Consultar por WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    position: relative;
+    padding: 5.5rem 0 5rem;
+  }
+
+  .relative-z {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-title {
+    color: var(--color-cream);
+    margin: 0.8rem 0;
+  }
+
+  .page-subtitle {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--text-on-dark-muted);
+    font-size: 1.15rem;
+  }
+
+  .promo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .promo-card {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-top: 4px solid var(--color-coral);
+  }
+
+  .promo-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .promo-benefit-pill {
+    background-color: rgba(var(--rgb-cyan), 0.12);
+    color: var(--color-cyan);
+    font-size: 0.84rem;
+    font-weight: var(--font-weight-semibold);
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-full);
+  }
+
+  .promo-title {
+    font-size: 1.45rem;
+    color: var(--color-petrol);
+    margin-bottom: 0.85rem;
+  }
+
+  .promo-desc {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .promo-conditions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.84rem;
+    color: var(--text-soft);
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--border-subtle);
+    margin-bottom: 1.5rem;
+  }
+
+  .promo-conditions svg {
+    flex-shrink: 0;
+    color: var(--color-cyan);
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+
+  /* ADVICE BANNER */
+  .advice-banner {
+    background: linear-gradient(135deg, var(--color-petrol) 0%, rgba(var(--rgb-petrol), 0.9) 100%);
+    padding: 3.5rem;
+    border-radius: var(--radius-xl);
+    color: var(--color-cream);
+  }
+
+  .advice-title {
+    color: var(--color-cream);
+    font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+    margin: 0.8rem 0;
+  }
+
+  .advice-text {
+    color: var(--text-on-dark-muted);
+    font-size: 1.05rem;
+    max-width: 700px;
+    margin-bottom: 2rem;
+  }
+
+  .advice-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 900px) {
+    .promo-grid {
+      grid-template-columns: 1fr;
+    }
+    .advice-banner {
+      padding: 2rem;
+    }
+  }
+</style>

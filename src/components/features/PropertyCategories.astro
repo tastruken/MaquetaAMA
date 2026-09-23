@@ -1,0 +1,160 @@
+---
+// src/components/features/PropertyCategories.astro
+// Sección de 4 categorías con fotos grandes estilo Aurvix (Property categories)
+import { u } from '../../utils/url';
+
+const rawCategories = [
+  {
+    title: "1 Dormitorio",
+    subtitle: "Ideal Inversionistas",
+    count: "Desde 2.390 UF",
+    image: "/images/ama_interior_living.jpg",
+    link: "/proyectos/ama-quillayes"
+  },
+  {
+    title: "2 Dormitorios",
+    subtitle: "Equilibrio & Home Office",
+    count: "Desde 2.950 UF",
+    image: "/images/ama_quillayes_facade.jpg",
+    link: "/proyectos/ama-quillayes"
+  },
+  {
+    title: "3 Dormitorios",
+    subtitle: "Amplitud Familiar",
+    count: "Desde 3.650 UF",
+    image: "/images/ama_interior_living.jpg",
+    link: "/proyectos/ama-quillayes"
+  },
+  {
+    title: "Amenities & Rooftop",
+    subtitle: "Espacios de Encuentro",
+    count: "Piscina, Cowork & Quinchos",
+    image: "/images/ama_amenity_rooftop.jpg",
+    link: "/amenities"
+  }
+];
+
+const categories = rawCategories.map((cat) => ({
+  ...cat,
+  image: u(cat.image),
+  link: u(cat.link)
+}));
+---
+
+<section class="section categories-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="pill-tag">Tipologías y Espacios</span>
+      <h2 class="section-title">Creados con propósito, diseñados para la vida moderna</h2>
+    </div>
+
+    <div class="categories-grid">
+      {categories.map((cat) => (
+        <a href={cat.link} class="category-card" aria-label={`Ver ${cat.title}`}>
+          <img src={cat.image} alt={cat.title} class="cat-img" loading="lazy" />
+          <div class="cat-overlay"></div>
+          <div class="cat-content">
+            <h3 class="cat-title">{cat.title}</h3>
+            <span class="cat-sub">{cat.subtitle}</span>
+            <span class="cat-count">{cat.count}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .categories-section {
+    background: #FFFFFF;
+    padding: 6rem 0 5rem;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .category-card {
+    position: relative;
+    border-radius: var(--radius-bento);
+    overflow: hidden;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.8rem;
+    transition: transform var(--transition-elastic), box-shadow var(--transition-elastic);
+  }
+
+  .cat-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .category-card:hover .cat-img {
+    transform: scale(1.06);
+  }
+
+  .cat-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.88) 0%, rgba(15, 23, 42, 0.3) 50%, transparent 80%);
+    transition: background 0.3s ease;
+  }
+
+  .category-card:hover .cat-overlay {
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.4) 50%, transparent 80%);
+  }
+
+  .cat-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cat-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 0.2rem;
+  }
+
+  .cat-sub {
+    font-size: 0.86rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 0.5rem;
+  }
+
+  .cat-count {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 1024px) {
+    .categories-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .categories-grid {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+    .category-card {
+      height: 300px;
+    }
+  }
+</style>

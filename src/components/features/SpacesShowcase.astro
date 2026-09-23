@@ -1,0 +1,300 @@
+---
+// src/components/features/SpacesShowcase.astro
+// Selector interactivo de espacios y ambientes estilo Aurvix (Luxury residences)
+import { u } from '../../utils/url';
+
+const rawSpaces = [
+  {
+    id: "living",
+    title: "Living & Terraza Integrada",
+    subtitle: "Amplitud y luminosidad con ventanales termopanel de piso a cielo",
+    image: "/images/ama_interior_living.jpg",
+    tags: ["Aislación Acústica", "Luz Natural 100%", "Conexión a Terraza"],
+    desc: "Espacios de concepto abierto que optimizan cada metro cuadrado. Su diseño permite una transición fluida entre el interior y la terraza panorámica con vistas despejadas a la cordillera."
+  },
+  {
+    id: "cocina",
+    title: "Cocina Equipada & Cubierta de Cuarzo",
+    subtitle: "Funcionalidad gourmet con horno empotrado y encimera vitrocerámica",
+    image: "/images/ama_interior_living.jpg",
+    tags: ["Cubiertas de Cuarzo", "Encimera Vitrocerámica", "Mobiliario Soft-Close"],
+    desc: "Diseño ergonómico pensado para quienes disfrutan cocinar o compartir con amigos. Terminaciones durables de estándar superior y muebles modulares de alta capacidad de almacenamiento."
+  },
+  {
+    id: "dormitorio",
+    title: "Dormitorio Principal en Suite",
+    subtitle: "Un refugio íntimo de descanso con walk-in closet y baño privado",
+    image: "/images/ama_interior_living.jpg",
+    tags: ["Walk-in Closet", "Baño en Suite", "Piso Fotolaminado"],
+    desc: "Dormitorios proyectados para el máximo confort térmico y sonoro. Espacios generosos para camas King, tomas USB integradas y closets con divisiones inteligentes."
+  },
+  {
+    id: "cowork",
+    title: "Cowork & Sala Multiuso",
+    subtitle: "Home office profesional sin salir de tu edificio",
+    image: "/images/ama_quillayes_facade.jpg",
+    tags: ["Fibra Óptica High-Speed", "Mesas Ergonómicas", "Sala de Reuniones"],
+    desc: "Espacio de trabajo colaborativo completamente equipado, pensado para emprendedores y teletrabajo. Cabinas para videollamadas privadas y áreas de descanso."
+  },
+  {
+    id: "rooftop",
+    title: "Rooftop, Quinchos & Piscina",
+    subtitle: "Vistas panorámicas hacia Santiago y la cordillera",
+    image: "/images/ama_quillayes_facade.jpg",
+    tags: ["Piscina Panorámica", "Quinchos Equipados", "Terraza Lounge"],
+    desc: "El punto de encuentro social en el piso superior. Quinchos independientes para celebraciones familiares y piscina panorámica para disfrutar los atardeceres de Santiago."
+  }
+];
+
+const spaces = rawSpaces.map((s) => ({
+  ...s,
+  image: u(s.image)
+}));
+---
+
+<section class="section spaces-showcase-section" id="ambientes">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="pill-tag pill-tag-white">Espacios y Terminaciones</span>
+      <h2 class="section-title">Diseño de vanguardia en cada rincón</h2>
+      <p class="section-desc">
+        Explora los ambientes de AMA Quillayes diseñados bajo los más altos estándares de arquitectura y habitabilidad.
+      </p>
+    </div>
+
+    <!-- Barra de Pestañas en Píldora -->
+    <div class="spaces-tabs-wrapper">
+      <div class="spaces-tabs-pill">
+        {spaces.map((space, index) => (
+          <button 
+            type="button" 
+            class={`space-tab-btn ${index === 0 ? 'active' : ''}`}
+            data-target={space.id}
+          >
+            {space.title.split('&')[0]}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Contenedor de Paneles de Espacios -->
+    <div class="spaces-display-card bento-card">
+      {spaces.map((space, index) => (
+        <div 
+          class={`space-panel ${index === 0 ? 'active' : ''}`} 
+          id={`space-panel-${space.id}`}
+        >
+          <div class="space-media">
+            <img 
+              src={space.image} 
+              alt={space.title} 
+              loading="lazy" 
+              class="space-img" 
+            />
+            <div class="space-media-badges">
+              {space.tags.map(tag => (
+                <span class="pill-tag pill-tag-white">{tag}</span>
+              ))}
+            </div>
+          </div>
+          <div class="space-content">
+            <span class="badge badge-cyan">Terminación Premium</span>
+            <h3 class="space-heading">{space.title}</h3>
+            <p class="space-subheading">{space.subtitle}</p>
+            <p class="space-text">{space.desc}</p>
+            
+            <div class="space-cta-row">
+              <button 
+                type="button" 
+                class="btn btn-petrol"
+                onclick="window.openCotizadorModal && window.openCotizadorModal()"
+              >
+                Cotizar este Departamento
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </button>
+              <a href={u('/amenities')} class="btn btn-outline">
+                Ver todos los amenities
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .spaces-showcase-section {
+    background-color: var(--bg-canvas);
+    padding: 6rem 0;
+  }
+
+  .spaces-tabs-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .spaces-tabs-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem;
+    background: #FFFFFF;
+    border: 1px solid rgba(var(--rgb-petrol), 0.08);
+    border-radius: var(--radius-full);
+    box-shadow: 0 4px 16px rgba(0, 45, 64, 0.05);
+  }
+
+  .space-tab-btn {
+    padding: 0.6rem 1.4rem;
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-muted);
+    background: transparent;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .space-tab-btn:hover {
+    color: var(--color-petrol);
+    background: rgba(var(--rgb-petrol), 0.04);
+  }
+
+  .space-tab-btn.active {
+    background: var(--color-petrol);
+    color: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(var(--rgb-petrol), 0.2);
+  }
+
+  .spaces-display-card {
+    border-radius: var(--radius-bento-lg, 32px);
+    overflow: hidden;
+    background: #FFFFFF;
+    box-shadow: 0 20px 48px -12px rgba(0, 45, 64, 0.1);
+  }
+
+  .space-panel {
+    display: none;
+    grid-template-columns: 1.25fr 1fr;
+    min-height: 520px;
+    align-items: center;
+  }
+
+  .space-panel.active {
+    display: grid;
+    animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .space-media {
+    position: relative;
+    height: 100%;
+    min-height: 480px;
+    overflow: hidden;
+  }
+
+  .space-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .space-panel:hover .space-img {
+    transform: scale(1.03);
+  }
+
+  .space-media-badges {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    z-index: 2;
+  }
+
+  .space-content {
+    padding: 3.5rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.2rem;
+  }
+
+  .space-heading {
+    font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+    color: var(--color-petrol);
+    line-height: 1.15;
+    font-weight: var(--font-weight-heavy);
+  }
+
+  .space-subheading {
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-cyan);
+    margin-top: -0.4rem;
+  }
+
+  .space-text {
+    font-size: 1.02rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  .space-cta-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 960px) {
+    .space-panel {
+      grid-template-columns: 1fr;
+    }
+    .space-media {
+      min-height: 320px;
+    }
+    .space-content {
+      padding: 2.2rem 1.75rem;
+    }
+  }
+</style>
+
+<script>
+  const tabBtns = document.querySelectorAll('.space-tab-btn');
+  const panels = document.querySelectorAll('.space-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      tabBtns.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+
+      btn.classList.add('active');
+      const targetPanel = document.getElementById(`space-panel-${targetId}`);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+    });
+  });
+</script>

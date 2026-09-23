@@ -1,0 +1,83 @@
+---
+import Cotizador from './Cotizador.astro';
+---
+
+<div id="global-cotizador-modal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="modal-dialog">
+    <button 
+      type="button" 
+      id="close-cotizador-modal" 
+      class="modal-close-btn" 
+      aria-label="Cerrar cotizador"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <Cotizador isModal={true} idPrefix="modal-calc" />
+  </div>
+</div>
+
+<style>
+  .modal-close-btn {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 20;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: rgba(var(--rgb-petrol), 0.1);
+    color: var(--color-petrol);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+  }
+
+  .modal-close-btn:hover {
+    background-color: var(--color-coral);
+    color: #FFFFFF;
+    transform: rotate(90deg);
+  }
+</style>
+
+<script>
+  const modal = document.getElementById('global-cotizador-modal');
+  const closeBtn = document.getElementById('close-cotizador-modal');
+
+  window.openCotizadorModal = function() {
+    if (modal) {
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  window.closeCotizadorModal = function() {
+    if (modal) {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  };
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', window.closeCotizadorModal);
+  }
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        window.closeCotizadorModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+        window.closeCotizadorModal();
+      }
+    });
+  }
+</script>

@@ -1,0 +1,154 @@
+---
+// src/components/features/JournalCards.astro
+// Sección de blog e información financiera estilo Aurvix (Our journal)
+import { u } from '../../utils/url';
+
+const rawArticles = [
+  {
+    title: "¿Por qué invertir en La Florida? Conectividad y alta plusvalía en Metro Los Quillayes",
+    readTime: "5 min de lectura",
+    image: "/images/ama_quillayes_facade.jpg",
+    link: "/blog/por-que-invertir-en-la-florida-quillayes"
+  },
+  {
+    title: "Cómo financiar tu primer departamento: Guía práctica para pagar el pie en cuotas",
+    readTime: "4 min de lectura",
+    image: "/images/ama_interior_living.jpg",
+    link: "/blog/como-financiar-tu-primer-departamento"
+  },
+  {
+    title: "Claves para recibir tu departamento nuevo: Checklist técnico de entrega y garantías",
+    readTime: "6 min de lectura",
+    image: "/images/ama_quillayes_facade.jpg",
+    link: "/blog/claves-para-recibir-tu-departamento-nuevo"
+  }
+];
+
+const articles = rawArticles.map((art) => ({
+  ...art,
+  image: u(art.image),
+  link: u(art.link)
+}));
+---
+
+<section class="section journal-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="pill-tag">Blog Inmobiliario</span>
+      <h2 class="section-title">Inspiración, finanzas y consejos para tu nuevo hogar</h2>
+    </div>
+
+    <div class="journal-grid">
+      {articles.map((art) => (
+        <article class="journal-card bento-card">
+          <a href={art.link} class="journal-media" aria-label={art.title}>
+            <img src={art.image} alt={art.title} class="journal-img" loading="lazy" />
+          </a>
+          <div class="journal-body">
+            <h3 class="journal-title">
+              <a href={art.link}>{art.title}</a>
+            </h3>
+            <div class="journal-footer">
+              <span class="read-time">{art.readTime}</span>
+              <a href={art.link} class="arrow-circle-btn outline" aria-label={`Leer ${art.title}`}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .journal-section {
+    background: #FFFFFF;
+    padding: 6rem 0;
+  }
+
+  .journal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+
+  .journal-card {
+    background: #FFFFFF;
+    border-radius: var(--radius-bento);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .journal-media {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    display: block;
+    background-color: var(--color-petrol);
+  }
+
+  .journal-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .journal-card:hover .journal-img {
+    transform: scale(1.06);
+  }
+
+  .journal-body {
+    padding: 1.75rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .journal-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-petrol);
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .journal-title a {
+    color: inherit;
+  }
+
+  .journal-title a:hover {
+    color: var(--color-cyan);
+  }
+
+  .journal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .read-time {
+    font-size: 0.84rem;
+    color: var(--text-soft);
+    font-weight: 500;
+  }
+
+  @media (max-width: 992px) {
+    .journal-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

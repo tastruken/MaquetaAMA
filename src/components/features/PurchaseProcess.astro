@@ -1,0 +1,158 @@
+---
+// src/components/features/PurchaseProcess.astro
+// Proceso de compra paso a paso con números grandes y diseño visual moderno
+---
+
+<section class="section purchase-process-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="pill-tag pill-tag-white">Proceso Simple y Seguro</span>
+      <h2 class="section-title">Tu camino hacia tu departamento propio</h2>
+      <p class="section-desc">
+        Acompañamiento integral y transparencia desde tu primera cotización hasta el día de la entrega de llaves.
+      </p>
+    </div>
+
+    <div class="steps-grid">
+      <!-- Paso 1 -->
+      <div class="step-card bento-card">
+        <div class="step-top">
+          <span class="step-number">01</span>
+          <span class="step-tag">En Línea</span>
+        </div>
+        <h3 class="step-title">Simula y Selecciona</h3>
+        <p class="step-text">
+          Revisa las tipologías disponibles en AMA Quillayes y utiliza nuestro cotizador inteligente para estimar tu pie y dividendo mensual según tus metas.
+        </p>
+      </div>
+
+      <!-- Paso 2 -->
+      <div class="step-card bento-card highlight">
+        <div class="step-top">
+          <span class="step-number">02</span>
+          <span class="step-tag promo">Bono Pie 10%</span>
+        </div>
+        <h3 class="step-title">Fracciona tu Pie</h3>
+        <p class="step-text">
+          Al comprar en blanco, paga el 10% de tu pie en hasta 36 cuotas mensuales sin interés, manteniendo tu capital protegido y sin sobrecostos.
+        </p>
+      </div>
+
+      <!-- Paso 3 -->
+      <div class="step-card bento-card">
+        <div class="step-top">
+          <span class="step-number">03</span>
+          <span class="step-tag">Sin Costo</span>
+        </div>
+        <h3 class="step-title">Aprobación Bancaria</h3>
+        <p class="step-text">
+          Nuestro equipo financiero gestiona directamente la aprobación de tu crédito hipotecario con tasas y condiciones preferenciales en los principales bancos.
+        </p>
+      </div>
+
+      <!-- Paso 4 -->
+      <div class="step-card bento-card">
+        <div class="step-top">
+          <span class="step-number">04</span>
+          <span class="step-tag">Garantizado</span>
+        </div>
+        <h3 class="step-title">Entrega y Respaldo</h3>
+        <p class="step-text">
+          Recepción técnica guiada por profesionales, entrega oficial de llaves y soporte continuo a través de nuestro portal digital de postventa.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .purchase-process-section {
+    background-color: var(--bg-canvas);
+    padding: 6rem 0;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .step-card {
+    padding: 2.2rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    border: 1px solid rgba(var(--rgb-petrol), 0.08);
+    position: relative;
+    border-radius: var(--radius-bento);
+    transition: all var(--transition-elastic);
+  }
+
+  .step-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px -10px rgba(0, 45, 64, 0.12);
+    border-color: rgba(var(--rgb-cyan), 0.4);
+  }
+
+  .step-card.highlight {
+    background: linear-gradient(180deg, #FFFFFF 0%, rgba(var(--rgb-cyan), 0.04) 100%);
+    border-color: rgba(var(--rgb-cyan), 0.25);
+  }
+
+  .step-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+
+  .step-number {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-heavy);
+    color: var(--color-petrol);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    opacity: 0.85;
+  }
+
+  .step-tag {
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-full);
+    background: rgba(var(--rgb-petrol), 0.06);
+    color: var(--color-petrol);
+  }
+
+  .step-tag.promo {
+    background: rgba(var(--rgb-coral), 0.12);
+    color: var(--color-coral);
+  }
+
+  .step-title {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-heavy);
+    color: var(--color-petrol);
+    margin-bottom: 0.75rem;
+  }
+
+  .step-text {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 1024px) {
+    .steps-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .steps-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

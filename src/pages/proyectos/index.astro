@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CardProject from '../../components/ui/CardProject.astro';
+import PatternDrops from '../../components/brand/PatternDrops.astro';
+---
+
+<BaseLayout 
+  title="Proyectos Inmobiliarios | AMA Inmobiliaria"
+  description="Conoce nuestros proyectos de departamentos en venta en Santiago. Calidad de vida, alta plusvalía y facilidades de financiamiento."
+>
+  <section class="page-hero section-petrol">
+    <PatternDrops color="#1AA6B7" opacity={0.05} />
+    <div class="container relative-z">
+      <span class="badge badge-cyan">Portafolio Residencial</span>
+      <h1 class="page-title">Nuestros Proyectos</h1>
+      <p class="page-subtitle">
+        Desarrollos pensados para quienes buscan un estándar superior, excelente conectividad urbana y una inversión rentable.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-cream">
+    <div class="container">
+      <div class="projects-list-header">
+        <div class="results-count">
+          <span>Mostrando <strong>1 proyecto activo</strong> y próximos lanzamientos</span>
+        </div>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Proyecto Activo: AMA Quillayes -->
+        <CardProject 
+          title="Edificio AMA Quillayes"
+          slug="ama-quillayes"
+          location="Av. Vicuña Mackenna / Walker Martínez, La Florida"
+          priceFrom="2.390 UF"
+          typology="1D, 2D y 3D (34 a 72 m²)"
+          status="En Blanco"
+          badgePromo="Bono Pie 10% + 36 cuotas"
+          image="/images/ama_quillayes_facade.jpg"
+        />
+
+        <!-- Próximo Proyecto 1: AMA La Florida -->
+        <div class="card future-grid-card">
+          <div class="future-media-badge">
+            <span class="badge badge-orange">Próximamente</span>
+          </div>
+          <div class="future-inner">
+            <span class="location-tag">La Florida Oriente</span>
+            <h3 class="future-name">Edificio AMA Walker Martínez</h3>
+            <p class="future-p">
+              En una de las avenidas residenciales con mayor tradición y plusvalía, rodeado de áreas verdes, colegios y comercio.
+            </p>
+            <ul class="future-specs">
+              <li><strong>Tipologías:</strong> 1D y 2D Estudio & Tradicional</li>
+              <li><strong>Etapa:</strong> Anteproyecto aprobado</li>
+            </ul>
+            <div class="future-card-btn">
+              <a href="/contacto?ref=walker-martinez" class="btn btn-outline btn-block">
+                Recibir Información Privilegiada
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Próximo Proyecto 2: AMA La Florida II -->
+        <div class="card future-grid-card">
+          <div class="future-media-badge">
+            <span class="badge badge-cyan">Estudio de Suelo</span>
+          </div>
+          <div class="future-inner">
+            <span class="location-tag">Eje Metro Línea 5</span>
+            <h3 class="future-name">Edificio AMA Bellavista</h3>
+            <p class="future-p">
+              Conexión directa a la red de transporte y polos gastronómicos. Un proyecto enfocado en inversionistas jóvenes y renta residencial.
+            </p>
+            <ul class="future-specs">
+              <li><strong>Tipologías:</strong> Studios, 1D1B y 2D2B Mariposa</li>
+              <li><strong>Etapa:</strong> Diseño de arquitectura</li>
+            </ul>
+            <div class="future-card-btn">
+              <a href="/contacto?ref=bellavista" class="btn btn-outline btn-block">
+                Inscribirme en Preventa
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    position: relative;
+    padding: 5rem 0 4.5rem;
+    text-align: center;
+  }
+
+  .relative-z {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-title {
+    color: var(--color-cream);
+    margin: 0.75rem 0;
+  }
+
+  .page-subtitle {
+    max-width: 680px;
+    margin: 0 auto;
+    color: var(--text-on-dark-muted);
+    font-size: 1.1rem;
+  }
+
+  .projects-list-header {
+    margin-bottom: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-medium);
+    padding-bottom: 1rem;
+  }
+
+  .results-count {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .future-grid-card {
+    background: #FFFFFF;
+    border: 2px dashed var(--border-medium);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .future-media-badge {
+    margin-bottom: 1rem;
+  }
+
+  .location-tag {
+    font-size: 0.84rem;
+    color: var(--color-cyan);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .future-name {
+    font-size: 1.45rem;
+    color: var(--color-petrol);
+    margin: 0.35rem 0 0.85rem;
+    font-weight: var(--font-weight-black);
+  }
+
+  .future-p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin-bottom: 1.5rem;
+  }
+
+  .future-specs {
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 0.88rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .future-specs strong {
+    color: var(--color-petrol);
+  }
+
+  .future-card-btn {
+    margin-top: auto;
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+
+  @media (max-width: 640px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

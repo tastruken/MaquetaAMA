@@ -1,0 +1,86 @@
+---
+interface Props {
+  variant?: 'cyan-white' | 'petrol' | 'white' | 'cyan';
+  height?: number;
+  class?: string;
+}
+
+const { variant = 'cyan-white', height = 48, class: className = '' } = Astro.props;
+
+// Colores según Brandbook (Págs. 5, 11 y 12)
+let letterColor = '#1AA6B7'; // cyan por defecto
+let subtextColor = '#002D40'; // petrol
+
+if (variant === 'petrol') {
+  letterColor = '#002D40';
+  subtextColor = '#002D40';
+} else if (variant === 'white') {
+  letterColor = '#FFFFFF';
+  subtextColor = '#FFFFFF';
+} else if (variant === 'cyan') {
+  letterColor = '#1AA6B7';
+  subtextColor = '#FFFFFF';
+} else if (variant === 'cyan-white') {
+  letterColor = '#1AA6B7';
+  subtextColor = '#FFFFFF';
+}
+---
+
+<div class={`brand-logo-container ${className}`} style={`height: ${height}px;`}>
+  <svg 
+    viewBox="0 0 280 86" 
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg"
+    style={`height: ${height}px; width: auto;`}
+    role="img"
+    aria-label="AMA Inmobiliaria"
+  >
+    <!-- Letra A Izquierda -->
+    <path 
+      d="M16 60 L45 8 L54 8 L83 60 L69 60 L62 47 L36 47 L30 60 Z M41 36 L58 36 L49 19 Z" 
+      fill={letterColor} 
+    />
+
+    <!-- Letra M Central con gota/bucle orgánico característico (Brandbook Pág 5) -->
+    <path 
+      d="M88 60 L88 28 C88 15 99 7 114 7 C124 7 132 12 138 21 C143 12 152 7 162 7 C177 7 188 15 188 28 L188 60 L174 60 L174 29 C174 21 169 17 161 17 C152 17 146 22 146 31 L146 60 L130 60 L130 31 C130 22 124 17 115 17 C107 17 102 21 102 29 L102 60 Z" 
+      fill={letterColor} 
+    />
+    <!-- Gota interior de la M -->
+    <path 
+      d="M138 28 C132 37 127 43 127 49 C127 55 132 60 138 60 C144 60 149 55 149 49 C149 43 144 37 138 28 Z M138 52 C135 52 133 50 133 48 C133 44 136 40 138 36 C140 40 143 44 143 48 C143 50 141 52 138 52 Z" 
+      fill={letterColor} 
+    />
+
+    <!-- Letra A Derecha -->
+    <path 
+      d="M193 60 L222 8 L231 8 L260 60 L246 60 L239 47 L213 47 L207 60 Z M218 36 L235 36 L226 19 Z" 
+      fill={letterColor} 
+    />
+
+    <!-- Subtexto corporativo "I N M O B I L I A R I A" con tracking oficial -->
+    <text 
+      x="138" 
+      y="80" 
+      fill={subtextColor}
+      font-size="9.5" 
+      font-family="'Gilroy', 'Plus Jakarta Sans', sans-serif" 
+      font-weight="600" 
+      letter-spacing="0.48em" 
+      text-anchor="middle"
+    >
+      INMOBILIARIA
+    </text>
+  </svg>
+</div>
+
+<style>
+  .brand-logo-container {
+    display: inline-flex;
+    align-items: center;
+    transition: transform var(--transition-fast);
+  }
+  .brand-logo-container:hover {
+    transform: scale(1.02);
+  }
+</style>

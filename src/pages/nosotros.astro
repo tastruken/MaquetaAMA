@@ -1,0 +1,417 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PatternDrops from '../components/brand/PatternDrops.astro';
+import PatternLoops from '../components/brand/PatternLoops.astro';
+
+const timeline = [
+  {
+    year: '2014',
+    title: 'Origen y Fundación',
+    desc: 'Nace AMA con la convicción de renovar la arquitectura residencial en Santiago, priorizando la habitabilidad y el diseño atemporal.'
+  },
+  {
+    year: '2017',
+    title: 'Consolidación en el Eje Sur-Oriente',
+    desc: 'Lanzamiento de nuestros primeros proyectos de escala media con 100% de venta en blanco antes del término de obra.'
+  },
+  {
+    year: '2021',
+    title: 'Innovación en Eficiencia y Sustentabilidad',
+    desc: 'Incorporación de estándares de aislación térmica superior, domótica y optimización energética en todos los departamentos.'
+  },
+  {
+    year: '2026',
+    title: 'Edificio AMA Quillayes & Futuro',
+    desc: 'Nuevo hito con AMA Quillayes, marcando una nueva generación de desarrollos con amenities de calidad hotelera y financiamiento accesible.'
+  }
+];
+
+const pillars = [
+  {
+    number: '01',
+    title: 'Ubicaciones con Alta Plusvalía',
+    desc: 'Seleccionamos terrenos estratégicos a pasos del Metro, ciclovías y servicios consolidados que garantizan alta rentabilidad por arriendo.'
+  },
+  {
+    number: '02',
+    title: 'Diseño Inteligente sin Metros Perdidos',
+    desc: 'Cada metro cuadrado está pensado para aprovechar la luz natural, evitar pasillos innecesarios y maximizar el almacenaje.'
+  },
+  {
+    number: '03',
+    title: 'Compromiso Postventa Real',
+    desc: 'Acompañamos a nuestros propietarios antes, durante y después de la entrega, cumpliendo rigurosamente los plazos de garantía legal.'
+  },
+  {
+    number: '04',
+    title: 'Facilidades de Compra Consciente',
+    desc: 'Ofrecemos esquemas de pago flexibles en cuotas sin interés y asesoría bancaria integral para facilitar el acceso a la vivienda.'
+  }
+];
+---
+
+<BaseLayout 
+  title="Nosotros | Trayectoria y Filosofía | AMA Inmobiliaria"
+  description="Conoce la historia, visión y pilares de AMA Inmobiliaria. Más de una década desarrollando proyectos residenciales con sello de calidad y compromiso en Santiago."
+>
+  <!-- HERO NOSOTROS -->
+  <section class="page-hero section-petrol">
+    <PatternDrops color="#1AA6B7" opacity={0.06} />
+    <div class="container relative-z text-center">
+      <span class="badge badge-cyan">Quiénes Somos</span>
+      <h1 class="page-title">Trayectoria, Compromiso y Visión de Futuro</h1>
+      <p class="page-subtitle">
+        En <strong>AMA Inmobiliaria</strong> creemos que un departamento no es solo un activo financiero: es el escenario donde se construyen proyectos de vida.
+      </p>
+    </div>
+  </section>
+
+  <!-- MANIFIESTO CORPORATIVO -->
+  <section class="section section-cream">
+    <div class="container">
+      <div class="manifesto-grid">
+        <div class="manifesto-text">
+          <span class="badge badge-petrol">Nuestra Filosofía</span>
+          <h2 class="manifesto-title">Construimos hogares que superan la prueba del tiempo</h2>
+          <p class="manifesto-p">
+            Desde nuestros inicios entendimos que la industria inmobiliaria requería un cambio: menos promesas vacías y más <strong>calidad comprobable</strong>. Por eso, en cada proyecto de AMA Inmobiliaria trabajamos junto a arquitectos y constructores de primer nivel para diseñar edificios que se mantengan vigentes, funcionales y atractivos con el paso de las décadas.
+          </p>
+          <p class="manifesto-p">
+            No concebimos edificios impersonales; diseñamos comunidades con amenities pensados en el bienestar diario y con terminaciones nobles de fácil mantención para resguardar los gastos comunes de cada propietario.
+          </p>
+          <div class="manifesto-stats">
+            <div class="m-stat">
+              <strong class="stat-big">+12</strong>
+              <span>Años de trayectoria</span>
+            </div>
+            <div class="m-stat">
+              <strong class="stat-big">+1.850</strong>
+              <span>Departamentos entregados</span>
+            </div>
+            <div class="m-stat">
+              <strong class="stat-big">98%</strong>
+              <span>Satisfacción en entrega</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="manifesto-media">
+          <img 
+            src="/images/ama_interior_living.jpg" 
+            alt="Interior departamento AMA Inmobiliaria"
+            class="manifesto-img"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILARES DE MARCA -->
+  <section class="section section-white">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="badge badge-cyan">Nuestros Principios</span>
+        <h2 class="section-title">Los 4 Pilares de AMA Inmobiliaria</h2>
+        <p class="section-desc">Criterios fundamentales que rigen cada una de nuestras decisiones y proyectos.</p>
+      </div>
+
+      <div class="pillars-grid">
+        {pillars.map((p) => (
+          <div class="pillar-card card">
+            <span class="pillar-number">{p.number}</span>
+            <h3 class="pillar-title">{p.title}</h3>
+            <p class="pillar-desc">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- LÍNEA DE TIEMPO / TRAYECTORIA -->
+  <section class="section section-petrol">
+    <PatternLoops color="#1AA6B7" opacity={0.04} />
+    <div class="container relative-z">
+      <div class="section-header text-center">
+        <span class="badge badge-cyan">Evolución</span>
+        <h2 class="section-title text-cream">Hitos de Nuestra Historia</h2>
+        <p class="section-desc text-muted-cream">Un recorrido de crecimiento continuo y solidez financiera.</p>
+      </div>
+
+      <div class="timeline-wrap">
+        {timeline.map((item, idx) => (
+          <div class="timeline-item">
+            <div class="timeline-marker">
+              <span class="year-badge">{item.year}</span>
+            </div>
+            <div class="timeline-card card card-dark">
+              <h3 class="t-item-title">{item.title}</h3>
+              <p class="t-item-desc">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CASOS Y TESTIMONIOS -->
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="badge badge-coral">Casos de Éxito</span>
+        <h2 class="section-title">La voz de nuestros propietarios</h2>
+        <p class="section-desc">Testimonios de quienes confiaron su inversión y patrimonio en AMA Inmobiliaria.</p>
+      </div>
+
+      <div class="testimonials-deck">
+        <div class="case-card card">
+          <div class="case-badge">
+            <span class="badge badge-cyan">Inversionista Joven</span>
+          </div>
+          <p class="case-quote">
+            "Comencé invirtiendo en un 1D+1B en blanco. El valor por m² subió casi un 18% al momento de la entrega. La postventa gestionó rápidamente los detalles y el arriendo se concretó en dos semanas."
+          </p>
+          <div class="case-user">
+            <strong>Rodrigo Morales</strong>
+            <span>Propietario & Arrendador</span>
+          </div>
+        </div>
+
+        <div class="case-card card">
+          <div class="case-badge">
+            <span class="badge badge-coral">Familia Primera Vivienda</span>
+          </div>
+          <p class="case-quote">
+            "Poder pagar el pie en 36 cuotas nos permitió comprar nuestro 3D+2B sin endeudarnos con créditos de consumo. Nos cambiamos el año pasado y la calidad de vida en el edificio es inmejorable."
+          </p>
+          <div class="case-user">
+            <strong>Camila & Andrés</strong>
+            <span>Propietarios</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center" style="margin-top: 3.5rem;">
+        <button 
+          type="button" 
+          class="btn btn-cyan btn-lg"
+          onclick="window.openCotizadorModal && window.openCotizadorModal()"
+        >
+          Cotizar Proyecto Activo
+        </button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    position: relative;
+    padding: 5.5rem 0 5rem;
+  }
+
+  .relative-z {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-title {
+    color: var(--color-cream);
+    margin: 0.8rem 0;
+  }
+
+  .page-subtitle {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--text-on-dark-muted);
+    font-size: 1.15rem;
+  }
+
+  .manifesto-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .manifesto-title {
+    margin: 0.8rem 0 1.25rem;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+  }
+
+  .manifesto-p {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+  }
+
+  .manifesto-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-medium);
+  }
+
+  .stat-big {
+    display: block;
+    font-size: 2.3rem;
+    font-weight: var(--font-weight-heavy);
+    color: var(--color-cyan);
+    line-height: 1;
+  }
+
+  .m-stat span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .manifesto-img {
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    border: 2px solid var(--color-cream);
+    width: 100%;
+    height: auto;
+  }
+
+  /* PILARES */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .pillar-card {
+    padding: 2.2rem;
+    position: relative;
+    border-top: 4px solid var(--color-cyan);
+  }
+
+  .pillar-number {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-heavy);
+    color: rgba(var(--rgb-cyan), 0.25);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+
+  .pillar-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.85rem;
+    color: var(--color-petrol);
+  }
+
+  .pillar-desc {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  /* TIMELINE */
+  .text-cream {
+    color: var(--color-cream);
+  }
+  .text-muted-cream {
+    color: var(--text-on-dark-muted);
+  }
+
+  .timeline-wrap {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .timeline-marker {
+    flex-shrink: 0;
+  }
+
+  .year-badge {
+    background-color: var(--color-cyan);
+    color: #FFFFFF;
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-heavy);
+    padding: 0.45rem 1.2rem;
+    border-radius: var(--radius-full);
+    display: inline-block;
+  }
+
+  .timeline-card {
+    padding: 1.75rem;
+    flex-grow: 1;
+  }
+
+  .t-item-title {
+    font-size: 1.2rem;
+    color: var(--color-cyan);
+    margin-bottom: 0.5rem;
+  }
+
+  .t-item-desc {
+    font-size: 0.95rem;
+    color: var(--text-on-dark-muted);
+    line-height: 1.55;
+  }
+
+  /* CASES */
+  .testimonials-deck {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+
+  .case-card {
+    padding: 2.5rem;
+  }
+
+  .case-badge {
+    margin-bottom: 1rem;
+  }
+
+  .case-quote {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .case-user strong {
+    display: block;
+    color: var(--color-petrol);
+    font-size: 1.05rem;
+  }
+
+  .case-user span {
+    font-size: 0.88rem;
+    color: var(--color-cyan);
+  }
+
+  @media (max-width: 992px) {
+    .manifesto-grid {
+      grid-template-columns: 1fr;
+    }
+    .pillars-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .testimonials-deck {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .pillars-grid {
+      grid-template-columns: 1fr;
+    }
+    .timeline-item {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+</style>

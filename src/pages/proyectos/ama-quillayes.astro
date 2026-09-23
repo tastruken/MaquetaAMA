@@ -1,0 +1,503 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Cotizador from '../../components/features/Cotizador.astro';
+import PatternLoops from '../../components/brand/PatternLoops.astro';
+import { u } from '../../utils/url';
+
+const typologies = [
+  {
+    name: 'Modelo 1D + 1B',
+    surface: '34,5 a 38,2 m²',
+    desc: 'Distribución abierta, cocina americana con cubierta de cuarzo y balcón continuo con vista despejada.',
+    price: 'Desde 2.390 UF',
+    tags: ['Ideal Inversionista', 'Renta Alta']
+  },
+  {
+    name: 'Modelo 2D + 1B',
+    surface: '46,0 a 52,4 m²',
+    desc: 'Dormitorio principal amplio, segundo dormitorio para oficina o visita, clóset mural y conexión para lavadora.',
+    price: 'Desde 3.190 UF',
+    tags: ['Primera Vivienda']
+  },
+  {
+    name: 'Modelo 2D + 2B Mariposa',
+    surface: '58,0 a 64,8 m²',
+    desc: 'Estilo mariposa: 2 suites independientes a cada costado del living central, otorgando máxima privacidad.',
+    price: 'Desde 3.750 UF',
+    tags: ['Más Vendido', 'Máxima Privacidad']
+  },
+  {
+    name: 'Modelo 3D + 2B Familiar',
+    surface: '70,5 a 76,2 m²',
+    desc: 'Espacios generosos para familias, suite con walk-in clóset, logia y amplia terraza para compartir.',
+    price: 'Desde 4.490 UF',
+    tags: ['Familiar', 'Terraza Amplia']
+  }
+];
+
+const amenities = [
+  { name: 'Piscina Panorámica', desc: 'Ubicada en la azotea con vista privilegiada a la Cordillera de Los Andes.' },
+  { name: 'Cowork & Lounge', desc: 'Espacio de trabajo colaborativo equipado con fibra óptica y salas de reuniones.' },
+  { name: 'Quinchos Panorámicos', desc: 'Parrillas tipo gourmet con áreas de estar y pérgolas de madera noble.' },
+  { name: 'Gimnasio Equipado', desc: 'Zona cardio, peso libre y espacio para yoga con iluminación natural.' },
+  { name: 'Sala Gourmet Multiuso', desc: 'Cocina de chef y comedor para celebraciones privadas y cumpleaños.' },
+  { name: 'Pet Spa & Zone', desc: 'Espacio dedicado al cuidado y recreación de tus mascotas.' },
+  { name: 'Bicicleteros Seguros', desc: 'Taller de mantención y estacionamientos protegidos para bicicletas.' },
+  { name: 'Conserjería 24/7 y CCTV', desc: 'Control de accesos biométrico y circuito cerrado de alta definición.' }
+];
+---
+
+<BaseLayout 
+  title="Edificio AMA Quillayes | Departamentos en La Florida"
+  description="Departamentos de 1, 2 y 3 dormitorios a pasos de Metro Quillayes en La Florida. Paga tu pie en 36 cuotas sin interés y obtén Bono Pie del 10%."
+>
+  <!-- BREADCRUMBS & TOP BAR -->
+  <div class="top-nav-bar">
+    <div class="container breadcrumbs-container">
+      <nav aria-label="Migas de pan" class="breadcrumbs">
+        <a href={u('/')}>Inicio</a>
+        <span class="sep">/</span>
+        <a href={u('/proyectos')}>Proyectos</a>
+        <span class="sep">/</span>
+        <span class="current">AMA Quillayes</span>
+      </nav>
+      <div class="top-status">
+        <span class="badge badge-cyan">Venta en Blanco</span>
+        <span class="badge badge-coral">Bono Pie 10%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO DE PROYECTO CON GALERÍA -->
+  <section class="project-hero-section section-white">
+    <div class="container">
+      <div class="project-header-info">
+        <span class="badge badge-petrol">La Florida, Santiago</span>
+        <h1 class="project-main-title">Edificio AMA Quillayes</h1>
+        <p class="project-tagline">
+          Ubicado en Av. Vicuña Mackenna a pasos de Metro Quillayes. Arquitectura vanguardista y conectividad insuperable.
+        </p>
+      </div>
+
+      <div class="project-gallery-grid">
+        <div class="gallery-main-img">
+          <img 
+            src={u('/images/ama_quillayes_facade.jpg')} 
+            alt="Fachada Edificio AMA Quillayes en La Florida"
+          />
+          <span class="img-caption">Fachada Exterior y Accesos</span>
+        </div>
+        <div class="gallery-side-imgs">
+          <div class="side-img-item">
+            <img 
+              src={u('/images/ama_interior_living.jpg')} 
+              alt="Living comedor departamento piloto"
+            />
+            <span class="img-caption">Interiores Luminosos</span>
+          </div>
+          <div class="side-img-item">
+            <img 
+              src={u('/images/ama_amenity_rooftop.jpg')} 
+              alt="Piscina y terraza en azotea"
+            />
+            <span class="img-caption">Azotea Panorámica & Piscina</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS TÉCNICOS -->
+  <section class="section section-cream">
+    <div class="container">
+      <div class="specs-pill-bar">
+        <div class="spec-pill">
+          <span class="p-label">Precios</span>
+          <strong class="p-val">Desde 2.390 UF</strong>
+        </div>
+        <div class="spec-pill">
+          <span class="p-label">Tipologías</span>
+          <strong class="p-val">1, 2 y 3 Dormitorios</strong>
+        </div>
+        <div class="spec-pill">
+          <span class="p-label">Superficie</span>
+          <strong class="p-val">34 a 76 m²</strong>
+        </div>
+        <div class="spec-pill">
+          <span class="p-label">Ubicación</span>
+          <strong class="p-val">Metro Quillayes (3 min)</strong>
+        </div>
+        <div class="spec-pill">
+          <span class="p-label">Entrega</span>
+          <strong class="p-val">2do Semestre 2026</strong>
+        </div>
+      </div>
+
+      <!-- TIPOLOGÍAS -->
+      <div class="section-header" style="margin-top: 3.5rem;">
+        <span class="badge badge-petrol">Modelos y Plantas</span>
+        <h2 class="section-title">Encuentra la distribución ideal</h2>
+        <p class="section-desc">Diseños optimizados al milímetro para otorgar máxima amplitud y confort térmico.</p>
+      </div>
+
+      <div class="typologies-grid">
+        {typologies.map((t) => (
+          <div class="typology-card card">
+            <div class="t-header">
+              <div class="t-tags">
+                {t.tags.map((tag) => (
+                  <span class="badge badge-cyan">{tag}</span>
+                ))}
+              </div>
+              <h3 class="t-title">{t.name}</h3>
+              <span class="t-surface">Superficie: <strong>{t.surface}</strong></span>
+            </div>
+            <p class="t-desc">{t.desc}</p>
+            <div class="t-footer">
+              <div class="t-price">
+                <span class="t-price-label">Valor referencial</span>
+                <strong class="t-price-val">{t.price}</strong>
+              </div>
+              <button 
+                type="button" 
+                class="btn btn-cyan btn-sm"
+                onclick="window.openCotizadorModal && window.openCotizadorModal()"
+              >
+                Cotizar Modelo
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AMENITIES ESPECÍFICOS DEL PROYECTO -->
+  <section class="section section-petrol">
+    <PatternLoops color="#1AA6B7" opacity={0.05} />
+    <div class="container relative-z">
+      <div class="section-header text-center">
+        <span class="badge badge-cyan">Espacios Comunes</span>
+        <h2 class="section-title text-cream">Amenities pensados para tu día a día</h2>
+        <p class="section-desc text-muted-cream">
+          Instalaciones de primer nivel administradas con eficiencia para mantener bajos los gastos comunes.
+        </p>
+      </div>
+
+      <div class="amenities-grid">
+        {amenities.map((a) => (
+          <div class="amenity-item card card-dark">
+            <h4 class="amenity-name">{a.name}</h4>
+            <p class="amenity-desc">{a.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- COTIZADOR EN VIVO PARA ESTE PROYECTO -->
+  <section class="section section-white" id="cotizador-quillayes">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="badge badge-coral">Financiamiento a tu Medida</span>
+        <h2 class="section-title">Simula tu dividendo en AMA Quillayes</h2>
+        <p class="section-desc">Calcula el pie en hasta 36 cuotas y la cuota mensual de tu crédito hipotecario.</p>
+      </div>
+
+      <div class="cotizador-wrap">
+        <Cotizador idPrefix="quillayes-page-calc" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .top-nav-bar {
+    background-color: var(--color-petrol);
+    border-bottom: 1px solid rgba(var(--rgb-cream), 0.1);
+    padding: 0.85rem 0;
+  }
+
+  .breadcrumbs-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    color: var(--text-on-dark-muted);
+  }
+
+  .breadcrumbs a:hover {
+    color: var(--color-cyan);
+  }
+
+  .breadcrumbs .current {
+    color: var(--color-cream);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .top-status {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .project-hero-section {
+    padding: 3.5rem 0 4rem;
+  }
+
+  .project-header-info {
+    margin-bottom: 2.5rem;
+  }
+
+  .project-main-title {
+    margin: 0.5rem 0 0.4rem;
+    font-size: clamp(2rem, 3.8vw, 3.2rem);
+  }
+
+  .project-tagline {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+  }
+
+  .project-gallery-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .gallery-main-img, .side-img-item {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+
+  .gallery-main-img {
+    height: 480px;
+  }
+
+  .gallery-side-imgs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 480px;
+  }
+
+  .side-img-item {
+    flex: 1;
+  }
+
+  .gallery-main-img img, .side-img-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .gallery-main-img:hover img, .side-img-item:hover img {
+    transform: scale(1.03);
+  }
+
+  .img-caption {
+    position: absolute;
+    bottom: 0.85rem;
+    left: 1rem;
+    background: rgba(var(--rgb-petrol), 0.75);
+    backdrop-filter: blur(6px);
+    color: var(--color-cream);
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /* SPECS PILL BAR */
+  .specs-pill-bar {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background: #FFFFFF;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 1.75rem 2rem;
+    border: 1px solid var(--border-subtle);
+    margin-top: -2.5rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .spec-pill {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-right: 1px solid var(--border-subtle);
+  }
+
+  .spec-pill:last-child {
+    border-right: none;
+  }
+
+  .p-label {
+    font-size: 0.8rem;
+    color: var(--text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .p-val {
+    font-size: 1.15rem;
+    font-weight: var(--font-weight-black);
+    color: var(--color-petrol);
+    margin-top: 0.2rem;
+  }
+
+  /* TYPOLOGIES */
+  .typologies-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .typology-card {
+    padding: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .t-tags {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .t-title {
+    font-size: 1.45rem;
+    font-weight: var(--font-weight-black);
+    color: var(--color-petrol);
+  }
+
+  .t-surface {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--color-cyan);
+    margin-bottom: 1rem;
+  }
+
+  .t-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .t-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .t-price-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-soft);
+    text-transform: uppercase;
+  }
+
+  .t-price-val {
+    font-size: 1.35rem;
+    font-weight: var(--font-weight-heavy);
+    color: var(--color-petrol);
+  }
+
+  /* AMENITIES */
+  .relative-z {
+    position: relative;
+    z-index: 2;
+  }
+
+  .text-cream {
+    color: var(--color-cream);
+  }
+
+  .text-muted-cream {
+    color: var(--text-on-dark-muted);
+  }
+
+  .amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .amenity-item {
+    padding: 1.75rem;
+  }
+
+  .amenity-name {
+    font-size: 1.15rem;
+    color: var(--color-cyan);
+    margin-bottom: 0.5rem;
+  }
+
+  .amenity-desc {
+    font-size: 0.88rem;
+    color: var(--text-on-dark-muted);
+    line-height: 1.5;
+  }
+
+  .cotizador-wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 992px) {
+    .project-gallery-grid {
+      grid-template-columns: 1fr;
+    }
+    .gallery-side-imgs {
+      flex-direction: row;
+      height: 240px;
+    }
+    .specs-pill-bar {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .spec-pill {
+      border-right: none;
+    }
+    .typologies-grid {
+      grid-template-columns: 1fr;
+    }
+    .amenities-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .breadcrumbs-container {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+    .gallery-side-imgs {
+      flex-direction: column;
+      height: auto;
+    }
+    .side-img-item {
+      height: 200px;
+    }
+    .specs-pill-bar {
+      grid-template-columns: 1fr;
+      margin-top: 0;
+    }
+    .amenities-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

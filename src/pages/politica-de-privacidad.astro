@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Política de Privacidad y Protección de Datos | AMA Inmobiliaria"
+  description="Conoce cómo AMA Inmobiliaria resguarda tus datos personales y comerciales conforme a la Ley N° 19.628 sobre protección de la vida privada en Chile."
+>
+  <div class="legal-hero section-petrol">
+    <div class="container text-center">
+      <span class="badge badge-cyan">Privacidad y Seguridad</span>
+      <h1 class="page-title">Política de Privacidad</h1>
+      <p class="page-subtitle">Compromiso con el tratamiento seguro de tus datos personales</p>
+    </div>
+  </div>
+
+  <section class="section section-cream">
+    <div class="container container-narrow">
+      <div class="legal-content card">
+        <h2>1. Compromiso de Confidencialidad</h2>
+        <p>
+          En <strong>AMA Inmobiliaria</strong> nos comprometemos a resguardar la privacidad de nuestros usuarios y clientes. Esta política establece el tratamiento de los datos recopilados a través de formularios de contacto, cotizadores online o canales de mensajería (WhatsApp), en estricto apego a la <strong>Ley N° 19.628 sobre Protección de la Vida Privada</strong> de la República de Chile.
+        </p>
+
+        <h2>2. Datos Recolectados</h2>
+        <p>Podemos recopilar los siguientes antecedentes facilitados voluntariamente por el usuario:</p>
+        <ul>
+          <li>Nombre y apellido.</li>
+          <li>Dirección de correo electrónico y número de teléfono móvil.</li>
+          <li>RUT (en caso de requerimientos de postventa o solicitudes formales de reserva).</li>
+          <li>Preferencias de proyecto, tipología de departamento y capacidad de crédito estimada.</li>
+        </ul>
+
+        <h2>3. Finalidad del Tratamiento de Datos</h2>
+        <p>Los datos ingresados serán utilizados exclusivamente para:</p>
+        <ul>
+          <li>Enviar la cotización solicitada y brindar asesoría sobre financiamiento y disponibilidad.</li>
+          <li>Gestionar requerimientos y visitas técnicas de soporte postventa.</li>
+          <li>Informar sobre promociones comerciales, lanzamientos en preventa o beneficios de compra en blanco si el usuario así lo autoriza.</li>
+        </ul>
+
+        <h2>4. No Cesión a Terceros</h2>
+        <p>
+          AMA Inmobiliaria <strong>no vende, arrienda ni transfiere</strong> tus datos personales a empresas externas con fines publicitarios ajenos a nuestras operaciones.
+        </p>
+
+        <h2>5. Derechos del Titular</h2>
+        <p>
+          En cualquier momento puedes solicitar el acceso, rectificación, cancelación o eliminación de tus datos personales enviando una solicitud formal al correo <strong>contacto@amainmobiliaria.cl</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-hero {
+    padding: 4.5rem 0 4rem;
+  }
+  .page-title {
+    color: var(--color-cream);
+    margin: 0.5rem 0;
+  }
+  .page-subtitle {
+    color: var(--text-on-dark-muted);
+    font-size: 0.95rem;
+  }
+  .legal-content {
+    background: #FFFFFF;
+    padding: 3.5rem;
+  }
+  .legal-content h2 {
+    font-size: 1.45rem;
+    color: var(--color-petrol);
+    margin: 2rem 0 0.75rem;
+  }
+  .legal-content h2:first-of-type {
+    margin-top: 0;
+  }
+  .legal-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+  .legal-content ul {
+    margin: 0 0 1.5rem 1.5rem;
+    list-style: disc;
+  }
+  .legal-content li {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+  }
+  @media (max-width: 640px) {
+    .legal-content {
+      padding: 1.75rem;
+    }
+  }
+</style>

@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Términos y Condiciones Legales | AMA Inmobiliaria"
+  description="Términos y condiciones de uso del sitio web, cotizaciones referenciales e información sobre promesas de compraventa en AMA Inmobiliaria."
+>
+  <div class="legal-hero section-petrol">
+    <div class="container text-center">
+      <span class="badge badge-cyan">Información Legal</span>
+      <h1 class="page-title">Términos y Condiciones</h1>
+      <p class="page-subtitle">Última actualización: Septiembre 2026</p>
+    </div>
+  </div>
+
+  <section class="section section-cream">
+    <div class="container container-narrow">
+      <div class="legal-content card">
+        <h2>1. Identificación y Alcance</h2>
+        <p>
+          El presente sitio web (<strong>www.amainmobiliaria.cl</strong>) es de propiedad y operación de <strong>AMA Inmobiliaria</strong>. Al acceder y navegar en este sitio, el usuario acepta de manera expresa los términos y condiciones aquí expuestos.
+        </p>
+
+        <h2>2. Carácter Referencial de las Imágenes y Simulaciones</h2>
+        <p>
+          Las imágenes, renders, perspectivas arquitectónicas, planos y maquetas virtuales exhibidas en este sitio web son meramente ilustrativas y buscan representar de forma gráfica las características generales de los proyectos. Las especificaciones técnicas finales serán las indicadas en las respectivas promesas y contratos de compraventa debidamente suscritos.
+        </p>
+
+        <h2>3. Cotizaciones y Simulador Financiero</h2>
+        <p>
+          Los valores de dividendo mensual, pie bancario y tasas de interés calculadas en el <strong>Cotizador Online</strong> son simulaciones referenciales basadas en supuestos promedio del mercado financiero chileno. La aprobación y condiciones definitivas de cualquier crédito hipotecario dependen exclusivamente de la evaluación comercial del banco o mutuaria correspondiente.
+        </p>
+
+        <h2>4. Precios y Disponibilidad</h2>
+        <p>
+          Todos los precios expresados en Unidades de Fomento (UF) y su equivalencia en pesos chilenos (CLP) están sujetos a confirmación y disponibilidad de stock en sala de ventas. AMA Inmobiliaria se reserva el derecho de modificar los valores sin previo aviso en función de las listas de precios vigentes.
+        </p>
+
+        <h2>5. Derechos de Propiedad Intelectual</h2>
+        <p>
+          El diseño, marca comercial <strong>AMA Inmobiliaria</strong>, logotipos, tramas vectoriales, imágenes y contenidos textuales están protegidos por las leyes chilenas e internacionales de propiedad industrial y derechos de autor. Queda prohibida su reproducción sin autorización expresa por escrito.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-hero {
+    padding: 4.5rem 0 4rem;
+  }
+  .page-title {
+    color: var(--color-cream);
+    margin: 0.5rem 0;
+  }
+  .page-subtitle {
+    color: var(--text-on-dark-muted);
+    font-size: 0.95rem;
+  }
+  .legal-content {
+    background: #FFFFFF;
+    padding: 3.5rem;
+  }
+  .legal-content h2 {
+    font-size: 1.45rem;
+    color: var(--color-petrol);
+    margin: 2rem 0 0.75rem;
+  }
+  .legal-content h2:first-of-type {
+    margin-top: 0;
+  }
+  .legal-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+  @media (max-width: 640px) {
+    .legal-content {
+      padding: 1.75rem;
+    }
+  }
+</style>

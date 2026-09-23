@@ -1,0 +1,336 @@
+---
+// src/pages/index.astro
+// Rediseño 100% fiel al estilo claro y luminoso de Aurvix (Framer Real Estate Template)
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CardProject from '../components/ui/CardProject.astro';
+import Cotizador from '../components/features/Cotizador.astro';
+import HeroFilterBar from '../components/features/HeroFilterBar.astro';
+import TrustTicker from '../components/features/TrustTicker.astro';
+import PropertyCategories from '../components/features/PropertyCategories.astro';
+import SpacesShowcase from '../components/features/SpacesShowcase.astro';
+import BentoOfferings from '../components/features/BentoOfferings.astro';
+import PurchaseProcess from '../components/features/PurchaseProcess.astro';
+import JournalCards from '../components/features/JournalCards.astro';
+import FAQAccordion from '../components/features/FAQAccordion.astro';
+import ModernCTA from '../components/features/ModernCTA.astro';
+import { u } from '../utils/url';
+import '../styles/home.css';
+---
+
+<BaseLayout 
+  title="AMA Inmobiliaria | Departamentos Nuevos en Santiago"
+  description="Desarrollamos proyectos residenciales de vanguardia con alta plusvalía, diseño inteligente y respaldo de postventa. Conoce nuestro proyecto AMA Quillayes."
+>
+  <!-- 1. HERO SECTION LUMINOSO ESTILO AURVIX -->
+  <section class="aurvix-hero">
+    <div class="container">
+      <div class="hero-card-banner">
+        <div class="hero-overlay-gradient"></div>
+        <div class="hero-banner-content">
+          <!-- Badge Superior con Pulso -->
+          <div class="hero-badge-pill">
+            <span class="live-dot"></span>
+            <span>Venta en Blanco · Metro Los Quillayes, La Florida</span>
+          </div>
+
+          <div class="hero-text-row">
+            <!-- Columna Izquierda: Títulos Display de Gran Escala -->
+            <div class="hero-headline-col">
+              <h1 class="hero-title-aurvix">
+                ESPACIOS DE VANGUARDIA<br />
+                PARA VIVIR® E INSPIRAR
+              </h1>
+              <p class="hero-sub-aurvix">
+                Departamentos en La Florida con arquitectura funcional, luz natural, terminaciones nobles y Bono Pie 10% financiado en hasta 36 cuotas sin interés.
+              </p>
+              <div class="hero-actions-aurvix">
+                <button 
+                  type="button" 
+                  class="btn-aurvix-white"
+                  onclick="window.openCotizadorModal && window.openCotizadorModal()"
+                >
+                  <span>Cotizar Online</span>
+                  <span class="arrow">↗</span>
+                </button>
+                <a href={u('/proyectos/ama-quillayes')} class="btn-aurvix-glass">
+                  Ver AMA Quillayes
+                </a>
+              </div>
+            </div>
+
+            <!-- Columna Derecha: Prueba Social con Avatares -->
+            <div class="hero-proof-col">
+              <div class="hero-avatars-card">
+                <div class="avatar-circles">
+                  <div class="av-circle" style="background:#1AA6B7;">M</div>
+                  <div class="av-circle" style="background:#0F172A;">C</div>
+                  <div class="av-circle" style="background:#FF8541;">V</div>
+                </div>
+                <div class="avatar-info">
+                  <strong>+1.850 familias</strong>
+                  <span>han recibido su hogar</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. BARRA DE BÚSQUEDA Y FILTRADO FLOTANTE -->
+  <div class="container filter-container-wrap">
+    <HeroFilterBar />
+  </div>
+
+  <!-- 3. SECCIÓN EDITORIAL "SOBRE AMA" (Split Layout idéntico a Aurvix) -->
+  <section class="section about-split-section">
+    <div class="container">
+      <div class="about-grid">
+        <!-- Foto en proporción elegante con radio de 24px -->
+        <div class="about-img-wrap">
+          <img 
+            src={u('/images/ama_interior_living.jpg')} 
+            alt="Arquitectura y diseño interior AMA" 
+            class="about-split-img"
+          />
+        </div>
+
+        <!-- Texto Editorial de Gran Escala -->
+        <div class="about-content">
+          <span class="pill-tag">Sobre AMA Inmobiliaria</span>
+          <h2 class="about-heading">
+            Conectamos a las personas con su hogar ideal a través de un estándar contemporáneo — ayudándote a invertir o vivir con total certeza y respaldo.
+          </h2>
+          <a href={u('/nosotros')} class="btn-aurvix-dark">
+            <span>Conoce Nuestra Trayectoria</span>
+            <span class="arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. BENTO VISUAL HIGHLIGHTS & 4 MÉTRICAS MINIMALISTAS (Aurvix Style) -->
+  <section class="section bento-showcase-section">
+    <div class="container">
+      <div class="bento-grid-aurvix">
+        <!-- Tarjeta Panorámica Principal -->
+        <div class="bento-card-wide">
+          <img src={u('/images/ama_quillayes_facade.jpg')} alt="AMA Quillayes exterior" class="bento-img" />
+          <div class="bento-wide-overlay"></div>
+          <div class="bento-wide-pills">
+            <span class="pill-tag-white">Lanzamiento Exclusivo</span>
+            <span class="pill-tag-white">Bono Pie 10%</span>
+            <span class="pill-tag-white">Inversión Inteligente</span>
+          </div>
+        </div>
+
+        <!-- Tarjeta Vertical 1 -->
+        <div class="bento-card-tall">
+          <img src={u('/images/ama_interior_living.jpg')} alt="Living con luz natural" class="bento-img" />
+          <div class="bento-tall-overlay">
+            <span class="pill-tag-white">Terminaciones Premium</span>
+            <p class="bento-tall-text">Ventanales Termopanel & Eficiencia</p>
+          </div>
+        </div>
+
+        <!-- Tarjeta Vertical 2 -->
+        <div class="bento-card-tall">
+          <img src={u('/images/ama_quillayes_facade.jpg')} alt="Conectividad Metro" class="bento-img" />
+          <div class="bento-tall-overlay">
+            <span class="pill-tag-white">Ubicación Insuperable</span>
+            <p class="bento-tall-text">A pasos de Metro Los Quillayes</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Métricas Numéricas en Blanco Puro -->
+      <div class="aurvix-metrics-row">
+        <div class="aurvix-metric">
+          <strong class="metric-num">+12</strong>
+          <span class="metric-lbl">Años de Trayectoria</span>
+        </div>
+        <div class="aurvix-metric">
+          <strong class="metric-num">+1.850</strong>
+          <span class="metric-lbl">Familias en su Hogar</span>
+        </div>
+        <div class="aurvix-metric">
+          <strong class="metric-num">36</strong>
+          <span class="metric-lbl">Cuotas Pie sin Interés</span>
+        </div>
+        <div class="aurvix-metric">
+          <strong class="metric-num">4.9</strong>
+          <span class="metric-lbl">Calificación Promedio</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CATEGORÍAS DE PROPIEDADES (4 Fotos Grandes Aurvix) -->
+  <PropertyCategories />
+
+  <!-- 6. PROYECTOS DESTACADOS "LUXURY LISTINGS" -->
+  <section class="section projects-aurvix-section" id="proyectos-activos">
+    <div class="container">
+      <div class="section-header-split">
+        <div>
+          <span class="pill-tag">Proyectos Destacados</span>
+          <h2 class="section-title">Construidos con propósito, diseñados para la vida moderna</h2>
+        </div>
+        <a href={u('/proyectos')} class="btn-aurvix-dark">
+          <span>Ver todos los proyectos</span>
+          <span class="arrow">↗</span>
+        </a>
+      </div>
+
+      <div class="projects-grid-two">
+        <!-- Proyecto 1: AMA Quillayes -->
+        <CardProject 
+          title="Edificio AMA Quillayes"
+          slug="ama-quillayes"
+          location="Av. Vicuña Mackenna / Los Quillayes, La Florida"
+          priceFrom="2.390 UF"
+          typology="1D, 2D y 3D (34 a 72 m²)"
+          status="En Blanco"
+          badgePromo="Bono Pie 10% + 36 cuotas"
+          image="/images/ama_quillayes_facade.jpg"
+        />
+
+        <!-- Proyecto 2: Próximo Lanzamiento -->
+        <div class="future-luxury-card bento-card">
+          <div class="future-top-strip">
+            <span class="pill-tag-dark">Próximo Lanzamiento</span>
+            <span class="pill-tag-coral">Preventa 2026</span>
+          </div>
+          <div class="future-body">
+            <h3 class="future-heading">AMA La Florida II</h3>
+            <p class="future-desc">
+              Nuevo desarrollo residencial con concepto de eficiencia energética, terraza rooftop panorámica, piscina lounge y departamentos tipo estudio y 2 dormitorios.
+            </p>
+            <div class="future-features">
+              <div class="feat-row">
+                <span>Comuna:</span>
+                <strong>La Florida, Santiago</strong>
+              </div>
+              <div class="feat-row">
+                <span>Estado:</span>
+                <strong>Inscripción en Blanco</strong>
+              </div>
+              <div class="feat-row">
+                <span>Beneficio:</span>
+                <strong style="color:var(--color-coral, #FF8541);">Lista Cero Preventa</strong>
+              </div>
+            </div>
+            <a href={u('/contacto?ref=futuro-la-florida')} class="btn-aurvix-dark btn-block">
+              <span>Inscribirme en Preventa Exclusiva</span>
+              <span class="arrow">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. SHOWCASE DE ESPACIOS INTERACTIVO POR TABS -->
+  <SpacesShowcase />
+
+  <!-- 8. SERVICIOS Y PROPUESTA DE VALOR (What we offer - 6 Tarjetas) -->
+  <BentoOfferings />
+
+  <!-- 9. PROCESO DE COMPRA EN 4 PASOS -->
+  <PurchaseProcess />
+
+  <!-- 10. SIMULADOR DE CRÉDITO Y COTIZADOR FINANCIERO -->
+  <section class="section cotizador-section" id="cotizador">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="pill-tag">Simulación en Línea</span>
+        <h2 class="section-title">Cotiza tu Departamento en Segundos</h2>
+        <p class="section-desc">
+          Calcula tu pie en hasta 36 cuotas mensuales fijas y obtén tu asesoría bancaria gratuita.
+        </p>
+      </div>
+
+      <div class="cotizador-white-box">
+        <Cotizador idPrefix="home-calc" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. CINTA DE ALIANZAS BANCARIAS Y RESPALDO -->
+  <TrustTicker />
+
+  <!-- 12. TESTIMONIOS (Client stories Aurvix) -->
+  <section class="section testimonials-light-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="pill-tag">Historias de Clientes</span>
+        <h2 class="section-title">La confianza de quienes ya viven en su propio hogar</h2>
+      </div>
+
+      <div class="testimonials-three-grid">
+        <!-- Testimonio 1 -->
+        <div class="test-card-aurvix">
+          <div class="test-stars-row">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="test-quote-text">
+            “Compré mi primer departamento con AMA Quillayes. Poder pagar el pie fraccionado en 36 cuotas durante la construcción me dio la tranquilidad de no descapitalizarme. La atención fue impecable.”
+          </p>
+          <div class="test-user-row">
+            <div class="test-avatar" style="background:#1AA6B7;">MR</div>
+            <div class="test-avatar-info">
+              <strong class="test-name">Marcela Riquelme</strong>
+              <span class="test-sub">Propietaria · Primera Vivienda</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonio 2 (Destacado) -->
+        <div class="test-card-aurvix highlight">
+          <div class="test-stars-row">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="test-quote-text">
+            “Como inversionista valoro la conectividad y la plusvalía del sector. El retorno por arriendo estimado supera el promedio y el respaldo de postventa me da completa seguridad en cada etapa.”
+          </p>
+          <div class="test-user-row">
+            <div class="test-avatar" style="background:#0F172A;">CV</div>
+            <div class="test-avatar-info">
+              <strong class="test-name">Cristián Valenzuela</strong>
+              <span class="test-sub">Inversionista · 2 Departamentos</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonio 3 -->
+        <div class="test-card-aurvix">
+          <div class="test-stars-row">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="test-quote-text">
+            “El proceso de entrega y recepción técnica fue totalmente transparente. Cualquier detalle menor de terminaciones fue gestionado por su equipo de postventa en menos de 72 horas.”
+          </p>
+          <div class="test-user-row">
+            <div class="test-avatar" style="background:#FF8541;">IV</div>
+            <div class="test-avatar-info">
+              <strong class="test-name">Ignacio & Valentina</strong>
+              <span class="test-sub">Residentes AMA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. JOURNAL / BLOG (Our journal Aurvix) -->
+  <JournalCards />
+
+  <!-- 14. ACORDEÓN DE PREGUNTAS FRECUENTES -->
+  <FAQAccordion />
+
+  <!-- 15. BANNER NOCTURNO DE CIERRE (Get in touch Aurvix) -->
+  <ModernCTA />
+</BaseLayout>

@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PatternDrops from '../../components/brand/PatternDrops.astro';
+
+const articles = [
+  {
+    title: '¿Cómo financiar tu primer departamento? Guía paso a paso',
+    slug: 'como-financiar-tu-primer-departamento',
+    category: 'Financiamiento',
+    date: '14 Septiembre 2026',
+    readTime: '5 min de lectura',
+    excerpt: 'Aprende los requisitos bancarios, cómo calcular tu dividendo ideal, consejos para pagar el pie en cuotas y cómo aprovechar el Bono Pie.',
+    image: '/images/ama_interior_living.jpg'
+  },
+  {
+    title: 'Plusvalía y conectividad: Por qué La Florida y Quillayes son foco de inversión',
+    slug: 'por-que-invertir-en-la-florida-quillayes',
+    category: 'Inversión & Barrios',
+    date: '08 Septiembre 2026',
+    readTime: '4 min de lectura',
+    excerpt: 'Análisis de rentabilidad por arriendo, consolidación de la Línea 5 del Metro y la transformación urbana del eje Vicuña Mackenna.',
+    image: '/images/ama_quillayes_facade.jpg'
+  },
+  {
+    title: 'Checklist de recepción y garantías: Qué revisar al momento de la entrega',
+    slug: 'claves-para-recibir-tu-departamento-nuevo',
+    category: 'Guía del Comprador',
+    date: '28 Agosto 2026',
+    readTime: '6 min de lectura',
+    excerpt: 'Todo lo que necesitas saber sobre el acta de recepción conforme, los plazos de garantía legal y cómo solicitar soporte a postventa.',
+    image: '/images/ama_amenity_rooftop.jpg'
+  }
+];
+
+const categories = ['Todas las categorías', 'Financiamiento', 'Inversión & Barrios', 'Guía del Comprador'];
+---
+
+<BaseLayout 
+  title="Blog y Centro de Contenido | AMA Inmobiliaria"
+  description="Artículos, guías y consejos inmobiliarios para comprar, invertir y financiar tu departamento en Santiago con total seguridad."
+>
+  <section class="page-hero section-petrol">
+    <PatternDrops color="#1AA6B7" opacity={0.06} />
+    <div class="container relative-z text-center">
+      <span class="badge badge-cyan">Centro de Conocimiento</span>
+      <h1 class="page-title">Blog Inmobiliario & Asesoría</h1>
+      <p class="page-subtitle">
+        Información clara y transparente para tomar las mejores decisiones de compra, financiamiento e inversión en Chile.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-cream">
+    <div class="container">
+      <!-- Filtros por categoría -->
+      <div class="categories-bar">
+        {categories.map((cat, i) => (
+          <button 
+            type="button" 
+            class={`category-btn ${i === 0 ? 'active' : ''}`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <!-- Grilla de Artículos -->
+      <div class="articles-grid">
+        {articles.map((art) => (
+          <article class="article-card card">
+            <a href={`/blog/${art.slug}`} class="art-img-wrap">
+              <img src={art.image} alt={art.title} class="art-img" />
+              <span class="badge badge-cyan art-cat-badge">{art.category}</span>
+            </a>
+            <div class="art-body">
+              <div class="art-meta">
+                <span>{art.date}</span>
+                <span class="dot">•</span>
+                <span>{art.readTime}</span>
+              </div>
+              <h2 class="art-title">
+                <a href={`/blog/${art.slug}`}>{art.title}</a>
+              </h2>
+              <p class="art-excerpt">{art.excerpt}</p>
+              <div class="art-footer">
+                <a href={`/blog/${art.slug}`} class="read-more-link">
+                  Leer artículo completo →
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    position: relative;
+    padding: 5.5rem 0 5rem;
+  }
+
+  .relative-z {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-title {
+    color: var(--color-cream);
+    margin: 0.8rem 0;
+  }
+
+  .page-subtitle {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--text-on-dark-muted);
+    font-size: 1.15rem;
+  }
+
+  .categories-bar {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+    justify-content: center;
+  }
+
+  .category-btn {
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-semibold);
+    background: #FFFFFF;
+    color: var(--color-petrol);
+    border: 1px solid var(--border-medium);
+    transition: all var(--transition-fast);
+  }
+
+  .category-btn.active, .category-btn:hover {
+    background: var(--color-petrol);
+    color: var(--color-cream);
+    border-color: var(--color-petrol);
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .article-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .art-img-wrap {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    display: block;
+  }
+
+  .art-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .article-card:hover .art-img {
+    transform: scale(1.05);
+  }
+
+  .art-cat-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .art-body {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .art-meta {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    margin-bottom: 0.75rem;
+  }
+
+  .art-title {
+    font-size: 1.35rem;
+    line-height: 1.35;
+    margin-bottom: 0.85rem;
+    font-weight: var(--font-weight-black);
+  }
+
+  .art-title a:hover {
+    color: var(--color-cyan);
+  }
+
+  .art-excerpt {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .art-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .read-more-link {
+    font-size: 0.92rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-cyan);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .read-more-link:hover {
+    color: var(--color-petrol);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1024px) {
+    .articles-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .articles-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

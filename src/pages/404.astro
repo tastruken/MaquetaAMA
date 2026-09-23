@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PatternDrops from '../components/brand/PatternDrops.astro';
+---
+
+<BaseLayout 
+  title="Página No Encontrada (Error 404) | AMA Inmobiliaria"
+  description="La página que buscas no existe o ha sido trasladada. Vuelve al inicio o conoce nuestros proyectos residenciales."
+>
+  <section class="error-section section-petrol">
+    <PatternDrops color="#1AA6B7" opacity={0.06} />
+    <div class="container text-center relative-z">
+      <div class="error-card card card-dark">
+        <span class="badge badge-coral">Error 404</span>
+        <div class="error-code">404</div>
+        <h1 class="error-title">No encontramos la página que buscas</h1>
+        <p class="error-desc">
+          Es posible que la dirección haya cambiado o que el enlace no esté disponible temporalmente. Te invitamos a continuar navegando en nuestros proyectos activos.
+        </p>
+
+        <div class="error-actions">
+          <a href="/" class="btn btn-cyan btn-lg">
+            ← Volver al Inicio
+          </a>
+          <a href="/proyectos" class="btn btn-outline-white btn-lg">
+            Explorar Proyectos
+          </a>
+          <button 
+            type="button" 
+            class="btn btn-outline-white btn-lg"
+            onclick="window.openCotizadorModal && window.openCotizadorModal()"
+          >
+            Simular Financiamiento
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .error-section {
+    position: relative;
+    padding: 7rem 0 8rem;
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .relative-z {
+    position: relative;
+    z-index: 2;
+  }
+
+  .error-card {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 3rem;
+  }
+
+  .error-code {
+    font-size: clamp(5rem, 12vw, 8rem);
+    font-weight: var(--font-weight-heavy);
+    color: var(--color-cyan);
+    line-height: 1;
+    margin: 1rem 0;
+    letter-spacing: -0.04em;
+  }
+
+  .error-title {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    color: var(--color-cream);
+    margin-bottom: 1rem;
+  }
+
+  .error-desc {
+    color: var(--text-on-dark-muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .error-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 640px) {
+    .error-card {
+      padding: 2.5rem 1.5rem;
+    }
+  }
+</style>

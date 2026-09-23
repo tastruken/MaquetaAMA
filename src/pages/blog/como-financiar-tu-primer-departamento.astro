@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PatternDrops from '../../components/brand/PatternDrops.astro';
+---
+
+<BaseLayout 
+  title="Cómo Financiar tu Primer Departamento | Blog AMA Inmobiliaria"
+  description="Guía completa para financiar tu departamento: crédito hipotecario, requisitos de renta, cálculo de dividendos y pago del pie en cuotas."
+>
+  <div class="article-top-bar">
+    <div class="container">
+      <a href="/blog" class="back-link">← Volver al Blog</a>
+    </div>
+  </div>
+
+  <article class="article-detail-page section-cream">
+    <div class="container container-narrow">
+      <header class="article-header">
+        <span class="badge badge-cyan">Financiamiento Inmobiliario</span>
+        <h1 class="article-title">
+          ¿Cómo financiar tu primer departamento en Chile? Guía paso a paso
+        </h1>
+        <div class="article-meta-info">
+          <span>Por: <strong>Equipo de Asesoría Financiera AMA</strong></span>
+          <span class="dot">•</span>
+          <span>14 Septiembre 2026</span>
+          <span class="dot">•</span>
+          <span>5 min de lectura</span>
+        </div>
+      </header>
+
+      <div class="article-featured-img card">
+        <img src="/images/ama_interior_living.jpg" alt="Interior departamento financiado" />
+      </div>
+
+      <div class="article-content card">
+        <p class="lead-paragraph">
+          Dar el paso hacia la compra de tu primer departamento es uno de los hitos patrimoniales más importantes. Sin embargo, conceptos como el <strong>dividendo mensual</strong>, el <strong>pie bancario</strong>, la <strong>tasa de interés</strong> o el <strong>Bono Pie</strong> suelen generar incertidumbre. En esta guía te explicamos cómo ordenar tus finanzas para concretar tu compra sin sobresaltos.
+        </p>
+
+        <h2>1. ¿Cuánto ahorro previo necesitas para el pie?</h2>
+        <p>
+          En el sistema financiero chileno, la mayoría de los bancos financian entre el <strong>80% y el 90%</strong> del valor de la propiedad, lo que significa que debes aportar entre un <strong>10% y un 20% de pie</strong>.
+        </p>
+        <div class="callout-box">
+          <strong>💡 La ventaja de comprar en blanco con AMA Inmobiliaria:</strong>
+          <p>
+            Al comprar en etapas tempranas como <strong>AMA Quillayes</strong>, puedes fraccionar el pago del pie en hasta <strong>36 cuotas sin interés</strong> durante todo el proceso constructivo, lo que te permite ahorrar mes a mes sin necesidad de desembolsar todo el dinero al contado.
+          </p>
+        </div>
+
+        <h2>2. ¿Cómo calcular la renta mínima requerida?</h2>
+        <p>
+          Una regla de oro en la banca chilena es que el dividendo mensual no debe superar el <strong>25% al 30% de tus ingresos líquidos</strong> demostrables. Esto significa que si tu dividendo estimado es de $600.000, la renta familiar o individual requerida será de aproximadamente $2.000.000 a $2.400.000.
+        </p>
+        <p>
+          Si compras con tu pareja o un familiar directo, la mayoría de los bancos permiten <strong>complementar rentas</strong> para alcanzar el monto exigido.
+        </p>
+
+        <h2>3. Plazo del crédito: ¿20, 25 o 30 años?</h2>
+        <ul>
+          <li><strong>25 a 30 años:</strong> Cuota mensual más baja y mayor holgura financiera en tu presupuesto mensual. Recomendado para primera vivienda.</li>
+          <li><strong>20 años:</strong> Menor costo financiero total en intereses a lo largo de la vida del crédito.</li>
+        </ul>
+
+        <h2>4. ¿Qué es el Bono Pie y cómo te beneficia?</h2>
+        <p>
+          El Bono Pie es una bonificación comercial que otorga la inmobiliaria sobre el precio de lista. Por ejemplo, en una propiedad de 3.000 UF con un Bono Pie del 10%, la inmobiliaria absorbe 300 UF, reduciendo de manera sustancial el aporte inicial que debes desembolsar de tu propio bolsillo.
+        </p>
+
+        <div class="article-cta-box">
+          <h3>¿Quieres simular tu dividendo y pie exacto?</h3>
+          <p>Usa nuestro cotizador online interactivo y calcula en segundos tu escenario financiero para AMA Quillayes.</p>
+          <button 
+            type="button" 
+            class="btn btn-cyan"
+            onclick="window.openCotizadorModal && window.openCotizadorModal()"
+          >
+            Abrir Cotizador Online
+          </button>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-top-bar {
+    background: var(--color-petrol);
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(var(--rgb-cyan), 0.15);
+  }
+
+  .back-link {
+    color: var(--color-cream);
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .back-link:hover {
+    color: var(--color-cyan);
+  }
+
+  .article-detail-page {
+    padding: 3.5rem 0 5rem;
+  }
+
+  .article-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .article-title {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    margin: 1rem 0;
+    line-height: 1.25;
+  }
+
+  .article-meta-info {
+    font-size: 0.88rem;
+    color: var(--text-soft);
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .article-meta-info strong {
+    color: var(--color-petrol);
+  }
+
+  .article-featured-img {
+    height: 420px;
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+  }
+
+  .article-featured-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .article-content {
+    background: #FFFFFF;
+    padding: 3.5rem;
+  }
+
+  .lead-paragraph {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: var(--color-petrol);
+    margin-bottom: 2rem;
+  }
+
+  .article-content h2 {
+    font-size: 1.6rem;
+    margin: 2.2rem 0 1rem;
+    color: var(--color-petrol);
+  }
+
+  .article-content p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .article-content ul {
+    margin: 1rem 0 1.75rem 1.5rem;
+    list-style: disc;
+  }
+
+  .article-content li {
+    font-size: 1.02rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .callout-box {
+    background: rgba(var(--rgb-cyan), 0.1);
+    border-left: 4px solid var(--color-cyan);
+    padding: 1.5rem;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin: 2rem 0;
+  }
+
+  .callout-box strong {
+    color: var(--color-petrol);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .article-cta-box {
+    background: linear-gradient(135deg, var(--color-petrol) 0%, rgba(var(--rgb-petrol), 0.95) 100%);
+    color: var(--color-cream);
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .article-cta-box h3 {
+    color: var(--color-cream);
+    margin-bottom: 0.5rem;
+  }
+
+  .article-cta-box p {
+    color: var(--text-on-dark-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .article-content {
+      padding: 1.75rem;
+    }
+    .article-featured-img {
+      height: 250px;
+    }
+  }
+</style>

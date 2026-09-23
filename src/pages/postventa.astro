@@ -1,0 +1,459 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PatternDrops from '../components/brand/PatternDrops.astro';
+
+const faqs = [
+  {
+    q: '¿Cómo ingreso un requerimiento de postventa?',
+    a: 'Puedes hacerlo a través de nuestro formulario en línea disponible en esta página, o enviando un correo a postventa@amainmobiliaria.cl indicando tu RUT, proyecto, número de departamento y fotografías del caso.'
+  },
+  {
+    q: '¿Cuáles son los plazos legales de garantía en Chile?',
+    a: 'De acuerdo a la Ley General de Urbanismo y Construcciones (Ley N° 20.016): 3 años para terminaciones (pintura, pisos, quincallería), 5 años para elementos constructivos e instalaciones (redes sanitarias, eléctricas, gas) y 10 años para la estructura del edificio.'
+  },
+  {
+    q: '¿Cuánto tiempo tarda la visita técnica tras enviar mi solicitud?',
+    a: 'Nuestro equipo de postventa se contacta contigo en un plazo máximo de 48 horas hábiles para coordinar la visita de diagnóstico en el horario que más te acomode.'
+  },
+  {
+    q: '¿Qué situaciones no están cubiertas por la garantía de postventa?',
+    a: 'El desgaste natural por uso, daños atribuibles a remodelaciones posteriores no autorizadas por la constructora, falta de mantención periódica por parte del usuario o accidentes domésticos.'
+  },
+  {
+    q: '¿Qué hacer en caso de una emergencia fuera de horario?',
+    a: 'En casos de fuga de agua masiva, corte general de energía o emergencia de gas, debes avisar de inmediato a la conserjería de tu edificio y al número de turnos de emergencia de AMA Inmobiliaria.'
+  }
+];
+---
+
+<BaseLayout 
+  title="Servicio de Postventa y Garantías | AMA Inmobiliaria"
+  description="Servicio técnico y garantías post-entrega para propietarios de AMA Inmobiliaria. Ingresa tu requerimiento de soporte o consulta los plazos de garantía legal."
+>
+  <section class="page-hero section-petrol">
+    <PatternDrops color="#1AA6B7" opacity={0.06} />
+    <div class="container relative-z text-center">
+      <span class="badge badge-cyan">Atención al Propietario</span>
+      <h1 class="page-title">Servicio y Garantía de Postventa</h1>
+      <p class="page-subtitle">
+        Tu tranquilidad no termina con la entrega de llaves. En <strong>AMA Inmobiliaria</strong> te respaldamos con un equipo técnico dedicado y protocolos ágiles de respuesta.
+      </p>
+    </div>
+  </section>
+
+  <!-- GARANTÍAS LEGALES CHILE -->
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="badge badge-petrol">Marco Legal Ley N° 20.016</span>
+        <h2 class="section-title">Plazos y Cobertura de Garantía</h2>
+        <p class="section-desc">Protegemos tu inversión con el cumplimiento estricto de la legislación chilena.</p>
+      </div>
+
+      <div class="warranties-grid">
+        <div class="warranty-card card">
+          <div class="w-number">10 Años</div>
+          <h3 class="w-title">Garantía Estructural</h3>
+          <p class="w-desc">
+            Cubre fallas o defectos que afecten la estructura soportante del edificio: cimientos, vigas, losas, muros de hormigón armado y techumbres.
+          </p>
+          <span class="w-status">Desde la recepción municipal definitiva</span>
+        </div>
+
+        <div class="warranty-card card">
+          <div class="w-number">5 Años</div>
+          <h3 class="w-title">Elementos Constructivos e Instalaciones</h3>
+          <p class="w-desc">
+            Cubre redes sanitarias, tuberías de agua y alcantarillado, canalizaciones eléctricas, ductos de ventilación e impermeabilizaciones.
+          </p>
+          <span class="w-status">Desde la recepción municipal definitiva</span>
+        </div>
+
+        <div class="warranty-card card">
+          <div class="w-number">3 Años</div>
+          <h3 class="w-title">Terminaciones & Acabados</h3>
+          <p class="w-desc">
+            Cubre elementos de acabado interior: piezas de quincallería, puertas, muebles de cocina, sellos de silicona, griferías y cerámicas.
+          </p>
+          <span class="w-status">Desde la inscripción en el Conservador de Bienes Raíces</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULARIO DE INGRESO DE REQUERIMIENTOS -->
+  <section class="section section-white" id="formulario-postventa">
+    <div class="container container-narrow">
+      <div class="postventa-form-card card">
+        <div class="p-form-header">
+          <span class="badge badge-cyan">Gestión de Solicitudes</span>
+          <h2 class="p-form-title">Ingresa tu Requerimiento de Postventa</h2>
+          <p class="p-form-subtitle">
+            Completa los datos de tu departamento y describe la situación para que un supervisor técnico te asigne una visita.
+          </p>
+        </div>
+
+        <form class="pv-form" id="postventa-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="pv-nombre">Nombre y Apellido *</label>
+              <input type="text" id="pv-nombre" required placeholder="Ej: Camila Soto" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="pv-rut">RUT del Propietario *</label>
+              <input type="text" id="pv-rut" required placeholder="Ej: 12.345.678-9" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="pv-email">Correo Electrónico *</label>
+              <input type="email" id="pv-email" required placeholder="tu@email.com" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="pv-telefono">Teléfono de Contacto *</label>
+              <input type="tel" id="pv-telefono" required placeholder="+569 1234 5678" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="pv-proyecto">Proyecto *</label>
+              <select id="pv-proyecto" class="form-select" required>
+                <option value="AMA Quillayes">Edificio AMA Quillayes</option>
+                <option value="Otro proyecto AMA">Otro desarrollo entregado por AMA</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="pv-depto">N° de Departamento / Estacionamiento / Bodega *</label>
+              <input type="text" id="pv-depto" required placeholder="Ej: Depto 504 - Bodega 12" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="pv-tipo">Tipo de Requerimiento *</label>
+            <select id="pv-tipo" class="form-select" required>
+              <option value="Terminaciones">Terminaciones (Pintura, guardapolvos, sellos)</option>
+              <option value="Gasfitería">Gasfitería y Sanitario (Grifería, desagüe, sifón)</option>
+              <option value="Electricidad">Electricidad (Enchufes, automáticos, luminaria)</option>
+              <option value="Cerrajería y Ventanas">Cerrajería, Puertas o Ventanas Termopanel</option>
+              <option value="Electrodomésticos">Horno, Encimera o Campana</option>
+              <option value="Otro">Otro requerimiento técnico</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="pv-desc">Descripción Detallada del Requerimiento *</label>
+            <textarea 
+              id="pv-desc" 
+              rows="4" 
+              required 
+              placeholder="Indica con la mayor precisión posible el recinto (living, baño principal, terraza) y el problema detectado..."
+              class="form-textarea"
+            ></textarea>
+          </div>
+
+          <div class="form-footer-action">
+            <button type="submit" class="btn btn-cyan btn-lg">
+              Enviar Solicitud a Postventa
+            </button>
+          </div>
+
+          <div id="pv-success" class="pv-success-alert" style="display: none;">
+            ✅ <strong>¡Solicitud N° PV-2026-084 registrada exitosamente!</strong><br />
+            Hemos enviado un comprobante a tu correo y nuestro equipo técnico te contactará dentro de las próximas 48 horas hábiles.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREGUNTAS FRECUENTES -->
+  <section class="section section-cream">
+    <div class="container container-narrow">
+      <div class="section-header text-center">
+        <span class="badge badge-petrol">Resolución de Dudas</span>
+        <h2 class="section-title">Preguntas Frecuentes de Postventa</h2>
+      </div>
+
+      <div class="faq-accordion">
+        {faqs.map((f, i) => (
+          <details class="faq-item card" open={i === 0}>
+            <summary class="faq-question">
+              <span>{f.q}</span>
+              <span class="faq-arrow">▼</span>
+            </summary>
+            <div class="faq-answer">
+              <p>{f.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <!-- CANAL DIRECTO -->
+      <div class="postventa-direct-card card">
+        <div class="direct-icon">📞</div>
+        <div>
+          <h3>Canal Telefónico y Emergencias</h3>
+          <p>Lunes a Viernes de 09:00 a 18:00 hrs. Para urgencias sanitarias o eléctricas fuera de horario, comunicarse directamente con la administración del condominio.</p>
+          <div class="direct-links">
+            <a href="mailto:postventa@amainmobiliaria.cl" class="btn btn-outline btn-sm">postventa@amainmobiliaria.cl</a>
+            <a href="tel:+56987654321" class="btn btn-cyan btn-sm">+569 8765 4321</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    position: relative;
+    padding: 5.5rem 0 5rem;
+  }
+
+  .relative-z {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-title {
+    color: var(--color-cream);
+    margin: 0.8rem 0;
+  }
+
+  .page-subtitle {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--text-on-dark-muted);
+    font-size: 1.15rem;
+  }
+
+  .warranties-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .warranty-card {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-top: 5px solid var(--color-cyan);
+  }
+
+  .w-number {
+    font-size: 2.4rem;
+    font-weight: var(--font-weight-heavy);
+    color: var(--color-petrol);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+
+  .w-title {
+    font-size: 1.35rem;
+    color: var(--color-cyan);
+    margin-bottom: 0.85rem;
+  }
+
+  .w-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .w-status {
+    font-size: 0.8rem;
+    color: var(--text-soft);
+    background: var(--color-cream);
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+  }
+
+  /* FORM */
+  .postventa-form-card {
+    padding: 3rem;
+  }
+
+  .p-form-header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .p-form-title {
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    margin: 0.5rem 0 0.5rem;
+  }
+
+  .p-form-subtitle {
+    font-size: 0.98rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    display: block;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-petrol);
+    font-size: 0.92rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--border-medium);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--color-petrol);
+    background-color: var(--color-cream);
+    transition: all var(--transition-fast);
+  }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: none;
+    border-color: var(--color-cyan);
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(var(--rgb-cyan), 0.15);
+  }
+
+  .form-textarea {
+    resize: vertical;
+  }
+
+  .form-footer-action {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+
+  .pv-success-alert {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(37, 211, 102, 0.15);
+    border: 1.5px solid #25D366;
+    border-radius: var(--radius-md);
+    color: var(--color-petrol);
+    font-size: 0.95rem;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* FAQS */
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+  }
+
+  .faq-item {
+    background: #FFFFFF;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    padding: 1.35rem 1.75rem;
+    cursor: pointer;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-petrol);
+    font-size: 1.05rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+
+  .faq-arrow {
+    font-size: 0.8rem;
+    color: var(--color-cyan);
+    transition: transform var(--transition-fast);
+  }
+
+  details[open] .faq-arrow {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 1.75rem 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .postventa-direct-card {
+    background: linear-gradient(135deg, var(--color-petrol) 0%, rgba(var(--rgb-petrol), 0.95) 100%);
+    color: var(--color-cream);
+    padding: 2.5rem;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .direct-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+  }
+
+  .postventa-direct-card h3 {
+    color: var(--color-cream);
+    margin-bottom: 0.4rem;
+  }
+
+  .postventa-direct-card p {
+    color: var(--text-on-dark-muted);
+    font-size: 0.92rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .direct-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 992px) {
+    .warranties-grid {
+      grid-template-columns: 1fr;
+    }
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .postventa-form-card {
+      padding: 1.75rem;
+    }
+    .postventa-direct-card {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  const pvForm = document.getElementById('postventa-form');
+  const pvSuccess = document.getElementById('pv-success');
+
+  if (pvForm && pvSuccess) {
+    pvForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      pvSuccess.style.display = 'block';
+      pvForm.reset();
+      pvSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }
+</script>

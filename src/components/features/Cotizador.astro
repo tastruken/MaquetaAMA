@@ -1,0 +1,567 @@
+---
+interface Props {
+  isModal?: boolean;
+  idPrefix?: string;
+}
+
+const { isModal = false, idPrefix = 'cotizador' } = Astro.props;
+---
+
+<div class={`cotizador-card ${isModal ? 'is-modal-style' : ''}`} id={`${idPrefix}-root`}>
+  <div class="cotizador-header">
+    <div class="cotizador-header-info">
+      <span class="badge badge-cyan">Simulador de Financiamiento</span>
+      <h3 class="cotizador-title">Cotiza tu Departamento en AMA Quillayes</h3>
+      <p class="cotizador-subtitle">
+        Calcula tu pie, plazo de crédito y dividendo mensual estimado en tiempo real.
+      </p>
+    </div>
+  </div>
+
+  <div class="cotizador-body">
+    <div class="cotizador-grid">
+      <!-- Columna Izquierda: Parámetros -->
+      <div class="cotizador-controls">
+        <!-- Selector de Tipología -->
+        <div class="form-group">
+          <label class="form-label" for={`${idPrefix}-tipologia`}>1. Elige tu modelo / tipología:</label>
+          <select id={`${idPrefix}-tipologia`} class="form-select">
+            <option value="2390" data-name="1D + 1B (Desde 34 m²)" data-img="/images/1d1b.png">1 Dormitorio + 1 Baño • Desde 2.390 UF</option>
+            <option value="3190" data-name="2D + 1B (Desde 46 m²)">2 Dormitorios + 1 Baño • Desde 3.190 UF</option>
+            <option value="3750" data-name="2D + 2B (Desde 58 m²)" selected>2 Dormitorios + 2 Baños • Desde 3.750 UF (Recomendado)</option>
+            <option value="4490" data-name="3D + 2B (Desde 72 m²)">3 Dormitorios + 2 Baños • Desde 4.490 UF</option>
+          </select>
+        </div>
+
+        <!-- Porcentaje de Pie -->
+        <div class="form-group">
+          <div class="label-with-val">
+            <label class="form-label" for={`${idPrefix}-pie-range`}>2. Porcentaje de Pie:</label>
+            <span id={`${idPrefix}-pie-val`} class="val-pill">15%</span>
+          </div>
+          <div class="pie-options-btns">
+            <button type="button" class="pie-btn" data-percent="10">10% de Pie</button>
+            <button type="button" class="pie-btn active" data-percent="15">15% de Pie</button>
+            <button type="button" class="pie-btn" data-percent="20">20% de Pie</button>
+          </div>
+          <input 
+            type="range" 
+            id={`${idPrefix}-pie-range`} 
+            min="10" 
+            max="30" 
+            step="1" 
+            value="15" 
+            class="range-slider"
+          />
+        </div>
+
+        <!-- Plazo de Crédito -->
+        <div class="form-group">
+          <label class="form-label">3. Plazo de Crédito Hipotecario:</label>
+          <div class="plazo-radio-group">
+            <label class="radio-label">
+              <input type="radio" name={`${idPrefix}-plazo`} value="20" />
+              <span>20 años</span>
+            </label>
+            <label class="radio-label active-radio">
+              <input type="radio" name={`${idPrefix}-plazo`} value="25" checked />
+              <span>25 años</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name={`${idPrefix}-plazo`} value="30" />
+              <span>30 años</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Opción de cuotas de pie -->
+        <div class="cuotas-pie-card">
+          <div class="cuotas-pie-header">
+            <span class="cuotas-icon">💡</span>
+            <div>
+              <strong>Paga tu pie en hasta 36 cuotas</strong>
+              <p>Sin intereses durante la etapa de construcción en blanco/verde.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Resumen de Simulación -->
+      <div class="cotizador-summary">
+        <div class="summary-box">
+          <div class="summary-top">
+            <span class="summary-caption">Dividendo mensual estimado</span>
+            <div class="dividendo-display">
+              <span class="dividendo-uf" id={`${idPrefix}-dividendo-uf`}>15.82 UF</span>
+              <span class="dividendo-clp" id={`${idPrefix}-dividendo-clp`}>~$617.000 / mes</span>
+            </div>
+            <p class="dividendo-disclaimer">*Cálculo con tasa referencial anual del 4.7%.</p>
+          </div>
+
+          <div class="summary-breakdown">
+            <div class="breakdown-row">
+              <span>Valor Propiedad:</span>
+              <strong id={`${idPrefix}-precio-total`}>3.750 UF</strong>
+            </div>
+            <div class="breakdown-row">
+              <span id={`${idPrefix}-pie-label`}>Monto de Pie (15%):</span>
+              <strong id={`${idPrefix}-pie-monto`}>562.5 UF (~$21.9 M)</strong>
+            </div>
+            <div class="breakdown-row">
+              <span>Crédito a financiar:</span>
+              <strong id={`${idPrefix}-credito-monto`}>3.187.5 UF</strong>
+            </div>
+            <div class="breakdown-row highlight-row">
+              <span>Renta mínima sugerida:</span>
+              <strong id={`${idPrefix}-renta-sugerida`}>~$2.450.000</strong>
+            </div>
+          </div>
+
+          <!-- Formulario rápido para agendar y enviar cotización -->
+          <form class="quote-lead-form" id={`${idPrefix}-lead-form`}>
+            <p class="form-instructions">Recibe esta cotización en tu correo o WhatsApp:</p>
+            <div class="form-inputs-row">
+              <input 
+                type="text" 
+                id={`${idPrefix}-lead-name`} 
+                placeholder="Tu Nombre completo" 
+                required 
+                class="form-input" 
+              />
+              <input 
+                type="email" 
+                id={`${idPrefix}-lead-email`} 
+                placeholder="Correo electrónico" 
+                required 
+                class="form-input" 
+              />
+              <input 
+                type="tel" 
+                id={`${idPrefix}-lead-phone`} 
+                placeholder="Teléfono móvil (+569)" 
+                required 
+                class="form-input" 
+              />
+            </div>
+            <button type="submit" class="btn btn-coral btn-block">
+              Solicitar Cotización y Asesoría
+            </button>
+            <div id={`${idPrefix}-success-msg`} class="success-message" style="display: none;">
+              ✅ ¡Cotización enviada con éxito! Un ejecutivo de AMA Inmobiliaria se comunicará contigo.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cotizador-card {
+    background: #FFFFFF;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+
+  .cotizador-header {
+    background: var(--color-petrol);
+    color: var(--color-cream);
+    padding: 2.2rem 2.5rem;
+    position: relative;
+    border-bottom: 3px solid var(--color-cyan);
+  }
+
+  .cotizador-title {
+    color: var(--color-cream);
+    margin: 0.6rem 0 0.4rem;
+    font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+    font-weight: var(--font-weight-black);
+  }
+
+  .cotizador-subtitle {
+    color: var(--text-on-dark-muted);
+    font-size: 0.98rem;
+    margin: 0;
+  }
+
+  .cotizador-body {
+    padding: 2.5rem;
+  }
+
+  .cotizador-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .form-group {
+    margin-bottom: 1.75rem;
+  }
+
+  .form-label {
+    display: block;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-petrol);
+    font-size: 0.98rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .label-with-val {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .val-pill {
+    background-color: var(--color-cyan);
+    color: #FFFFFF;
+    font-weight: var(--font-weight-bold);
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+  }
+
+  .form-select, .form-input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--border-medium);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--color-petrol);
+    background-color: var(--color-cream);
+    transition: border-color var(--transition-fast), background-color var(--transition-fast);
+  }
+
+  .form-select:focus, .form-input:focus {
+    outline: none;
+    border-color: var(--color-cyan);
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(var(--rgb-cyan), 0.15);
+  }
+
+  .pie-options-btns {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .pie-btn {
+    flex: 1;
+    padding: 0.55rem;
+    background-color: var(--color-cream);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-petrol);
+    transition: all var(--transition-fast);
+  }
+
+  .pie-btn.active, .pie-btn:hover {
+    background-color: var(--color-petrol);
+    color: var(--color-cream);
+    border-color: var(--color-petrol);
+  }
+
+  .range-slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--border-medium);
+    outline: none;
+    accent-color: var(--color-cyan);
+    cursor: pointer;
+  }
+
+  .plazo-radio-group {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .radio-label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.65rem 0.5rem;
+    border: 1.5px solid var(--border-medium);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: var(--font-weight-semibold);
+    font-size: 0.9rem;
+    background: var(--color-cream);
+    color: var(--color-petrol);
+    transition: all var(--transition-fast);
+  }
+
+  .radio-label.active-radio {
+    border-color: var(--color-cyan);
+    background: rgba(var(--rgb-cyan), 0.1);
+    color: var(--color-petrol);
+  }
+
+  .cuotas-pie-card {
+    background: rgba(var(--rgb-orange), 0.1);
+    border: 1px solid rgba(var(--rgb-orange), 0.3);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1.15rem;
+    margin-top: 1.5rem;
+  }
+
+  .cuotas-pie-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .cuotas-pie-header strong {
+    color: var(--color-petrol);
+    font-size: 0.9rem;
+    display: block;
+  }
+
+  .cuotas-pie-header p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0.15rem 0 0;
+  }
+
+  /* Summary Box */
+  .summary-box {
+    background: var(--color-cream);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-subtle);
+    padding: 2rem;
+  }
+
+  .summary-top {
+    text-align: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 1.5rem;
+  }
+
+  .summary-caption {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-muted);
+  }
+
+  .dividendo-display {
+    margin: 0.4rem 0;
+  }
+
+  .dividendo-uf {
+    display: block;
+    font-size: 2.3rem;
+    font-weight: var(--font-weight-heavy);
+    color: var(--color-petrol);
+    line-height: 1.1;
+  }
+
+  .dividendo-clp {
+    display: block;
+    font-size: 1.15rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-cyan);
+  }
+
+  .dividendo-disclaimer {
+    font-size: 0.75rem;
+    color: var(--text-soft);
+    margin-top: 0.4rem;
+  }
+
+  .summary-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+    font-size: 0.92rem;
+  }
+
+  .breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-muted);
+  }
+
+  .breakdown-row strong {
+    color: var(--color-petrol);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .highlight-row {
+    background: #FFFFFF;
+    padding: 0.65rem 0.85rem;
+    border-radius: var(--radius-sm);
+    border: 1px dashed var(--border-cyan);
+  }
+
+  .highlight-row strong {
+    color: var(--color-petrol);
+  }
+
+  .quote-lead-form {
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 1.5rem;
+  }
+
+  .form-instructions {
+    font-size: 0.85rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-petrol);
+    margin-bottom: 0.85rem;
+  }
+
+  .form-inputs-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 1rem;
+  }
+
+  .success-message {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: rgba(37, 211, 102, 0.15);
+    border: 1px solid #25D366;
+    border-radius: var(--radius-md);
+    color: var(--color-petrol);
+    font-size: 0.88rem;
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .cotizador-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .cotizador-body {
+      padding: 1.5rem;
+    }
+  }
+</style>
+
+<script define:vars={{ idPrefix }}>
+  (function initCotizador() {
+    const UF_VALUE = 39000; // Valor referencial de la UF en CLP
+    const ANNUAL_RATE = 0.047; // Tasa anual 4.7%
+    const MONTHLY_RATE = Math.pow(1 + ANNUAL_RATE, 1 / 12) - 1;
+
+    const selectTipologia = document.getElementById(`${idPrefix}-tipologia`);
+    const rangePie = document.getElementById(`${idPrefix}-pie-range`);
+    const valPie = document.getElementById(`${idPrefix}-pie-val`);
+    const pieButtons = document.querySelectorAll(`#${idPrefix}-root .pie-btn`);
+    const radioPlazos = document.querySelectorAll(`input[name="${idPrefix}-plazo"]`);
+
+    const elDividendoUf = document.getElementById(`${idPrefix}-dividendo-uf`);
+    const elDividendoClp = document.getElementById(`${idPrefix}-dividendo-clp`);
+    const elPrecioTotal = document.getElementById(`${idPrefix}-precio-total`);
+    const elPieLabel = document.getElementById(`${idPrefix}-pie-label`);
+    const elPieMonto = document.getElementById(`${idPrefix}-pie-monto`);
+    const elCreditoMonto = document.getElementById(`${idPrefix}-credito-monto`);
+    const elRentaSugerida = document.getElementById(`${idPrefix}-renta-sugerida`);
+    const formLead = document.getElementById(`${idPrefix}-lead-form`);
+    const successMsg = document.getElementById(`${idPrefix}-success-msg`);
+
+    function calculate() {
+      if (!selectTipologia || !rangePie) return;
+      const ufPrice = parseFloat(selectTipologia.value);
+      const piePercent = parseInt(rangePie.value, 10);
+      let plazoYears = 25;
+
+      radioPlazos.forEach((radio) => {
+        if (radio.checked) {
+          plazoYears = parseInt(radio.value, 10);
+        }
+      });
+
+      const pieUf = (ufPrice * piePercent) / 100;
+      const loanUf = ufPrice - pieUf;
+      const totalMonths = plazoYears * 12;
+
+      // Fórmula de cuota dividendo hipotecario: C = P * [r(1+r)^n] / [(1+r)^n - 1]
+      const r = MONTHLY_RATE;
+      const n = totalMonths;
+      const factor = (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      const monthlyPaymentUf = loanUf * factor;
+      const monthlyPaymentClp = Math.round(monthlyPaymentUf * UF_VALUE);
+      const pieClp = Math.round(pieUf * UF_VALUE);
+      const minIncomeClp = Math.round(monthlyPaymentClp * 4);
+
+      if (valPie) valPie.textContent = `${piePercent}%`;
+      if (elDividendoUf) elDividendoUf.textContent = `${monthlyPaymentUf.toFixed(2)} UF`;
+      if (elDividendoClp) elDividendoClp.textContent = `~$${monthlyPaymentClp.toLocaleString('es-CL')} / mes`;
+      if (elPrecioTotal) elPrecioTotal.textContent = `${ufPrice.toLocaleString('es-CL')} UF`;
+      if (elPieLabel) elPieLabel.textContent = `Monto de Pie (${piePercent}%):`;
+      if (elPieMonto) elPieMonto.textContent = `${pieUf.toFixed(1)} UF (~$${(pieClp / 1000000).toFixed(1)}M)`;
+      if (elCreditoMonto) elCreditoMonto.textContent = `${loanUf.toFixed(1)} UF`;
+      if (elRentaSugerida) elRentaSugerida.textContent = `~$${minIncomeClp.toLocaleString('es-CL')}`;
+    }
+
+    if (selectTipologia) selectTipologia.addEventListener('change', calculate);
+    if (rangePie) {
+      rangePie.addEventListener('input', () => {
+        const val = rangePie.value;
+        pieButtons.forEach((btn) => {
+          btn.classList.toggle('active', btn.getAttribute('data-percent') === val);
+        });
+        calculate();
+      });
+    }
+
+    pieButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const percent = btn.getAttribute('data-percent');
+        if (rangePie) rangePie.value = percent;
+        pieButtons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        calculate();
+      });
+    });
+
+    radioPlazos.forEach((radio) => {
+      radio.addEventListener('change', () => {
+        radioPlazos.forEach((r) => {
+          const parent = r.closest('.radio-label');
+          if (parent) parent.classList.toggle('active-radio', r.checked);
+        });
+        calculate();
+      });
+    });
+
+    if (formLead) {
+      formLead.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById(`${idPrefix}-lead-name`)?.value || '';
+        const phone = document.getElementById(`${idPrefix}-lead-phone`)?.value || '';
+        const email = document.getElementById(`${idPrefix}-lead-email`)?.value || '';
+        const tipologiaText = selectTipologia?.options[selectTipologia.selectedIndex]?.text || '';
+        const divUf = elDividendoUf?.textContent || '';
+        const divClp = elDividendoClp?.textContent || '';
+
+        if (successMsg) {
+          successMsg.style.display = 'block';
+        }
+
+        // Abrir WhatsApp con cotización pre-llenada tras 1.2s para comodidad del usuario
+        setTimeout(() => {
+          const msg = `Hola AMA Inmobiliaria, soy ${name}. Acabo de cotizar en la web el modelo: ${tipologiaText}. Dividendo estimado: ${divUf} (${divClp}). Mi correo es ${email} y teléfono ${phone}. Me gustaría que me asesoren.`;
+          window.open(`https://wa.me/56987654321?text=${encodeURIComponent(msg)}`, '_blank');
+        }, 1200);
+      });
+    }
+
+    calculate();
+  })();
+</script>

@@ -1,0 +1,67 @@
+---
+interface Props {
+  phone?: string;
+  message?: string;
+}
+
+const { 
+  phone = '56987654321', 
+  message = 'Hola, me gustaría cotizar e informarme sobre los proyectos de AMA Inmobiliaria.' 
+} = Astro.props;
+
+const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+---
+
+<aside class="whatsapp-floating-wrap" aria-label="Contacto por WhatsApp">
+  <a 
+    href={whatsappUrl} 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    class="whatsapp-btn"
+    aria-label="Chatear por WhatsApp con una ejecutiva de AMA Inmobiliaria"
+  >
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.947.814 2.8.814 3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.586-5.766-5.772-5.766zm3.376 8.21c-.14.394-.805.748-1.127.794-.306.044-.707.067-2.038-.484-1.603-.665-2.617-2.316-2.696-2.423-.079-.107-.649-.864-.649-1.647 0-.783.41-1.168.556-1.328.146-.16.321-.2.428-.2.107 0 .214.002.308.006.1.005.234-.038.366.279.136.328.465 1.135.505 1.218.041.082.068.179.014.288-.055.107-.082.175-.164.27-.082.096-.173.214-.247.288-.082.083-.168.172-.072.337.096.164.428.706.918 1.142.631.562 1.164.737 1.328.819.164.082.261.069.358-.041.097-.11.41-.479.52-.644.11-.164.22-.137.369-.082.15.055.952.449 1.116.531.164.082.273.123.314.192.041.069.041.401-.099.795zM12 2C6.477 2 2 6.477 2 12c0 1.891.526 3.66 1.439 5.174L2 22l4.98-1.306C8.423 21.523 10.15 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
+    </svg>
+    <span class="whatsapp-label">¿Hablamos por WhatsApp?</span>
+  </a>
+</aside>
+
+<style>
+  .whatsapp-floating-wrap {
+    position: fixed;
+    bottom: 1.75rem;
+    right: 1.75rem;
+    z-index: 900;
+  }
+
+  .whatsapp-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background-color: #25D366;
+    color: #FFFFFF;
+    padding: 0.75rem 1.15rem;
+    border-radius: var(--radius-full);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-semibold);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .whatsapp-btn:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 12px 28px rgba(37, 211, 102, 0.5);
+    filter: brightness(1.05);
+  }
+
+  @media (max-width: 640px) {
+    .whatsapp-label {
+      display: none;
+    }
+    .whatsapp-btn {
+      padding: 0.85rem;
+      border-radius: 50%;
+    }
+  }
+</style>

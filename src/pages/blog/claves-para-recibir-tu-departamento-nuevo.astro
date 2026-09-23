@@ -1,0 +1,202 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Checklist para Recibir tu Departamento Nuevo | Blog AMA Inmobiliaria"
+  description="Puntos clave que debes inspeccionar al recibir tu departamento nuevo: terminaciones, instalaciones y acta de recepción de postventa."
+>
+  <div class="article-top-bar">
+    <div class="container">
+      <a href="/blog" class="back-link">← Volver al Blog</a>
+    </div>
+  </div>
+
+  <article class="article-detail-page section-cream">
+    <div class="container container-narrow">
+      <header class="article-header">
+        <span class="badge badge-petrol">Guía del Comprador</span>
+        <h1 class="article-title">
+          Checklist de recepción y garantías: Qué revisar al momento de la entrega
+        </h1>
+        <div class="article-meta-info">
+          <span>Por: <strong>Departamento de Calidad y Postventa AMA</strong></span>
+          <span class="dot">•</span>
+          <span>28 Agosto 2026</span>
+          <span class="dot">•</span>
+          <span>6 min de lectura</span>
+        </div>
+      </header>
+
+      <div class="article-featured-img card">
+        <img src="/images/ama_amenity_rooftop.jpg" alt="Entrega departamento nuevo AMA" />
+      </div>
+
+      <div class="article-content card">
+        <p class="lead-paragraph">
+          El día de la entrega de tu departamento nuevo es una ocasión memorable. En <strong>AMA Inmobiliaria</strong> nos esforzamos para que este hito sea una experiencia transparente, profesional y bien documentada. Aquí te compartimos nuestro checklist técnico para que revises cada rincón con total seguridad.
+        </p>
+
+        <h2>1. Puertas, ventanas y quincallería</h2>
+        <ul>
+          <li><strong>Apertura y cierre:</strong> Comprueba que las puertas abran y cierren sin rozar el piso y que las cerraduras funcionen con suavidad.</li>
+          <li><strong>Termopanel:</strong> Revisa que las hojas de ventanas deslicen correctamente y que los sellos perimetrales no presenten fisuras.</li>
+          <li><strong>Topes de puerta:</strong> Verifica que los topes magnéticos o de piso estén firmemente instalados.</li>
+        </ul>
+
+        <h2>2. Instalaciones sanitarias y gasfitería</h2>
+        <ul>
+          <li><strong>Presión de agua:</strong> Abre llaves de lavamanos, lavaplatos y ducha simultáneamente para verificar flujo continuo.</li>
+          <li><strong>Desagüe:</strong> Llena los lavabos con el tapón puesto y vacíalos para comprobar que no existan filtraciones bajo los muebles de vanitorio o lavaplatos.</li>
+          <li><strong>Sellos de tina / receptáculo:</strong> La silicona sanitaria debe ser uniforme y sin espacios libres donde pueda ingresar humedad.</li>
+        </ul>
+
+        <h2>3. Sistema eléctrico y enchufes</h2>
+        <p>
+          Puedes llevar el cargador de tu teléfono para probar rápidamente los enchufes de cada habitación. Además:
+        </p>
+        <ul>
+          <li>Verifica que el tablero general con disyuntores y automáticos esté rotulado claramente (cocina, iluminación, enchufes generales).</li>
+          <li>Prueba el citófono con la conserjería del edificio para confirmar audio y apertura remota si corresponde.</li>
+        </ul>
+
+        <h2>4. El Acta de Recepción Conforme</h2>
+        <p>
+          Si detectas algún detalle estético menor (por ejemplo, una pincelada de pintura o un ajuste de bisagra), no te preocupes: se anota detalladamente en el <strong>Acta de Observaciones</strong>. Nuestro equipo de postventa programa una visita de rectificación para subsanarlo a la brevedad.
+        </p>
+        <p>
+          Recuerda que cuentas con el respaldo de la garantía legal de <strong>3 años para terminaciones, 5 años para instalaciones y 10 años para estructura</strong>.
+        </p>
+
+        <div class="article-cta-box">
+          <h3>¿Necesitas soporte técnico o ingresar una solicitud?</h3>
+          <p>Visita nuestro portal de postventa y gestiona cualquier requerimiento en línea.</p>
+          <a href="/postventa" class="btn btn-cyan">
+            Ir a Postventa y Garantías
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-top-bar {
+    background: var(--color-petrol);
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(var(--rgb-cyan), 0.15);
+  }
+
+  .back-link {
+    color: var(--color-cream);
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .back-link:hover {
+    color: var(--color-cyan);
+  }
+
+  .article-detail-page {
+    padding: 3.5rem 0 5rem;
+  }
+
+  .article-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .article-title {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    margin: 1rem 0;
+    line-height: 1.25;
+  }
+
+  .article-meta-info {
+    font-size: 0.88rem;
+    color: var(--text-soft);
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .article-meta-info strong {
+    color: var(--color-petrol);
+  }
+
+  .article-featured-img {
+    height: 420px;
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+  }
+
+  .article-featured-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .article-content {
+    background: #FFFFFF;
+    padding: 3.5rem;
+  }
+
+  .lead-paragraph {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: var(--color-petrol);
+    margin-bottom: 2rem;
+  }
+
+  .article-content h2 {
+    font-size: 1.6rem;
+    margin: 2.2rem 0 1rem;
+    color: var(--color-petrol);
+  }
+
+  .article-content p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .article-content ul {
+    margin: 1rem 0 1.75rem 1.5rem;
+    list-style: disc;
+  }
+
+  .article-content li {
+    font-size: 1.02rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .article-cta-box {
+    background: linear-gradient(135deg, var(--color-petrol) 0%, rgba(var(--rgb-petrol), 0.95) 100%);
+    color: var(--color-cream);
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .article-cta-box h3 {
+    color: var(--color-cream);
+    margin-bottom: 0.5rem;
+  }
+
+  .article-cta-box p {
+    color: var(--text-on-dark-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .article-content {
+      padding: 1.75rem;
+    }
+    .article-featured-img {
+      height: 250px;
+    }
+  }
+</style>

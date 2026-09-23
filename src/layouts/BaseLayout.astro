@@ -1,0 +1,95 @@
+---
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import WhatsAppButton from '../components/layout/WhatsAppButton.astro';
+import CotizadorModal from '../components/features/CotizadorModal.astro';
+import { u, base } from '../utils/url';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = 'Departamentos Nuevos en Santiago',
+  description = 'Descubre proyectos inmobiliarios con diseño de vanguardia, altos estándares y excelente conectividad. AMA Inmobiliaria, calidad que trasciende.',
+  ogImage = '/images/og-ama.jpg'
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://tastruken.github.io');
+const fullTitle = title.includes('AMA Inmobiliaria') ? title : `${title} | AMA Inmobiliaria`;
+---
+
+<!DOCTYPE html>
+<html lang="es-CL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href={u('/favicon.svg')} />
+    
+    <script is:inline>
+      (() => {
+        const base = '/MaquetaAMA';
+        if (window.location.pathname.startsWith(base)) {
+          // Intercept link clicks to root-relative paths
+          document.addEventListener('click', (e) => {
+            const a = e.target.closest('a');
+            if (!a) return;
+            const href = a.getAttribute('href');
+            if (href && href.startsWith('/') && !href.startsWith(base) && !href.startsWith('//')) {
+              e.preventDefault();
+              window.location.href = base + href;
+            }
+          });
+          // Fix images with root-relative paths
+          window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('img[src^="/"]').forEach((img) => {
+              const src = img.getAttribute('src');
+              if (src && !src.startsWith(base) && !src.startsWith('//')) {
+                img.setAttribute('src', base + src);
+              }
+            });
+          });
+        }
+      })();
+    </script>
+    
+    <!-- Metadatos SEO -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <!-- Fuentes Corporativas (Brandbook Pág. 8: Gilroy / Fallback idéntico Plus Jakarta Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <Header currentPath={Astro.url.pathname} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    
+    <!-- Utilidades Globales -->
+    <WhatsAppButton />
+    <CotizadorModal />
+  </body>
+</html>
+
+<style is:global>
+  #main-content {
+    flex-grow: 1;
+  }
+</style>

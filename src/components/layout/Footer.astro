@@ -1,0 +1,318 @@
+---
+// src/components/layout/Footer.astro
+// Footer minimalista dark estilo Aurvix con suscripción en cápsula
+
+import LogoAMA from '../brand/LogoAMA.astro';
+import { u } from '../../utils/url';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-container">
+    <div class="footer-grid">
+      <!-- Columna 1: Newsletter y Redes (Estilo Aurvix "Subscribe to our journal") -->
+      <div class="footer-newsletter-col">
+        <a href={u('/')} class="footer-logo" aria-label="Ir a Inicio AMA Inmobiliaria">
+          <LogoAMA variant="cyan-white" height={40} />
+        </a>
+        <p class="newsletter-heading">Suscríbete a nuestro boletín inmobiliario</p>
+        <p class="newsletter-sub">Recibe primero las aperturas en blanco, bonos especiales y oportunidades de inversión en Santiago.</p>
+
+        <!-- Formulario Píldora estilo Aurvix -->
+        <form class="newsletter-pill-form" onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte!');">
+          <input 
+            type="email" 
+            placeholder="Ingresa tu correo electrónico" 
+            required 
+            aria-label="Correo electrónico para suscripción"
+            class="newsletter-input" 
+          />
+          <button type="submit" class="newsletter-submit-circle" aria-label="Suscribirse">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </button>
+        </form>
+
+        <!-- Redes Sociales Minimalistas -->
+        <div class="footer-social-row">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+          <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna 2: Proyectos -->
+      <div class="footer-links-col">
+        <p class="col-title">Proyectos</p>
+        <ul class="col-list">
+          <li><a href={u('/proyectos/ama-quillayes')}>Edificio AMA Quillayes</a></li>
+          <li><a href={u('/proyectos')}>Venta en Blanco</a></li>
+          <li><a href={u('/ofertas')}>Bono Pie 10%</a></li>
+          <li><a href={u('/amenities')}>Amenities & Estándar</a></li>
+          <li><a href="javascript:void(0)" onclick="window.openCotizadorModal && window.openCotizadorModal()">Cotizador Online</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Empresa y Postventa -->
+      <div class="footer-links-col">
+        <p class="col-title">Compañía</p>
+        <ul class="col-list">
+          <li><a href={u('/nosotros')}>Nuestra Historia</a></li>
+          <li><a href={u('/postventa')}>Portal Postventa</a></li>
+          <li><a href={u('/blog')}>Blog Inmobiliario</a></li>
+          <li><a href={u('/contacto')}>Canal de Contacto</a></li>
+          <li><a href={u('/terminos-y-condiciones')}>Términos y Condiciones</a></li>
+          <li><a href={u('/politica-de-privacidad')}>Privacidad</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 4: Sala de Ventas & Ubicación -->
+      <div class="footer-links-col">
+        <p class="col-title">Showroom & Ubicación</p>
+        <ul class="col-list address-list">
+          <li>
+            <strong>Sala de Ventas:</strong>
+            <span>Av. Vicuña Mackenna / Los Quillayes, La Florida</span>
+          </li>
+          <li>
+            <strong>Horario de Atención:</strong>
+            <span>Lunes a Domingo 10:30 a 19:00 hrs</span>
+          </li>
+          <li>
+            <strong>Teléfono Directo:</strong>
+            <a href="tel:+56987654321">+56 9 8765 4321</a>
+          </li>
+          <li>
+            <strong>Correo:</strong>
+            <a href="mailto:contacto@amainmobiliaria.cl">contacto@amainmobiliaria.cl</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Barra Inferior -->
+    <div class="footer-copyright-bar">
+      <p>&copy; {currentYear} AMA Inmobiliaria. Desarrollos residenciales de vanguardia.</p>
+      <div class="legal-badge-pill">
+        <span>Socio Cámara Chilena de la Construcción</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: #021822;
+    color: var(--color-cream);
+    padding: 5.5rem 0 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+    gap: 3.5rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .footer-logo {
+    display: inline-block;
+    margin-bottom: 1.2rem;
+  }
+
+  .newsletter-heading {
+    font-size: 1.2rem;
+    font-weight: var(--font-weight-heavy);
+    color: #FFFFFF;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .newsletter-sub {
+    font-size: 0.9rem;
+    color: var(--text-on-dark-muted);
+    line-height: 1.55;
+    margin-bottom: 1.5rem;
+    max-width: 360px;
+  }
+
+  /* Formulario Píldora Aurvix */
+  .newsletter-pill-form {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-full);
+    padding: 0.3rem 0.35rem 0.3rem 1.2rem;
+    max-width: 360px;
+    margin-bottom: 1.75rem;
+    transition: all var(--transition-fast);
+  }
+
+  .newsletter-pill-form:focus-within {
+    border-color: var(--color-cyan);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 3px rgba(var(--rgb-cyan), 0.2);
+  }
+
+  .newsletter-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 0.88rem;
+    outline: none;
+  }
+
+  .newsletter-input::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .newsletter-submit-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: var(--color-petrol);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+  }
+
+  .newsletter-submit-circle:hover {
+    background: var(--color-cyan);
+    color: #FFFFFF;
+    transform: scale(1.08);
+  }
+
+  .footer-social-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .social-icon-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+  }
+
+  .social-icon-btn:hover {
+    background: var(--color-cyan);
+    color: #FFFFFF;
+    border-color: var(--color-cyan);
+    transform: translateY(-2px);
+  }
+
+  .col-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 1.4rem;
+    letter-spacing: -0.01em;
+  }
+
+  .col-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .col-list a {
+    color: var(--text-on-dark-muted);
+    font-size: 0.92rem;
+    transition: color var(--transition-fast);
+  }
+
+  .col-list a:hover {
+    color: var(--color-cyan);
+  }
+
+  .address-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.88rem;
+    color: var(--text-on-dark-muted);
+    line-height: 1.5;
+  }
+
+  .address-list strong {
+    color: #FFFFFF;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .footer-copyright-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2rem;
+    font-size: 0.84rem;
+    color: var(--text-on-dark-muted);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .legal-badge-pill {
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  @media (max-width: 992px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .footer-copyright-bar {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

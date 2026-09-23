@@ -1,0 +1,348 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PatternDrops from '../components/brand/PatternDrops.astro';
+---
+
+<BaseLayout 
+  title="Contacto y Salas de Venta | AMA Inmobiliaria"
+  description="Ponte en contacto con nuestro equipo comercial o visita la sala de ventas de AMA Quillayes en Santiago. Asesoría inmobiliaria y financiera personalizada."
+>
+  <section class="page-hero section-petrol">
+    <PatternDrops color="#1AA6B7" opacity={0.06} />
+    <div class="container relative-z text-center">
+      <span class="badge badge-cyan">Atención Comercial</span>
+      <h1 class="page-title">Conversemos sobre tu Próximo Hogar</h1>
+      <p class="page-subtitle">
+        ¿Tienes dudas sobre financiamiento, plazos de entrega o disponibilidad? Estamos listos para responderte de inmediato.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-cream">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Columna Izquierda: Información y Canales -->
+        <div class="contact-info-col">
+          <div class="card info-card">
+            <h2 class="info-title">Canales Oficiales</h2>
+            <p class="info-desc">
+              Comunícate directamente con nuestros ejecutivos comerciales por el canal de tu preferencia.
+            </p>
+
+            <ul class="channels-list">
+              <li class="channel-item">
+                <div class="ch-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <span class="ch-label">Correo Electrónico General</span>
+                  <a href="mailto:contacto@amainmobiliaria.cl" class="ch-link">contacto@amainmobiliaria.cl</a>
+                </div>
+              </li>
+
+              <li class="channel-item">
+                <div class="ch-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <span class="ch-label">Central Telefónica</span>
+                  <a href="tel:+56987654321" class="ch-link">+569 8765 4321</a>
+                </div>
+              </li>
+
+              <li class="channel-item">
+                <div class="ch-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </div>
+                <div>
+                  <span class="ch-label">Sala de Ventas AMA Quillayes</span>
+                  <p class="ch-text">Av. Vicuña Mackenna Oriente / Walker Martínez, La Florida, Santiago.</p>
+                </div>
+              </li>
+
+              <li class="channel-item">
+                <div class="ch-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <span class="ch-label">Horario de Atención</span>
+                  <p class="ch-text">Lunes a Domingo de 10:30 a 19:00 hrs (Horario continuado).</p>
+                </div>
+              </li>
+            </ul>
+
+            <!-- Acceso Directo a WhatsApp -->
+            <div class="whatsapp-direct-card">
+              <h4>¿Consultas rápidas o cotización inmediata?</h4>
+              <p>Chatea con una asesora en tiempo real por WhatsApp:</p>
+              <a 
+                href="https://wa.me/56987654321?text=Hola,%20quisiera%20hacer%20una%20consulta%20general%20a%20AMA%20Inmobiliaria" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="btn btn-block"
+                style="background-color: #25D366; color: #FFFFFF;"
+              >
+                Escribir por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Formulario General -->
+        <div class="contact-form-col">
+          <div class="card form-card">
+            <h2 class="form-title">Envíanos un Mensaje</h2>
+            <p class="form-subtitle">Te responderemos dentro de las próximas 2 horas hábiles.</p>
+
+            <form id="contact-form-element" class="contact-form">
+              <div class="form-group">
+                <label class="form-label" for="c-name">Nombre y Apellido *</label>
+                <input type="text" id="c-name" required placeholder="Ej: Ignacio Morales" class="form-input" />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="c-email">Correo Electrónico *</label>
+                  <input type="email" id="c-email" required placeholder="tu@correo.cl" class="form-input" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="c-phone">Teléfono Móvil *</label>
+                  <input type="tel" id="c-phone" required placeholder="+569 9876 5432" class="form-input" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="c-subject">Motivo de Consulta *</label>
+                <select id="c-subject" class="form-select" required>
+                  <option value="Cotizar departamento AMA Quillayes">Cotizar departamento en AMA Quillayes</option>
+                  <option value="Consultar facilidades de pago de pie">Consultar facilidades de pago de pie (cuotas)</option>
+                  <option value="Asesoría para inversionistas">Asesoría para inversionistas (rentabilidad)</option>
+                  <option value="Postventa y Garantías">Postventa y Garantías</option>
+                  <option value="Otra consulta">Otra consulta general</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="c-message">Tu Mensaje o Consulta *</label>
+                <textarea id="c-message" rows="5" required placeholder="Cuéntanos en qué podemos ayudarte..." class="form-textarea"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-cyan btn-lg btn-block">
+                Enviar Mensaje
+              </button>
+
+              <div id="c-success" class="contact-success" style="display: none;">
+                ✅ <strong>¡Mensaje recibido!</strong> Un ejecutivo de AMA Inmobiliaria se comunicará contigo a la brevedad.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    position: relative;
+    padding: 5.5rem 0 5rem;
+  }
+
+  .relative-z {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-title {
+    color: var(--color-cream);
+    margin: 0.8rem 0;
+  }
+
+  .page-subtitle {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--text-on-dark-muted);
+    font-size: 1.15rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+  }
+
+  .info-card, .form-card {
+    padding: 3rem;
+  }
+
+  .info-title, .form-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-petrol);
+  }
+
+  .info-desc, .form-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  .channels-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .channel-item {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .ch-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: rgba(var(--rgb-cyan), 0.12);
+    color: var(--color-cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .ch-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.2rem;
+  }
+
+  .ch-link {
+    font-size: 1.05rem;
+    color: var(--color-petrol);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .ch-link:hover {
+    color: var(--color-cyan);
+  }
+
+  .ch-text {
+    font-size: 0.92rem;
+    color: var(--color-petrol);
+    margin: 0;
+  }
+
+  .whatsapp-direct-card {
+    background: rgba(var(--rgb-petrol), 0.05);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    border: 1px solid var(--border-subtle);
+  }
+
+  .whatsapp-direct-card h4 {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    color: var(--color-petrol);
+  }
+
+  .whatsapp-direct-card p {
+    font-size: 0.88rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    display: block;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-petrol);
+    font-size: 0.92rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--border-medium);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--color-petrol);
+    background-color: var(--color-cream);
+    transition: all var(--transition-fast);
+  }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: none;
+    border-color: var(--color-cyan);
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(var(--rgb-cyan), 0.15);
+  }
+
+  .contact-success {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(37, 211, 102, 0.15);
+    border: 1px solid #25D366;
+    border-radius: var(--radius-md);
+    color: var(--color-petrol);
+    font-size: 0.92rem;
+    text-align: center;
+  }
+
+  @media (max-width: 992px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .info-card, .form-card {
+      padding: 1.75rem;
+    }
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>
+
+<script>
+  const cForm = document.getElementById('contact-form-element');
+  const cSuccess = document.getElementById('c-success');
+
+  if (cForm && cSuccess) {
+    cForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      cSuccess.style.display = 'block';
+      cForm.reset();
+    });
+  }
+</script>

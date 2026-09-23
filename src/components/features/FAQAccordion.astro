@@ -1,0 +1,169 @@
+---
+// src/components/features/FAQAccordion.astro
+// Acordeón interactivo de preguntas frecuentes estilo Aurvix
+
+const faqs = [
+  {
+    q: "¿En qué consiste el beneficio de Bono Pie 10% en AMA Quillayes?",
+    a: "El Bono Pie es un incentivo comercial donde la inmobiliaria aporta un porcentaje del valor total de la propiedad (hasta un 10%). Esto permite que el banco financie el 90% restante o que tu desembolso en efectivo sea significativamente menor, facilitando la aprobación hipotecaria."
+  },
+  {
+    q: "¿Cómo funciona el pago del pie en hasta 36 cuotas sin interés?",
+    a: "Al comprar en blanco en Edificio AMA Quillayes, el tiempo de construcción te permite fraccionar el pago de tu pie directamente con la inmobiliaria en hasta 36 cuotas mensuales fijas, sin intereses ni costos de intermediación financiera."
+  },
+  {
+    q: "¿Cuál es la renta mínima sugerida para calificar a un departamento?",
+    a: "Dependiendo de la tipología (desde 2.390 UF), la renta sugerida parte desde $1.400.000 líquidos, la cual puede ser complementada entre parejas, cónyuges o familiares directos para alcanzar el monto exigido por la institución bancaria."
+  },
+  {
+    q: "¿Por qué invertir en La Florida (sector Metro Los Quillayes)?",
+    a: "La Florida es una de las comunas más consolidadas del sector suroriente de Santiago. La cercanía inmediata al Metro Línea 4, centros de salud, universidades y comercio garantiza una ocupación promedio sobre el 95% y una plusvalía anual estimada superior al 12%."
+  },
+  {
+    q: "¿Qué garantías legales y postventa ofrece AMA Inmobiliaria?",
+    a: "Cumplimos rigurosamente con la Ley General de Urbanismo y Construcciones: 3 años de garantía para terminaciones, 5 años para elementos constructivos e instalaciones, y 10 años para la estructura del edificio. Además, dispones de una plataforma digital para gestionar cualquier requerimiento de postventa con trazabilidad en vivo."
+  }
+];
+---
+
+<section class="section faq-section" id="faq">
+  <div class="container container-narrow">
+    <div class="section-header text-center">
+      <span class="pill-tag pill-tag-white">Resolvemos tus Dudas</span>
+      <h2 class="section-title">Preguntas Frecuentes</h2>
+      <p class="section-desc">
+        Información clara y transparente para que tomes la mejor decisión de inversión o vivienda.
+      </p>
+    </div>
+
+    <div class="faq-accordion-list">
+      {faqs.map((faq, index) => (
+        <div class="faq-item" data-index={index}>
+          <button type="button" class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">{faq.q}</span>
+            <span class="faq-icon-circle">
+              <svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <p>{faq.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    background-color: #FFFFFF;
+    padding: 6rem 0;
+  }
+
+  .faq-accordion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    margin-top: 2.5rem;
+  }
+
+  .faq-item {
+    background: var(--bg-canvas);
+    border: 1px solid rgba(var(--rgb-petrol), 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color var(--transition-fast), background-color var(--transition-fast);
+  }
+
+  .faq-item:hover {
+    border-color: rgba(var(--rgb-cyan), 0.35);
+  }
+
+  .faq-item.is-open {
+    background: #FFFFFF;
+    border-color: var(--color-cyan);
+    box-shadow: 0 8px 24px -6px rgba(0, 45, 64, 0.08);
+  }
+
+  .faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.4rem 1.75rem;
+    text-align: left;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .faq-q-text {
+    font-size: 1.05rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-petrol);
+    line-height: 1.4;
+  }
+
+  .faq-icon-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(var(--rgb-petrol), 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-petrol);
+    flex-shrink: 0;
+    transition: all var(--transition-fast);
+  }
+
+  .faq-item.is-open .faq-icon-circle {
+    background: var(--color-petrol);
+    color: #FFFFFF;
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s ease;
+    padding: 0 1.75rem;
+  }
+
+  .faq-item.is-open .faq-answer {
+    max-height: 300px;
+    padding: 0 1.75rem 1.5rem;
+  }
+
+  .faq-answer p {
+    font-size: 0.98rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    border-top: 1px solid rgba(var(--rgb-petrol), 0.06);
+    padding-top: 1rem;
+  }
+</style>
+
+<script>
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const btn = item.querySelector('.faq-question');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('is-open');
+        faqItems.forEach(i => {
+          i.classList.remove('is-open');
+          const b = i.querySelector('.faq-question');
+          if (b) b.setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    }
+  });
+</script>

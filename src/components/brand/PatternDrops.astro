@@ -1,0 +1,42 @@
+---
+interface Props {
+  color?: string;
+  opacity?: number;
+  class?: string;
+}
+
+const { color = 'var(--color-cyan)', opacity = 0.08, class: className = '' } = Astro.props;
+---
+
+<div class={`pattern-drops-wrapper ${className}`} aria-hidden="true">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="brandDrops" x="0" y="0" width="48" height="72" patternUnits="userSpaceOnUse">
+        <!-- Gota fila 1 -->
+        <path 
+          d="M24 8 C18 18 14 26 14 34 C14 42 19 47 24 47 C29 47 34 42 34 34 C34 26 30 18 24 8 Z" 
+          fill={color} 
+        />
+        <!-- Gota fila 2 desfasada -->
+        <path 
+          d="M0 44 C-6 54 -10 62 -10 70 C-10 78 -5 83 0 83 C5 83 10 78 10 70 C10 62 6 54 0 44 Z" 
+          fill={color} 
+        />
+        <path 
+          d="M48 44 C42 54 38 62 38 70 C38 78 43 83 48 83 C53 83 58 78 58 70 C58 62 54 54 48 44 Z" 
+          fill={color} 
+        />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#brandDrops)" opacity={opacity} />
+  </svg>
+</div>
+
+<style>
+  .pattern-drops-wrapper {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+</style>
