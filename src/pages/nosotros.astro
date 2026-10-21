@@ -1,151 +1,351 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import PatternDrops from '../components/brand/PatternDrops.astro';
-import PatternLoops from '../components/brand/PatternLoops.astro';
+// src/pages/nosotros.astro
+// Diseño 100% unificado con la estética de Inicio (Template Aurvix / Framer Real Estate)
 
-const timeline = [
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TrustTicker from '../components/features/TrustTicker.astro';
+import ModernCTA from '../components/features/ModernCTA.astro';
+import { u } from '../utils/url';
+import '../styles/home.css';
+import '../styles/nosotros.css';
+
+// Estructura Societaria oficial
+const partners = [
   {
-    year: '2014',
-    title: 'Origen y Fundación',
-    desc: 'Nace AMA con la convicción de renovar la arquitectura residencial en Santiago, priorizando la habitabilidad y el diseño atemporal.'
+    share: '47,5%',
+    name: 'Holding Ernesto Valle e Hijos',
+    subsidiary: 'Inmobiliaria Todos los Santos S.A. & VAIN S.A.',
+    badge: '30+ Años de Trayectoria',
+    summary: 'Grupo con más de 30 años de solidez en el rubro inmobiliario y de construcción en Chile.',
+    points: [
+      {
+        bold: 'Inmobiliaria Todos los Santos (2007):',
+        text: 'Brazo de desarrollo y comercialización con más de 5.000 viviendas en la RM.'
+      },
+      {
+        bold: 'Constructora VAIN S.A. (1994):',
+        text: 'Más de 22.000 viviendas y 2.000.000 m² construidos, líder en viviendas de alta calidad y valores accesibles.'
+      }
+    ]
   },
   {
-    year: '2017',
-    title: 'Consolidación en el Eje Sur-Oriente',
-    desc: 'Lanzamiento de nuestros primeros proyectos de escala media con 100% de venta en blanco antes del término de obra.'
+    share: '47,5%',
+    name: 'Constructora San José Andina',
+    subsidiary: 'Grupo SANJOSE (España)',
+    badge: 'Top 100 Mundial Deloitte',
+    summary: 'Compañía multinacional de origen español con más de 50 años de experiencia constructiva y presencia global desde los 90.',
+    points: [
+      {
+        bold: 'Presencia Internacional:',
+        text: 'Obras en España, EE.UU., Italia, Portugal, Reino Unido, Emiratos Árabes y México en salud, obra civil y residencial de alta complejidad.'
+      },
+      {
+        bold: 'Liderazgo Global:',
+        text: 'Top 100 mundial de constructoras (Global Powers of Construction 2024 de Deloitte) y puesto 147 de ENR Top International Contractors.'
+      }
+    ]
   },
   {
-    year: '2021',
-    title: 'Innovación en Eficiencia y Sustentabilidad',
-    desc: 'Incorporación de estándares de aislación térmica superior, domótica y optimización energética en todos los departamentos.'
-  },
-  {
-    year: '2026',
-    title: 'Edificio AMA Quillayes & Futuro',
-    desc: 'Nuevo hito con AMA Quillayes, marcando una nueva generación de desarrollos con amenities de calidad hotelera y financiamiento accesible.'
+    share: '5,0%',
+    name: 'Polux Inmobiliaria SpA',
+    subsidiary: 'Polux Gestión Inmobiliaria',
+    badge: 'Gestión Patrimonial',
+    summary: 'Sociedad fundada en 2023 por Rodrigo Aldunate, Maximiliano Cuadra y Pablo Ramírez, especialistas en fondos y gobiernos corporativos.',
+    points: [
+      {
+        bold: 'Fondos & Equity:',
+        text: 'Gestión en 12 fondos de inversión con más de 1 millón de UF de equity administrado en Chile y Estados Unidos.'
+      },
+      {
+        bold: 'Volumen y Ventas:',
+        text: 'Más de 200.000 m² en densificación en altura, 2.000 unidades vendidas y más de 5 millones de UF en ventas.'
+      }
+    ]
   }
 ];
 
+// Liderazgo y Socios Fundadores
+const leaders = [
+  {
+    name: 'Familia Valle',
+    role: 'Holding Ernesto Valle e Hijos',
+    badge: '30+ Años de Trayectoria',
+    image: '/images/leader_valle.jpg',
+    desc: 'Liderazgo de más de tres décadas y más de 22.000 viviendas construidas a través de ITLS y VAIN.'
+  },
+  {
+    name: 'Rodrigo Aldunate',
+    role: 'Socio Fundador – Polux Gestión',
+    badge: 'Fondos & Patrimonio',
+    image: '/images/leader_aldunate.jpg',
+    desc: 'Especialista en administración de patrimonio y estructuración de fondos de inversión en Chile y EE. UU.'
+  },
+  {
+    name: 'Maximiliano Cuadra',
+    role: 'Socio Fundador – Polux Gestión',
+    badge: 'Finanzas Corporativas',
+    image: '/images/leader_cuadra.jpg',
+    desc: 'Liderazgo en gestión patrimonial, análisis financiero riguroso y evaluación estratégica de activos residenciales.'
+  },
+  {
+    name: 'Pablo Ramírez',
+    role: 'Socio Fundador – Polux Gestión',
+    badge: 'Desarrollo en Altura',
+    image: '/images/leader_ramirez.jpg',
+    desc: 'Dirección directiva en proyectos de densificación urbana en altura y gobiernos corporativos inmobiliarios.'
+  }
+];
+
+// Pilares de Marca AMA
 const pillars = [
   {
-    number: '01',
-    title: 'Ubicaciones con Alta Plusvalía',
-    desc: 'Seleccionamos terrenos estratégicos a pasos del Metro, ciclovías y servicios consolidados que garantizan alta rentabilidad por arriendo.'
+    num: '01',
+    title: 'Cada metro cuadrado con propósito',
+    desc: 'Diseñamos sin metros perdidos ni pasillos innecesarios. Cada rincón tiene un sentido para optimizar la habitabilidad, luz natural y almacenaje inteligente.',
+    icon: 'home'
   },
   {
-    number: '02',
-    title: 'Diseño Inteligente sin Metros Perdidos',
-    desc: 'Cada metro cuadrado está pensado para aprovechar la luz natural, evitar pasillos innecesarios y maximizar el almacenaje.'
+    num: '02',
+    title: 'Ubicaciones conectadas a lo esencial',
+    desc: 'Emplazamientos estratégicos a pasos del Metro, ciclovías, comercio, centros de salud y colegios consolidados para facilitar tu día a día.',
+    icon: 'globe'
   },
   {
-    number: '03',
-    title: 'Compromiso Postventa Real',
-    desc: 'Acompañamos a nuestros propietarios antes, durante y después de la entrega, cumpliendo rigurosamente los plazos de garantía legal.'
+    num: '03',
+    title: 'Estética clara, cercana y sin excesos',
+    desc: 'Arquitectura serena y acabados nobles de fácil mantención que cuidan los gastos comunes y envejecen con elegancia a través de las décadas.',
+    icon: 'shield'
   },
   {
-    number: '04',
-    title: 'Facilidades de Compra Consciente',
-    desc: 'Ofrecemos esquemas de pago flexibles en cuotas sin interés y asesoría bancaria integral para facilitar el acceso a la vivienda.'
+    num: '04',
+    title: 'Decisiones que encajan sin pesar',
+    desc: 'Facilitamos el acceso al departamento propio con pago de pie en hasta 60 cuotas, asesoría bancaria integral y transparencia total.',
+    icon: 'card'
+  }
+];
+
+// Cronograma de obra AMA Quillayes
+const milestones = [
+  {
+    step: 'Hito 01',
+    date: 'Mayo 2026',
+    title: 'Inicio de Obras',
+    desc: 'Inicio oficial de excavaciones, fundaciones y obra gruesa de las dos torres residenciales en Av. Vicuña Mackenna 11.600.',
+    tag: 'En Curso'
+  },
+  {
+    step: 'Hito 02',
+    date: 'Agosto 2028',
+    title: 'Término de Construcción',
+    desc: 'Finalización de la edificación, terminaciones interiores y habilitación de equipamiento comunitario y amenities.',
+    tag: 'Obra Terminada'
+  },
+  {
+    step: 'Hito 03',
+    date: 'Diciembre 2028',
+    title: 'Escrituración y Entrega',
+    desc: 'Firma de escrituras y entrega de llaves de los 299 departamentos a sus propietarios para habitar o rentabilizar.',
+    tag: 'Entrega de Llaves'
   }
 ];
 ---
 
 <BaseLayout 
-  title="Nosotros | Trayectoria y Filosofía | AMA Inmobiliaria"
-  description="Conoce la historia, visión y pilares de AMA Inmobiliaria. Más de una década desarrollando proyectos residenciales con sello de calidad y compromiso en Santiago."
+  title="Nosotros | Donde Todo Encaja | AMA Inmobiliaria"
+  description="Conoce la filosofía, propósito y respaldo de Inmobiliaria AMA Quillayes SpA. La alianza de Grupo SANJOSE, Holding Ernesto Valle e ITLS, y Polux Inmobiliaria."
 >
-  <!-- HERO NOSOTROS -->
-  <section class="page-hero section-petrol">
-    <PatternDrops color="#1AA6B7" opacity={0.06} />
-    <div class="container relative-z text-center">
-      <span class="badge badge-cyan">Quiénes Somos</span>
-      <h1 class="page-title">Trayectoria, Compromiso y Visión de Futuro</h1>
-      <p class="page-subtitle">
-        En <strong>AMA Inmobiliaria</strong> creemos que un departamento no es solo un activo financiero: es el escenario donde se construyen proyectos de vida.
-      </p>
-    </div>
-  </section>
+  <!-- 1. HERO LUMINOSO CINEMATOGRÁFICO (Idéntico a Inicio) -->
+  <section class="aurvix-hero">
+    <div class="hero-card-banner">
+      <!-- Fondo arquitectónico cinematográfico -->
+      <div class="hero-slideshow">
+        <div class="hero-slide active" style={`background-image: url(${u('/images/ama_interior_living.jpg')});`}></div>
+      </div>
 
-  <!-- MANIFIESTO CORPORATIVO -->
-  <section class="section section-cream">
-    <div class="container">
-      <div class="manifesto-grid">
-        <div class="manifesto-text">
-          <span class="badge badge-petrol">Nuestra Filosofía</span>
-          <h2 class="manifesto-title">Construimos hogares que superan la prueba del tiempo</h2>
-          <p class="manifesto-p">
-            Desde nuestros inicios entendimos que la industria inmobiliaria requería un cambio: menos promesas vacías y más <strong>calidad comprobable</strong>. Por eso, en cada proyecto de AMA Inmobiliaria trabajamos junto a arquitectos y constructores de primer nivel para diseñar edificios que se mantengan vigentes, funcionales y atractivos con el paso de las décadas.
-          </p>
-          <p class="manifesto-p">
-            No concebimos edificios impersonales; diseñamos comunidades con amenities pensados en el bienestar diario y con terminaciones nobles de fácil mantención para resguardar los gastos comunes de cada propietario.
-          </p>
-          <div class="manifesto-stats">
-            <div class="m-stat">
-              <strong class="stat-big">+12</strong>
-              <span>Años de trayectoria</span>
-            </div>
-            <div class="m-stat">
-              <strong class="stat-big">+1.850</strong>
-              <span>Departamentos entregados</span>
-            </div>
-            <div class="m-stat">
-              <strong class="stat-big">98%</strong>
-              <span>Satisfacción en entrega</span>
+      <div class="hero-overlay-gradient"></div>
+
+      <div class="container hero-banner-content">
+        <div class="hero-text-row">
+          <div class="hero-headline-col">
+
+
+            <h1 class="hero-title-aurvix">
+              DONDE TODO ENCAJA®<br />
+              ESPACIOS CON ALMA
+            </h1>
+
+            <p class="hero-sub-aurvix">
+              Una invitación a <strong>elegir con calma y habitar una nueva etapa</strong>. Somos una marca joven, local y con alma, respaldada por la alianza estratégica de gigantes de la construcción nacional e internacional.
+            </p>
+
+            <!-- Acciones Principales -->
+            <div class="hero-actions-row">
+              <button 
+                type="button" 
+                class="btn-hero-primary"
+                onclick="window.openCotizadorModal && window.openCotizadorModal()"
+              >
+                <span>Cotizar Proyecto Activo</span>
+                <span class="btn-arrow">↗</span>
+              </button>
+              <a href="#estructura-societaria" class="btn-hero-secondary">
+                <span>Ver Respaldo Societario</span>
+              </a>
             </div>
           </div>
         </div>
 
-        <div class="manifesto-media">
+        <!-- Chips Flotantes de Socios con Estilo Frosted Glass -->
+        <div class="hero-partners-glass-bar">
+          <div class="glass-chip">
+            <span class="glass-pct">47,5%</span>
+            <span class="glass-txt">Holding Ernesto Valle (ITLS & VAIN)</span>
+          </div>
+          <div class="glass-div"></div>
+          <div class="glass-chip">
+            <span class="glass-pct">47,5%</span>
+            <span class="glass-txt">Grupo SANJOSE (San José Andina)</span>
+          </div>
+          <div class="glass-div"></div>
+          <div class="glass-chip">
+            <span class="glass-pct">5,0%</span>
+            <span class="glass-txt">Polux Inmobiliaria (Gestión)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. CINTA INSTITUCIONAL DE CONFIANZA Y ALIANZAS BANCARIAS -->
+  <TrustTicker />
+
+  <!-- 3. SECCIÓN EDITORIAL: QUIÉNES SOMOS (Split Layout idéntico a Sobre AMA en Inicio) -->
+  <section class="section about-split-section">
+    <div class="container">
+      <div class="about-grid">
+        <!-- Foto en proporción elegante con radio de 24px y hover zoom -->
+        <div class="about-img-wrap">
           <img 
-            src="/images/ama_interior_living.jpg" 
-            alt="Interior departamento AMA Inmobiliaria"
-            class="manifesto-img"
+            src={u('/images/ama_piloto_cocina_quillayes.jpg')} 
+            alt="Diseño y arquitectura de departamentos AMA" 
+            class="about-split-img"
+            loading="lazy"
           />
         </div>
+
+        <!-- Texto Editorial de Gran Escala -->
+        <div class="about-content">
+          <h2 class="about-heading">
+            Creamos lugares que se sienten propios, más allá de los metros cuadrados.
+          </h2>
+          <p class="about-paragraph">
+            <strong>AMA</strong> nace con el propósito de facilitar el acceso al departamento propio para personas que avanzan con esfuerzo y buscan <em>independencia, seguridad y estabilidad</em> para sus familias o proyectos personales.
+          </p>
+          <p class="about-paragraph">
+            Apostamos por una estética clara, cercana, sin excesos ni sorpresas, con un sello propio que respeta el entorno. Una marca orientada a ofrecer <strong>espacios que se sienten, diseños que acompañan sin complicar y decisiones que encajan sin pesar</strong>.
+          </p>
+          <div class="about-actions-row">
+            <a href="#pilares-marca" class="btn-aurvix-dark">
+              <span>Nuestros Pilares</span>
+              <span class="arrow">↗</span>
+            </a>
+            <span class="eslogan-highlight">"Donde todo encaja"</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 MÉTRICAS MINIMALISTAS AURVIX (Idénticas al template maestro) -->
+      <div class="aurvix-metrics-row">
+        <div class="aurvix-metric">
+          <span class="metric-num">+27K</span>
+          <span class="metric-lbl">Viviendas desarrolladas por nuestros socios</span>
+        </div>
+        <div class="aurvix-metric">
+          <span class="metric-num">+2M</span>
+          <span class="metric-lbl">Metros cuadrados construidos con altos estándares</span>
+        </div>
+        <div class="aurvix-metric">
+          <span class="metric-num">50+</span>
+          <span class="metric-lbl">Años de trayectoria internacional de Grupo SANJOSE</span>
+        </div>
+        <div class="aurvix-metric">
+          <span class="metric-num">Top 100</span>
+          <span class="metric-lbl">Constructoras del mundo (Deloitte Powers of Construction)</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- PILARES DE MARCA -->
-  <section class="section section-white">
+  <!-- 4. ESTRUCTURA SOCIETARIA (Tarjetas Bento Blancas estilo Aurvix) -->
+  <section class="section aurvix-corporate-section" id="estructura-societaria">
     <div class="container">
-      <div class="section-header text-center">
-        <span class="badge badge-cyan">Nuestros Principios</span>
-        <h2 class="section-title">Los 4 Pilares de AMA Inmobiliaria</h2>
-        <p class="section-desc">Criterios fundamentales que rigen cada una de nuestras decisiones y proyectos.</p>
+      <div class="section-header-split">
+        <div>
+          <h2 class="aurvix-projects-title">Estructura Societaria de Inmobiliaria AMA Quillayes SpA</h2>
+        </div>
+        <p class="corporate-header-desc">
+          Tres socios estratégicos combinan solvencia técnica, constructiva y de gestión de inversiones para brindar máxima solidez a cada propietario.
+        </p>
       </div>
 
-      <div class="pillars-grid">
-        {pillars.map((p) => (
-          <div class="pillar-card card">
-            <span class="pillar-number">{p.number}</span>
-            <h3 class="pillar-title">{p.title}</h3>
-            <p class="pillar-desc">{p.desc}</p>
+      <div class="corporate-cards-grid">
+        {partners.map((p) => (
+          <div class="corporate-card">
+            <div class="corp-card-top">
+              <div class="corp-share-badge">
+                <span class="share-val">{p.share}</span>
+                <span class="share-sub">Participación social</span>
+              </div>
+              <span class="corp-pill-tag">{p.badge}</span>
+            </div>
+
+            <h3 class="corp-title">{p.name}</h3>
+            <span class="corp-subsidiary">{p.subsidiary}</span>
+            <p class="corp-summary">{p.summary}</p>
+
+            <div class="corp-points-list">
+              {p.points.map((pt) => (
+                <div class="corp-point-item">
+                  <span class="point-check">✓</span>
+                  <div class="point-text">
+                    <strong>{pt.bold}</strong> {pt.text}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- LÍNEA DE TIEMPO / TRAYECTORIA -->
-  <section class="section section-petrol">
-    <PatternLoops color="#1AA6B7" opacity={0.04} />
-    <div class="container relative-z">
-      <div class="section-header text-center">
-        <span class="badge badge-cyan">Evolución</span>
-        <h2 class="section-title text-cream">Hitos de Nuestra Historia</h2>
-        <p class="section-desc text-muted-cream">Un recorrido de crecimiento continuo y solidez financiera.</p>
+  <!-- 4.1 LIDERAZGO Y SOCIOS FUNDADORES -->
+  <section class="section aurvix-leadership-section" id="liderazgo-fundadores">
+    <div class="container">
+      <div class="section-header-centered">
+        <h2 class="section-title aurvix-title">Liderazgo y Socios Fundadores</h2>
+        <p class="section-desc">
+          Profesionales y grupos con probada trayectoria directiva en desarrollo inmobiliario, estructuración financiera y construcción de gran escala.
+        </p>
       </div>
 
-      <div class="timeline-wrap">
-        {timeline.map((item, idx) => (
-          <div class="timeline-item">
-            <div class="timeline-marker">
-              <span class="year-badge">{item.year}</span>
+      <div class="leadership-cards-grid">
+        {leaders.map((leader) => (
+          <div class="leader-card">
+            <div class="leader-img-wrap">
+              <img 
+                src={u(leader.image)} 
+                alt={`Retrato de ${leader.name}`}
+                class="leader-img"
+                loading="lazy"
+              />
+              <span class="leader-chip">{leader.badge}</span>
             </div>
-            <div class="timeline-card card card-dark">
-              <h3 class="t-item-title">{item.title}</h3>
-              <p class="t-item-desc">{item.desc}</p>
+
+            <div class="leader-info">
+              <h3 class="leader-name">{leader.name}</h3>
+              <span class="leader-role">{leader.role}</span>
+              <p class="leader-desc">{leader.desc}</p>
             </div>
           </div>
         ))}
@@ -153,265 +353,158 @@ const pillars = [
     </div>
   </section>
 
-  <!-- CASOS Y TESTIMONIOS -->
-  <section class="section section-cream">
+  <!-- 5. PILARES DE PROYECTO (Tarjetas Minimalistas estilo BentoOfferings) -->
+  <section class="section aurvix-pillars-section" id="pilares-marca">
     <div class="container">
-      <div class="section-header text-center">
-        <span class="badge badge-coral">Casos de Éxito</span>
-        <h2 class="section-title">La voz de nuestros propietarios</h2>
-        <p class="section-desc">Testimonios de quienes confiaron su inversión y patrimonio en AMA Inmobiliaria.</p>
+      <div class="section-header-centered">
+        <h2 class="section-title aurvix-title">Los 4 Atributos Esenciales de AMA</h2>
+        <p class="section-desc">
+          Criterios de vanguardia que rigen la habitabilidad, eficiencia y confort de cada departamento.
+        </p>
       </div>
 
-      <div class="testimonials-deck">
-        <div class="case-card card">
-          <div class="case-badge">
-            <span class="badge badge-cyan">Inversionista Joven</span>
+      <div class="pillars-four-grid">
+        {pillars.map((item) => (
+          <div class="pillar-clean-card">
+            <div class="pillar-header-row">
+              <span class="pillar-num-badge">{item.num}</span>
+              <div class="pillar-icon-box">
+                {item.icon === 'home' && (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1AA6B7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+                    <path d="M9 21V12h6v9"/>
+                  </svg>
+                )}
+                {item.icon === 'globe' && (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1AA6B7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="2" y1="12" x2="22" y2="12"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                  </svg>
+                )}
+                {item.icon === 'shield' && (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1AA6B7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                )}
+                {item.icon === 'card' && (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1AA6B7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="5" width="20" height="14" rx="3"/>
+                    <line x1="2" y1="10" x2="22" y2="10"/>
+                  </svg>
+                )}
+              </div>
+            </div>
+            <h3 class="pillar-clean-title">{item.title}</h3>
+            <p class="pillar-clean-desc">{item.desc}</p>
           </div>
-          <p class="case-quote">
-            "Comencé invirtiendo en un 1D+1B en blanco. El valor por m² subió casi un 18% al momento de la entrega. La postventa gestionó rápidamente los detalles y el arriendo se concretó en dos semanas."
-          </p>
-          <div class="case-user">
-            <strong>Rodrigo Morales</strong>
-            <span>Propietario & Arrendador</span>
-          </div>
-        </div>
-
-        <div class="case-card card">
-          <div class="case-badge">
-            <span class="badge badge-coral">Familia Primera Vivienda</span>
-          </div>
-          <p class="case-quote">
-            "Poder pagar el pie en 36 cuotas nos permitió comprar nuestro 3D+2B sin endeudarnos con créditos de consumo. Nos cambiamos el año pasado y la calidad de vida en el edificio es inmejorable."
-          </p>
-          <div class="case-user">
-            <strong>Camila & Andrés</strong>
-            <span>Propietarios</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="text-center" style="margin-top: 3.5rem;">
-        <button 
-          type="button" 
-          class="btn btn-cyan btn-lg"
-          onclick="window.openCotizadorModal && window.openCotizadorModal()"
-        >
-          Cotizar Proyecto Activo
-        </button>
+        ))}
       </div>
     </div>
   </section>
+
+  <!-- 6. PROYECTO INSIGNIA: EDIFICIO AMA QUILLAYES -->
+  <section class="section aurvix-showcase-section" id="ama-quillayes">
+    <div class="container">
+      <div class="section-header-split">
+        <div>
+          <h2 class="aurvix-projects-title">Edificio AMA Quillayes — La Florida</h2>
+        </div>
+        <a href={u('/proyectos/ama-quillayes')} class="btn-aurvix-dark">
+          <span>Ver Ficha Completa</span>
+          <span class="arrow">↗</span>
+        </a>
+      </div>
+
+      <!-- Tarjeta Maestra del Proyecto estilo Aurvix Featured -->
+      <div class="project-master-card">
+        <div class="pmc-media-col">
+          <img 
+            src={u('/images/ama_quillayes_facade.jpg')} 
+            alt="Fachada Edificio AMA Quillayes" 
+            class="pmc-img"
+            loading="lazy"
+          />
+          <div class="pmc-pills-overlay">
+            <span class="pill-tag-white">2 Torres Residenciales</span>
+            <span class="pill-tag-white">299 Departamentos</span>
+            <span class="pill-tag-white">1 y 2 Dormitorios</span>
+          </div>
+        </div>
+
+        <div class="pmc-info-col">
+          <!-- Ubicación y Entorno -->
+          <div class="pmc-location-box">
+            <div class="pmc-loc-icon">📍</div>
+            <div class="pmc-loc-details">
+              <strong>Av. Vicuña Mackenna 11.600, La Florida</strong>
+              <p>A 450 m de Metro Elisa Correa y 650 m de Metro Los Quillayes (Línea 4).</p>
+            </div>
+          </div>
+
+          <p class="pmc-description">
+            Ubicado en un polo residencial consolidado con acceso inmediato a comercio y servicios esenciales: Jumbo, Easy, Mall Vivo Los Toros, colegios, CESFAM Maffioletti, UC Christus, Hospital Dr. Sótero del Río y el futuro nuevo Hospital Sótero del Río.
+          </p>
+
+          <!-- Amenities estilo Aurvix Tags -->
+          <div class="pmc-amenities-wrap">
+            <span class="pmc-amenities-label">Equipamiento Comunitario:</span>
+            <div class="pmc-amenities-tags">
+              <span class="aurvix-chip">🏊 Piscina</span>
+              <span class="aurvix-chip">🥩 Quinchos Rooftop</span>
+              <span class="aurvix-chip">💪 Gimnasio Equipado</span>
+              <span class="aurvix-chip">💻 Espacio Cowork</span>
+              <span class="aurvix-chip">🍷 Salón Gourmet</span>
+              <span class="aurvix-chip">🚲 Bicicletero</span>
+              <span class="aurvix-chip">🧺 Lavandería</span>
+            </div>
+          </div>
+
+          <!-- Botones de Acción -->
+          <div class="pmc-actions-row">
+            <button 
+              type="button" 
+              class="btn-aurvix-dark"
+              onclick="window.openCotizadorModal && window.openCotizadorModal()"
+            >
+              <span>Cotizar en AMA Quillayes</span>
+              <span class="arrow">↗</span>
+            </button>
+            <a href={u('/proyectos/ama-quillayes')} class="btn-clean-link">
+              Ver tipologías y planos →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRONOGRAMA DE OBRA Y ENTREGAS (Estilo Testimonials Light / Minimalist Cards) -->
+      <div class="milestones-aurvix-wrap">
+        <div class="section-header-centered" style="margin-bottom: 2.5rem;">
+          <h3 class="section-title aurvix-title" style="font-size: clamp(1.8rem, 3vw, 2.4rem);">Cronograma de Obras y Entrega</h3>
+        </div>
+
+        <div class="milestones-three-grid">
+          {milestones.map((m) => (
+            <div class="milestone-aurvix-card">
+              <div class="ms-card-top">
+                <span class="ms-step-badge">{m.step}</span>
+                <span class="ms-status-tag">{m.tag}</span>
+              </div>
+              <strong class="ms-date-text">{m.date}</strong>
+              <h4 class="ms-title-text">{m.title}</h4>
+              <p class="ms-desc-text">{m.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. CTA BANNER DE ALTA CONVERSIÓN (Idéntico a Inicio) -->
+  <ModernCTA 
+    badge="Donde Todo Encaja"
+    title="Descubre tu nuevo hogar con el respaldo que mereces"
+    subtitle="Simula tu crédito hipotecario, conoce los departamentos de 1 y 2 dormitorios y agenda una asesoría personalizada sin costo en La Florida."
+    primaryBtnText="Cotizar Online"
+  />
 </BaseLayout>
-
-<style>
-  .page-hero {
-    position: relative;
-    padding: 5.5rem 0 5rem;
-  }
-
-  .relative-z {
-    position: relative;
-    z-index: 2;
-  }
-
-  .page-title {
-    color: var(--color-cream);
-    margin: 0.8rem 0;
-  }
-
-  .page-subtitle {
-    max-width: 720px;
-    margin: 0 auto;
-    color: var(--text-on-dark-muted);
-    font-size: 1.15rem;
-  }
-
-  .manifesto-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 3.5rem;
-    align-items: center;
-  }
-
-  .manifesto-title {
-    margin: 0.8rem 0 1.25rem;
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-  }
-
-  .manifesto-p {
-    font-size: 1.02rem;
-    line-height: 1.65;
-    margin-bottom: 1.25rem;
-  }
-
-  .manifesto-stats {
-    display: flex;
-    gap: 2.5rem;
-    margin-top: 2.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border-medium);
-  }
-
-  .stat-big {
-    display: block;
-    font-size: 2.3rem;
-    font-weight: var(--font-weight-heavy);
-    color: var(--color-cyan);
-    line-height: 1;
-  }
-
-  .m-stat span {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-  }
-
-  .manifesto-img {
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-lg);
-    border: 2px solid var(--color-cream);
-    width: 100%;
-    height: auto;
-  }
-
-  /* PILARES */
-  .pillars-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-  }
-
-  .pillar-card {
-    padding: 2.2rem;
-    position: relative;
-    border-top: 4px solid var(--color-cyan);
-  }
-
-  .pillar-number {
-    font-size: 2.5rem;
-    font-weight: var(--font-weight-heavy);
-    color: rgba(var(--rgb-cyan), 0.25);
-    display: block;
-    line-height: 1;
-    margin-bottom: 0.75rem;
-  }
-
-  .pillar-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.85rem;
-    color: var(--color-petrol);
-  }
-
-  .pillar-desc {
-    font-size: 0.92rem;
-    line-height: 1.55;
-  }
-
-  /* TIMELINE */
-  .text-cream {
-    color: var(--color-cream);
-  }
-  .text-muted-cream {
-    color: var(--text-on-dark-muted);
-  }
-
-  .timeline-wrap {
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    position: relative;
-  }
-
-  .timeline-item {
-    display: flex;
-    gap: 2rem;
-    align-items: flex-start;
-  }
-
-  .timeline-marker {
-    flex-shrink: 0;
-  }
-
-  .year-badge {
-    background-color: var(--color-cyan);
-    color: #FFFFFF;
-    font-size: 1.1rem;
-    font-weight: var(--font-weight-heavy);
-    padding: 0.45rem 1.2rem;
-    border-radius: var(--radius-full);
-    display: inline-block;
-  }
-
-  .timeline-card {
-    padding: 1.75rem;
-    flex-grow: 1;
-  }
-
-  .t-item-title {
-    font-size: 1.2rem;
-    color: var(--color-cyan);
-    margin-bottom: 0.5rem;
-  }
-
-  .t-item-desc {
-    font-size: 0.95rem;
-    color: var(--text-on-dark-muted);
-    line-height: 1.55;
-  }
-
-  /* CASES */
-  .testimonials-deck {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
-  }
-
-  .case-card {
-    padding: 2.5rem;
-  }
-
-  .case-badge {
-    margin-bottom: 1rem;
-  }
-
-  .case-quote {
-    font-size: 1.05rem;
-    line-height: 1.65;
-    margin-bottom: 1.5rem;
-    font-style: italic;
-  }
-
-  .case-user strong {
-    display: block;
-    color: var(--color-petrol);
-    font-size: 1.05rem;
-  }
-
-  .case-user span {
-    font-size: 0.88rem;
-    color: var(--color-cyan);
-  }
-
-  @media (max-width: 992px) {
-    .manifesto-grid {
-      grid-template-columns: 1fr;
-    }
-    .pillars-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .testimonials-deck {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .pillars-grid {
-      grid-template-columns: 1fr;
-    }
-    .timeline-item {
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-  }
-</style>

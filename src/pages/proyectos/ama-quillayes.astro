@@ -1,15 +1,19 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Cotizador from '../../components/features/Cotizador.astro';
+import SpacesShowcase from '../../components/features/SpacesShowcase.astro';
+import PurchaseProcess from '../../components/features/PurchaseProcess.astro';
+import ModernCTA from '../../components/features/ModernCTA.astro';
 import PatternLoops from '../../components/brand/PatternLoops.astro';
 import { u } from '../../utils/url';
+import '../../styles/home.css';
 
 const typologies = [
   {
     name: 'Modelo 1D + 1B',
     surface: '34,5 a 38,2 m²',
     desc: 'Distribución abierta, cocina americana con cubierta de cuarzo y balcón continuo con vista despejada.',
-    price: 'Desde 2.390 UF',
+    price: 'Desde 2.540 UF',
     tags: ['Ideal Inversionista', 'Renta Alta']
   },
   {
@@ -36,14 +40,129 @@ const typologies = [
 ];
 
 const amenities = [
-  { name: 'Piscina Panorámica', desc: 'Ubicada en la azotea con vista privilegiada a la Cordillera de Los Andes.' },
-  { name: 'Cowork & Lounge', desc: 'Espacio de trabajo colaborativo equipado con fibra óptica y salas de reuniones.' },
-  { name: 'Quinchos Panorámicos', desc: 'Parrillas tipo gourmet con áreas de estar y pérgolas de madera noble.' },
-  { name: 'Gimnasio Equipado', desc: 'Zona cardio, peso libre y espacio para yoga con iluminación natural.' },
-  { name: 'Sala Gourmet Multiuso', desc: 'Cocina de chef y comedor para celebraciones privadas y cumpleaños.' },
-  { name: 'Pet Spa & Zone', desc: 'Espacio dedicado al cuidado y recreación de tus mascotas.' },
-  { name: 'Bicicleteros Seguros', desc: 'Taller de mantención y estacionamientos protegidos para bicicletas.' },
-  { name: 'Conserjería 24/7 y CCTV', desc: 'Control de accesos biométrico y circuito cerrado de alta definición.' }
+  { name: 'Piscina', desc: 'Ubicada en la azotea con vista panorámica a la Cordillera de Los Andes.' },
+  { name: 'Salón Cowork', desc: 'Espacio de trabajo colaborativo equipado con fibra óptica y salas de reuniones.' },
+  { name: 'Salón Gourmet', desc: 'Cocina de chef y comedor equipado para celebraciones privadas y eventos.' },
+  { name: 'Gimnasio', desc: 'Zona cardio, peso libre y espacio para entrenamiento funcional con luz natural.' },
+  { name: 'Zona Pet', desc: 'Espacio exclusivo dedicado al paseo, cuidado y recreación de tus mascotas.' },
+  { name: 'Quinchos', desc: 'Parrillas tipo gourmet con áreas de estar y pérgolas con vista despejada.' },
+  { name: 'Áreas Verdes', desc: 'Jardines sustentables con paisajismo nativo de bajo consumo hídrico y descanso.' },
+  { name: 'Sala Ecommerce', desc: 'Casilleros inteligentes y recepción segura de encomiendas las 24 horas.' },
+  { name: 'Lavandería', desc: 'Central de lavado y secado eficiente de alta capacidad para residentes.' },
+  { name: 'Bicicleteros', desc: 'Estacionamientos protegidos para bicicletas y estación de mantención básica.' }
+];
+
+const locationPoints = [
+  {
+    icon: 'metro',
+    category: 'Metro L4',
+    name: 'Metro Los Quillayes (Línea 4)',
+    time: '6 min a pie',
+    distance: '450 metros caminando directo',
+    highlight: true
+  },
+  {
+    icon: 'car',
+    category: 'Vías Rápidas',
+    name: 'Autopista Vespucio Sur Express',
+    time: '5 min en auto',
+    distance: 'Conexión a todo Santiago'
+  },
+  {
+    icon: 'mall',
+    category: 'Comercio',
+    name: 'Mallplaza Vespucio & Florida Center',
+    time: '8 min en Metro / auto',
+    distance: 'Retail, cines, gastronomía y servicios'
+  },
+  {
+    icon: 'hospital',
+    category: 'Salud',
+    name: 'Hospital La Florida & Clínica Bupa',
+    time: '7 min en auto',
+    distance: 'Centro de urgencias y salud integral'
+  },
+  {
+    icon: 'education',
+    category: 'Educación',
+    name: 'Duoc UC & Colegios del sector',
+    time: '9 min en auto',
+    distance: 'Educación superior y escolar'
+  },
+  {
+    icon: 'nature',
+    category: 'Naturaleza',
+    name: 'Parque Panul & Quebrada de Macul',
+    time: '15 min en auto',
+    distance: 'Trekking, ciclovías y aire puro cordillerano'
+  }
+];
+
+const galleryImages = [
+  {
+    id: 'gal-1',
+    src: '/images/ama_quillayes_facade.jpg',
+    category: 'fachada',
+    categoryLabel: 'Fachada',
+    title: 'Fachada Principal Av. Vicuña Mackenna',
+    desc: 'Arquitectura contemporánea de vanguardia con amplias terrazas y orientación privilegiada para luz natural.'
+  },
+  {
+    id: 'gal-2',
+    src: '/images/ama_piloto_cocina_quillayes.jpg',
+    category: 'interiores',
+    categoryLabel: 'Interiores',
+    title: 'Cocina Americana y Living con Vista Cordillera',
+    desc: 'Cubierta de cuarzo blanco, mesón isla desayunador, piso gres porcelánico y ventanales con vista a los Andes.'
+  },
+  {
+    id: 'gal-3',
+    src: '/images/ama_quinchos_rooftop_quillayes.jpg',
+    category: 'amenities',
+    categoryLabel: 'Espacios Comunes',
+    title: 'Quinchos Gourmet en Rooftop',
+    desc: 'Parrillas tipo gourmet de acero inoxidable, pérgola con iluminación cálida y vista panorámica al atardecer.'
+  },
+  {
+    id: 'gal-4',
+    src: '/images/ama_amenity_rooftop.jpg',
+    category: 'amenities',
+    categoryLabel: 'Espacios Comunes',
+    title: 'Piscina Panorámica en Azotea',
+    desc: 'Refrescante piscina en la cubierta superior con vista en 360° a toda la cuenca de Santiago.'
+  },
+  {
+    id: 'gal-5',
+    src: '/images/ama_interior_living.jpg',
+    category: 'interiores',
+    categoryLabel: 'Interiores',
+    title: 'Living Comedor y Balcón Corrido',
+    desc: 'Espacio diáfano con conexión directa a terraza para disfrutar del aire libre en cualquier momento.'
+  },
+  {
+    id: 'gal-6',
+    src: '/images/ama_dormitorio_suite_quillayes.jpg',
+    category: 'interiores',
+    categoryLabel: 'Interiores',
+    title: 'Dormitorio Principal en Suite',
+    desc: 'Gran luminosidad, walk-in clóset integrado y baño en suite con vista panorámica a la Cordillera.'
+  },
+  {
+    id: 'gal-7',
+    src: '/images/ama_gimnasio_quillayes.jpg',
+    category: 'amenities',
+    categoryLabel: 'Espacios Comunes',
+    title: 'Gimnasio Equipado con Luz Natural',
+    desc: 'Zona de cardio y pesas con ventanales de piso a cielo y vista panorámica a la Cordillera de Los Andes.'
+  },
+  {
+    id: 'gal-8',
+    src: '/images/ama_acceso_nocturno.jpg',
+    category: 'fachada',
+    categoryLabel: 'Fachada',
+    title: 'Iluminación Nocturna y Accesos Controlados',
+    desc: 'Seguridad 24/7 con hall de acceso de doble altura y control peatonal y vehicular de última tecnología.'
+  }
 ];
 ---
 
@@ -51,7 +170,91 @@ const amenities = [
   title="Edificio AMA Quillayes | Departamentos en La Florida"
   description="Departamentos de 1, 2 y 3 dormitorios a pasos de Metro Quillayes en La Florida. Paga tu pie en 36 cuotas sin interés y obtén Bono Pie del 10%."
 >
-  <!-- BREADCRUMBS & TOP BAR -->
+  <!-- 1. HERO COMPLETO CINEMATOGRÁFICO EDGE-TO-EDGE -->
+  <section class="aurvix-hero">
+    <div class="hero-card-banner">
+      <!-- Slideshow de fondo en alta resolución -->
+      <div class="hero-slideshow" id="quillayesHeroSlideshow">
+        <div class="hero-slide active" style={`background-image: url(${u('/images/ama_quillayes_facade.jpg')});`}></div>
+        <div class="hero-slide" style={`background-image: url(${u('/images/ama_interior_living.jpg')});`}></div>
+        <div class="hero-slide" style={`background-image: url(${u('/images/ama_amenity_rooftop.jpg')});`}></div>
+      </div>
+
+      <div class="hero-overlay-gradient"></div>
+
+      <div class="container hero-banner-content">
+        <div class="hero-text-row">
+          <div class="hero-headline-col">
+
+
+            <h1 class="hero-title-aurvix">
+              EDIFICIO AMA QUILLAYES®<br />
+              DONDE TODO ENCAJA
+            </h1>
+
+            <p class="hero-sub-aurvix">
+              Departamentos en La Florida de 1 y 2 dormitorios con terrazas continuas a lo ancho, arquitectura de vanguardia y financiamiento de hasta 60 cuotas, a pasos de la estación Metro Quillayes.
+            </p>
+
+            <!-- Botones de Acción del Hero -->
+            <div class="hero-actions-row">
+              <button 
+                type="button" 
+                class="btn-hero-primary"
+                onclick="window.openCotizadorModal && window.openCotizadorModal()"
+              >
+                <span>Cotizar Online</span>
+                <span class="btn-arrow">↗</span>
+              </button>
+              <a href="#galeria-proyecto" class="btn-hero-secondary">
+                <span>Ver Galería y Espacios</span>
+              </a>
+              <a href="#cotizador-quillayes" class="btn-hero-secondary">
+                <span>Simular Financiamiento</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra Frosted Glass de Especificaciones Clave del Proyecto -->
+        <div class="hero-specs-glass-bar">
+          <div class="glass-spec-item">
+            <span class="glass-spec-label">Precios</span>
+            <strong class="glass-spec-val">Desde 2.540 UF</strong>
+          </div>
+          <div class="glass-div"></div>
+          <div class="glass-spec-item">
+            <span class="glass-spec-label">Tipologías</span>
+            <strong class="glass-spec-val">1 y 2 Dorms</strong>
+          </div>
+          <div class="glass-div"></div>
+          <div class="glass-spec-item">
+            <span class="glass-spec-label">Superficie</span>
+            <strong class="glass-spec-val">34 a 60 m²</strong>
+          </div>
+          <div class="glass-div"></div>
+          <div class="glass-spec-item">
+            <span class="glass-spec-label">Ubicación</span>
+            <strong class="glass-spec-val">Metro Quillayes (6 min)</strong>
+          </div>
+          <div class="glass-div"></div>
+          <div class="glass-spec-item highlight">
+            <span class="glass-spec-label">Entrega Estimada</span>
+            <strong class="glass-spec-val">2do Semestre 2028</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Indicadores del Slideshow -->
+      <div class="hero-slide-dots" id="quillayesHeroDots" aria-label="Controles del slideshow">
+        <button type="button" class="slide-dot active" data-slide="0" aria-label="Fachada Exterior"></button>
+        <button type="button" class="slide-dot" data-slide="1" aria-label="Living y Terraza"></button>
+        <button type="button" class="slide-dot" data-slide="2" aria-label="Rooftop y Piscina"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BREADCRUMBS & TOP BAR (SECCIÓN BAJADA TRAS EL HERO) -->
   <div class="top-nav-bar">
     <div class="container breadcrumbs-container">
       <nav aria-label="Migas de pan" class="breadcrumbs">
@@ -62,21 +265,45 @@ const amenities = [
         <span class="current">AMA Quillayes</span>
       </nav>
       <div class="top-status">
-        <span class="badge badge-cyan">Venta en Blanco</span>
-        <span class="badge badge-coral">Bono Pie 10%</span>
+        <span class="badge badge-cyan">Venta en Verde</span>
+        <span class="badge badge-coral">Pie en hasta 60 cuotas</span>
       </div>
     </div>
   </div>
 
-  <!-- HERO DE PROYECTO CON GALERÍA -->
-  <section class="project-hero-section section-white">
+  <!-- SECCIÓN DE GALERÍA Y DETALLES DEL PROYECTO (BAJADA TRAS EL HERO) -->
+  <section class="project-hero-section section-white" id="galeria-proyecto">
     <div class="container">
       <div class="project-header-info">
-        <span class="badge badge-petrol">La Florida, Santiago</span>
-        <h1 class="project-main-title">Edificio AMA Quillayes</h1>
+
+        <h2 class="project-main-title">Edificio AMA Quillayes — Galería y Espacios</h2>
         <p class="project-tagline">
-          Ubicado en Av. Vicuña Mackenna a pasos de Metro Quillayes. Arquitectura vanguardista y conectividad insuperable.
+          Ubicado en Av. Vicuña Mackenna 11.600, a pasos del Metro Quillayes.
         </p>
+      </div>
+
+      <!-- BANNER FIJO DE ESPECIFICACIONES CON ALTO CONTRASTE (VISIBLE SIN SCROLL) -->
+      <div class="specs-hero-bar" id="specs-banner">
+        <div class="spec-pill">
+          <span class="p-label">Precios</span>
+          <strong class="p-val">Desde 2.540 UF</strong>
+        </div>
+        <div class="spec-pill">
+          <span class="p-label">Tipologías</span>
+          <strong class="p-val">1 y 2 Dorms</strong>
+        </div>
+        <div class="spec-pill">
+          <span class="p-label">Superficie</span>
+          <strong class="p-val">34 a 60 mt2</strong>
+        </div>
+        <div class="spec-pill">
+          <span class="p-label">Ubicación</span>
+          <strong class="p-val">Metro Quillayes (6 min)</strong>
+        </div>
+        <div class="spec-pill highlight-pill">
+          <span class="p-label">Entrega Estimada</span>
+          <strong class="p-val">2do Semestre 2028</strong>
+        </div>
       </div>
 
       <div class="project-gallery-grid">
@@ -85,7 +312,7 @@ const amenities = [
             src={u('/images/ama_quillayes_facade.jpg')} 
             alt="Fachada Edificio AMA Quillayes en La Florida"
           />
-          <span class="img-caption">Fachada Exterior y Accesos</span>
+          <span class="img-caption">Fachada Exterior</span>
         </div>
         <div class="gallery-side-imgs">
           <div class="side-img-item">
@@ -93,14 +320,14 @@ const amenities = [
               src={u('/images/ama_interior_living.jpg')} 
               alt="Living comedor departamento piloto"
             />
-            <span class="img-caption">Interiores Luminosos</span>
+            <span class="img-caption">Terrazas a lo Ancho</span>
           </div>
           <div class="side-img-item">
             <img 
               src={u('/images/ama_amenity_rooftop.jpg')} 
               alt="Piscina y terraza en azotea"
             />
-            <span class="img-caption">Azotea Panorámica & Piscina</span>
+            <span class="img-caption">Espacios comunes para tu día a día</span>
           </div>
         </div>
       </div>
@@ -110,32 +337,29 @@ const amenities = [
   <!-- HIGHLIGHTS TÉCNICOS -->
   <section class="section section-cream">
     <div class="container">
-      <div class="specs-pill-bar">
-        <div class="spec-pill">
-          <span class="p-label">Precios</span>
-          <strong class="p-val">Desde 2.390 UF</strong>
+      <!-- 4 MÉTRICAS DE RESPALDO Y TRAYECTORIA AMA QUILLAYES -->
+      <div class="quillayes-metrics-row">
+        <div class="q-metric-item">
+          <strong class="q-metric-num">+12</strong>
+          <span class="q-metric-label">Años de Trayectoria</span>
         </div>
-        <div class="spec-pill">
-          <span class="p-label">Tipologías</span>
-          <strong class="p-val">1, 2 y 3 Dormitorios</strong>
+        <div class="q-metric-item">
+          <strong class="q-metric-num">+1.850</strong>
+          <span class="q-metric-label">Familias en su Hogar</span>
         </div>
-        <div class="spec-pill">
-          <span class="p-label">Superficie</span>
-          <strong class="p-val">34 a 76 m²</strong>
+        <div class="q-metric-item">
+          <strong class="q-metric-num">60</strong>
+          <span class="q-metric-label">Cuotas Pie sin Interés</span>
         </div>
-        <div class="spec-pill">
-          <span class="p-label">Ubicación</span>
-          <strong class="p-val">Metro Quillayes (3 min)</strong>
-        </div>
-        <div class="spec-pill">
-          <span class="p-label">Entrega</span>
-          <strong class="p-val">2do Semestre 2026</strong>
+        <div class="q-metric-item">
+          <strong class="q-metric-num">4.9</strong>
+          <span class="q-metric-label">Calificación Promedio</span>
         </div>
       </div>
 
       <!-- TIPOLOGÍAS -->
       <div class="section-header" style="margin-top: 3.5rem;">
-        <span class="badge badge-petrol">Modelos y Plantas</span>
+
         <h2 class="section-title">Encuentra la distribución ideal</h2>
         <p class="section-desc">Diseños optimizados al milímetro para otorgar máxima amplitud y confort térmico.</p>
       </div>
@@ -172,12 +396,27 @@ const amenities = [
     </div>
   </section>
 
-  <!-- AMENITIES ESPECÍFICOS DEL PROYECTO -->
-  <section class="section section-petrol">
+  <!-- COTIZADOR EN VIVO PARA ESTE PROYECTO (LUEGO DE PLANTAS) -->
+  <section class="section section-white" id="cotizador-quillayes">
+    <div class="container">
+      <div class="section-header text-center">
+
+        <h2 class="section-title">Simula tu dividendo en AMA Quillayes</h2>
+        <p class="section-desc">Calcula el pie en hasta 60 cuotas y la cuota mensual de tu crédito hipotecario.</p>
+      </div>
+
+      <div class="cotizador-wrap">
+        <Cotizador idPrefix="quillayes-page-calc" />
+      </div>
+    </div>
+  </section>
+
+  <!-- AMENITIES ESPECÍFICOS DEL PROYECTO (LUEGO DE PLANTAS Y COTIZADOR) -->
+  <section class="section section-petrol" id="amenities">
     <PatternLoops color="#1AA6B7" opacity={0.05} />
     <div class="container relative-z">
       <div class="section-header text-center">
-        <span class="badge badge-cyan">Espacios Comunes</span>
+
         <h2 class="section-title text-cream">Amenities pensados para tu día a día</h2>
         <p class="section-desc text-muted-cream">
           Instalaciones de primer nivel administradas con eficiencia para mantener bajos los gastos comunes.
@@ -195,20 +434,248 @@ const amenities = [
     </div>
   </section>
 
-  <!-- COTIZADOR EN VIVO PARA ESTE PROYECTO -->
-  <section class="section section-white" id="cotizador-quillayes">
+  <!-- ESPACIOS Y TERMINACIONES INTERACTIVO (Showcase por Tabs) -->
+  <SpacesShowcase />
+
+  <!-- PROCESO DE COMPRA EN 4 PASOS -->
+  <PurchaseProcess />
+
+  <!-- UBICACIÓN DEL PROYECTO (ESTILO CLARO, BENTO Y SOFISTICADO) -->
+  <section class="section section-location-canvas" id="ubicacion">
     <div class="container">
       <div class="section-header text-center">
-        <span class="badge badge-coral">Financiamiento a tu Medida</span>
-        <h2 class="section-title">Simula tu dividendo en AMA Quillayes</h2>
-        <p class="section-desc">Calcula el pie en hasta 36 cuotas y la cuota mensual de tu crédito hipotecario.</p>
+
+        <h2 class="section-title">Ubicación Estratégica en La Florida</h2>
+        <p class="section-desc">
+          Av. Vicuña Mackenna 11.600, a pasos de la estación Metro Los Quillayes (L4) y con conectividad inmediata a autopistas, servicios y comercio.
+        </p>
       </div>
 
-      <div class="cotizador-wrap">
-        <Cotizador idPrefix="quillayes-page-calc" />
+      <div class="location-bento-grid">
+        <!-- Columna Izquierda: Master Card de Dirección y Servicios Cercanos -->
+        <div class="location-content-col">
+          <!-- Tarjeta Bento: Dirección y Acciones -->
+          <div class="location-bento-card address-bento">
+            <div class="address-bento-top">
+              <div class="address-icon-badge" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <div class="address-meta-info">
+                <span class="address-kicker">Sala de Ventas & Piloto en Terreno</span>
+                <h3 class="address-main-title">Av. Vicuña Mackenna 11.600</h3>
+                <p class="address-sub-text">La Florida, Santiago · A 6 min a pie de Metro Los Quillayes</p>
+              </div>
+            </div>
+
+            <div class="address-actions-bar">
+              <a 
+                href="https://maps.google.com/?q=Av.+Vicu%C3%B1a+Mackenna+11600,+La+Florida,+Regi%C3%B3n+Metropolitana" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn-address-primary"
+              >
+                <span>Cómo Llegar en Maps</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+              <button 
+                type="button" 
+                class="btn-address-secondary copy-address-btn" 
+                id="copy-address-trigger"
+                title="Copiar dirección al portapapeles"
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span id="copy-text">Copiar Dirección</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Tarjeta Bento: Servicios y Puntos Cercanos -->
+          <div class="location-bento-card services-bento">
+            <div class="services-bento-header">
+              <h4 class="services-bento-title">Servicios Esenciales y Conectividad</h4>
+              <span class="services-bento-sub">Tiempos reales de traslado caminando y en vehículo</span>
+            </div>
+
+            <div class="services-cards-grid">
+              {locationPoints.map((pt) => (
+                <div class={`service-item-tile ${pt.highlight ? 'tile-highlight' : ''}`}>
+                  <div class="service-tile-top">
+                    <div class="service-cat-wrap">
+                      <span class="service-icon-pill" aria-hidden="true">
+                        {pt.icon === 'metro' && (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="16" rx="2"></rect><path d="M4 11h16"></path><path d="M12 3v8"></path><path d="m8 19-2 3"></path><path d="m16 19 2 3"></path><circle cx="8" cy="15" r="1"></circle><circle cx="16" cy="15" r="1"></circle></svg>
+                        )}
+                        {pt.icon === 'car' && (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path><circle cx="7" cy="17" r="2"></circle><path d="M9 17h6"></path><circle cx="17" cy="17" r="2"></circle></svg>
+                        )}
+                        {pt.icon === 'mall' && (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                        )}
+                        {pt.icon === 'hospital' && (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                        )}
+                        {pt.icon === 'education' && (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                        )}
+                        {pt.icon === 'nature' && (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"></path></svg>
+                        )}
+                      </span>
+                      <span class="service-cat-name">{pt.category}</span>
+                    </div>
+                    <span class="service-time-pill">{pt.time}</span>
+                  </div>
+                  <h5 class="service-item-name">{pt.name}</h5>
+                  <span class="service-item-dist">{pt.distance}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Mapa Arquitectónico Integrado -->
+        <div class="location-map-col">
+          <div class="architectural-map-card">
+            <!-- Pin Flotante de Cristal -->
+            <div class="map-floating-pin-card">
+              <div class="map-pulse-dot" aria-hidden="true">
+                <span class="pulse-ring"></span>
+                <span class="pulse-core"></span>
+              </div>
+              <div class="map-pin-info">
+                <strong>Edificio AMA Quillayes</strong>
+                <span>Vicuña Mackenna 11.600 · Metro Quillayes a 450 m</span>
+              </div>
+            </div>
+
+            <!-- Mapa Embebido Limpio -->
+            <iframe 
+              class="architectural-map-iframe"
+              title="Ubicación Edificio AMA Quillayes en Google Maps"
+              src="https://maps.google.com/maps?q=Av.+Vicu%C3%B1a+Mackenna+11600,+La+Florida,+Regi%C3%B3n+Metropolitana&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
+
+            <!-- Badge inferior de respaldo -->
+            <div class="map-floating-bottom-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span>Metro Los Quillayes (L4) a 6 min a pie</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- POSTERIOR GALERÍA DE IMÁGENES AL FINAL DE LA PÁGINA (4 COLUMNAS - WIDE) -->
+  <section class="section section-petrol" id="galeria">
+    <PatternLoops color="#1AA6B7" opacity={0.04} />
+    <div class="gallery-wide-container relative-z">
+      <div class="section-header text-center">
+
+        <h2 class="section-title text-cream">Conoce Cada Espacio de AMA Quillayes</h2>
+        <p class="section-desc text-muted-cream">
+          Explora los renders oficiales de arquitectura, departamentos piloto y equipamiento de áreas comunes.
+        </p>
+      </div>
+
+      <!-- Grid de Galería 4 Columnas (Sin filtros, Sin texto en las imágenes) -->
+      <div class="gallery-full-grid" id="quillayes-gallery-grid">
+        {galleryImages.map((img, idx) => (
+          <div 
+            class="gallery-item-card" 
+            data-index={idx}
+            data-src={u(img.src)}
+            data-title={img.title}
+            data-catlabel={img.categoryLabel}
+            data-desc={img.desc}
+            tabindex="0"
+            role="button"
+            aria-label={`Ver imagen ampliada: ${img.title}`}
+          >
+            <div class="gal-img-wrapper">
+              <img 
+                src={u(img.src)} 
+                alt={img.title} 
+                loading="lazy" 
+                class="gal-photo"
+              />
+              <div class="gal-overlay">
+                <div class="gal-zoom-pill" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <polyline points="9 21 3 21 3 15"></polyline>
+                    <line x1="21" y1="3" x2="14" y2="10"></line>
+                    <line x1="3" y1="21" x2="10" y2="14"></line>
+                  </svg>
+                  <span>Ver Detalle</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER SHOWROOM & ASESORÍA (Cierre de Alta Conversión) -->
+  <ModernCTA />
+
+  <!-- LIGHTBOX MODAL GLOBAL (MINIMALISTA, FINO Y ELEGANTE) -->
+  <div class="gallery-lightbox" id="gallery-lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-stage" id="lightbox-stage">
+      <!-- Barra superior flotante: solo botón de cierre -->
+      <header class="lightbox-topbar">
+        <button type="button" class="lightbox-close-btn" id="lightbox-close" aria-label="Cerrar visor">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </header>
+
+      <!-- Zona central con fotografía y controles flotantes -->
+      <div class="lightbox-main">
+        <button type="button" class="lightbox-nav-btn prev" id="lightbox-prev" aria-label="Imagen anterior">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <div class="lightbox-frame">
+          <img src="" alt="" id="lightbox-active-img" class="lightbox-img" />
+        </div>
+
+        <button type="button" class="lightbox-nav-btn next" id="lightbox-next" aria-label="Siguiente imagen">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Indicador numérico minimalista abajo de la imagen (solo número de imagen) -->
+      <footer class="lightbox-bottom-bar">
+        <div class="lightbox-counter-pill">
+          <span class="lightbox-counter" id="lightbox-counter">01 / 08</span>
+        </div>
+      </footer>
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
@@ -247,11 +714,11 @@ const amenities = [
   }
 
   .project-hero-section {
-    padding: 3.5rem 0 4rem;
+    padding: 2.25rem 0 3.5rem;
   }
 
   .project-header-info {
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .project-main-title {
@@ -262,6 +729,60 @@ const amenities = [
   .project-tagline {
     font-size: 1.15rem;
     color: var(--text-muted);
+  }
+
+  /* BANNER FIJO / DESTACADO DE ESPECIFICACIONES CON ALTO CONTRASTE */
+  .specs-hero-bar {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background: linear-gradient(135deg, #002230 0%, #00364C 100%);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 14px 34px rgba(0, 34, 48, 0.22), 0 0 24px rgba(26, 166, 183, 0.14);
+    border: 1px solid rgba(26, 166, 183, 0.5);
+    padding: 1.35rem 1.75rem;
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 5.4rem;
+    z-index: 80;
+    backdrop-filter: blur(12px);
+  }
+
+  .specs-hero-bar .spec-pill {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 0 0.75rem;
+  }
+
+  .specs-hero-bar .spec-pill:last-child {
+    border-right: none;
+  }
+
+  .p-label {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #7BE0EC;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .p-val {
+    font-size: clamp(1.05rem, 1.22vw, 1.3rem);
+    font-weight: 800;
+    color: #FFFFFF;
+    margin-top: 0.25rem;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  .highlight-pill .p-label {
+    color: #FFB399;
+  }
+
+  .highlight-pill .p-val {
+    color: #FFFFFF;
   }
 
   .project-gallery-grid {
@@ -278,14 +799,14 @@ const amenities = [
   }
 
   .gallery-main-img {
-    height: 480px;
+    height: 440px;
   }
 
   .gallery-side-imgs {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    height: 480px;
+    height: 440px;
   }
 
   .side-img-item {
@@ -305,54 +826,68 @@ const amenities = [
 
   .img-caption {
     position: absolute;
-    bottom: 0.85rem;
-    left: 1rem;
-    background: rgba(var(--rgb-petrol), 0.75);
-    backdrop-filter: blur(6px);
-    color: var(--color-cream);
-    padding: 0.35rem 0.85rem;
+    bottom: 1rem;
+    left: 1.1rem;
+    background: rgba(0, 34, 48, 0.88);
+    backdrop-filter: blur(8px);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 0.45rem 1rem;
     border-radius: var(--radius-full);
-    font-size: 0.8rem;
-    font-weight: var(--font-weight-semibold);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 
-  /* SPECS PILL BAR */
-  .specs-pill-bar {
+  /* MÉTRICAS DE RESPALDO QUILLAYES */
+  .quillayes-metrics-row {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
     background: #FFFFFF;
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    padding: 1.75rem 2rem;
+    padding: 2.2rem 2.5rem;
     border: 1px solid var(--border-subtle);
-    margin-top: -2.5rem;
-    position: relative;
-    z-index: 10;
+    box-shadow: var(--shadow-sm);
+    margin-top: 0;
+    text-align: center;
   }
 
-  .spec-pill {
+  .q-metric-item {
     display: flex;
     flex-direction: column;
-    text-align: center;
-    border-right: 1px solid var(--border-subtle);
+    align-items: center;
+    gap: 0.35rem;
   }
 
-  .spec-pill:last-child {
-    border-right: none;
-  }
-
-  .p-label {
-    font-size: 0.8rem;
-    color: var(--text-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .p-val {
-    font-size: 1.15rem;
-    font-weight: var(--font-weight-black);
+  .q-metric-num {
+    font-size: clamp(2rem, 3.2vw, 2.75rem);
+    font-weight: 800;
     color: var(--color-petrol);
-    margin-top: 0.2rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .q-metric-label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 900px) {
+    .quillayes-metrics-row {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      padding: 1.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .quillayes-metrics-row {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
   }
 
   /* TYPOLOGIES */
@@ -431,12 +966,18 @@ const amenities = [
 
   .amenities-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
   }
 
   .amenity-item {
-    padding: 1.75rem;
+    padding: 1.5rem 1.25rem;
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .amenity-item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(var(--rgb-cyan), 0.4);
   }
 
   .amenity-name {
@@ -456,6 +997,12 @@ const amenities = [
     margin: 0 auto;
   }
 
+  @media (max-width: 1100px) {
+    .amenities-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
   @media (max-width: 992px) {
     .project-gallery-grid {
       grid-template-columns: 1fr;
@@ -464,12 +1011,19 @@ const amenities = [
       flex-direction: row;
       height: 240px;
     }
-    .specs-pill-bar {
+    .specs-hero-bar {
       grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
+      gap: 1.25rem;
+      position: relative;
+      top: auto;
+      padding: 1.25rem 1.5rem;
     }
-    .spec-pill {
+    .specs-hero-bar .spec-pill {
       border-right: none;
+      padding: 0;
+    }
+    .specs-hero-bar .spec-pill:last-child {
+      grid-column: span 2;
     }
     .typologies-grid {
       grid-template-columns: 1fr;
@@ -492,12 +1046,939 @@ const amenities = [
     .side-img-item {
       height: 200px;
     }
-    .specs-pill-bar {
+    .specs-hero-bar {
       grid-template-columns: 1fr;
-      margin-top: 0;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .specs-hero-bar .spec-pill:last-child {
+      grid-column: span 1;
     }
     .amenities-grid {
       grid-template-columns: 1fr;
     }
   }
+
+  /* ========================================================
+     UBICACIÓN DEL PROYECTO (ESTILO CLARO, BENTO Y SOFISTICADO)
+     ======================================================== */
+  .section-location-canvas {
+    background-color: var(--bg-canvas, #FDFBF7);
+    padding: 5.5rem 0;
+  }
+
+  .location-bento-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 2rem;
+    align-items: stretch;
+  }
+
+  .location-content-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .location-bento-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: var(--radius-bento, 20px);
+    box-shadow: 0 4px 20px rgba(0, 34, 48, 0.04);
+    transition: all 0.3s ease;
+  }
+
+  .location-bento-card:hover {
+    border-color: rgba(26, 166, 183, 0.3);
+    box-shadow: 0 12px 30px rgba(0, 34, 48, 0.08);
+  }
+
+  /* Tarjeta de Dirección */
+  .address-bento {
+    padding: 1.75rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .address-bento-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.15rem;
+  }
+
+  .address-icon-badge {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(26, 166, 183, 0.1);
+    color: var(--color-cyan, #1AA6B7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .address-meta-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .address-kicker {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-cyan, #1AA6B7);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.2rem;
+  }
+
+  .address-main-title {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #0F172A;
+    margin: 0 0 0.25rem 0;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+
+  .address-sub-text {
+    font-size: 0.9rem;
+    color: #64748B;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  .address-actions-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .btn-address-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: #0F172A;
+    color: #FFFFFF !important;
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+    transition: all 0.25s ease;
+  }
+
+  .btn-address-primary:hover {
+    background: var(--color-cyan, #1AA6B7);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(26, 166, 183, 0.25);
+  }
+
+  .btn-address-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: #FFFFFF;
+    color: #0F172A !important;
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(15, 23, 42, 0.14);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .btn-address-secondary:hover {
+    border-color: #0F172A;
+    background: #F8FAFC;
+    transform: translateY(-2px);
+  }
+
+  .btn-address-secondary.copied {
+    background: var(--color-cyan, #1AA6B7);
+    color: #FFFFFF !important;
+    border-color: var(--color-cyan, #1AA6B7);
+  }
+
+  /* Tarjeta de Servicios Bento */
+  .services-bento {
+    padding: 1.75rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .services-bento-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .services-bento-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #0F172A;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .services-bento-sub {
+    font-size: 0.84rem;
+    color: #64748B;
+  }
+
+  .services-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+
+  .service-item-tile {
+    background: #F8FAFC;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 14px;
+    padding: 0.95rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.25s ease;
+  }
+
+  .service-item-tile:hover {
+    background: #FFFFFF;
+    border-color: rgba(26, 166, 183, 0.45);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 34, 48, 0.05);
+  }
+
+  .service-item-tile.tile-highlight {
+    background: linear-gradient(135deg, #FFFFFF 0%, rgba(26, 166, 183, 0.07) 100%);
+    border-color: rgba(26, 166, 183, 0.4);
+  }
+
+  .service-tile-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .service-cat-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .service-icon-pill {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(26, 166, 183, 0.1);
+    color: var(--color-cyan, #1AA6B7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .tile-highlight .service-icon-pill {
+    background: var(--color-cyan, #1AA6B7);
+    color: #FFFFFF;
+  }
+
+  .service-cat-name {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .service-time-pill {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #0F172A;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 0.15rem 0.6rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+  }
+
+  .tile-highlight .service-time-pill {
+    background: rgba(26, 166, 183, 0.15);
+    color: var(--color-cyan, #1AA6B7);
+    border-color: rgba(26, 166, 183, 0.3);
+  }
+
+  .service-item-name {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #0F172A;
+    margin: 0 0 0.2rem 0;
+    line-height: 1.3;
+  }
+
+  .service-item-dist {
+    font-size: 0.78rem;
+    color: #64748B;
+    line-height: 1.4;
+  }
+
+  /* Columna Derecha: Mapa Arquitectónico Integrado */
+  .location-map-col {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .architectural-map-card {
+    position: relative;
+    background: #FFFFFF;
+    border-radius: var(--radius-bento, 20px);
+    overflow: hidden;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 12px 36px rgba(0, 34, 48, 0.06);
+    flex: 1;
+    min-height: 540px;
+    height: 100%;
+  }
+
+  .map-floating-pin-card {
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    padding: 0.75rem 1.15rem;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    pointer-events: none;
+    max-width: calc(100% - 2.5rem);
+  }
+
+  .map-pulse-dot {
+    position: relative;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .pulse-core {
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+    background: #10B981;
+  }
+
+  .pulse-ring {
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: rgba(16, 185, 129, 0.4);
+    animation: pulseGlow 2s infinite ease-out;
+  }
+
+  @keyframes pulseGlow {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(1.9); opacity: 0; }
+  }
+
+  .map-pin-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .map-pin-info strong {
+    font-size: 0.88rem;
+    color: #0F172A;
+    font-weight: 800;
+  }
+
+  .map-pin-info span {
+    font-size: 0.76rem;
+    color: #64748B;
+  }
+
+  .architectural-map-iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 540px;
+    border: 0;
+    display: block;
+  }
+
+  .map-floating-bottom-pill {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    z-index: 2;
+    background: rgba(15, 23, 42, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #FFFFFF;
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 0.45rem 0.95rem;
+    border-radius: 9999px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    pointer-events: none;
+  }
+
+  /* ========================================================
+     POSTERIOR GALERÍA DE IMÁGENES AL FINAL (4 COLUMNAS - WIDE)
+     ======================================================== */
+  .gallery-wide-container {
+    max-width: 1560px;
+    width: 95%;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .gallery-full-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.35rem;
+    margin-top: 1.5rem;
+  }
+
+  .gallery-item-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.4s ease;
+    display: block;
+    aspect-ratio: 16 / 11;
+  }
+
+  .gallery-item-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(26, 166, 183, 0.6);
+    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.55);
+  }
+
+  .gal-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #00141D;
+  }
+
+  .gal-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gallery-item-card:hover .gal-photo {
+    transform: scale(1.05);
+  }
+
+  .gal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 18, 25, 0.4);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gallery-item-card:hover .gal-overlay {
+    opacity: 1;
+  }
+
+  .gal-zoom-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.15rem;
+    border-radius: 999px;
+    background: rgba(0, 24, 34, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #FFFFFF;
+    font-size: 0.76rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transform: translateY(6px);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .gallery-item-card:hover .gal-zoom-pill {
+    transform: translateY(0);
+    border-color: rgba(123, 224, 236, 0.7);
+    color: #7BE0EC;
+    background: rgba(0, 28, 40, 0.9);
+  }
+
+  /* ========================================================
+     LIGHTBOX MODAL (ARQUITECTÓNICO, MINIMALISTA & FINO)
+     ======================================================== */
+  .gallery-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gallery-lightbox.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(2, 14, 20, 0.94);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+  }
+
+  .lightbox-stage {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    padding: 1.5rem 2.5rem;
+    box-sizing: border-box;
+    animation: fadeInStage 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes fadeInStage {
+    from { opacity: 0; transform: scale(0.985); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* Barra superior minimalista: solo botón de cierre a la derecha */
+  .lightbox-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    max-width: 1720px;
+    margin: 0 auto;
+    padding-bottom: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  .lightbox-close-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .lightbox-close-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #FFFFFF;
+    transform: scale(1.06);
+  }
+
+  /* Zona central con la fotografía y flechas flotantes en carriles dedicados (Cero Superposición) */
+  .lightbox-main {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    width: 100%;
+    max-width: 1720px;
+    margin: 0 auto;
+    padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+    gap: 2rem;
+    min-height: 0;
+    box-sizing: border-box;
+  }
+
+  .lightbox-frame {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    max-height: 82vh;
+  }
+
+  .lightbox-img {
+    max-width: 100%;
+    max-height: 82vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 32px 85px -20px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    display: block;
+  }
+
+  .lightbox-nav-btn {
+    position: relative;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(0, 24, 34, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 10;
+  }
+
+  .lightbox-nav-btn:hover {
+    background: rgba(26, 166, 183, 0.28);
+    border-color: rgba(123, 224, 236, 0.7);
+    color: #FFFFFF;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(26, 166, 183, 0.35);
+  }
+
+  .lightbox-nav-btn:active {
+    transform: scale(0.96);
+  }
+
+  /* Indicador numérico minimalista abajo de la imagen */
+  .lightbox-bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .lightbox-counter-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.95rem;
+    border-radius: 999px;
+    background: rgba(0, 24, 34, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  .lightbox-counter {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #7BE0EC;
+    letter-spacing: 0.14em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 768px) {
+    .lightbox-stage {
+      padding: 1rem 0.75rem;
+    }
+    .lightbox-main {
+      padding: 0.25rem 0.25rem 0.75rem 0.25rem;
+      gap: 0.6rem;
+    }
+    .lightbox-frame {
+      max-height: 72vh;
+    }
+    .lightbox-img {
+      max-height: 72vh;
+    }
+    .lightbox-nav-btn {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .gallery-item-card.is-hidden {
+    display: none !important;
+  }
+
+  @media (max-width: 1200px) {
+    .gallery-full-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .location-bento-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .architectural-map-card {
+      min-height: 420px;
+    }
+    .architectural-map-iframe {
+      min-height: 420px;
+    }
+    .gallery-wide-container {
+      width: 100%;
+      padding: 0 1rem;
+    }
+    .gallery-full-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.15rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .services-cards-grid {
+      grid-template-columns: 1fr;
+    }
+    .address-bento,
+    .services-bento {
+      padding: 1.25rem;
+    }
+    .address-actions-bar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .btn-address-primary,
+    .btn-address-secondary {
+      justify-content: center;
+    }
+    .gallery-full-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
 </style>
+
+<script>
+  // Funcionalidad interactiva: Ubicación (Copiar Dirección) y Galería (Lightbox)
+  function initPageInteractions() {
+    // 1. Copiar Dirección
+    const copyBtn = document.getElementById('copy-address-trigger');
+    const copyText = document.getElementById('copy-text');
+    if (copyBtn && copyText && !copyBtn.dataset.bound) {
+      copyBtn.dataset.bound = 'true';
+      copyBtn.addEventListener('click', async () => {
+        const address = 'Av. Vicuña Mackenna 11.600, La Florida, Región Metropolitana';
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(address);
+          } else {
+            const textArea = document.createElement('textarea');
+            textArea.value = address;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+          }
+          const original = copyText.textContent;
+          copyText.textContent = '¡Copiado!';
+          copyBtn.classList.add('copied');
+          setTimeout(() => {
+            copyText.textContent = original;
+            copyBtn.classList.remove('copied');
+          }, 2200);
+        } catch (e) {
+          console.error('Error al copiar dirección', e);
+        }
+      });
+    }
+
+    // 2. Lightbox Modal (Minimalista & Elegante)
+    const lightbox = document.getElementById('gallery-lightbox');
+    const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+    const lightboxStage = document.getElementById('lightbox-stage');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const activeImg = document.getElementById('lightbox-active-img') as HTMLImageElement | null;
+    const activeCounter = document.getElementById('lightbox-counter');
+
+    const cards = Array.from(document.querySelectorAll('.gallery-item-card')) as HTMLElement[];
+    let currentIdx = 0;
+
+    function updateLightbox(idx: number) {
+      if (!cards.length || !activeImg) return;
+      if (idx < 0) idx = cards.length - 1;
+      if (idx >= cards.length) idx = 0;
+      currentIdx = idx;
+
+      const card = cards[currentIdx];
+      const src = card.getAttribute('data-src') || '';
+      const title = card.getAttribute('data-title') || '';
+
+      activeImg.style.opacity = '0';
+      activeImg.style.transform = 'scale(0.985)';
+      setTimeout(() => {
+        activeImg.src = src;
+        activeImg.alt = title;
+        activeImg.style.opacity = '1';
+        activeImg.style.transform = 'scale(1)';
+      }, 70);
+
+      if (activeCounter) {
+        const padCurrent = String(currentIdx + 1).padStart(2, '0');
+        const padTotal = String(cards.length).padStart(2, '0');
+        activeCounter.textContent = `${padCurrent} / ${padTotal}`;
+      }
+    }
+
+    function openLightbox(idx: number) {
+      updateLightbox(idx >= 0 ? idx : 0);
+      if (lightbox) {
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeLightbox() {
+      if (lightbox) {
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    }
+
+    cards.forEach((card, idx) => {
+      if (card.dataset.bound) return;
+      card.dataset.bound = 'true';
+      card.addEventListener('click', () => openLightbox(idx));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLightbox(idx);
+        }
+      });
+    });
+
+    if (lightboxClose && !(lightboxClose as HTMLElement).dataset.bound) {
+      (lightboxClose as HTMLElement).dataset.bound = 'true';
+      lightboxClose.addEventListener('click', closeLightbox);
+    }
+    if (lightboxBackdrop && !(lightboxBackdrop as HTMLElement).dataset.bound) {
+      (lightboxBackdrop as HTMLElement).dataset.bound = 'true';
+      lightboxBackdrop.addEventListener('click', closeLightbox);
+    }
+    if (lightboxStage && !(lightboxStage as HTMLElement).dataset.bound) {
+      (lightboxStage as HTMLElement).dataset.bound = 'true';
+      lightboxStage.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (target === lightboxStage || target.classList.contains('lightbox-main') || target.classList.contains('lightbox-frame')) {
+          closeLightbox();
+        }
+      });
+    }
+    if (activeImg && !activeImg.dataset.bound) {
+      activeImg.dataset.bound = 'true';
+      activeImg.addEventListener('click', (e) => e.stopPropagation());
+    }
+    if (lightboxPrev && !(lightboxPrev as HTMLElement).dataset.bound) {
+      (lightboxPrev as HTMLElement).dataset.bound = 'true';
+      lightboxPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        updateLightbox(currentIdx - 1);
+      });
+    }
+    if (lightboxNext && !(lightboxNext as HTMLElement).dataset.bound) {
+      (lightboxNext as HTMLElement).dataset.bound = 'true';
+      lightboxNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        updateLightbox(currentIdx + 1);
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox || !lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') updateLightbox(currentIdx - 1);
+      if (e.key === 'ArrowRight') updateLightbox(currentIdx + 1);
+    });
+
+    // 3. Slideshow Hero Quillayes (Edge-to-Edge)
+    const heroSlides = document.querySelectorAll<HTMLElement>('#quillayesHeroSlideshow .hero-slide');
+    const heroDots = document.querySelectorAll<HTMLElement>('#quillayesHeroDots .slide-dot');
+    let currentHeroSlide = 0;
+    let heroTimer: ReturnType<typeof setInterval> | null = null;
+
+    function goToHeroSlide(index: number) {
+      if (!heroSlides.length) return;
+      heroSlides[currentHeroSlide]?.classList.remove('active');
+      heroDots[currentHeroSlide]?.classList.remove('active');
+      currentHeroSlide = (index + heroSlides.length) % heroSlides.length;
+      heroSlides[currentHeroSlide]?.classList.add('active');
+      heroDots[currentHeroSlide]?.classList.add('active');
+    }
+
+    function startHeroSlideshow() {
+      if (heroTimer) clearInterval(heroTimer);
+      heroTimer = setInterval(() => {
+        goToHeroSlide(currentHeroSlide + 1);
+      }, 5500);
+    }
+
+    heroDots.forEach((dot) => {
+      if (dot.dataset.bound) return;
+      dot.dataset.bound = 'true';
+      dot.addEventListener('click', (e) => {
+        const targetIndex = parseInt((e.currentTarget as HTMLElement).getAttribute('data-slide') || '0', 10);
+        goToHeroSlide(targetIndex);
+        startHeroSlideshow();
+      });
+    });
+
+    if (heroSlides.length > 1) {
+      startHeroSlideshow();
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPageInteractions);
+  } else {
+    initPageInteractions();
+  }
+  document.addEventListener('astro:page-load', initPageInteractions);
+</script>

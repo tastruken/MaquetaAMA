@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PatternDrops from '../components/brand/PatternDrops.astro';
+import { u } from '../utils/url';
 ---
 
 <BaseLayout 
@@ -19,11 +20,11 @@ import PatternDrops from '../components/brand/PatternDrops.astro';
         </p>
 
         <div class="error-actions">
-          <a href="/" class="btn btn-cyan btn-lg">
+          <a href={u('/')} class="btn btn-cyan btn-lg">
             ← Volver al Inicio
           </a>
-          <a href="/proyectos" class="btn btn-outline-white btn-lg">
-            Explorar Proyectos
+          <a href={u('/proyectos/ama-quillayes')} class="btn btn-outline-white btn-lg">
+            Ver AMA Quillayes
           </a>
           <button 
             type="button" 

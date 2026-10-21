@@ -1,0 +1,673 @@
+/* ========================================================
+   NOSOTROS.CSS - Estilos de la página Nosotros
+   100% Unificado con la estética de Inicio (Aurvix Framer)
+   ======================================================== */
+
+/* 1. HERO GLASS BAR DE SOCIOS */
+.hero-partners-glass-bar {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 9999px;
+  padding: 0.65rem 1.75rem;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 2.8rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  width: fit-content;
+}
+
+.glass-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.glass-pct {
+  background: #FFFFFF;
+  color: #0F172A;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 0.22rem 0.6rem;
+  border-radius: 9999px;
+  letter-spacing: -0.01em;
+  display: inline-block;
+  line-height: 1.2;
+}
+
+.glass-txt {
+  font-size: 0.88rem;
+  color: #FFFFFF;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.glass-div {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* 2. EDITORIAL EXTRA (QUIÉNES SOMOS) */
+.about-paragraph {
+  font-size: 1.05rem;
+  color: #4B5563;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+
+.about-paragraph strong {
+  color: #111827;
+}
+
+.about-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.eslogan-highlight {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1AA6B7;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* 3. CORPORATE SECTION (ESTRUCTURA SOCIETARIA) */
+.aurvix-corporate-section {
+  background: #F9FAFB !important;
+  padding: 6.5rem 0 !important;
+  width: 100%;
+}
+
+.corporate-header-desc {
+  max-width: 520px;
+  font-size: 1.05rem;
+  color: #4B5563;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.corporate-cards-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 2rem !important;
+  margin-top: 3.5rem !important;
+  width: 100%;
+}
+
+.corporate-card {
+  background: #FFFFFF !important;
+  border-radius: 24px !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  padding: 2.5rem 2.2rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: 0 12px 30px -12px rgba(15, 23, 42, 0.08) !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease !important;
+}
+
+.corporate-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.14) !important;
+}
+
+.corp-card-top {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  gap: 1rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.corp-share-badge {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.share-val {
+  font-size: 2.5rem !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.share-sub {
+  font-size: 0.74rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: #6B7280 !important;
+  margin-top: 0.3rem !important;
+  font-weight: 600 !important;
+}
+
+.corp-pill-tag {
+  background: #EFF1F0 !important;
+  color: #4B5563 !important;
+  font-size: 0.76rem !important;
+  font-weight: 600 !important;
+  padding: 0.35rem 0.85rem !important;
+  border-radius: 9999px !important;
+  white-space: nowrap !important;
+}
+
+.corp-title {
+  font-size: 1.35rem !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  margin-bottom: 0.3rem !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.corp-subsidiary {
+  display: block !important;
+  font-size: 0.88rem !important;
+  color: #1AA6B7 !important;
+  font-weight: 600 !important;
+  margin-bottom: 1rem !important;
+}
+
+.corp-summary {
+  font-size: 0.95rem !important;
+  color: #4B5563 !important;
+  line-height: 1.6 !important;
+  margin-bottom: 1.75rem !important;
+  padding-bottom: 1.5rem !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+.corp-points-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.15rem !important;
+  margin-top: auto !important;
+}
+
+.corp-point-item {
+  display: flex !important;
+  gap: 0.8rem !important;
+  align-items: flex-start !important;
+}
+
+.point-check {
+  width: 22px !important;
+  height: 22px !important;
+  border-radius: 50% !important;
+  background: #E6F6F8 !important;
+  color: #1AA6B7 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0.8rem !important;
+  font-weight: 800 !important;
+  flex-shrink: 0 !important;
+  margin-top: 2px !important;
+}
+
+.point-text {
+  font-size: 0.88rem !important;
+  color: #4B5563 !important;
+  line-height: 1.55 !important;
+}
+
+.point-text strong {
+  color: #111827 !important;
+}
+
+/* 3.1 LEADERSHIP SECTION (LIDERAZGO Y SOCIOS FUNDADORES) */
+.aurvix-leadership-section {
+  background: #FFFFFF !important;
+  padding: 6.5rem 0 !important;
+  width: 100%;
+}
+
+.leadership-cards-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 1.75rem !important;
+  width: 100%;
+}
+
+.leader-card {
+  background: #FFFFFF !important;
+  border-radius: 24px !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: 0 10px 24px -8px rgba(15, 23, 42, 0.05) !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease !important;
+}
+
+.leader-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 20px 40px -12px rgba(15, 23, 42, 0.12) !important;
+}
+
+.leader-img-wrap {
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 1 / 1.15 !important;
+  overflow: hidden !important;
+  background: #E5E7EB !important;
+}
+
+.leader-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: top center !important;
+  display: block !important;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.leader-card:hover .leader-img {
+  transform: scale(1.04) !important;
+}
+
+.leader-chip {
+  position: absolute !important;
+  bottom: 0.85rem !important;
+  left: 0.85rem !important;
+  background: rgba(15, 23, 42, 0.82) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  color: #FFFFFF !important;
+  font-size: 0.74rem !important;
+  font-weight: 600 !important;
+  padding: 0.3rem 0.75rem !important;
+  border-radius: 9999px !important;
+  letter-spacing: 0.02em !important;
+}
+
+.leader-info {
+  padding: 1.6rem 1.4rem 1.8rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+}
+
+.leader-name {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  margin: 0 0 0.3rem !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.leader-role {
+  display: block !important;
+  font-size: 0.84rem !important;
+  color: #1AA6B7 !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.75rem !important;
+  line-height: 1.3 !important;
+}
+
+.leader-desc {
+  font-size: 0.88rem !important;
+  color: #64748B !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+}
+
+/* 4. PILARES DE MARCA (LOS 4 ATRIBUTOS ESENCIALES) */
+.aurvix-pillars-section {
+  background: #FFFFFF !important;
+  padding: 6.5rem 0 !important;
+  width: 100%;
+}
+
+.section-header-centered {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  margin-bottom: 3.5rem !important;
+}
+
+.section-header-centered .aurvix-pill-light {
+  margin-bottom: 0.75rem !important;
+}
+
+.section-header-centered .aurvix-title {
+  font-size: clamp(2.2rem, 4vw, 3.2rem) !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  letter-spacing: -0.03em !important;
+  margin: 0.5rem 0 0.85rem !important;
+  line-height: 1.15 !important;
+}
+
+.section-header-centered .section-desc {
+  max-width: 620px !important;
+  margin: 0 auto !important;
+  color: #64748B !important;
+  font-size: 1.05rem !important;
+  line-height: 1.6 !important;
+}
+
+.pillars-four-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 1.75rem !important;
+  width: 100%;
+}
+
+.pillar-clean-card {
+  background: #F9FAFB !important;
+  border-radius: 24px !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  padding: 2.4rem 1.85rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.pillar-clean-card:hover {
+  background: #FFFFFF !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.pillar-header-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.pillar-num-badge {
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  color: #9CA3AF !important;
+  letter-spacing: -0.02em !important;
+}
+
+.pillar-icon-box {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 12px !important;
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+.pillar-clean-title {
+  font-size: 1.18rem !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  margin-bottom: 0.75rem !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.pillar-clean-desc {
+  font-size: 0.92rem !important;
+  color: #4B5563 !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+}
+
+/* 5. SHOWCASE AMA QUILLAYES */
+.aurvix-showcase-section {
+  background: #F9FAFB !important;
+  padding: 6.5rem 0 !important;
+  width: 100%;
+}
+
+.project-master-card {
+  background: #FFFFFF !important;
+  border-radius: 28px !important;
+  overflow: hidden !important;
+  display: grid !important;
+  grid-template-columns: 1.1fr 1fr !important;
+  box-shadow: 0 16px 40px -12px rgba(15, 23, 42, 0.1) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  margin-bottom: 5rem !important;
+  width: 100%;
+}
+
+.pmc-media-col {
+  position: relative !important;
+  min-height: 440px !important;
+}
+
+.pmc-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.pmc-pills-overlay {
+  position: absolute !important;
+  bottom: 1.75rem !important;
+  left: 1.75rem !important;
+  display: flex !important;
+  gap: 0.6rem !important;
+  flex-wrap: wrap !important;
+  z-index: 2 !important;
+}
+
+.pmc-info-col {
+  padding: 3.5rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+.pmc-location-box {
+  display: flex !important;
+  gap: 0.9rem !important;
+  align-items: flex-start !important;
+  background: #F3F5F4 !important;
+  padding: 1rem 1.3rem !important;
+  border-radius: 16px !important;
+  margin-bottom: 1.5rem !important;
+  border: 1px solid rgba(0, 0, 0, 0.04) !important;
+}
+
+.pmc-loc-icon {
+  font-size: 1.3rem !important;
+  flex-shrink: 0 !important;
+  margin-top: 1px !important;
+}
+
+.pmc-loc-details strong {
+  display: block !important;
+  color: #111827 !important;
+  font-size: 0.95rem !important;
+}
+
+.pmc-loc-details p {
+  font-size: 0.85rem !important;
+  color: #4B5563 !important;
+  margin: 0.15rem 0 0 !important;
+}
+
+.pmc-description {
+  font-size: 0.98rem !important;
+  color: #4B5563 !important;
+  line-height: 1.65 !important;
+  margin-bottom: 1.75rem !important;
+}
+
+.pmc-amenities-wrap {
+  margin-bottom: 2rem !important;
+  padding-bottom: 1.75rem !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+.pmc-amenities-label {
+  display: block !important;
+  font-size: 0.78rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: #6B7280 !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.8rem !important;
+}
+
+.pmc-amenities-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.55rem !important;
+}
+
+.aurvix-chip {
+  background: #F3F5F4 !important;
+  color: #111827 !important;
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
+  padding: 0.4rem 0.85rem !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(0, 0, 0, 0.03) !important;
+}
+
+.pmc-actions-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1.5rem !important;
+  flex-wrap: wrap !important;
+}
+
+.btn-clean-link {
+  font-size: 0.92rem !important;
+  font-weight: 600 !important;
+  color: #1AA6B7 !important;
+  transition: color 0.2s ease !important;
+}
+
+.btn-clean-link:hover {
+  color: #0F172A !important;
+}
+
+/* 6. CRONOGRAMA MILESTONES (Aurvix Light Cards) */
+.milestones-three-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 2rem !important;
+  width: 100%;
+}
+
+.milestone-aurvix-card {
+  background: #FFFFFF !important;
+  border-radius: 24px !important;
+  padding: 2.4rem 2rem !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 10px 25px -8px rgba(15, 23, 42, 0.06) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.milestone-aurvix-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.ms-card-top {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 1.25rem !important;
+}
+
+.ms-step-badge {
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  color: #6B7280 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+}
+
+.ms-status-tag {
+  background: #E6F6F8 !important;
+  color: #1AA6B7 !important;
+  font-size: 0.76rem !important;
+  font-weight: 600 !important;
+  padding: 0.25rem 0.65rem !important;
+  border-radius: 9999px !important;
+}
+
+.ms-date-text {
+  font-size: 1.8rem !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+  line-height: 1.1 !important;
+  margin-bottom: 0.35rem !important;
+  letter-spacing: -0.03em !important;
+}
+
+.ms-title-text {
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  color: #1AA6B7 !important;
+  margin-bottom: 0.75rem !important;
+  letter-spacing: -0.01em !important;
+}
+
+.ms-desc-text {
+  font-size: 0.9rem !important;
+  color: #4B5563 !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  .corporate-cards-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .leadership-cards-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .pillars-four-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .project-master-card {
+    grid-template-columns: 1fr !important;
+  }
+  .pmc-media-col {
+    min-height: 320px !important;
+  }
+  .milestones-three-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .leadership-cards-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .pillars-four-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .pmc-info-col {
+    padding: 2rem !important;
+  }
+  .hero-partners-glass-bar {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    border-radius: 20px !important;
+    align-items: flex-start !important;
+    padding: 1.25rem !important;
+  }
+  .glass-div {
+    display: none !important;
+  }
+}

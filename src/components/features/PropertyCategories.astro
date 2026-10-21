@@ -5,31 +5,27 @@ import { u } from '../../utils/url';
 
 const rawCategories = [
   {
-    title: "1 Dormitorio",
-    subtitle: "Ideal Inversionistas",
-    count: "Desde 2.390 UF",
-    image: "/images/ama_interior_living.jpg",
+    title: "apartments",
+    subtitle: "120+ properties · 1 y 2 Dorms",
+    image: "/images/aurvix_cat_apartments.jpg",
     link: "/proyectos/ama-quillayes"
   },
   {
-    title: "2 Dormitorios",
-    subtitle: "Equilibrio & Home Office",
-    count: "Desde 2.950 UF",
-    image: "/images/ama_quillayes_facade.jpg",
+    title: "villas",
+    subtitle: "80+ properties · Amplitud Familiar",
+    image: "/images/aurvix_cat_villas.jpg",
     link: "/proyectos/ama-quillayes"
   },
   {
-    title: "3 Dormitorios",
-    subtitle: "Amplitud Familiar",
-    count: "Desde 3.650 UF",
-    image: "/images/ama_interior_living.jpg",
+    title: "modern homes",
+    subtitle: "150+ properties · Venta en Blanco",
+    image: "/images/aurvix_cat_modern.jpg",
     link: "/proyectos/ama-quillayes"
   },
   {
-    title: "Amenities & Rooftop",
-    subtitle: "Espacios de Encuentro",
-    count: "Piscina, Cowork & Quinchos",
-    image: "/images/ama_amenity_rooftop.jpg",
+    title: "luxury estates",
+    subtitle: "60+ properties · Amenities & Rooftop",
+    image: "/images/aurvix_cat_luxury.jpg",
     link: "/amenities"
   }
 ];
@@ -44,8 +40,8 @@ const categories = rawCategories.map((cat) => ({
 <section class="section categories-section">
   <div class="container">
     <div class="section-header text-center">
-      <span class="pill-tag">Tipologías y Espacios</span>
-      <h2 class="section-title">Creados con propósito, diseñados para la vida moderna</h2>
+      <span class="pill-tag">Property categories</span>
+      <h2 class="section-title">Built with purpose, designed<br />for modern living</h2>
     </div>
 
     <div class="categories-grid">
@@ -56,7 +52,6 @@ const categories = rawCategories.map((cat) => ({
           <div class="cat-content">
             <h3 class="cat-title">{cat.title}</h3>
             <span class="cat-sub">{cat.subtitle}</span>
-            <span class="cat-count">{cat.count}</span>
           </div>
         </a>
       ))}
@@ -70,11 +65,25 @@ const categories = rawCategories.map((cat) => ({
     padding: 6rem 0 5rem;
   }
 
+  .section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3.5rem;
+  }
+
+  .section-title {
+    font-size: clamp(2.3rem, 4.5vw, 3.6rem);
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-top: 1.2rem;
+  }
+
   .categories-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
-    margin-top: 3.5rem;
   }
 
   .category-card {

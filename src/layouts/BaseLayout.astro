@@ -1,7 +1,6 @@
 ---
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
-import WhatsAppButton from '../components/layout/WhatsAppButton.astro';
 import CotizadorModal from '../components/features/CotizadorModal.astro';
 import { u, base } from '../utils/url';
 import '../styles/global.css';
@@ -83,7 +82,6 @@ const fullTitle = title.includes('AMA Inmobiliaria') ? title : `${title} | AMA I
     <Footer />
     
     <!-- Utilidades Globales -->
-    <WhatsAppButton />
     <CotizadorModal />
   </body>
 </html>

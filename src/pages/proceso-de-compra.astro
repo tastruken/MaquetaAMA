@@ -1,0 +1,289 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PurchaseProcess from '../components/features/PurchaseProcess.astro';
+import FAQAccordion from '../components/features/FAQAccordion.astro';
+import ModernCTA from '../components/features/ModernCTA.astro';
+import { u } from '../utils/url';
+
+const purchaseSteps = [
+  {
+    step: '01',
+    title: 'Selección y Simulación',
+    phase: 'Etapa Inicial',
+    desc: 'Explora nuestros modelos disponibles en AMA Quillayes (1, 2 y 3 dormitorios). Utiliza nuestro simulador interactivo para calcular tu pie, evaluar el dividendo estimado y planificar tu inversión con claridad.',
+    details: ['Asesoría virtual o presencial en sala de ventas', 'Cotización formal con lista de precios oficial', 'Evaluación de capacidad crediticia preliminar']
+  },
+  {
+    step: '02',
+    title: 'Reserva y Promesa de Compraventa',
+    phase: 'Compromiso Legal',
+    desc: 'Bloquea tu unidad seleccionada con un monto de reserva mínimo. Posteriormente, firmamos la Promesa de Compraventa con póliza de seguro de garantía que protege el 100% de los abonos de tu pie.',
+    details: ['Póliza de garantía por todos los montos pagados', 'Condiciones pactadas fijas en UF', 'Cesión de promesa a costo $0 para inversionistas']
+  },
+  {
+    step: '03',
+    title: 'Pago del Pie en Cuotas sin Interés',
+    phase: 'Periodo de Construcción',
+    desc: 'Durante todo el avance de la obra, abona tu pie mensual en hasta 60 cuotas sin interés, aprovechando además el beneficio de Bono Pie 10% en venta en blanco.',
+    details: ['Flexibilidad en métodos de pago (transferencia, PAC, tarjeta)', 'Monitoreo periódico del estado de avance del edificio', 'Sin recargos ni intereses financieros durante la construcción']
+  },
+  {
+    step: '04',
+    title: 'Gestión del Crédito Hipotecario',
+    phase: 'Tramitación Bancaria',
+    desc: 'Aproximadamente 4 a 6 meses antes de la entrega final, nuestro equipo de financiamiento gestiona tu crédito hipotecario con los principales bancos del país para obtener las tasas más convenientes.',
+    details: ['Comparativa simultánea entre múltiples entidades financieras', 'Gestión de tasación y estudio de títulos', 'Acompañamiento hasta la aprobación definitiva']
+  },
+  {
+    step: '05',
+    title: 'Escrituración y Entrega de Llaves',
+    phase: 'Recepción del Inmueble',
+    desc: 'Firma de la escritura de compraventa en notaría, inspección técnica guiada por profesionales para validar terminaciones y entrega oficial de las llaves de tu nuevo hogar.',
+    details: ['Acta de recepción técnica detallada', 'Manual del propietario y especificaciones técnicas', 'Activación del portal de postventa con garantías vigentes']
+  }
+];
+---
+
+<BaseLayout 
+  title="Proceso de Compra Paso a Paso | AMA Inmobiliaria"
+  description="Conoce cada etapa para comprar tu departamento en AMA Quillayes: reserva, pago del pie en cuotas, aprobación bancaria y entrega de llaves."
+>
+  <!-- HERO PROCESO DE COMPRA -->
+  <section class="process-hero">
+    <div class="container relative-z">
+      <h1 class="page-title">Tu camino hacia tu departamento propio</h1>
+      <p class="page-subtitle">
+        Te acompañamos con absoluta claridad desde tu primera simulación hasta el día en que recibes las llaves de tu departamento.
+      </p>
+    </div>
+  </section>
+
+  <!-- LISTA DETALLADA DE ETAPAS -->
+  <section class="section section-cream">
+    <div class="container">
+      <div class="process-steps-list">
+        {purchaseSteps.map((s, idx) => (
+          <div class={`process-step-row ${idx % 2 === 1 ? 'reverse' : ''}`}>
+            <div class="step-badge-col">
+              <span class="step-num-big">{s.step}</span>
+              <span class="step-phase-tag">{s.phase}</span>
+            </div>
+            <div class="step-content-card">
+              <h3 class="step-card-title">{s.title}</h3>
+              <p class="step-card-desc">{s.desc}</p>
+              <div class="step-card-highlights">
+                <strong>Claves de esta etapa:</strong>
+                <ul>
+                  {s.details.map((d) => (
+                    <li>✓ {d}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Y SIMULADOR -->
+  <section class="section section-petrol text-center">
+    <div class="container">
+      <h2 class="cta-title">¿Listo para dar el primer paso?</h2>
+      <p class="cta-sub">
+        Simula tu financiamiento o cotiza tu unidad en AMA Quillayes en menos de 2 minutos.
+      </p>
+      <div class="cta-btn-group">
+        <button 
+          type="button" 
+          class="btn btn-coral"
+          onclick="window.openCotizadorModal && window.openCotizadorModal()"
+        >
+          <span>Abrir Cotizador y Simulador ↗</span>
+        </button>
+        <a href={u('/proyectos/ama-quillayes')} class="btn btn-outline-white">
+          <span>Ver Departamentos Disponibles</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQS DEL PROCESO -->
+  <FAQAccordion />
+
+  <!-- MODERN CTA -->
+  <ModernCTA />
+</BaseLayout>
+
+<style>
+  .process-hero {
+    position: relative;
+    margin-top: -5rem;
+    padding: 12rem 0 5.5rem;
+    background: #0F172A;
+    color: #FFFFFF;
+    text-align: center;
+  }
+
+  .pill-tag-white {
+    display: inline-block;
+    padding: 0.4rem 1.1rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #FFFFFF;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .page-title {
+    font-size: clamp(2.2rem, 4.2vw, 3.8rem);
+    font-weight: 800;
+    color: #FFFFFF;
+    margin: 0 0 1.2rem;
+    letter-spacing: -0.03em;
+  }
+
+  .page-subtitle {
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .process-steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .process-step-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 3rem;
+    align-items: start;
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 3rem;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.05);
+  }
+
+  .step-badge-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .step-num-big {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--color-cyan, #1AA6B7);
+    letter-spacing: -0.05em;
+  }
+
+  .step-phase-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-petrol, #0B2545);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.5rem;
+  }
+
+  .step-card-title {
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: #0F172A;
+    margin: 0 0 1rem;
+  }
+
+  .step-card-desc {
+    font-size: 1rem;
+    color: #4B5563;
+    line-height: 1.65;
+    margin: 0 0 1.5rem;
+  }
+
+  .step-card-highlights {
+    background: #F8FAFC;
+    padding: 1.25rem 1.5rem;
+    border-radius: 16px;
+    border-left: 3px solid var(--color-cyan, #1AA6B7);
+  }
+
+  .step-card-highlights strong {
+    font-size: 0.88rem;
+    color: #0F172A;
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .step-card-highlights ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .step-card-highlights li {
+    font-size: 0.88rem;
+    color: #4B5563;
+  }
+
+  .section-petrol {
+    background: #0B2545;
+    color: #FFFFFF;
+    padding: 5rem 0;
+  }
+
+  .cta-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin-bottom: 0.8rem;
+  }
+
+  .cta-sub {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 2rem;
+  }
+
+  .cta-btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-outline-white {
+    background: rgba(255, 255, 255, 0.12);
+    color: #FFFFFF !important;
+    font-weight: 600;
+    padding: 0.85rem 1.85rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+
+  .btn-outline-white:hover {
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  @media (max-width: 768px) {
+    .process-step-row {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>

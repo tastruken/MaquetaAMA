@@ -1,207 +1,481 @@
 ---
 // src/components/features/BentoOfferings.astro
-// Grilla Bento de atributos y servicios estilo Aurvix (What we offer)
+// Grilla interactiva de 6 tarjetas con animación 3D Flip Card
+// Front: Minimalista estilo Aurvix (Foto 1)
+// Back: Cuadro con beneficios, descripciones y badges (Foto 2)
+
+const offerings = [
+  {
+    id: 'hogar',
+    frontTitle: 'Tu Nuevo Hogar',
+    backTitle: 'Tu Nuevo Hogar',
+    desc: 'Tipologías 1D, 2D y 3D pensadas para optimizar el espacio con luz natural y terminaciones nobles.',
+    badgeText: 'DESDE 2.390 UF',
+    badgeType: 'gray',
+    iconType: 'home'
+  },
+  {
+    id: 'bono-pie',
+    frontTitle: 'Bono Pie 10%',
+    backTitle: 'Bono Pie 10%',
+    desc: 'Paga tu pie en hasta 36 cuotas sin interés durante la etapa de construcción en blanco.',
+    badgeText: '36 CUOTAS',
+    badgeType: 'coral',
+    iconType: 'card'
+  },
+  {
+    id: 'gestion-bancaria',
+    frontTitle: 'Gestión Bancaria 100%',
+    backTitle: 'Gestión Bancaria 100%',
+    desc: 'Evaluamos y tramitamos tu crédito hipotecario con tasas preferenciales en los principales bancos.',
+    badgeText: 'SIN COSTO',
+    badgeType: 'gray',
+    iconType: 'document'
+  },
+  {
+    id: 'eficiencia',
+    frontTitle: 'Eficiencia y Termopanel',
+    backTitle: 'Eficiencia y Termopanel',
+    desc: 'Ventanas de doble vidriado hermético que aíslan ruidos urbanos y reducen hasta un 40% el gasto térmico.',
+    badgeText: 'AISLAMIENTO ACÚSTICO',
+    badgeType: 'gray',
+    iconType: 'globe'
+  },
+  {
+    id: 'plusvalia',
+    frontTitle: 'Plusvalía & Rentabilidad',
+    backTitle: 'Plusvalía & Rentabilidad',
+    desc: 'Ubicaciones con alta demanda de arriendo y plusvalía sostenida a pasos del Metro Los Quillayes.',
+    badgeText: '+15% PLUSVALÍA PROYECTADA',
+    badgeType: 'coral',
+    iconType: 'chart'
+  },
+  {
+    id: 'postventa',
+    frontTitle: 'Postventa Digital y Garantía',
+    backTitle: 'Postventa Digital y Garantía',
+    desc: 'Plataforma web con trazabilidad en vivo de requerimientos y respaldo legal de hasta 10 años.',
+    badgeText: 'GARANTÍA LEY',
+    badgeType: 'gray',
+    iconType: 'shield'
+  }
+];
 ---
 
-<section class="section bento-offerings-section">
+<section class="section bento-offerings-section" id="experiencias-vida">
   <div class="container">
+    <!-- Encabezado general en Español -->
     <div class="section-header text-center">
-      <span class="pill-tag pill-tag-white">El Estándar AMA</span>
-      <h2 class="section-title">Diseñado para elevar tu calidad de vida</h2>
+      <h2 class="section-title aurvix-title">Experiencias de Vida</h2>
       <p class="section-desc">
-        Más que metros cuadrados: una propuesta integral de diseño, respaldo financiero y plusvalía garantizada.
+        Atributos pensados para maximizar tu confort, rentabilidad y respaldo en cada etapa.
       </p>
     </div>
 
+    <!-- Grilla de Tarjetas con Flip 3D -->
     <div class="bento-offerings-grid">
-      <!-- Card 1 -->
-      <div class="offering-card bento-card">
-        <div class="offering-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-          </svg>
-        </div>
-        <h3 class="offering-title">Tu Nuevo Hogar</h3>
-        <p class="offering-desc">
-          Tipologías 1D, 2D y 3D pensadas para optimizar el espacio con luz natural y terminaciones nobles.
-        </p>
-        <span class="offering-badge">Desde 2.390 UF</span>
-      </div>
+      {offerings.map((item) => (
+        <div class="offering-flip-card" tabindex="0" role="region" aria-label={item.frontTitle}>
+          <div class="card-flipper">
+            
+            <!-- CARA FRONTAL (Foto 1: Icono + Título + Fondo suave con trama) -->
+            <div class="card-face card-front">
+              <div class="front-icon-wrap">
+                {item.iconType === 'home' && (
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+                    <path d="M9 21V12h6v9"/>
+                  </svg>
+                )}
+                {item.iconType === 'card' && (
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="5" width="20" height="14" rx="3"/>
+                    <line x1="2" y1="10" x2="22" y2="10"/>
+                  </svg>
+                )}
+                {item.iconType === 'document' && (
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="8" y1="13" x2="16" y2="13"/>
+                    <line x1="8" y1="17" x2="13" y2="17"/>
+                  </svg>
+                )}
+                {item.iconType === 'globe' && (
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="2" y1="12" x2="22" y2="12"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                  </svg>
+                )}
+                {item.iconType === 'chart' && (
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="6" y1="20" x2="6" y2="14"/>
+                    <line x1="12" y1="20" x2="12" y2="8"/>
+                    <line x1="18" y1="20" x2="18" y2="4"/>
+                  </svg>
+                )}
+                {item.iconType === 'shield' && (
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                )}
+              </div>
+              <h3 class="front-card-title">{item.frontTitle}</h3>
+              <span class="flip-hint-pill">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                </svg>
+                Pasa el cursor
+              </span>
+            </div>
 
-      <!-- Card 2 -->
-      <div class="offering-card bento-card">
-        <div class="offering-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="5" width="20" height="14" rx="2"></rect>
-            <line x1="2" y1="10" x2="22" y2="10"></line>
-          </svg>
-        </div>
-        <h3 class="offering-title">Bono Pie 10%</h3>
-        <p class="offering-desc">
-          Paga tu pie en hasta 36 cuotas sin interés durante la etapa de construcción en blanco.
-        </p>
-        <span class="offering-badge highlight">36 Cuotas</span>
-      </div>
+            <!-- CARA POSTERIOR (Foto 2: Tarjeta Blanca, Icono Cyan en recuadro, Título, Descripción y Badge) -->
+            <div class="card-face card-back">
+              <div class="back-card-header">
+                <div class="back-icon-box">
+                  {item.iconType === 'home' && (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1AA6B7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+                      <path d="M9 21V12h6v9"/>
+                    </svg>
+                  )}
+                  {item.iconType === 'card' && (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1AA6B7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="5" width="20" height="14" rx="3"/>
+                      <line x1="2" y1="10" x2="22" y2="10"/>
+                    </svg>
+                  )}
+                  {item.iconType === 'document' && (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1AA6B7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                      <polyline points="14 2 14 8 20 8"/>
+                      <line x1="8" y1="13" x2="16" y2="13"/>
+                      <line x1="8" y1="17" x2="13" y2="17"/>
+                    </svg>
+                  )}
+                  {item.iconType === 'globe' && (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1AA6B7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"/>
+                      <line x1="2" y1="12" x2="22" y2="12"/>
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                  )}
+                  {item.iconType === 'chart' && (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1AA6B7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="6" y1="20" x2="6" y2="14"/>
+                      <line x1="12" y1="20" x2="12" y2="8"/>
+                      <line x1="18" y1="20" x2="18" y2="4"/>
+                    </svg>
+                  )}
+                  {item.iconType === 'shield' && (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1AA6B7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                  )}
+                </div>
+                <h3 class="back-card-title">{item.backTitle}</h3>
+                <p class="back-card-desc">{item.desc}</p>
+              </div>
 
-      <!-- Card 3 -->
-      <div class="offering-card bento-card">
-        <div class="offering-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
-          </svg>
-        </div>
-        <h3 class="offering-title">Gestión Bancaria 100%</h3>
-        <p class="offering-desc">
-          Evaluamos y tramitamos tu crédito hipotecario con tasas preferenciales en los principales bancos.
-        </p>
-        <span class="offering-badge">Sin Costo</span>
-      </div>
+              <div class="back-card-footer">
+                <span class={`spec-pill ${item.badgeType === 'coral' ? 'spec-pill-coral' : 'spec-pill-gray'}`}>
+                  {item.badgeText}
+                </span>
+              </div>
+            </div>
 
-      <!-- Card 4 -->
-      <div class="offering-card bento-card">
-        <div class="offering-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
-            <path d="M2 12h20"></path>
-          </svg>
+          </div>
         </div>
-        <h3 class="offering-title">Eficiencia y Termopanel</h3>
-        <p class="offering-desc">
-          Ventanas de doble vidriado hermético que aíslan ruidos urbanos y reducen hasta un 40% el gasto térmico.
-        </p>
-        <span class="offering-badge">Aislamiento Acústico</span>
-      </div>
-
-      <!-- Card 5 -->
-      <div class="offering-card bento-card">
-        <div class="offering-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="20" x2="18" y2="10"></line>
-            <line x1="12" y1="20" x2="12" y2="4"></line>
-            <line x1="6" y1="20" x2="6" y2="14"></line>
-          </svg>
-        </div>
-        <h3 class="offering-title">Plusvalía & Rentabilidad</h3>
-        <p class="offering-desc">
-          Ubicaciones con alta demanda de arriendo y plusvalía sostenida a pasos del Metro Los Quillayes.
-        </p>
-        <span class="offering-badge highlight">+15% Plusvalía Proyectada</span>
-      </div>
-
-      <!-- Card 6 -->
-      <div class="offering-card bento-card">
-        <div class="offering-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          </svg>
-        </div>
-        <h3 class="offering-title">Postventa Digital y Garantía</h3>
-        <p class="offering-desc">
-          Plataforma web con trazabilidad en vivo de requerimientos y respaldo legal de hasta 10 años.
-        </p>
-        <span class="offering-badge">Garantía Ley</span>
-      </div>
+      ))}
     </div>
   </div>
 </section>
 
-<style>
+<!-- Soporte táctil en dispositivos móviles -->
+<script is:inline>
+  function setupOfferingCards() {
+    const cards = document.querySelectorAll('.offering-flip-card');
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        if (window.matchMedia('(hover: none)').matches) {
+          card.classList.toggle('is-flipped');
+        }
+      });
+    });
+  }
+
+  setupOfferingCards();
+  document.addEventListener('astro:page-load', setupOfferingCards);
+</script>
+
+<style is:global>
+  /* ========================================================
+     BENTO OFFERINGS / FLIP CARDS (Experiencias de Vida)
+     ======================================================== */
   .bento-offerings-section {
-    background: #FFFFFF;
-    padding: 6rem 0;
+    background: #FFFFFF !important;
+    padding: 6.5rem 0 7rem !important;
+    position: relative;
+    width: 100%;
+    clear: both;
+  }
+
+  .aurvix-title {
+    font-size: clamp(2.3rem, 4vw, 3.4rem) !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+    letter-spacing: -0.03em !important;
+    margin: 0.85rem 0 0.75rem !important;
+    line-height: 1.15 !important;
+    text-align: center;
+  }
+
+  .bento-offerings-section .section-desc {
+    max-width: 600px;
+    margin: 0 auto 3.75rem !important;
+    color: #64748B !important;
+    font-size: 1.05rem !important;
+    line-height: 1.6 !important;
+    text-align: center;
   }
 
   .bento-offerings-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.8rem;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1.75rem !important;
+    max-width: 1140px;
+    margin: 0 auto !important;
+    width: 100%;
   }
 
-  .offering-card {
-    padding: 2.5rem 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    position: relative;
-    background: #FAFAFA;
-    border: 1px solid rgba(var(--rgb-petrol), 0.06);
-    transition: all var(--transition-elastic);
+  /* 3D Flip Card Container */
+  .offering-flip-card {
+    background-color: transparent !important;
+    perspective: 1200px !important;
+    -webkit-perspective: 1200px !important;
+    height: 330px !important; /* Altura explícita para evitar colapso */
+    min-height: 330px !important;
+    cursor: pointer;
+    border-radius: 24px !important;
+    outline: none;
+    position: relative !important;
+    display: block !important;
   }
 
-  .offering-card:hover {
-    background: #FFFFFF;
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px -10px rgba(0, 45, 64, 0.12);
-    border-color: rgba(var(--rgb-cyan), 0.35);
+  .offering-flip-card:focus-visible {
+    box-shadow: 0 0 0 3px rgba(26, 166, 183, 0.4);
   }
 
-  .offering-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #FFFFFF;
-    color: var(--color-cyan);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(var(--rgb-petrol), 0.06);
-    transition: all var(--transition-fast);
+  .card-flipper {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    text-align: left;
+    transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    transform-style: preserve-3d !important;
+    -webkit-transform-style: preserve-3d !important;
+    border-radius: 24px !important;
   }
 
-  .offering-card:hover .offering-icon {
-    background: var(--color-petrol);
-    color: #FFFFFF;
-    transform: scale(1.05);
+  /* Volteo en Hover y foco */
+  .offering-flip-card:hover .card-flipper,
+  .offering-flip-card:focus-within .card-flipper,
+  .offering-flip-card.is-flipped .card-flipper {
+    transform: rotateY(180deg) !important;
+    -webkit-transform: rotateY(180deg) !important;
   }
 
-  .offering-title {
-    font-size: 1.3rem;
-    font-weight: var(--font-weight-heavy);
-    color: var(--color-petrol);
-    margin-top: 0.2rem;
+  /* Ambas Caras (Front y Back) */
+  .card-face {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-backface-visibility: hidden !important;
+    backface-visibility: hidden !important;
+    border-radius: 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
   }
 
-  .offering-desc {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-    flex-grow: 1;
+  /* CARA FRONTAL (Foto 1) */
+  .card-front {
+    background-color: #EFF1F0 !important;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px) !important;
+    background-size: 16px 16px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 1.4rem !important;
+    padding: 2.5rem 1.8rem !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02) !important;
+    transform: rotateY(0deg) translateZ(1px) !important;
+    -webkit-transform: rotateY(0deg) translateZ(1px) !important;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease !important;
+    z-index: 2 !important;
   }
 
-  .offering-badge {
-    font-size: 0.76rem;
-    font-weight: var(--font-weight-semibold);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 0.3rem 0.75rem;
-    border-radius: var(--radius-full);
-    background: rgba(var(--rgb-petrol), 0.06);
-    color: var(--color-petrol);
-    margin-top: 0.5rem;
+  .offering-flip-card:hover .card-front {
+    background-color: #E6EAE9 !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05) !important;
   }
 
-  .offering-badge.highlight {
-    background: rgba(var(--rgb-coral), 0.12);
-    color: var(--color-coral);
+  .front-icon-wrap {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #111827 !important;
+    transition: transform 0.3s ease !important;
+    width: 60px;
+    height: 60px;
   }
 
-  @media (max-width: 992px) {
+  .offering-flip-card:hover .front-icon-wrap {
+    transform: scale(1.08) !important;
+  }
+
+  .front-card-title {
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    color: #111827 !important;
+    letter-spacing: -0.015em !important;
+    margin: 0 !important;
+    text-align: center !important;
+    line-height: 1.3 !important;
+  }
+
+  .flip-hint-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+    font-size: 0.76rem !important;
+    font-weight: 500 !important;
+    color: #788596 !important;
+    background: rgba(0, 0, 0, 0.04) !important;
+    padding: 0.3rem 0.75rem !important;
+    border-radius: 9999px !important;
+    margin-top: 0.15rem !important;
+    opacity: 0.85 !important;
+    transition: color 0.2s ease, opacity 0.2s ease, background-color 0.2s ease !important;
+  }
+
+  .offering-flip-card:hover .flip-hint-pill {
+    color: #1AA6B7 !important;
+    background: rgba(26, 166, 183, 0.1) !important;
+    opacity: 1 !important;
+  }
+
+  /* CARA POSTERIOR (Foto 2) */
+  .card-back {
+    background-color: #FFFFFF !important;
+    border: 1px solid rgba(0, 0, 0, 0.07) !important;
+    box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.09) !important;
+    transform: rotateY(180deg) translateZ(1px) !important;
+    -webkit-transform: rotateY(180deg) translateZ(1px) !important;
+    padding: 2.2rem 1.85rem !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    z-index: 1 !important;
+  }
+
+  .back-card-header {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+
+  .back-icon-box {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 12px !important;
+    background-color: #E8F8FA !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #1AA6B7 !important;
+    margin-bottom: 1.15rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  .back-card-title {
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+    letter-spacing: -0.015em !important;
+    margin: 0 0 0.65rem 0 !important;
+    line-height: 1.25 !important;
+    text-align: left !important;
+  }
+
+  .back-card-desc {
+    font-size: 0.88rem !important;
+    line-height: 1.55 !important;
+    color: #556272 !important;
+    margin: 0 !important;
+    text-align: left !important;
+  }
+
+  .back-card-footer {
+    margin-top: 1.25rem !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+  }
+
+  .spec-pill {
+    display: inline-block !important;
+    padding: 0.38rem 0.85rem !important;
+    border-radius: 9999px !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+  }
+
+  .spec-pill-gray {
+    background-color: #EEF2F6 !important;
+    color: #4B5563 !important;
+  }
+
+  .spec-pill-coral {
+    background-color: #FEE8E8 !important;
+    color: #E5484D !important;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
     .bento-offerings-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 1.5rem !important;
+    }
+    .offering-flip-card {
+      height: 320px !important;
+      min-height: 320px !important;
     }
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 600px) {
     .bento-offerings-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr !important;
+      gap: 1.25rem !important;
+    }
+    .offering-flip-card {
+      height: 310px !important;
+      min-height: 310px !important;
+    }
+    .card-back {
+      padding: 1.75rem 1.5rem !important;
     }
   }
 </style>
