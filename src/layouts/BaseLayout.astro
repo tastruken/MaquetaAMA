@@ -9,16 +9,21 @@ interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  isHome?: boolean;
 }
 
 const {
   title = 'Departamentos Nuevos en Santiago',
   description = 'Descubre proyectos inmobiliarios con diseño de vanguardia, altos estándares y excelente conectividad. AMA Inmobiliaria, calidad que trasciende.',
-  ogImage = '/images/og-ama.jpg'
+  ogImage = '/images/og-ama.jpg',
+  isHome: isHomeProp
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://tastruken.github.io');
 const fullTitle = title.includes('AMA Inmobiliaria') ? title : `${title} | AMA Inmobiliaria`;
+
+const currentPathNorm = Astro.url.pathname.replace(base, '').replace(/\/$/, '') || '/';
+const isHomePage = isHomeProp !== undefined ? isHomeProp : (currentPathNorm === '/');
 ---
 
 <!DOCTYPE html>
@@ -74,7 +79,7 @@ const fullTitle = title.includes('AMA Inmobiliaria') ? title : `${title} | AMA I
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   </head>
-  <body>
+  <body class={isHomePage ? 'is-home-page' : ''}>
     <Header currentPath={Astro.url.pathname} />
     <main id="main-content">
       <slot />
@@ -89,5 +94,54 @@ const fullTitle = title.includes('AMA Inmobiliaria') ? title : `${title} | AMA I
 <style is:global>
   #main-content {
     flex-grow: 1;
+  }
+
+  /* ========================================================
+     BOTONES DESTACADOS EXCLUSIVOS DE LA PÁGINA DE INICIO (#FF8541)
+     ======================================================== */
+  body.is-home-page .btn-hero-primary {
+    background-color: #FF8541 !important;
+    color: #FFFFFF !important;
+    border-color: #FF8541 !important;
+    box-shadow: 0 8px 24px rgba(255, 133, 65, 0.38) !important;
+  }
+
+  body.is-home-page .btn-hero-primary:hover {
+    background-color: #F07028 !important;
+    border-color: #F07028 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 30px rgba(255, 133, 65, 0.48) !important;
+  }
+
+  body.is-home-page .btn-hero-primary .btn-arrow {
+    color: #FFFFFF !important;
+  }
+
+  body.is-home-page .btn-header-cotizar {
+    background: #FF8541 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(255, 133, 65, 0.32) !important;
+  }
+
+  body.is-home-page .btn-header-cotizar:hover {
+    background: #F07028 !important;
+    box-shadow: 0 6px 18px rgba(255, 133, 65, 0.45) !important;
+  }
+
+  body.is-home-page .btn-ver-proyecto {
+    background: #FF8541 !important;
+    border-color: #FF8541 !important;
+    box-shadow: 0 4px 14px rgba(255, 133, 65, 0.28) !important;
+  }
+
+  body.is-home-page .btn-ver-proyecto:hover {
+    background: #F07028 !important;
+    border-color: #F07028 !important;
+    box-shadow: 0 6px 18px rgba(255, 133, 65, 0.4) !important;
+  }
+
+  body.is-home-page .mobile-drawer-cta .btn-petrol {
+    background: #FF8541 !important;
+    border-color: #FF8541 !important;
   }
 </style>

@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PatternDrops from '../../components/brand/PatternDrops.astro';
+import ModernCTA from '../../components/features/ModernCTA.astro';
+import { u } from '../../utils/url';
+import '../../styles/home.css';
+import '../../styles/inner-pages.css';
 
 const articles = [
   {
@@ -9,8 +12,14 @@ const articles = [
     category: 'Financiamiento',
     date: '14 Septiembre 2026',
     readTime: '5 min de lectura',
-    excerpt: 'Aprende los requisitos bancarios, cómo calcular tu dividendo ideal, consejos para pagar el pie en cuotas y cómo aprovechar el Bono Pie.',
-    image: '/images/ama_interior_living.jpg'
+    excerpt: 'Conoce los requisitos bancarios actuales, cómo calcular tu dividendo ideal, cómo funciona el pago del pie en hasta 60 cuotas y de qué manera aprovechar el Bono Pie del 10%.',
+    image: u('/images/ama_interior_living.jpg'),
+    specs: [
+      { label: 'Categoría', val: 'Financiamiento Hipotecario' },
+      { label: 'Lectura', val: '5 minutos' },
+      { label: 'Enfoque', val: 'Primera vivienda e inversión' },
+      { label: 'Actualización', val: 'Normativa 2026' }
+    ]
   },
   {
     title: 'Plusvalía y conectividad: Por qué La Florida y Quillayes son foco de inversión',
@@ -18,8 +27,14 @@ const articles = [
     category: 'Inversión & Barrios',
     date: '08 Septiembre 2026',
     readTime: '4 min de lectura',
-    excerpt: 'Análisis de rentabilidad por arriendo, consolidación de la Línea 5 del Metro y la transformación urbana del eje Vicuña Mackenna.',
-    image: '/images/ama_quillayes_facade.jpg'
+    excerpt: 'Análisis de rentabilidad por arriendo, consolidación del eje Vicuña Mackenna junto a Metro Línea 4 y proyección de demanda residencial en La Florida.',
+    image: u('/images/ama_quillayes_facade.jpg'),
+    specs: [
+      { label: 'Categoría', val: 'Inversión & Barrios' },
+      { label: 'Lectura', val: '4 minutos' },
+      { label: 'Zona analizada', val: 'Metro Los Quillayes (L4)' },
+      { label: 'Indicador clave', val: 'Cap Rate 6,8% – 7,4%' }
+    ]
   },
   {
     title: 'Checklist de recepción y garantías: Qué revisar al momento de la entrega',
@@ -27,64 +42,180 @@ const articles = [
     category: 'Guía del Comprador',
     date: '28 Agosto 2026',
     readTime: '6 min de lectura',
-    excerpt: 'Todo lo que necesitas saber sobre el acta de recepción conforme, los plazos de garantía legal y cómo solicitar soporte a postventa.',
-    image: '/images/ama_amenity_rooftop.jpg'
+    excerpt: 'Todo lo que debes considerar en el recorrido de inspección técnica, los plazos de garantía legal de 3, 5 y 10 años y cómo activar el acompañamiento de postventa.',
+    image: u('/images/ama_amenity_rooftop.jpg'),
+    specs: [
+      { label: 'Categoría', val: 'Guía del Comprador' },
+      { label: 'Lectura', val: '6 minutos' },
+      { label: 'Marco legal', val: 'Ley de Calidad N° 20.016' },
+      { label: 'Cobertura', val: '3, 5 y 10 años' }
+    ]
   }
 ];
 
-const categories = ['Todas las categorías', 'Financiamiento', 'Inversión & Barrios', 'Guía del Comprador'];
+const categories = ['Todas las publicaciones', 'Financiamiento', 'Inversión & Barrios', 'Guía del Comprador'];
+const featured = articles[0];
 ---
 
 <BaseLayout 
   title="Blog y Centro de Contenido | AMA Inmobiliaria"
-  description="Artículos, guías y consejos inmobiliarios para comprar, invertir y financiar tu departamento en Santiago con total seguridad."
+  description="Artículos, guías y análisis inmobiliario para comprar, invertir y financiar tu departamento en Santiago con claridad y respaldo."
 >
-  <section class="page-hero section-petrol">
-    <PatternDrops color="#1AA6B7" opacity={0.06} />
-    <div class="container relative-z text-center">
-      <span class="badge badge-cyan">Centro de Conocimiento</span>
-      <h1 class="page-title">Blog Inmobiliario & Asesoría</h1>
-      <p class="page-subtitle">
-        Información clara y transparente para tomar las mejores decisiones de compra, financiamiento e inversión en Chile.
-      </p>
+  <!-- 1. HERO CINEMATOGRÁFICO -->
+  <section class="aurvix-hero ip-hero">
+    <div class="hero-card-banner">
+      <div class="hero-slideshow">
+        <div class="hero-slide active" style={`background-image: url(${u('/images/ama_amenity_rooftop.jpg')});`}></div>
+      </div>
+
+      <div class="hero-overlay-gradient"></div>
+
+      <div class="container hero-banner-content">
+        <div class="hero-text-row">
+          <div class="hero-headline-col">
+            <h1 class="hero-title-aurvix">
+              GUÍAS Y ANÁLISIS PARA<br />
+              DECIDIR CON CERTEZA
+            </h1>
+            <p class="hero-sub-aurvix">
+              Contenido editorial claro sobre financiamiento hipotecario, rentabilidad por barrios y consejos prácticos para elegir y habitar tu próximo departamento.
+            </p>
+
+            <div class="hero-actions-row">
+              <a href="#articulos-blog" class="btn-hero-primary">
+                <span>Explorar Publicaciones</span>
+                <span class="btn-arrow">↗</span>
+              </a>
+              <button
+                type="button"
+                class="btn-hero-secondary"
+                onclick="window.openCotizadorModal && window.openCotizadorModal()"
+              >
+                <span>Simular Financiamiento</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="ip-glass-bar">
+          <div class="ip-glass-chip">
+            <span class="ip-glass-val">Financiamiento</span>
+            <span class="ip-glass-txt">Pie en cuotas y crédito</span>
+          </div>
+          <div class="ip-glass-div"></div>
+          <div class="ip-glass-chip">
+            <span class="ip-glass-val">Barrios</span>
+            <span class="ip-glass-txt">Plusvalía y conectividad L4</span>
+          </div>
+          <div class="ip-glass-div"></div>
+          <div class="ip-glass-chip">
+            <span class="ip-glass-val">Propietarios</span>
+            <span class="ip-glass-txt">Recepción y garantías legales</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="section section-cream">
+  <!-- 2. ARTÍCULO DESTACADO (UNIFIED SPLIT CARD) + COLECCIÓN DE GUÍAS -->
+  <section class="ip-section is-canvas" id="articulos-blog">
     <div class="container">
-      <!-- Filtros por categoría -->
-      <div class="categories-bar">
-        {categories.map((cat, i) => (
-          <button 
-            type="button" 
-            class={`category-btn ${i === 0 ? 'active' : ''}`}
-          >
-            {cat}
-          </button>
-        ))}
+      <div class="ip-head">
+        <h2 class="ip-title">Lectura destacada de la semana</h2>
+        <p class="ip-desc">
+          Herramientas prácticas preparadas por nuestro equipo inmobiliario y financiero.
+        </p>
       </div>
 
-      <!-- Grilla de Artículos -->
-      <div class="articles-grid">
+      <!-- Split Card de Lectura Principal -->
+      <div class="ip-split" style="margin-bottom: 4.5rem;">
+        <div class="ip-split-media">
+          <img src={featured.image} alt={featured.title} />
+        </div>
+
+        <div class="ip-split-info">
+          <div>
+            <span class="ip-kicker">{featured.category} · {featured.readTime}</span>
+            <h3 class="ip-card-title">{featured.title}</h3>
+            <p class="ip-card-text">{featured.excerpt}</p>
+
+            <div class="ip-specs">
+              {featured.specs.map((sp) => (
+                <div class="ip-spec">
+                  <div class="ip-spec-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <div class="ip-spec-info">
+                    <span class="ip-spec-label">{sp.label}</span>
+                    <strong class="ip-spec-val">{sp.val}</strong>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="ip-card-footer">
+            <div>
+              <span class="ip-footer-label">Publicado el</span>
+              <div class="ip-footer-value" style="font-size: 1.15rem;">{featured.date}</div>
+            </div>
+
+            <div class="ip-actions">
+              <a href={u(`/blog/${featured.slug}`)} class="btn-aurvix-dark">
+                <span>Leer Guía Completa</span>
+                <span class="arrow">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Encabezado y Filtro de Categorías -->
+      <div class="ip-head">
+        <h2 class="ip-title">Todas nuestras publicaciones</h2>
+        <p class="ip-desc">
+          Filtra por temática para profundizar en cada etapa de tu decisión inmobiliaria.
+        </p>
+      </div>
+
+      <div class="ip-tabs-bar">
+        <div class="ip-tabs-pill" role="tablist" aria-label="Categorías del blog">
+          {categories.map((cat, idx) => (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={idx === 0 ? 'true' : 'false'}
+              class={`ip-tab-btn ${idx === 0 ? 'active' : ''}`}
+              data-blog-cat={cat}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Grilla Editorial de Artículos -->
+      <div class="ip-blog-grid">
         {articles.map((art) => (
-          <article class="article-card card">
-            <a href={`/blog/${art.slug}`} class="art-img-wrap">
-              <img src={art.image} alt={art.title} class="art-img" />
-              <span class="badge badge-cyan art-cat-badge">{art.category}</span>
-            </a>
-            <div class="art-body">
-              <div class="art-meta">
-                <span>{art.date}</span>
-                <span class="dot">•</span>
+          <article class="ip-blog-card" data-article-cat={art.category}>
+            <div class="ip-blog-media">
+              <img src={art.image} alt={art.title} />
+            </div>
+            <div class="ip-blog-body">
+              <div class="ip-blog-meta">
+                <span style="color: #1AA6B7; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;">{art.category}</span>
+                <span>·</span>
                 <span>{art.readTime}</span>
               </div>
-              <h2 class="art-title">
-                <a href={`/blog/${art.slug}`}>{art.title}</a>
-              </h2>
-              <p class="art-excerpt">{art.excerpt}</p>
-              <div class="art-footer">
-                <a href={`/blog/${art.slug}`} class="read-more-link">
-                  Leer artículo completo →
+              <h3 class="ip-blog-title">
+                <a href={u(`/blog/${art.slug}`)}>{art.title}</a>
+              </h3>
+              <p class="ip-blog-excerpt">{art.excerpt}</p>
+              <div class="ip-blog-footer">
+                <span style="font-size: 0.8rem; color: #64748B; font-weight: 600;">{art.date}</span>
+                <a href={u(`/blog/${art.slug}`)} class="ip-blog-link">
+                  <span>Leer artículo</span>
+                  <span>↗</span>
                 </a>
               </div>
             </div>
@@ -93,153 +224,35 @@ const categories = ['Todas las categorías', 'Financiamiento', 'Inversión & Bar
       </div>
     </div>
   </section>
+
+  <!-- 3. BANNER CTA -->
+  <ModernCTA />
 </BaseLayout>
 
-<style>
-  .page-hero {
-    position: relative;
-    padding: 5.5rem 0 5rem;
-  }
+<script>
+  const catBtns = document.querySelectorAll('[data-blog-cat]');
+  const cards = document.querySelectorAll('[data-article-cat]');
 
-  .relative-z {
-    position: relative;
-    z-index: 2;
-  }
+  catBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const selected = btn.getAttribute('data-blog-cat');
 
-  .page-title {
-    color: var(--color-cream);
-    margin: 0.8rem 0;
-  }
+      catBtns.forEach((b) => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
 
-  .page-subtitle {
-    max-width: 720px;
-    margin: 0 auto;
-    color: var(--text-on-dark-muted);
-    font-size: 1.15rem;
-  }
-
-  .categories-bar {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
-    justify-content: center;
-  }
-
-  .category-btn {
-    padding: 0.6rem 1.25rem;
-    border-radius: var(--radius-full);
-    font-size: 0.9rem;
-    font-weight: var(--font-weight-semibold);
-    background: #FFFFFF;
-    color: var(--color-petrol);
-    border: 1px solid var(--border-medium);
-    transition: all var(--transition-fast);
-  }
-
-  .category-btn.active, .category-btn:hover {
-    background: var(--color-petrol);
-    color: var(--color-cream);
-    border-color: var(--color-petrol);
-  }
-
-  .articles-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
-  }
-
-  .article-card {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .art-img-wrap {
-    position: relative;
-    height: 220px;
-    overflow: hidden;
-    display: block;
-  }
-
-  .art-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-
-  .article-card:hover .art-img {
-    transform: scale(1.05);
-  }
-
-  .art-cat-badge {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-  }
-
-  .art-body {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
-
-  .art-meta {
-    display: flex;
-    gap: 0.5rem;
-    font-size: 0.82rem;
-    color: var(--text-soft);
-    margin-bottom: 0.75rem;
-  }
-
-  .art-title {
-    font-size: 1.35rem;
-    line-height: 1.35;
-    margin-bottom: 0.85rem;
-    font-weight: var(--font-weight-black);
-  }
-
-  .art-title a:hover {
-    color: var(--color-cyan);
-  }
-
-  .art-excerpt {
-    font-size: 0.92rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-  }
-
-  .art-footer {
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border-subtle);
-  }
-
-  .read-more-link {
-    font-size: 0.92rem;
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-cyan);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .read-more-link:hover {
-    color: var(--color-petrol);
-    transform: translateX(4px);
-  }
-
-  @media (max-width: 1024px) {
-    .articles-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 640px) {
-    .articles-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
+      cards.forEach((card) => {
+        const el = card as HTMLElement;
+        const cat = el.getAttribute('data-article-cat');
+        if (!selected || selected === 'Todas las publicaciones' || cat === selected) {
+          el.style.display = 'flex';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

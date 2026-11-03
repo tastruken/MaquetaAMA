@@ -510,7 +510,7 @@
 /* Proyectos destacados (Home) */
 .featured-projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 440px));
+  grid-template-columns: 1fr;
   gap: 2rem;
 }
 

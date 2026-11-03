@@ -2,54 +2,93 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Cotizador from '../../components/features/Cotizador.astro';
 import SpacesShowcase from '../../components/features/SpacesShowcase.astro';
-import PurchaseProcess from '../../components/features/PurchaseProcess.astro';
 import ModernCTA from '../../components/features/ModernCTA.astro';
+import AdvisorQuoteCTA from '../../components/features/AdvisorQuoteCTA.astro';
 import PatternLoops from '../../components/brand/PatternLoops.astro';
 import { u } from '../../utils/url';
 import '../../styles/home.css';
 
 const typologies = [
   {
+    id: '1d-1b',
     name: 'Modelo 1D + 1B',
     surface: '34,5 a 38,2 m²',
+    bedrooms: '1 Dormitorio',
+    bathrooms: '1 Baño Suite',
+    terrace: 'Balcón Continuo',
     desc: 'Distribución abierta, cocina americana con cubierta de cuarzo y balcón continuo con vista despejada.',
     price: 'Desde 2.540 UF',
-    tags: ['Ideal Inversionista', 'Renta Alta']
+    tags: ['Ideal Inversionista', 'Renta Alta'],
+    planImage: u('/images/plano_mockup_1d1b.jpg')
   },
   {
+    id: '2d-1b',
     name: 'Modelo 2D + 1B',
     surface: '46,0 a 52,4 m²',
+    bedrooms: '2 Dormitorios',
+    bathrooms: '1 Baño Completo',
+    terrace: 'Terraza Integrada',
     desc: 'Dormitorio principal amplio, segundo dormitorio para oficina o visita, clóset mural y conexión para lavadora.',
     price: 'Desde 3.190 UF',
-    tags: ['Primera Vivienda']
+    tags: ['Primera Vivienda'],
+    planImage: u('/images/plano_mockup_2d1b.jpg')
   },
   {
+    id: '2d-2b-mariposa',
     name: 'Modelo 2D + 2B Mariposa',
     surface: '58,0 a 64,8 m²',
+    bedrooms: '2 Suites Indep.',
+    bathrooms: '2 Baños en Suite',
+    terrace: 'Terraza Panorámica',
     desc: 'Estilo mariposa: 2 suites independientes a cada costado del living central, otorgando máxima privacidad.',
     price: 'Desde 3.750 UF',
-    tags: ['Más Vendido', 'Máxima Privacidad']
+    tags: ['Más Vendido', 'Máxima Privacidad'],
+    planImage: u('/images/plano_mockup_2d2b.jpg')
   },
   {
+    id: '3d-2b-familiar',
     name: 'Modelo 3D + 2B Familiar',
     surface: '70,5 a 76,2 m²',
+    bedrooms: '3 Dormitorios',
+    bathrooms: '2 Baños (1 Suite)',
+    terrace: 'Amplia Terraza',
     desc: 'Espacios generosos para familias, suite con walk-in clóset, logia y amplia terraza para compartir.',
     price: 'Desde 4.490 UF',
-    tags: ['Familiar', 'Terraza Amplia']
+    tags: ['Familiar', 'Terraza Amplia'],
+    planImage: u('/images/plano_mockup_3d2b.jpg')
   }
 ];
 
-const amenities = [
-  { name: 'Piscina', desc: 'Ubicada en la azotea con vista panorámica a la Cordillera de Los Andes.' },
-  { name: 'Salón Cowork', desc: 'Espacio de trabajo colaborativo equipado con fibra óptica y salas de reuniones.' },
-  { name: 'Salón Gourmet', desc: 'Cocina de chef y comedor equipado para celebraciones privadas y eventos.' },
-  { name: 'Gimnasio', desc: 'Zona cardio, peso libre y espacio para entrenamiento funcional con luz natural.' },
-  { name: 'Zona Pet', desc: 'Espacio exclusivo dedicado al paseo, cuidado y recreación de tus mascotas.' },
-  { name: 'Quinchos', desc: 'Parrillas tipo gourmet con áreas de estar y pérgolas con vista despejada.' },
-  { name: 'Áreas Verdes', desc: 'Jardines sustentables con paisajismo nativo de bajo consumo hídrico y descanso.' },
-  { name: 'Sala Ecommerce', desc: 'Casilleros inteligentes y recepción segura de encomiendas las 24 horas.' },
-  { name: 'Lavandería', desc: 'Central de lavado y secado eficiente de alta capacidad para residentes.' },
-  { name: 'Bicicleteros', desc: 'Estacionamientos protegidos para bicicletas y estación de mantención básica.' }
+const featuredAmenities = [
+  {
+    name: 'Piscina Panorámica',
+    subtitle: 'Azotea con vista despejada a la Cordillera',
+    image: '/images/ama_amenity_rooftop.jpg'
+  },
+  {
+    name: 'Quinchos Gourmet',
+    subtitle: 'Parrillas equipadas y pérgola en altura',
+    image: '/images/ama_quinchos_rooftop_quillayes.jpg'
+  },
+  {
+    name: 'Gimnasio Equipado',
+    subtitle: 'Zona cardio, peso libre y entrenamiento funcional',
+    image: '/images/ama_gimnasio_quillayes.jpg'
+  },
+  {
+    name: 'Salón Cowork & Gourmet',
+    subtitle: 'Wi-Fi de alta velocidad y salón para eventos',
+    image: '/images/ama_piloto_cocina_quillayes.jpg'
+  }
+];
+
+const extraAmenities = [
+  { icon: 'pet', name: 'Zona Pet', sub: 'Recreación y paseo' },
+  { icon: 'nature', name: 'Áreas Verdes', sub: 'Paisajismo nativo' },
+  { icon: 'ecommerce', name: 'Sala Ecommerce', sub: 'Recepción 24/7' },
+  { icon: 'laundry', name: 'Lavandería', sub: 'Alta capacidad' },
+  { icon: 'bike', name: 'Bicicleteros', sub: 'Custodia segura' },
+  { icon: 'shield', name: 'Accesos 24/7', sub: 'Control inteligente' }
 ];
 
 const locationPoints = [
@@ -183,10 +222,8 @@ const galleryImages = [
       <div class="hero-overlay-gradient"></div>
 
       <div class="container hero-banner-content">
-        <div class="hero-text-row">
+        <div class="hero-text-row hero-split-layout">
           <div class="hero-headline-col">
-
-
             <h1 class="hero-title-aurvix">
               EDIFICIO AMA QUILLAYES®<br />
               DONDE TODO ENCAJA
@@ -214,34 +251,62 @@ const galleryImages = [
               </a>
             </div>
           </div>
-        </div>
 
-        <!-- Barra Frosted Glass de Especificaciones Clave del Proyecto -->
-        <div class="hero-specs-glass-bar">
-          <div class="glass-spec-item">
-            <span class="glass-spec-label">Precios</span>
-            <strong class="glass-spec-val">Desde 2.540 UF</strong>
-          </div>
-          <div class="glass-div"></div>
-          <div class="glass-spec-item">
-            <span class="glass-spec-label">Tipologías</span>
-            <strong class="glass-spec-val">1 y 2 Dorms</strong>
-          </div>
-          <div class="glass-div"></div>
-          <div class="glass-spec-item">
-            <span class="glass-spec-label">Superficie</span>
-            <strong class="glass-spec-val">34 a 60 m²</strong>
-          </div>
-          <div class="glass-div"></div>
-          <div class="glass-spec-item">
-            <span class="glass-spec-label">Ubicación</span>
-            <strong class="glass-spec-val">Metro Quillayes (6 min)</strong>
-          </div>
-          <div class="glass-div"></div>
-          <div class="glass-spec-item highlight">
-            <span class="glass-spec-label">Entrega Estimada</span>
-            <strong class="glass-spec-val">2do Semestre 2028</strong>
-          </div>
+          <!-- Tarjeta Derecha de Información Clave (Estilo AMA) -->
+          <aside class="hero-key-info-card" aria-label="Información clave del proyecto">
+            <p class="hkc-header">
+              Accede a la <strong>información clave</strong><br />
+              con uno de nuestros ejecutivos
+            </p>
+
+            <div class="hkc-pills-grid">
+              <div class="hkc-pill">
+                <span class="hkc-pill-label">Precios</span>
+                <strong class="hkc-pill-val">Desde 2.540 UF</strong>
+              </div>
+
+              <div class="hkc-pill">
+                <span class="hkc-pill-label">Tipologías</span>
+                <strong class="hkc-pill-val">1 y 2 Dorms</strong>
+              </div>
+
+              <div class="hkc-pill">
+                <span class="hkc-pill-label">Superficie</span>
+                <strong class="hkc-pill-val">34 a 60 m²</strong>
+              </div>
+
+              <div class="hkc-pill">
+                <span class="hkc-pill-label">Ubicación</span>
+                <strong class="hkc-pill-val">Metro Quillayes (6 min)</strong>
+              </div>
+
+              <div class="hkc-pill hkc-pill-full">
+                <span class="hkc-pill-label">Entrega Estimada</span>
+                <strong class="hkc-pill-val">2do Semestre 2028 · Venta en Verde</strong>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="hkc-cta-btn"
+              onclick="window.openCotizadorModal && window.openCotizadorModal()"
+            >
+              COTIZAR PROYECTO
+            </button>
+
+            <a
+              href="#cotizador-quillayes"
+              class="hkc-brochure-link"
+              onclick="window.openCotizadorModal && window.openCotizadorModal(); return false;"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Descargar Brochure Oficial (PDF)</span>
+            </a>
+          </aside>
         </div>
       </div>
 
@@ -254,19 +319,26 @@ const galleryImages = [
     </div>
   </section>
 
-  <!-- BREADCRUMBS & TOP BAR (SECCIÓN BAJADA TRAS EL HERO) -->
-  <div class="top-nav-bar">
-    <div class="container breadcrumbs-container">
-      <nav aria-label="Migas de pan" class="breadcrumbs">
-        <a href={u('/')}>Inicio</a>
-        <span class="sep">/</span>
-        <a href={u('/proyectos')}>Proyectos</a>
-        <span class="sep">/</span>
-        <span class="current">AMA Quillayes</span>
-      </nav>
-      <div class="top-status">
-        <span class="badge badge-cyan">Venta en Verde</span>
-        <span class="badge badge-coral">Pie en hasta 60 cuotas</span>
+  <!-- BARRA DE MÉTRICAS QUE COMPLETA EL HERO -->
+  <div class="hero-metrics-bar">
+    <div class="container">
+      <div class="hero-metrics-grid">
+        <div class="h-metric-item">
+          <strong class="h-metric-num">+12</strong>
+          <span class="h-metric-label">Años de Trayectoria</span>
+        </div>
+        <div class="h-metric-item">
+          <strong class="h-metric-num">+1.850</strong>
+          <span class="h-metric-label">Familias en su Hogar</span>
+        </div>
+        <div class="h-metric-item">
+          <strong class="h-metric-num">60</strong>
+          <span class="h-metric-label">Cuotas Pie sin Interés</span>
+        </div>
+        <div class="h-metric-item">
+          <strong class="h-metric-num">4.9</strong>
+          <span class="h-metric-label">Calificación Promedio</span>
+        </div>
       </div>
     </div>
   </div>
@@ -282,7 +354,30 @@ const galleryImages = [
         </p>
       </div>
 
-      <!-- BANNER FIJO DE ESPECIFICACIONES CON ALTO CONTRASTE (VISIBLE SIN SCROLL) -->
+      <div class="project-gallery-grid">
+        <div class="gallery-main-img">
+          <img 
+            src={u('/images/ama_quillayes_facade.jpg')} 
+            alt="Fachada Edificio AMA Quillayes en La Florida"
+          />
+        </div>
+        <div class="gallery-side-imgs">
+          <div class="side-img-item">
+            <img 
+              src={u('/images/ama_interior_living.jpg')} 
+              alt="Living comedor departamento piloto"
+            />
+          </div>
+          <div class="side-img-item">
+            <img 
+              src={u('/images/ama_amenity_rooftop.jpg')} 
+              alt="Piscina y terraza en azotea"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- BANNER DE ESPECIFICACIONES CON ALTO CONTRASTE (DEBAJO DE LAS IMÁGENES) -->
       <div class="specs-hero-bar" id="specs-banner">
         <div class="spec-pill">
           <span class="p-label">Precios</span>
@@ -305,93 +400,140 @@ const galleryImages = [
           <strong class="p-val">2do Semestre 2028</strong>
         </div>
       </div>
-
-      <div class="project-gallery-grid">
-        <div class="gallery-main-img">
-          <img 
-            src={u('/images/ama_quillayes_facade.jpg')} 
-            alt="Fachada Edificio AMA Quillayes en La Florida"
-          />
-          <span class="img-caption">Fachada Exterior</span>
-        </div>
-        <div class="gallery-side-imgs">
-          <div class="side-img-item">
-            <img 
-              src={u('/images/ama_interior_living.jpg')} 
-              alt="Living comedor departamento piloto"
-            />
-            <span class="img-caption">Terrazas a lo Ancho</span>
-          </div>
-          <div class="side-img-item">
-            <img 
-              src={u('/images/ama_amenity_rooftop.jpg')} 
-              alt="Piscina y terraza en azotea"
-            />
-            <span class="img-caption">Espacios comunes para tu día a día</span>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- HIGHLIGHTS TÉCNICOS -->
-  <section class="section section-cream">
+  <!-- TIPOLOGÍAS Y DISTRIBUCIONES (CUADRO UNIFICADO CON FILTRO Y MOCKUP DE PLANO) -->
+  <section class="section section-cream" id="tipologias">
     <div class="container">
-      <!-- 4 MÉTRICAS DE RESPALDO Y TRAYECTORIA AMA QUILLAYES -->
-      <div class="quillayes-metrics-row">
-        <div class="q-metric-item">
-          <strong class="q-metric-num">+12</strong>
-          <span class="q-metric-label">Años de Trayectoria</span>
-        </div>
-        <div class="q-metric-item">
-          <strong class="q-metric-num">+1.850</strong>
-          <span class="q-metric-label">Familias en su Hogar</span>
-        </div>
-        <div class="q-metric-item">
-          <strong class="q-metric-num">60</strong>
-          <span class="q-metric-label">Cuotas Pie sin Interés</span>
-        </div>
-        <div class="q-metric-item">
-          <strong class="q-metric-num">4.9</strong>
-          <span class="q-metric-label">Calificación Promedio</span>
-        </div>
-      </div>
-
-      <!-- TIPOLOGÍAS -->
-      <div class="section-header" style="margin-top: 3.5rem;">
-
+      <div class="section-header text-center">
         <h2 class="section-title">Encuentra la distribución ideal</h2>
         <p class="section-desc">Diseños optimizados al milímetro para otorgar máxima amplitud y confort térmico.</p>
       </div>
 
-      <div class="typologies-grid">
-        {typologies.map((t) => (
-          <div class="typology-card card">
-            <div class="t-header">
-              <div class="t-tags">
-                {t.tags.map((tag) => (
-                  <span class="badge badge-cyan">{tag}</span>
-                ))}
+      <!-- Barra de Pestañas / Filtro de Modelos -->
+      <div class="tu-tabs-bar" role="tablist" aria-label="Seleccionar modelo de departamento">
+        <div class="tu-tabs-pill">
+          {typologies.map((t, index) => (
+            <button
+              type="button"
+              role="tab"
+              class={`tu-tab-btn ${index === 0 ? 'active' : ''}`}
+              data-tu-index={index}
+              aria-selected={index === 0 ? 'true' : 'false'}
+            >
+              {t.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Cuadro Único Unificado (Plano Mockup + Información del Modelo) -->
+      <div class="tu-unified-card">
+        <!-- Columna Izquierda: Foto Simple de Mockup del Plano -->
+        <div class="tu-media-col">
+          <div class="tu-img-wrap">
+            <img
+              id="tu-display-img"
+              src={typologies[0].planImage}
+              alt={`Plano arquitectónico ${typologies[0].name}`}
+              class="tu-plan-img"
+            />
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Información del Modelo Seleccionado -->
+        <div class="tu-info-col">
+          <div class="tu-info-top">
+            <h3 class="tu-title" id="tu-item-title">{typologies[0].name}</h3>
+            <p class="tu-desc" id="tu-item-desc">{typologies[0].desc}</p>
+
+            <!-- Ficha Iconográfica del Modelo -->
+            <div class="tu-specs-grid">
+              <div class="tu-spec-box">
+                <div class="tu-spec-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 4v16"/>
+                    <path d="M2 8h18a2 2 0 0 1 2 2v10"/>
+                    <path d="M2 17h20"/>
+                    <path d="M6 8v9"/>
+                  </svg>
+                </div>
+                <div class="tu-spec-info">
+                  <span class="tu-spec-label">Habitaciones</span>
+                  <strong class="tu-spec-val" id="tu-spec-beds">{typologies[0].bedrooms}</strong>
+                </div>
               </div>
-              <h3 class="t-title">{t.name}</h3>
-              <span class="t-surface">Superficie: <strong>{t.surface}</strong></span>
-            </div>
-            <p class="t-desc">{t.desc}</p>
-            <div class="t-footer">
-              <div class="t-price">
-                <span class="t-price-label">Valor referencial</span>
-                <strong class="t-price-val">{t.price}</strong>
+
+              <div class="tu-spec-box">
+                <div class="tu-spec-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/>
+                    <line x1="10" x2="8" y1="5" y2="7"/>
+                    <line x1="2" x2="22" y1="12" y2="12"/>
+                    <line x1="7" x2="7" y1="19" y2="21"/>
+                    <line x1="17" x2="17" y1="19" y2="21"/>
+                  </svg>
+                </div>
+                <div class="tu-spec-info">
+                  <span class="tu-spec-label">Baños</span>
+                  <strong class="tu-spec-val" id="tu-spec-baths">{typologies[0].bathrooms}</strong>
+                </div>
               </div>
-              <button 
-                type="button" 
-                class="btn btn-cyan btn-sm"
-                onclick="window.openCotizadorModal && window.openCotizadorModal()"
-              >
-                Cotizar Modelo
-              </button>
+
+              <div class="tu-spec-box">
+                <div class="tu-spec-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 3H3v18h18V3z"/>
+                    <path d="M9 3v18"/>
+                    <path d="M3 9h6"/>
+                    <path d="M15 3v6h6"/>
+                  </svg>
+                </div>
+                <div class="tu-spec-info">
+                  <span class="tu-spec-label">Superficie Total</span>
+                  <strong class="tu-spec-val" id="tu-item-surface">{typologies[0].surface}</strong>
+                </div>
+              </div>
+
+              <div class="tu-spec-box">
+                <div class="tu-spec-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2"/>
+                    <path d="M12 20v2"/>
+                    <path d="m4.93 4.93 1.41 1.41"/>
+                    <path d="m17.66 17.66 1.41 1.41"/>
+                    <path d="M2 12h2"/>
+                    <path d="M20 12h2"/>
+                    <path d="m6.34 17.66-1.41 1.41"/>
+                    <path d="m19.07 4.93-1.41 1.41"/>
+                  </svg>
+                </div>
+                <div class="tu-spec-info">
+                  <span class="tu-spec-label">Exterior</span>
+                  <strong class="tu-spec-val" id="tu-spec-terrace">{typologies[0].terrace}</strong>
+                </div>
+              </div>
             </div>
           </div>
-        ))}
+
+          <div class="tu-footer">
+            <div class="tu-price">
+              <span class="tu-price-label">Valor referencial</span>
+              <strong class="tu-price-val" id="tu-item-price">{typologies[0].price}</strong>
+            </div>
+
+            <button
+              type="button"
+              class="btn btn-cyan tu-cotizar-btn"
+              onclick="window.openCotizadorModal && window.openCotizadorModal()"
+            >
+              <span>Cotizar Modelo</span>
+              <span class="tu-arrow">↗</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -411,23 +553,75 @@ const galleryImages = [
     </div>
   </section>
 
-  <!-- AMENITIES ESPECÍFICOS DEL PROYECTO (LUEGO DE PLANTAS Y COTIZADOR) -->
+  <!-- AMENITIES ESPECÍFICOS DEL PROYECTO (CON FOTOGRAFÍAS REALES) -->
   <section class="section section-petrol" id="amenities">
     <PatternLoops color="#1AA6B7" opacity={0.05} />
     <div class="container relative-z">
-      <div class="section-header text-center">
-
+      <div class="section-header">
         <h2 class="section-title text-cream">Amenities pensados para tu día a día</h2>
         <p class="section-desc text-muted-cream">
           Instalaciones de primer nivel administradas con eficiencia para mantener bajos los gastos comunes.
         </p>
       </div>
 
-      <div class="amenities-grid">
-        {amenities.map((a) => (
-          <div class="amenity-item card card-dark">
-            <h4 class="amenity-name">{a.name}</h4>
-            <p class="amenity-desc">{a.desc}</p>
+      <!-- 4 Tarjetas Fotográficas Principales -->
+      <div class="amenities-photo-grid">
+        {featuredAmenities.map((item) => (
+          <article class="amenity-photo-card">
+            <img src={u(item.image)} alt={item.name} loading="lazy" class="amenity-photo-img" />
+            <div class="amenity-photo-overlay">
+              <h3 class="amenity-photo-title">{item.name}</h3>
+              <p class="amenity-photo-sub">{item.subtitle}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Barra Inferior Unificada de Equipamiento Complementario -->
+      <div class="amenities-extra-bar">
+        {extraAmenities.map((item) => (
+          <div class="extra-bar-col">
+            <span class="extra-bar-icon" aria-hidden="true">
+              {item.icon === 'pet' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/>
+                  <path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/>
+                </svg>
+              )}
+              {item.icon === 'nature' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                  <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                </svg>
+              )}
+              {item.icon === 'ecommerce' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+                  <path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>
+                </svg>
+              )}
+              {item.icon === 'laundry' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="18" height="20" x="3" y="2" rx="2"/><circle cx="12" cy="13" r="5"/>
+                  <line x1="7" x2="7.01" y1="6" y2="6"/><line x1="10" x2="10.01" y1="6" y2="6"/>
+                </svg>
+              )}
+              {item.icon === 'bike' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/>
+                  <path d="M12 17.5V14l-3-3 4-3 2 3h2"/>
+                </svg>
+              )}
+              {item.icon === 'shield' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              )}
+            </span>
+            <div class="extra-bar-text">
+              <strong class="extra-bar-name">{item.name}</strong>
+              <span class="extra-bar-sub">{item.sub}</span>
+            </div>
           </div>
         ))}
       </div>
@@ -437,149 +631,8 @@ const galleryImages = [
   <!-- ESPACIOS Y TERMINACIONES INTERACTIVO (Showcase por Tabs) -->
   <SpacesShowcase />
 
-  <!-- PROCESO DE COMPRA EN 4 PASOS -->
-  <PurchaseProcess />
-
-  <!-- UBICACIÓN DEL PROYECTO (ESTILO CLARO, BENTO Y SOFISTICADO) -->
-  <section class="section section-location-canvas" id="ubicacion">
-    <div class="container">
-      <div class="section-header text-center">
-
-        <h2 class="section-title">Ubicación Estratégica en La Florida</h2>
-        <p class="section-desc">
-          Av. Vicuña Mackenna 11.600, a pasos de la estación Metro Los Quillayes (L4) y con conectividad inmediata a autopistas, servicios y comercio.
-        </p>
-      </div>
-
-      <div class="location-bento-grid">
-        <!-- Columna Izquierda: Master Card de Dirección y Servicios Cercanos -->
-        <div class="location-content-col">
-          <!-- Tarjeta Bento: Dirección y Acciones -->
-          <div class="location-bento-card address-bento">
-            <div class="address-bento-top">
-              <div class="address-icon-badge" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-              <div class="address-meta-info">
-                <span class="address-kicker">Sala de Ventas & Piloto en Terreno</span>
-                <h3 class="address-main-title">Av. Vicuña Mackenna 11.600</h3>
-                <p class="address-sub-text">La Florida, Santiago · A 6 min a pie de Metro Los Quillayes</p>
-              </div>
-            </div>
-
-            <div class="address-actions-bar">
-              <a 
-                href="https://maps.google.com/?q=Av.+Vicu%C3%B1a+Mackenna+11600,+La+Florida,+Regi%C3%B3n+Metropolitana" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="btn-address-primary"
-              >
-                <span>Cómo Llegar en Maps</span>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-              </a>
-              <button 
-                type="button" 
-                class="btn-address-secondary copy-address-btn" 
-                id="copy-address-trigger"
-                title="Copiar dirección al portapapeles"
-              >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-                <span id="copy-text">Copiar Dirección</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Tarjeta Bento: Servicios y Puntos Cercanos -->
-          <div class="location-bento-card services-bento">
-            <div class="services-bento-header">
-              <h4 class="services-bento-title">Servicios Esenciales y Conectividad</h4>
-              <span class="services-bento-sub">Tiempos reales de traslado caminando y en vehículo</span>
-            </div>
-
-            <div class="services-cards-grid">
-              {locationPoints.map((pt) => (
-                <div class={`service-item-tile ${pt.highlight ? 'tile-highlight' : ''}`}>
-                  <div class="service-tile-top">
-                    <div class="service-cat-wrap">
-                      <span class="service-icon-pill" aria-hidden="true">
-                        {pt.icon === 'metro' && (
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="16" rx="2"></rect><path d="M4 11h16"></path><path d="M12 3v8"></path><path d="m8 19-2 3"></path><path d="m16 19 2 3"></path><circle cx="8" cy="15" r="1"></circle><circle cx="16" cy="15" r="1"></circle></svg>
-                        )}
-                        {pt.icon === 'car' && (
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path><circle cx="7" cy="17" r="2"></circle><path d="M9 17h6"></path><circle cx="17" cy="17" r="2"></circle></svg>
-                        )}
-                        {pt.icon === 'mall' && (
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-                        )}
-                        {pt.icon === 'hospital' && (
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
-                        )}
-                        {pt.icon === 'education' && (
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-                        )}
-                        {pt.icon === 'nature' && (
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"></path></svg>
-                        )}
-                      </span>
-                      <span class="service-cat-name">{pt.category}</span>
-                    </div>
-                    <span class="service-time-pill">{pt.time}</span>
-                  </div>
-                  <h5 class="service-item-name">{pt.name}</h5>
-                  <span class="service-item-dist">{pt.distance}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <!-- Columna Derecha: Mapa Arquitectónico Integrado -->
-        <div class="location-map-col">
-          <div class="architectural-map-card">
-            <!-- Pin Flotante de Cristal -->
-            <div class="map-floating-pin-card">
-              <div class="map-pulse-dot" aria-hidden="true">
-                <span class="pulse-ring"></span>
-                <span class="pulse-core"></span>
-              </div>
-              <div class="map-pin-info">
-                <strong>Edificio AMA Quillayes</strong>
-                <span>Vicuña Mackenna 11.600 · Metro Quillayes a 450 m</span>
-              </div>
-            </div>
-
-            <!-- Mapa Embebido Limpio -->
-            <iframe 
-              class="architectural-map-iframe"
-              title="Ubicación Edificio AMA Quillayes en Google Maps"
-              src="https://maps.google.com/maps?q=Av.+Vicu%C3%B1a+Mackenna+11600,+La+Florida,+Regi%C3%B3n+Metropolitana&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              loading="lazy"
-              allowfullscreen
-            ></iframe>
-
-            <!-- Badge inferior de respaldo -->
-            <div class="map-floating-bottom-pill">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-              <span>Metro Los Quillayes (L4) a 6 min a pie</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- SECCIÓN DE COTIZACIÓN Y ASESORÍA CON EJECUTIVA COMERCIAL -->
+  <AdvisorQuoteCTA />
 
   <!-- POSTERIOR GALERÍA DE IMÁGENES AL FINAL DE LA PÁGINA (4 COLUMNAS - WIDE) -->
   <section class="section section-petrol" id="galeria">
@@ -632,8 +685,98 @@ const galleryImages = [
     </div>
   </section>
 
-  <!-- BANNER SHOWROOM & ASESORÍA (Cierre de Alta Conversión) -->
-  <ModernCTA />
+  <!-- UBICACIÓN DEL PROYECTO (CUADRO UNIFICADO ESTILO HOME / AURVIX) -->
+  <section class="section section-white" id="ubicacion">
+    <div class="loc-wide-container">
+      <div class="section-header text-center">
+        <h2 class="section-title">Ubicación Estratégica en La Florida</h2>
+        <p class="section-desc">
+          Av. Vicuña Mackenna 11.600, a pasos de la estación Metro Los Quillayes (L4) y con conectividad inmediata a autopistas, servicios y comercio.
+        </p>
+      </div>
+
+      <div class="loc-unified-card">
+        <!-- Columna Izquierda: Mapa Limpio en Marco Redondeado -->
+        <div class="loc-map-col">
+          <div class="loc-map-wrap">
+            <iframe 
+              class="loc-map-iframe"
+              title="Ubicación Edificio AMA Quillayes en Google Maps"
+              src="https://maps.google.com/maps?q=Av.+Vicu%C3%B1a+Mackenna+11600,+La+Florida,+Regi%C3%B3n+Metropolitana&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Dirección, Conectividad sin Cuadros y Acciones -->
+        <div class="loc-info-col">
+          <div class="loc-info-top">
+            <h3 class="loc-title">Av. Vicuña Mackenna 11.600</h3>
+            <p class="loc-desc">
+              Sala de ventas y piloto en terreno en La Florida, a 6 minutos caminando directo de Metro Los Quillayes (Línea 4).
+            </p>
+
+            <!-- Grilla Abierta de Conectividad (Sin cuadros ni bordes, igual a Tipologías) -->
+            <div class="loc-specs-grid">
+              {locationPoints.map((pt) => (
+                <div class="loc-spec-item">
+                  <div class="loc-spec-icon" aria-hidden="true">
+                    {pt.icon === 'metro' && (
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="16" rx="2"></rect><path d="M4 11h16"></path><path d="M12 3v8"></path><path d="m8 19-2 3"></path><path d="m16 19 2 3"></path><circle cx="8" cy="15" r="1"></circle><circle cx="16" cy="15" r="1"></circle></svg>
+                    )}
+                    {pt.icon === 'car' && (
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path><circle cx="7" cy="17" r="2"></circle><path d="M9 17h6"></path><circle cx="17" cy="17" r="2"></circle></svg>
+                    )}
+                    {pt.icon === 'mall' && (
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    )}
+                    {pt.icon === 'hospital' && (
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                    )}
+                    {pt.icon === 'education' && (
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                    )}
+                    {pt.icon === 'nature' && (
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"></path></svg>
+                    )}
+                  </div>
+                  <div class="loc-spec-info">
+                    <span class="loc-spec-label">{pt.category} · {pt.time}</span>
+                    <strong class="loc-spec-val">{pt.name}</strong>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="loc-footer">
+            <a 
+              href="https://maps.google.com/?q=Av.+Vicu%C3%B1a+Mackenna+11600,+La+Florida,+Regi%C3%B3n+Metropolitana" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="btn-address-primary"
+            >
+              <span>Cómo Llegar en Maps</span>
+              <span>↗</span>
+            </a>
+            <button 
+              type="button" 
+              class="btn-address-secondary copy-address-btn" 
+              id="copy-address-trigger"
+              title="Copiar dirección al portapapeles"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span id="copy-text">Copiar Dirección</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- LIGHTBOX MODAL GLOBAL (MINIMALISTA, FINO Y ELEGANTE) -->
   <div class="gallery-lightbox" id="gallery-lightbox" aria-hidden="true" role="dialog" aria-modal="true">
@@ -679,38 +822,225 @@ const galleryImages = [
 </BaseLayout>
 
 <style>
-  .top-nav-bar {
+  /* TARJETA DE INFORMACIÓN CLAVE EN EL HERO (ESTILO AMA) */
+  .hero-split-layout {
+    display: grid;
+    grid-template-columns: 1fr 430px;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .hero-key-info-card {
+    background: #FFFFFF;
+    border-radius: 28px;
+    padding: 2.15rem 1.9rem 1.85rem;
+    box-shadow: 0 24px 60px rgba(0, 15, 26, 0.42);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    display: flex;
+    flex-direction: column;
+    color: #0F172A;
+  }
+
+  .hkc-header {
+    text-align: center;
+    font-size: 1.05rem;
+    line-height: 1.45;
+    color: #334155;
+    margin: 0 0 1.35rem;
+    font-weight: 500;
+  }
+
+  .hkc-header strong {
+    color: #0F172A;
+    font-weight: 800;
+  }
+
+  .hkc-pills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.35rem;
+  }
+
+  .hkc-pill {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.75rem 1.15rem;
+    border-radius: 9999px;
+    border: 1px solid #E2E8F0;
+    background: #FFFFFF;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hkc-pill:hover {
+    border-color: rgba(26, 166, 183, 0.45);
+    box-shadow: 0 4px 12px rgba(26, 166, 183, 0.08);
+  }
+
+  .hkc-pill-full {
+    grid-column: span 2;
+  }
+
+  .hkc-pill-label {
+    font-size: 0.66rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748B;
+    margin-bottom: 0.12rem;
+    line-height: 1.2;
+  }
+
+  .hkc-pill-val {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #0F172A;
+    line-height: 1.25;
+  }
+
+  .hkc-cta-btn {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-radius: 9999px;
+    background: var(--color-petrol, #0F172A);
+    color: #FFFFFF;
+    font-size: 0.86rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.22);
+    transition: all 0.25s ease;
+    margin-bottom: 1rem;
+  }
+
+  .hkc-cta-btn:hover {
+    background: var(--color-cyan, #1AA6B7);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(26, 166, 183, 0.35);
+  }
+
+  .hkc-brochure-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-cyan, #1AA6B7);
+    text-decoration: none;
+    transition: color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .hkc-brochure-link:hover {
+    color: #0F172A;
+  }
+
+  .aurvix-hero .hero-slide-dots {
+    bottom: 2rem;
+    left: max(1.5rem, calc((100vw - 1240px) / 2 + 1.5rem));
+    right: auto;
+  }
+
+  @media (max-width: 1080px) {
+    .hero-split-layout {
+      grid-template-columns: 1fr;
+      gap: 2.25rem;
+    }
+
+    .hero-key-info-card {
+      max-width: 480px;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .hero-key-info-card {
+      padding: 1.6rem 1.25rem;
+      border-radius: 22px;
+    }
+
+    .hkc-pills-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hkc-pill-full {
+      grid-column: span 1;
+    }
+  }
+
+  /* BARRA DE MÉTRICAS QUE COMPLETA EL HERO */
+  .hero-metrics-bar {
     background-color: var(--color-petrol);
-    border-bottom: 1px solid rgba(var(--rgb-cream), 0.1);
-    padding: 0.85rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 1.35rem 0;
+    width: 100%;
+    position: relative;
+    z-index: 10;
   }
 
-  .breadcrumbs-container {
-    display: flex;
-    justify-content: space-between;
+  .hero-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
   }
 
-  .breadcrumbs {
+  .h-metric-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
+    text-align: center;
+    padding: 0.35rem 1rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .h-metric-item:last-child {
+    border-right: none;
+  }
+
+  .h-metric-num {
+    font-size: clamp(1.85rem, 2.3vw, 2.5rem);
+    font-weight: 800;
+    color: #FFFFFF;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .h-metric-label {
     font-size: 0.88rem;
-    color: var(--text-on-dark-muted);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    margin-top: 0.25rem;
+    letter-spacing: 0.01em;
   }
 
-  .breadcrumbs a:hover {
-    color: var(--color-cyan);
+  @media (max-width: 900px) {
+    .hero-metrics-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem 0;
+    }
+    .h-metric-item:nth-child(2) {
+      border-right: none;
+    }
   }
 
-  .breadcrumbs .current {
-    color: var(--color-cream);
-    font-weight: var(--font-weight-semibold);
-  }
-
-  .top-status {
-    display: flex;
-    gap: 0.5rem;
+  @media (max-width: 540px) {
+    .hero-metrics-grid {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .h-metric-item {
+      border-right: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 1rem;
+    }
+    .h-metric-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
   }
 
   .project-hero-section {
@@ -731,7 +1061,7 @@ const galleryImages = [
     color: var(--text-muted);
   }
 
-  /* BANNER FIJO / DESTACADO DE ESPECIFICACIONES CON ALTO CONTRASTE */
+  /* BANNER DE ESPECIFICACIONES CON ALTO CONTRASTE (DEBAJO DE LAS IMÁGENES) */
   .specs-hero-bar {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -740,11 +1070,9 @@ const galleryImages = [
     box-shadow: 0 14px 34px rgba(0, 34, 48, 0.22), 0 0 24px rgba(26, 166, 183, 0.14);
     border: 1px solid rgba(26, 166, 183, 0.5);
     padding: 1.35rem 1.75rem;
-    margin-bottom: 2rem;
-    position: sticky;
-    top: 5.4rem;
-    z-index: 80;
-    backdrop-filter: blur(12px);
+    margin-top: 2rem;
+    position: relative;
+    z-index: 10;
   }
 
   .specs-hero-bar .spec-pill {
@@ -840,114 +1168,245 @@ const galleryImages = [
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 
-  /* MÉTRICAS DE RESPALDO QUILLAYES */
-  .quillayes-metrics-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    background: #FFFFFF;
-    border-radius: var(--radius-lg);
-    padding: 2.2rem 2.5rem;
-    border: 1px solid var(--border-subtle);
-    box-shadow: var(--shadow-sm);
-    margin-top: 0;
-    text-align: center;
+
+
+  /* ========================================================
+     TIPOLOGÍAS Y DISTRIBUCIONES (CUADRO UNIFICADO CON FILTRO)
+     ======================================================== */
+  .tu-tabs-bar {
+    display: flex;
+    justify-content: center;
+    margin: 2.25rem 0 2.75rem;
   }
 
-  .q-metric-item {
+  .tu-tabs-pill {
+    display: inline-flex;
+    align-items: center;
+    background: #F1F5F9;
+    padding: 0.35rem;
+    border-radius: 9999px;
+    gap: 0.3rem;
+    max-width: 100%;
+    overflow-x: auto;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .tu-tab-btn {
+    background: transparent;
+    border: none;
+    padding: 0.65rem 1.4rem;
+    border-radius: 9999px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #64748B;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+
+  .tu-tab-btn:hover {
+    color: #0F172A;
+  }
+
+  .tu-tab-btn.active {
+    background: #0F172A;
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+  }
+
+  .tu-unified-card {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3.25rem;
+    align-items: center;
+    background: #FFFFFF;
+    border-radius: 28px;
+    padding: 2.5rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 18px 44px -12px rgba(15, 23, 42, 0.08);
+  }
+
+  .tu-media-col {
+    width: 100%;
+  }
+
+  .tu-img-wrap {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 430px;
+    background: #F8FAFC;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .tu-plan-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.28s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tu-plan-img.fade {
+    opacity: 0.35;
+    transform: scale(1.02);
+  }
+
+  .tu-floating-specs {
+    position: absolute;
+    bottom: 1.15rem;
+    left: 1.15rem;
+    right: 1.15rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    z-index: 2;
+  }
+
+  .tu-spec-pill {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(8px);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    padding: 0.42rem 0.95rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .tu-info-col {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.35rem;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0.5rem 0.5rem 0.5rem 0;
   }
 
-  .q-metric-num {
-    font-size: clamp(2rem, 3.2vw, 2.75rem);
+  .tu-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .tu-title {
+    font-size: clamp(1.75rem, 2.6vw, 2.25rem);
     font-weight: 800;
-    color: var(--color-petrol);
-    line-height: 1;
-    letter-spacing: -0.03em;
+    color: #0F172A;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.75rem;
+    line-height: 1.15;
   }
 
-  .q-metric-label {
-    font-size: 0.92rem;
-    font-weight: 600;
-    color: var(--text-muted);
+  .tu-desc {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: #475569;
+    margin: 0 0 1.5rem;
   }
 
-  @media (max-width: 900px) {
-    .quillayes-metrics-row {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      padding: 1.75rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .quillayes-metrics-row {
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
-    }
-  }
-
-  /* TYPOLOGIES */
-  .typologies-grid {
+  .tu-specs-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    row-gap: 1.35rem;
+    column-gap: 1.75rem;
+    margin-bottom: 1.75rem;
+    padding: 0.25rem 0;
   }
 
-  .typology-card {
-    padding: 2.2rem;
+  .tu-spec-box {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0;
+    background: transparent;
+    border: none;
+  }
+
+  .tu-spec-icon {
+    color: #1AA6B7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .tu-spec-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .tu-spec-info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    min-width: 0;
   }
 
-  .t-tags {
-    display: flex;
-    gap: 0.4rem;
-    margin-bottom: 0.85rem;
+  .tu-spec-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748B;
+    margin-bottom: 0.1rem;
   }
 
-  .t-title {
-    font-size: 1.45rem;
-    font-weight: var(--font-weight-black);
-    color: var(--color-petrol);
+  .tu-spec-val {
+    font-size: 0.98rem;
+    font-weight: 800;
+    color: #0F172A;
+    line-height: 1.25;
   }
 
-  .t-surface {
-    display: block;
-    font-size: 0.95rem;
-    color: var(--color-cyan);
-    margin-bottom: 1rem;
+  @media (max-width: 540px) {
+    .tu-specs-grid {
+      grid-template-columns: 1fr;
+      row-gap: 1rem;
+    }
   }
 
-  .t-desc {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-  }
-
-  .t-footer {
+  .tu-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--border-subtle);
+    gap: 1.25rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    flex-wrap: wrap;
   }
 
-  .t-price-label {
+  .tu-price-label {
     display: block;
     font-size: 0.75rem;
-    color: var(--text-soft);
+    font-weight: 700;
+    color: #64748B;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
   }
 
-  .t-price-val {
-    font-size: 1.35rem;
-    font-weight: var(--font-weight-heavy);
-    color: var(--color-petrol);
+  .tu-price-val {
+    font-size: clamp(1.5rem, 2.2vw, 1.85rem);
+    font-weight: 900;
+    color: #0F172A;
+    letter-spacing: -0.02em;
+  }
+
+  .tu-cotizar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.6rem;
+    border-radius: 9999px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(26, 166, 183, 0.28);
+  }
+
+  .tu-arrow {
+    font-size: 1rem;
+    line-height: 1;
   }
 
   /* AMENITIES */
@@ -964,32 +1423,138 @@ const galleryImages = [
     color: var(--text-on-dark-muted);
   }
 
-  .amenities-grid {
+  .amenities-photo-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1.25rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.35rem;
+    margin-top: 2.25rem;
   }
 
-  .amenity-item {
-    padding: 1.5rem 1.25rem;
-    transition: transform var(--transition-fast), border-color var(--transition-fast);
+  .amenity-photo-card {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    height: 350px;
+    background: #091322;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
   }
 
-  .amenity-item:hover {
-    transform: translateY(-4px);
-    border-color: rgba(var(--rgb-cyan), 0.4);
+  .amenity-photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .amenity-name {
-    font-size: 1.15rem;
-    color: var(--color-cyan);
-    margin-bottom: 0.5rem;
+  .amenity-photo-card:hover .amenity-photo-img {
+    transform: scale(1.05);
   }
 
-  .amenity-desc {
-    font-size: 0.88rem;
-    color: var(--text-on-dark-muted);
-    line-height: 1.5;
+  .amenity-photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(9, 18, 32, 0.94) 0%,
+      rgba(9, 18, 32, 0.45) 45%,
+      transparent 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem 1.35rem;
+  }
+
+  .amenity-photo-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin: 0 0 0.25rem;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+
+  .amenity-photo-sub {
+    font-size: 0.86rem;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .amenities-extra-bar {
+    margin-top: 1.5rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    padding: 1.25rem 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    align-items: center;
+  }
+
+  .extra-bar-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.25rem 1rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .extra-bar-col:last-child {
+    border-right: none;
+  }
+
+  .extra-bar-icon {
+    color: #7BE0EC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .extra-bar-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .extra-bar-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .extra-bar-sub {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.58);
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 1150px) {
+    .amenities-extra-bar {
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 1.25rem;
+      padding: 1.35rem 1rem;
+    }
+    .extra-bar-col:nth-child(3) {
+      border-right: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .amenities-extra-bar {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .extra-bar-col {
+      justify-content: flex-start;
+      border-right: none;
+    }
   }
 
   .cotizador-wrap {
@@ -998,8 +1563,8 @@ const galleryImages = [
   }
 
   @media (max-width: 1100px) {
-    .amenities-grid {
-      grid-template-columns: repeat(3, 1fr);
+    .amenities-photo-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
@@ -1025,20 +1590,23 @@ const galleryImages = [
     .specs-hero-bar .spec-pill:last-child {
       grid-column: span 2;
     }
-    .typologies-grid {
+    .tu-unified-card {
       grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 1.75rem;
     }
-    .amenities-grid {
+    .tu-img-wrap {
+      height: 350px;
+    }
+    .tu-info-col {
+      padding: 0;
+    }
+    .amenities-photo-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (max-width: 640px) {
-    .breadcrumbs-container {
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: flex-start;
-    }
     .gallery-side-imgs {
       flex-direction: column;
       height: auto;
@@ -1049,124 +1617,170 @@ const galleryImages = [
     .specs-hero-bar {
       grid-template-columns: 1fr;
       gap: 1rem;
-      margin-bottom: 1.5rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0;
     }
     .specs-hero-bar .spec-pill:last-child {
       grid-column: span 1;
     }
-    .amenities-grid {
+    .tu-unified-card {
+      padding: 1.35rem;
+    }
+    .tu-img-wrap {
+      height: 270px;
+    }
+    .tu-footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .tu-cotizar-btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .amenities-photo-grid {
       grid-template-columns: 1fr;
     }
   }
 
   /* ========================================================
-     UBICACIÓN DEL PROYECTO (ESTILO CLARO, BENTO Y SOFISTICADO)
+     UBICACIÓN DEL PROYECTO (CUADRO UNIFICADO ESTILO HOME / AURVIX)
      ======================================================== */
-  .section-location-canvas {
-    background-color: var(--bg-canvas, #FDFBF7);
-    padding: 5.5rem 0;
+  .loc-wide-container {
+    max-width: 1560px;
+    width: 95%;
+    margin: 0 auto;
+    padding: 0 1.5rem;
   }
 
-  .location-bento-grid {
+  .loc-unified-card {
     display: grid;
-    grid-template-columns: 1.15fr 1fr;
-    gap: 2rem;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 0;
     align-items: stretch;
-  }
-
-  .location-content-col {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .location-bento-card {
     background: #FFFFFF;
+    border-radius: 28px;
+    padding: 0;
     border: 1px solid rgba(15, 23, 42, 0.08);
-    border-radius: var(--radius-bento, 20px);
-    box-shadow: 0 4px 20px rgba(0, 34, 48, 0.04);
-    transition: all 0.3s ease;
+    box-shadow: 0 18px 44px -12px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+    width: 100%;
   }
 
-  .location-bento-card:hover {
-    border-color: rgba(26, 166, 183, 0.3);
-    box-shadow: 0 12px 30px rgba(0, 34, 48, 0.08);
+  .loc-map-col {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 580px;
+    background: #F8FAFC;
   }
 
-  /* Tarjeta de Dirección */
-  .address-bento {
-    padding: 1.75rem 2rem;
+  .loc-map-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 580px;
+    border-radius: 0;
+    border: none;
+    overflow: hidden;
+  }
+
+  .loc-map-iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  .loc-info-col {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    justify-content: space-between;
+    height: 100%;
+    padding: 3.5rem 3.5rem;
+    background: #FFFFFF;
   }
 
-  .address-bento-top {
+  .loc-title {
+    font-size: clamp(1.75rem, 2.4vw, 2.2rem);
+    font-weight: 800;
+    color: #0F172A;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.65rem;
+    line-height: 1.15;
+  }
+
+  .loc-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #475569;
+    margin: 0 0 1.75rem;
+  }
+
+  .loc-specs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 1.35rem;
+    column-gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .loc-spec-item {
     display: flex;
     align-items: flex-start;
-    gap: 1.15rem;
+    gap: 0.75rem;
   }
 
-  .address-icon-badge {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: rgba(26, 166, 183, 0.1);
-    color: var(--color-cyan, #1AA6B7);
+  .loc-spec-icon {
+    color: #1AA6B7;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    margin-top: 0.15rem;
   }
 
-  .address-meta-info {
+  .loc-spec-info {
     display: flex;
     flex-direction: column;
+    min-width: 0;
   }
 
-  .address-kicker {
+  .loc-spec-label {
     font-size: 0.72rem;
     font-weight: 700;
-    color: var(--color-cyan, #1AA6B7);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 0.2rem;
+    letter-spacing: 0.04em;
+    color: #64748B;
+    margin-bottom: 0.1rem;
   }
 
-  .address-main-title {
-    font-size: 1.45rem;
+  .loc-spec-val {
+    font-size: 0.94rem;
     font-weight: 800;
     color: #0F172A;
-    margin: 0 0 0.25rem 0;
-    letter-spacing: -0.02em;
-    line-height: 1.25;
+    line-height: 1.3;
   }
 
-  .address-sub-text {
-    font-size: 0.9rem;
-    color: #64748B;
-    margin: 0;
-    line-height: 1.45;
-  }
-
-  .address-actions-bar {
+  .loc-footer {
     display: flex;
     align-items: center;
     gap: 0.85rem;
     flex-wrap: wrap;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(15, 23, 42, 0.06);
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
   }
 
   .btn-address-primary {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.5rem;
     background: #0F172A;
     color: #FFFFFF !important;
-    font-weight: 600;
-    font-size: 0.88rem;
-    padding: 0.7rem 1.4rem;
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 0.8rem 1.6rem;
     border-radius: 9999px;
     text-decoration: none;
     box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
@@ -1186,10 +1800,10 @@ const galleryImages = [
     background: #FFFFFF;
     color: #0F172A !important;
     font-weight: 600;
-    font-size: 0.88rem;
-    padding: 0.7rem 1.4rem;
+    font-size: 0.92rem;
+    padding: 0.8rem 1.5rem;
     border-radius: 9999px;
-    border: 1px solid rgba(15, 23, 42, 0.14);
+    border: 1px solid rgba(15, 23, 42, 0.16);
     cursor: pointer;
     transition: all 0.25s ease;
   }
@@ -1206,238 +1820,44 @@ const galleryImages = [
     border-color: var(--color-cyan, #1AA6B7);
   }
 
-  /* Tarjeta de Servicios Bento */
-  .services-bento {
-    padding: 1.75rem 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+  @media (max-width: 992px) {
+    .loc-unified-card {
+      grid-template-columns: 1fr;
+    }
+    .loc-map-col,
+    .loc-map-wrap {
+      min-height: 380px;
+      height: 380px;
+    }
+    .loc-map-iframe {
+      position: relative;
+    }
+    .loc-info-col {
+      padding: 2.25rem 2rem;
+    }
   }
 
-  .services-bento-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-
-  .services-bento-title {
-    font-size: 1.05rem;
-    font-weight: 800;
-    color: #0F172A;
-    margin: 0;
-    letter-spacing: -0.01em;
-  }
-
-  .services-bento-sub {
-    font-size: 0.84rem;
-    color: #64748B;
-  }
-
-  .services-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.85rem;
-  }
-
-  .service-item-tile {
-    background: #F8FAFC;
-    border: 1px solid rgba(226, 232, 240, 0.9);
-    border-radius: 14px;
-    padding: 0.95rem 1.1rem;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.25s ease;
-  }
-
-  .service-item-tile:hover {
-    background: #FFFFFF;
-    border-color: rgba(26, 166, 183, 0.45);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 34, 48, 0.05);
-  }
-
-  .service-item-tile.tile-highlight {
-    background: linear-gradient(135deg, #FFFFFF 0%, rgba(26, 166, 183, 0.07) 100%);
-    border-color: rgba(26, 166, 183, 0.4);
-  }
-
-  .service-tile-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    margin-bottom: 0.4rem;
-  }
-
-  .service-cat-wrap {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-  }
-
-  .service-icon-pill {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: rgba(26, 166, 183, 0.1);
-    color: var(--color-cyan, #1AA6B7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .tile-highlight .service-icon-pill {
-    background: var(--color-cyan, #1AA6B7);
-    color: #FFFFFF;
-  }
-
-  .service-cat-name {
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: #64748B;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-
-  .service-time-pill {
-    font-size: 0.74rem;
-    font-weight: 700;
-    color: #0F172A;
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    padding: 0.15rem 0.6rem;
-    border-radius: 9999px;
-    white-space: nowrap;
-  }
-
-  .tile-highlight .service-time-pill {
-    background: rgba(26, 166, 183, 0.15);
-    color: var(--color-cyan, #1AA6B7);
-    border-color: rgba(26, 166, 183, 0.3);
-  }
-
-  .service-item-name {
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: #0F172A;
-    margin: 0 0 0.2rem 0;
-    line-height: 1.3;
-  }
-
-  .service-item-dist {
-    font-size: 0.78rem;
-    color: #64748B;
-    line-height: 1.4;
-  }
-
-  /* Columna Derecha: Mapa Arquitectónico Integrado */
-  .location-map-col {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .architectural-map-card {
-    position: relative;
-    background: #FFFFFF;
-    border-radius: var(--radius-bento, 20px);
-    overflow: hidden;
-    border: 1px solid rgba(15, 23, 42, 0.08);
-    box-shadow: 0 12px 36px rgba(0, 34, 48, 0.06);
-    flex: 1;
-    min-height: 540px;
-    height: 100%;
-  }
-
-  .map-floating-pin-card {
-    position: absolute;
-    top: 1.25rem;
-    left: 1.25rem;
-    z-index: 2;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 14px;
-    padding: 0.75rem 1.15rem;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    pointer-events: none;
-    max-width: calc(100% - 2.5rem);
-  }
-
-  .map-pulse-dot {
-    position: relative;
-    width: 14px;
-    height: 14px;
-    flex-shrink: 0;
-  }
-
-  .pulse-core {
-    position: absolute;
-    inset: 2px;
-    border-radius: 50%;
-    background: #10B981;
-  }
-
-  .pulse-ring {
-    position: absolute;
-    inset: -3px;
-    border-radius: 50%;
-    background: rgba(16, 185, 129, 0.4);
-    animation: pulseGlow 2s infinite ease-out;
-  }
-
-  @keyframes pulseGlow {
-    0% { transform: scale(0.8); opacity: 1; }
-    100% { transform: scale(1.9); opacity: 0; }
-  }
-
-  .map-pin-info {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .map-pin-info strong {
-    font-size: 0.88rem;
-    color: #0F172A;
-    font-weight: 800;
-  }
-
-  .map-pin-info span {
-    font-size: 0.76rem;
-    color: #64748B;
-  }
-
-  .architectural-map-iframe {
-    width: 100%;
-    height: 100%;
-    min-height: 540px;
-    border: 0;
-    display: block;
-  }
-
-  .map-floating-bottom-pill {
-    position: absolute;
-    bottom: 1.25rem;
-    right: 1.25rem;
-    z-index: 2;
-    background: rgba(15, 23, 42, 0.88);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    color: #FFFFFF;
-    font-size: 0.76rem;
-    font-weight: 600;
-    padding: 0.45rem 0.95rem;
-    border-radius: 9999px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    pointer-events: none;
+  @media (max-width: 540px) {
+    .loc-map-col,
+    .loc-map-wrap {
+      min-height: 300px;
+      height: 300px;
+    }
+    .loc-info-col {
+      padding: 1.75rem 1.35rem;
+    }
+    .loc-specs-grid {
+      grid-template-columns: 1fr;
+      row-gap: 1rem;
+    }
+    .loc-footer {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .btn-address-primary,
+    .btn-address-secondary {
+      justify-content: center;
+    }
   }
 
   /* ========================================================
@@ -1973,6 +2393,97 @@ const galleryImages = [
     if (heroSlides.length > 1) {
       startHeroSlideshow();
     }
+
+    // 4. Selector Unificado de Tipologías (Cuadro Único con Mockup de Plano)
+    const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+    const typologiesData = [
+      {
+        name: 'Modelo 1D + 1B',
+        surface: '34,5 a 38,2 m²',
+        bedrooms: '1 Dormitorio',
+        bathrooms: '1 Baño Suite',
+        terrace: 'Balcón Continuo',
+        desc: 'Distribución abierta, cocina americana con cubierta de cuarzo y balcón continuo con vista despejada.',
+        price: 'Desde 2.540 UF',
+        tags: ['Ideal Inversionista', 'Renta Alta'],
+        planImage: `${baseUrl}/images/plano_mockup_1d1b.jpg`
+      },
+      {
+        name: 'Modelo 2D + 1B',
+        surface: '46,0 a 52,4 m²',
+        bedrooms: '2 Dormitorios',
+        bathrooms: '1 Baño Completo',
+        terrace: 'Terraza Integrada',
+        desc: 'Dormitorio principal amplio, segundo dormitorio para oficina o visita, clóset mural y conexión para lavadora.',
+        price: 'Desde 3.190 UF',
+        tags: ['Primera Vivienda'],
+        planImage: `${baseUrl}/images/plano_mockup_2d1b.jpg`
+      },
+      {
+        name: 'Modelo 2D + 2B Mariposa',
+        surface: '58,0 a 64,8 m²',
+        bedrooms: '2 Suites Indep.',
+        bathrooms: '2 Baños en Suite',
+        terrace: 'Terraza Panorámica',
+        desc: 'Estilo mariposa: 2 suites independientes a cada costado del living central, otorgando máxima privacidad.',
+        price: 'Desde 3.750 UF',
+        tags: ['Más Vendido', 'Máxima Privacidad'],
+        planImage: `${baseUrl}/images/plano_mockup_2d2b.jpg`
+      },
+      {
+        name: 'Modelo 3D + 2B Familiar',
+        surface: '70,5 a 76,2 m²',
+        bedrooms: '3 Dormitorios',
+        bathrooms: '2 Baños (1 Suite)',
+        terrace: 'Amplia Terraza',
+        desc: 'Espacios generosos para familias, suite con walk-in clóset, logia y amplia terraza para compartir.',
+        price: 'Desde 4.490 UF',
+        tags: ['Familiar', 'Terraza Amplia'],
+        planImage: `${baseUrl}/images/plano_mockup_3d2b.jpg`
+      }
+    ];
+
+    const tuTabs = document.querySelectorAll<HTMLElement>('.tu-tab-btn');
+    const tuImg = document.getElementById('tu-display-img') as HTMLImageElement | null;
+    const tuTitle = document.getElementById('tu-item-title');
+    const tuSurface = document.getElementById('tu-item-surface');
+    const tuBeds = document.getElementById('tu-spec-beds');
+    const tuBaths = document.getElementById('tu-spec-baths');
+    const tuTerrace = document.getElementById('tu-spec-terrace');
+    const tuDesc = document.getElementById('tu-item-desc');
+    const tuPrice = document.getElementById('tu-item-price');
+
+    tuTabs.forEach((tab) => {
+      if (tab.dataset.bound) return;
+      tab.dataset.bound = 'true';
+      tab.addEventListener('click', () => {
+        const index = parseInt(tab.getAttribute('data-tu-index') || '0', 10);
+        const item = typologiesData[index];
+        if (!item || !tuImg) return;
+
+        tuTabs.forEach((t) => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        tuImg.classList.add('fade');
+        setTimeout(() => {
+          tuImg.src = item.planImage;
+          tuImg.alt = `Plano arquitectónico ${item.name}`;
+          tuImg.classList.remove('fade');
+
+          if (tuTitle) tuTitle.textContent = item.name;
+          if (tuSurface) tuSurface.textContent = item.surface;
+          if (tuBeds) tuBeds.textContent = item.bedrooms;
+          if (tuBaths) tuBaths.textContent = item.bathrooms;
+          if (tuTerrace) tuTerrace.textContent = item.terrace;
+          if (tuDesc) tuDesc.textContent = item.desc;
+          if (tuPrice) tuPrice.textContent = item.price;
+        }, 160);
+      });
+    });
   }
 
   if (document.readyState === 'loading') {

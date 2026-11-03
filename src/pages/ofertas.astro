@@ -1,232 +1,338 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PatternDrops from '../components/brand/PatternDrops.astro';
+import ModernCTA from '../components/features/ModernCTA.astro';
+import { u } from '../utils/url';
+import '../styles/home.css';
+import '../styles/inner-pages.css';
 
-const promotions = [
+const campaigns = [
   {
-    badge: 'Campaña Estrella',
-    badgeClass: 'badge-coral',
-    title: 'Bono Pie del 10%',
-    desc: 'Te bonificamos hasta un 10% del valor total de la propiedad para que lo presentes como parte del pie bancario, reduciendo tu ahorro inicial al mínimo.',
-    conditions: 'Válido para compras en blanco en tipologías seleccionadas de AMA Quillayes.',
-    benefit: 'Ahorro directo de hasta 400 UF'
+    id: 'bono-pie',
+    tabLabel: 'Bono Pie 10%',
+    kicker: 'Beneficio Comercial Directo',
+    title: 'Bono Pie de hasta un 10%',
+    desc: 'Bonificamos hasta un 10% del valor total del departamento para que lo presentes como parte de tu pie bancario, reduciendo al mínimo tu desembolso inicial y facilitando la aprobación hipotecaria.',
+    image: u('/images/ama_quillayes_facade.jpg'),
+    highlightLabel: 'Ahorro directo estimado',
+    highlightValue: 'Hasta 400 UF',
+    specs: [
+      { label: 'Cobertura', val: 'Hasta 10% del valor UF' },
+      { label: 'Proyecto activo', val: 'Edificio AMA Quillayes' },
+      { label: 'Tipologías', val: 'Unidades 1D y 2D seleccionadas' },
+      { label: 'Combinable con', val: 'Pago de pie en cuotas' }
+    ],
+    checks: ['Descuento directo en promesa', 'Menor exigencia de liquidez inicial', 'Aplica para vivienda e inversión']
   },
   {
-    badge: 'Facilidad de Pago',
-    badgeClass: 'badge-cyan',
-    title: 'Tu Pie en hasta 36 Cuotas sin Interés',
-    desc: 'Fracciona el pago de tu pie durante todo el periodo de edificación del proyecto, pagando mes a mes sin recargos financieros.',
-    conditions: 'Cuotas mensuales fijas hasta la fecha de entrega y escrituración.',
-    benefit: 'Cuotas desde $250.000 / mes'
+    id: 'cuotas-pie',
+    tabLabel: 'Pie en hasta 60 Cuotas',
+    kicker: 'Flexibilidad Financiera',
+    title: 'Tu pie en hasta 60 cuotas sin interés',
+    desc: 'Fracciona el pago del pie durante el período de construcción y más allá de la entrega, con cuotas mensuales fijas y sin recargos financieros para ordenar tu flujo de caja con tranquilidad.',
+    image: u('/images/ama_interior_living.jpg'),
+    highlightLabel: 'Cuota mensual referencial',
+    highlightValue: 'Desde $250.000 / mes',
+    specs: [
+      { label: 'Plazo máximo', val: 'Hasta 60 cuotas mensuales' },
+      { label: 'Tasa de interés', val: '0% interés directo' },
+      { label: 'Medios de pago', val: 'PAC, transferencia o tarjeta' },
+      { label: 'Respaldo legal', val: 'Póliza de venta en verde' }
+    ],
+    checks: ['Sin evaluación bancaria para el pie', 'Cuotas adaptadas a tu capacidad mensual', '100% respaldado por póliza de garantía']
   },
   {
-    badge: 'Especial Inversionista',
-    badgeClass: 'badge-orange',
-    title: 'Garantía de Arriendo por 1 Año',
-    desc: 'Te aseguramos el pago mensual del arriendo durante los primeros 12 meses desde la entrega del departamento, con administración profesional incluida.',
-    conditions: 'Aplica para tipologías 1D+1B y 2D+1B en venta en blanco.',
-    benefit: 'Retorno asegurado desde el día 1'
+    id: 'garantia-arriendo',
+    tabLabel: 'Garantía de Arriendo',
+    kicker: 'Especial Inversionistas',
+    title: 'Garantía de arriendo por 12 meses',
+    desc: 'Aseguramos el flujo mensual de tu inversión durante el primer año desde la recepción del departamento, incluyendo búsqueda de arrendatario calificado y administración profesional.',
+    image: u('/images/ama_amenity_rooftop.jpg'),
+    highlightLabel: 'Flujo garantizado',
+    highlightValue: '12 meses continuos',
+    specs: [
+      { label: 'Duración', val: '1 año desde la entrega' },
+      { label: 'Administración', val: 'Gestión integral incluida' },
+      { label: 'Unidades elegibles', val: 'Modelos 1D+1B y 2D+1B' },
+      { label: 'Vacancia', val: 'Riesgo cero el primer año' }
+    ],
+    checks: ['El dividendo se cubre desde el primer mes', 'Selección rigurosa de arrendatario', 'Administración delegada sin estrés']
   },
   {
-    badge: 'Flexibilidad Patrimonial',
-    badgeClass: 'badge-petrol',
-    title: 'Cesión de Promesa a Costo $0',
-    desc: 'Si compras para invertir y decides transferir tus derechos de promesa a un tercero antes de escriturar, no cobramos comisión ni multas administrativas.',
-    conditions: 'Solicitud con 60 días de anticipación a la recepción final.',
-    benefit: 'Máxima liquidez y salida oportuna'
+    id: 'cesion-promesa',
+    tabLabel: 'Cesión a Costo $0',
+    kicker: 'Liquidez Patrimonial',
+    title: 'Cesión de promesa sin costo ni comisión',
+    desc: 'Si compras en etapa temprana para capturar la plusvalía de construcción y decides transferir tu promesa a un tercero antes de escriturar, no cobramos multas ni gastos administrativos.',
+    image: u('/images/ama_piloto_cocina_quillayes.jpg'),
+    highlightLabel: 'Comisión por cesión',
+    highlightValue: '$0 Costo Administrativo',
+    specs: [
+      { label: 'Costo de traspaso', val: '100% liberado ($0)' },
+      { label: 'Ventana de solicitud', val: 'Hasta 60 días pre-recepción' },
+      { label: 'Plusvalía capturada', val: '100% para el promitente' },
+      { label: 'Gestión legal', val: 'Acompañamiento notarial AMA' }
+    ],
+    checks: ['Salida flexible antes de escriturar', 'Captura la plusvalía de venta en verde', 'Trámite ágil con nuestro equipo legal']
   }
 ];
 ---
 
 <BaseLayout 
-  title="Ofertas y Campañas Comerciales | AMA Inmobiliaria"
-  description="Aprovecha las promociones y campañas vigentes en AMA Inmobiliaria: Bono Pie 10%, cuotas sin interés y garantía de arriendo en Santiago."
+  title="Ofertas y Beneficios Comerciales | AMA Inmobiliaria"
+  description="Conoce los beneficios comerciales vigentes en AMA Quillayes: Bono Pie 10%, pago de pie en hasta 60 cuotas sin interés, garantía de arriendo y cesión a costo $0."
 >
-  <section class="page-hero section-petrol">
-    <PatternDrops color="#1AA6B7" opacity={0.06} />
-    <div class="container relative-z text-center">
-      <span class="badge badge-coral">Campañas Vigentes</span>
-      <h1 class="page-title">Oportunidades & Promociones Comerciales</h1>
-      <p class="page-subtitle">
-        Diseñamos promociones reales y transparentes para que comprar tu departamento sea más accesible, rentable y seguro.
-      </p>
-    </div>
-  </section>
-
-  <section class="section section-cream">
-    <div class="container">
-      <div class="promo-grid">
-        {promotions.map((p) => (
-          <div class="promo-card card">
-            <div class="promo-card-top">
-              <span class={`badge ${p.badgeClass}`}>{p.badge}</span>
-              <span class="promo-benefit-pill">{p.benefit}</span>
-            </div>
-            <h3 class="promo-title">{p.title}</h3>
-            <p class="promo-desc">{p.desc}</p>
-            <div class="promo-conditions">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-              </svg>
-              <span>{p.conditions}</span>
-            </div>
-            <div class="promo-footer">
-              <button 
-                type="button" 
-                class="btn btn-cyan btn-block"
-                onclick="window.openCotizadorModal && window.openCotizadorModal()"
-              >
-                Aplicar Esta Promoción
-              </button>
-            </div>
-          </div>
-        ))}
+  <!-- 1. HERO CINEMATOGRÁFICO UNIFICADO -->
+  <section class="aurvix-hero ip-hero">
+    <div class="hero-card-banner">
+      <div class="hero-slideshow">
+        <div class="hero-slide active" style={`background-image: url(${u('/images/ama_quillayes_facade.jpg')});`}></div>
       </div>
 
-      <!-- BANNER DE ASESORÍA PERSONALIZADA -->
-      <div class="advice-banner card">
-        <div class="advice-content">
-          <span class="badge badge-cyan">Atención Personalizada</span>
-          <h3 class="advice-title">¿Tienes dudas sobre cómo combinar estas ofertas?</h3>
-          <p class="advice-text">
-            Nuestros ejecutivos financieros analizan tu capacidad de crédito, perfil de renta y subsidios disponibles para recomendarte la combinación de mayor ahorro.
-          </p>
-          <div class="advice-btns">
-            <a href="/contacto" class="btn btn-coral">
-              Agendar Asesoría Gratuita
-            </a>
-            <a href="https://wa.me/56987654321?text=Hola,%20quisiera%20asesoría%20sobre%20las%20ofertas%20vigentes%20en%20AMA%20Inmobiliaria" target="_blank" rel="noopener noreferrer" class="btn btn-outline-white">
-              Consultar por WhatsApp
-            </a>
+      <div class="hero-overlay-gradient"></div>
+
+      <div class="container hero-banner-content">
+        <div class="hero-text-row">
+          <div class="hero-headline-col">
+            <h1 class="hero-title-aurvix">
+              BENEFICIOS REALES PARA<br />
+              DECIDIR CON CALMA
+            </h1>
+            <p class="hero-sub-aurvix">
+              Estructuramos condiciones comerciales claras y combinables en <strong>AMA Quillayes</strong> para que dar el paso a tu nuevo hogar o inversión sea liviano, transparente y seguro.
+            </p>
+
+            <div class="hero-actions-row">
+              <button 
+                type="button" 
+                class="btn-hero-primary"
+                onclick="window.openCotizadorModal && window.openCotizadorModal()"
+              >
+                <span>Simular con Beneficios</span>
+                <span class="btn-arrow">↗</span>
+              </button>
+              <a href="#campanas-vigentes" class="btn-hero-secondary">
+                <span>Explorar Campañas</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ip-glass-bar">
+          <div class="ip-glass-chip">
+            <span class="ip-glass-val">10%</span>
+            <span class="ip-glass-txt">Bono Pie Comercial</span>
+          </div>
+          <div class="ip-glass-div"></div>
+          <div class="ip-glass-chip">
+            <span class="ip-glass-val">60 Cuotas</span>
+            <span class="ip-glass-txt">Pago de pie sin interés</span>
+          </div>
+          <div class="ip-glass-div"></div>
+          <div class="ip-glass-chip">
+            <span class="ip-glass-val">12 Meses</span>
+            <span class="ip-glass-txt">Arriendo garantizado</span>
+          </div>
+          <div class="ip-glass-div"></div>
+          <div class="ip-glass-chip">
+            <span class="ip-glass-val">Costo $0</span>
+            <span class="ip-glass-txt">Cesión de promesa</span>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- 2. EXPLORADOR DE CAMPAÑAS (SPLIT CARD + PILL TABS) -->
+  <section class="ip-section is-canvas" id="campanas-vigentes">
+    <div class="container">
+      <div class="ip-head">
+        <h2 class="ip-title">Campañas vigentes en AMA Quillayes</h2>
+        <p class="ip-desc">
+          Selecciona cada beneficio para conocer en detalle cómo se aplica a tu compra o estrategia de inversión.
+        </p>
+      </div>
+
+      <!-- Selector Pill idéntico a Tipologías -->
+      <div class="ip-tabs-bar">
+        <div class="ip-tabs-pill" role="tablist" aria-label="Campañas vigentes">
+          {campaigns.map((c, idx) => (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={idx === 0 ? 'true' : 'false'}
+              class={`ip-tab-btn ${idx === 0 ? 'active' : ''}`}
+              data-campaign-idx={idx}
+            >
+              {c.tabLabel}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Tarjeta Split Unificada -->
+      <div class="ip-split">
+        <div class="ip-split-media">
+          <img
+            id="camp-img"
+            src={campaigns[0].image}
+            alt={campaigns[0].title}
+          />
+        </div>
+
+        <div class="ip-split-info">
+          <div>
+            <span class="ip-kicker" id="camp-kicker">{campaigns[0].kicker}</span>
+            <h3 class="ip-card-title" id="camp-title">{campaigns[0].title}</h3>
+            <p class="ip-card-text" id="camp-desc">{campaigns[0].desc}</p>
+
+            <!-- Specs abiertos con íconos SVG limpios (sin cajas anidadas) -->
+            <div class="ip-specs">
+              <div class="ip-spec">
+                <div class="ip-spec-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
+                <div class="ip-spec-info">
+                  <span class="ip-spec-label" id="camp-spec-label-0">{campaigns[0].specs[0].label}</span>
+                  <strong class="ip-spec-val" id="camp-spec-val-0">{campaigns[0].specs[0].val}</strong>
+                </div>
+              </div>
+
+              <div class="ip-spec">
+                <div class="ip-spec-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg>
+                </div>
+                <div class="ip-spec-info">
+                  <span class="ip-spec-label" id="camp-spec-label-1">{campaigns[0].specs[1].label}</span>
+                  <strong class="ip-spec-val" id="camp-spec-val-1">{campaigns[0].specs[1].val}</strong>
+                </div>
+              </div>
+
+              <div class="ip-spec">
+                <div class="ip-spec-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                </div>
+                <div class="ip-spec-info">
+                  <span class="ip-spec-label" id="camp-spec-label-2">{campaigns[0].specs[2].label}</span>
+                  <strong class="ip-spec-val" id="camp-spec-val-2">{campaigns[0].specs[2].val}</strong>
+                </div>
+              </div>
+
+              <div class="ip-spec">
+                <div class="ip-spec-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                </div>
+                <div class="ip-spec-info">
+                  <span class="ip-spec-label" id="camp-spec-label-3">{campaigns[0].specs[3].label}</span>
+                  <strong class="ip-spec-val" id="camp-spec-val-3">{campaigns[0].specs[3].val}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ip-card-footer">
+            <div>
+              <span class="ip-footer-label" id="camp-hl-label">{campaigns[0].highlightLabel}</span>
+              <div class="ip-footer-value" id="camp-hl-val">{campaigns[0].highlightValue}</div>
+            </div>
+
+            <div class="ip-actions">
+              <button
+                type="button"
+                class="btn-aurvix-dark"
+                onclick="window.openCotizadorModal && window.openCotizadorModal()"
+              >
+                <span>Aplicar este Beneficio</span>
+                <span class="arrow">↗</span>
+              </button>
+              <a href={u('/proyectos/ama-quillayes')} class="ip-btn-ghost">
+                <span>Ver Proyecto</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. RESUMEN COMPARATIVO DE CONDICIONES (FILAS EDITORIALES) -->
+  <section class="ip-section">
+    <div class="container">
+      <div class="ip-head is-left">
+        <h2 class="ip-title">Todas las facilidades de un vistazo</h2>
+        <p class="ip-desc">
+          Nuestros asesores financieros analizan tu perfil para combinar estas herramientas y lograr el dividendo y flujo más conveniente.
+        </p>
+      </div>
+
+      <div class="ip-rows">
+        {campaigns.map((c) => (
+          <div class="ip-row">
+            <div class="ip-row-meta">
+              <span class="ip-row-label">{c.kicker}</span>
+              <span class="ip-row-big">{c.highlightValue}</span>
+            </div>
+            <div>
+              <h3 class="ip-row-title">{c.title}</h3>
+              <p class="ip-row-text">{c.desc}</p>
+              <ul class="ip-row-checks">
+                {c.checks.map((ch) => (
+                  <li>{ch}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. BANNER CTA INSTITUCIONAL -->
+  <ModernCTA />
 </BaseLayout>
 
-<style>
-  .page-hero {
-    position: relative;
-    padding: 5.5rem 0 5rem;
-  }
+<script define:vars={{ campaigns }}>
+  const tabBtns = document.querySelectorAll('[data-campaign-idx]');
+  const imgEl = document.getElementById('camp-img');
+  const kickerEl = document.getElementById('camp-kicker');
+  const titleEl = document.getElementById('camp-title');
+  const descEl = document.getElementById('camp-desc');
+  const hlLabelEl = document.getElementById('camp-hl-label');
+  const hlValEl = document.getElementById('camp-hl-val');
 
-  .relative-z {
-    position: relative;
-    z-index: 2;
-  }
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const idx = Number(btn.getAttribute('data-campaign-idx'));
+      const data = campaigns[idx];
+      if (!data) return;
 
-  .page-title {
-    color: var(--color-cream);
-    margin: 0.8rem 0;
-  }
+      tabBtns.forEach((b) => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
 
-  .page-subtitle {
-    max-width: 720px;
-    margin: 0 auto;
-    color: var(--text-on-dark-muted);
-    font-size: 1.15rem;
-  }
+      if (imgEl) {
+        imgEl.classList.add('fade');
+        setTimeout(() => {
+          imgEl.src = data.image;
+          imgEl.alt = data.title;
+          imgEl.classList.remove('fade');
+        }, 160);
+      }
 
-  .promo-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
-    margin-bottom: 3.5rem;
-  }
+      if (kickerEl) kickerEl.textContent = data.kicker;
+      if (titleEl) titleEl.textContent = data.title;
+      if (descEl) descEl.textContent = data.desc;
+      if (hlLabelEl) hlLabelEl.textContent = data.highlightLabel;
+      if (hlValEl) hlValEl.textContent = data.highlightValue;
 
-  .promo-card {
-    padding: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-top: 4px solid var(--color-coral);
-  }
-
-  .promo-card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .promo-benefit-pill {
-    background-color: rgba(var(--rgb-cyan), 0.12);
-    color: var(--color-cyan);
-    font-size: 0.84rem;
-    font-weight: var(--font-weight-semibold);
-    padding: 0.3rem 0.75rem;
-    border-radius: var(--radius-full);
-  }
-
-  .promo-title {
-    font-size: 1.45rem;
-    color: var(--color-petrol);
-    margin-bottom: 0.85rem;
-  }
-
-  .promo-desc {
-    font-size: 0.98rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-  }
-
-  .promo-conditions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.84rem;
-    color: var(--text-soft);
-    padding: 0.85rem 0;
-    border-top: 1px solid var(--border-subtle);
-    margin-bottom: 1.5rem;
-  }
-
-  .promo-conditions svg {
-    flex-shrink: 0;
-    color: var(--color-cyan);
-  }
-
-  .btn-block {
-    width: 100%;
-  }
-
-  /* ADVICE BANNER */
-  .advice-banner {
-    background: linear-gradient(135deg, var(--color-petrol) 0%, rgba(var(--rgb-petrol), 0.9) 100%);
-    padding: 3.5rem;
-    border-radius: var(--radius-xl);
-    color: var(--color-cream);
-  }
-
-  .advice-title {
-    color: var(--color-cream);
-    font-size: clamp(1.6rem, 2.4vw, 2.2rem);
-    margin: 0.8rem 0;
-  }
-
-  .advice-text {
-    color: var(--text-on-dark-muted);
-    font-size: 1.05rem;
-    max-width: 700px;
-    margin-bottom: 2rem;
-  }
-
-  .advice-btns {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  @media (max-width: 900px) {
-    .promo-grid {
-      grid-template-columns: 1fr;
-    }
-    .advice-banner {
-      padding: 2rem;
-    }
-  }
-</style>
+      data.specs.forEach((s, i) => {
+        const lEl = document.getElementById(`camp-spec-label-${i}`);
+        const vEl = document.getElementById(`camp-spec-val-${i}`);
+        if (lEl) lEl.textContent = s.label;
+        if (vEl) vEl.textContent = s.val;
+      });
+    });
+  });
+</script>

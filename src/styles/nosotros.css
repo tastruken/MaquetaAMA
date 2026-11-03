@@ -26,6 +26,15 @@
   gap: 0.65rem;
 }
 
+.glass-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2DD4BF;
+  box-shadow: 0 0 8px rgba(45, 212, 191, 0.7);
+  flex-shrink: 0;
+}
+
 .glass-pct {
   background: #FFFFFF;
   color: #0F172A;
@@ -120,7 +129,7 @@
 
 .corp-card-top {
   display: flex !important;
-  justify-content: space-between !important;
+  justify-content: flex-start !important;
   align-items: flex-start !important;
   gap: 1rem !important;
   margin-bottom: 1.5rem !important;
@@ -669,5 +678,217 @@
   }
   .glass-div {
     display: none !important;
+  }
+}
+
+
+/* ========================================================
+   ESTRUCTURA SOCIETARIA REDISEÑADA: FILAS BENTO INSTITUCIONALES
+   ======================================================== */
+.corporate-bento-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.5rem !important;
+  margin-top: 3.5rem !important;
+  width: 100% !important;
+}
+
+.corp-bento-row {
+  background: #FFFFFF !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(0, 0, 0, 0.07) !important;
+  padding: 2rem 2.5rem !important;
+  display: grid !important;
+  grid-template-columns: 220px 1.2fr 1.3fr !important;
+  gap: 2.5rem !important;
+  align-items: center !important;
+  box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.05) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.corp-bento-row:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 20px 38px -10px rgba(15, 23, 42, 0.1) !important;
+  border-color: rgba(26, 166, 183, 0.4) !important;
+}
+
+/* Columna 1: Branding y Logo Mockup */
+.corp-brand-col {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 1rem !important;
+}
+
+.corp-logo-mockup {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.65rem !important;
+  padding: 0.7rem 1.4rem !important;
+  background: #F8FAFC !important;
+  border: 1.5px dashed #CBD5E1 !important;
+  border-radius: 12px !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03) !important;
+  transition: all 0.2s ease !important;
+}
+
+.corp-bento-row:hover .corp-logo-mockup {
+  border-color: #1AA6B7 !important;
+  background: #F2FBFC !important;
+}
+
+.corp-logo-mockup .logo-mark {
+  color: #1AA6B7 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.corp-logo-mockup .logo-name {
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.18em !important;
+  color: #0F172A !important;
+  text-transform: uppercase !important;
+}
+
+/* Columna 2: Identidad y Resumen */
+.corp-info-col {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+}
+
+.corp-names-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.2rem !important;
+}
+
+.corp-info-col .corp-title {
+  font-size: 1.35rem !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  margin: 0 !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.corp-info-col .corp-subsidiary {
+  font-size: 0.85rem !important;
+  color: #1AA6B7 !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+}
+
+.corp-info-col .corp-summary {
+  font-size: 0.92rem !important;
+  color: #4B5563 !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* Columna 3: Hitos / Credenciales */
+.corp-milestones-col {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+}
+
+.corp-milestone-tile {
+  background: #F8FAFC !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  border-radius: 12px !important;
+  padding: 0.85rem 1.15rem !important;
+  display: flex !important;
+  gap: 0.85rem !important;
+  align-items: flex-start !important;
+  transition: background 0.2s ease !important;
+}
+
+.corp-bento-row:hover .corp-milestone-tile {
+  background: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+}
+
+.milestone-accent {
+  width: 3px !important;
+  height: 28px !important;
+  border-radius: 4px !important;
+  background: #1AA6B7 !important;
+  flex-shrink: 0 !important;
+  margin-top: 2px !important;
+}
+
+.milestone-body {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.15rem !important;
+}
+
+.milestone-title {
+  font-size: 0.84rem !important;
+  font-weight: 700 !important;
+  color: #0F172A !important;
+  line-height: 1.3 !important;
+}
+
+.milestone-desc {
+  font-size: 0.82rem !important;
+  color: #64748B !important;
+  line-height: 1.45 !important;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .corp-bento-row {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    padding: 1.75rem !important;
+  }
+  
+  .corp-brand-col {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+}
+
+
+/* Fila invertida / contrapeso (Card 2: San José Andina) */
+.corp-bento-row.is-reversed {
+  grid-template-columns: 1.3fr 1.2fr 220px !important;
+}
+
+.corp-bento-row.is-reversed .corp-milestones-col {
+  order: 1 !important;
+}
+
+.corp-bento-row.is-reversed .corp-info-col {
+  order: 2 !important;
+}
+
+.corp-bento-row.is-reversed .corp-brand-col {
+  order: 3 !important;
+  align-items: flex-end !important;
+}
+
+@media (max-width: 1024px) {
+  .corp-bento-row.is-reversed {
+    grid-template-columns: 1fr !important;
+  }
+  .corp-bento-row.is-reversed .corp-brand-col {
+    order: -1 !important;
+    align-items: flex-start !important;
+  }
+  .corp-bento-row.is-reversed .corp-info-col {
+    order: 1 !important;
+  }
+  .corp-bento-row.is-reversed .corp-milestones-col {
+    order: 2 !important;
   }
 }

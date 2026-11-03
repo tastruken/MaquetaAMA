@@ -1,465 +1,425 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PatternLoops from '../components/brand/PatternLoops.astro';
 import Cotizador from '../components/features/Cotizador.astro';
 import ModernCTA from '../components/features/ModernCTA.astro';
 import { u } from '../utils/url';
+import '../styles/home.css';
+import '../styles/inner-pages.css';
 
-const investorBenefits = [
+const rentalTypologies = [
   {
-    icon: '📈',
-    title: 'Alta Rentabilidad & Demanda',
-    desc: 'Departamentos a pasos del Metro Los Quillayes en La Florida, una de las comunas con mayor velocidad de arriendo y menor tasa de vacancia en el Gran Santiago.'
+    id: '1d-1b',
+    tabLabel: 'Modelo 1D + 1B',
+    kicker: 'Mayor Velocidad de Colocación',
+    title: 'Modelo 1D + 1B · Renta Intensiva',
+    desc: 'La unidad de mayor rotación y demanda en el eje Vicuña Mackenna. Distribución abierta con cocina equipada, terraza continua a lo ancho y gastos comunes optimizados para maximizar el retorno neto.',
+    planImage: u('/images/plano_mockup_1d1b.jpg'),
+    price: 'Desde 2.540 UF',
+    specs: [
+      { label: 'Cap Rate proyectado', val: '6,8% a 7,4% anual' },
+      { label: 'Superficie total', val: '34,5 a 38,2 m²' },
+      { label: 'Perfil arrendatario', val: 'Profesionales jóvenes' },
+      { label: 'Garantía incluida', val: '12 meses de arriendo' }
+    ]
   },
   {
-    icon: '💎',
-    title: 'Bono Pie del 10%',
-    desc: 'Bonificación comercial directa para que completes tu pie bancario con un desembolso inicial significativamente menor, maximizando tu apalancamiento financiero.'
+    id: '2d-1b',
+    tabLabel: 'Modelo 2D + 1B',
+    kicker: 'Permanencia Extendida',
+    title: 'Modelo 2D + 1B · Equilibrio Patrimonial',
+    desc: 'Dormitorio principal amplio más segundo dormitorio versátil para home office o familia joven. Excelente tasa de retención de inquilinos y menor rotación interanual.',
+    planImage: u('/images/plano_mockup_2d1b.jpg'),
+    price: 'Desde 3.190 UF',
+    specs: [
+      { label: 'Cap Rate proyectado', val: '6,4% a 7,0% anual' },
+      { label: 'Superficie total', val: '46,0 a 52,4 m²' },
+      { label: 'Perfil arrendatario', val: 'Parejas y teletrabajo' },
+      { label: 'Garantía incluida', val: '12 meses de arriendo' }
+    ]
   },
   {
-    icon: '🗓️',
-    title: 'Hasta 60 Cuotas de Pie',
-    desc: 'Paga tu pie en cuotas mensuales sin interés durante la etapa de desarrollo y edificación en blanco, optimizando tu flujo de caja mensual.'
-  },
-  {
-    icon: '🛡️',
-    title: 'Garantía de Arriendo por 1 Año',
-    desc: 'Contamos con convenios y administración profesional para asegurar el arriendo de tu departamento desde el primer mes de recepción del proyecto.'
-  },
-  {
-    icon: '🔄',
-    title: 'Cesión de Promesa a Costo $0',
-    desc: 'Si decides transferir tus derechos de promesa a un tercero antes de la escrituración final, no aplicamos multas ni comisiones administrativas.'
-  },
-  {
-    icon: '🤝',
-    title: 'Asesoría Bancaria y Tributaria',
-    desc: 'Gestión integral de tu crédito hipotecario con los principales bancos del país y orientación para aprovechar beneficios del DFL2 y deducción de intereses.'
+    id: '2d-2b',
+    tabLabel: 'Modelo 2D + 2B Mariposa',
+    kicker: 'Máximo Canon Mensual',
+    title: 'Modelo 2D + 2B Mariposa · Doble Suite',
+    desc: 'Dos suites simétricas independientes separadas por el área social central. Formato altamente cotizado por profesionales que comparten arriendo con total privacidad.',
+    planImage: u('/images/plano_mockup_2d2b.jpg'),
+    price: 'Desde 3.750 UF',
+    specs: [
+      { label: 'Cap Rate proyectado', val: '6,2% a 6,8% anual' },
+      { label: 'Superficie total', val: '58,0 a 64,8 m²' },
+      { label: 'Perfil arrendatario', val: 'Roommates / Ejecutivos' },
+      { label: 'Plusvalía estimada', val: 'Tramo superior en UF/m²' }
+    ]
   }
 ];
 
-const investorTypologies = [
+const investmentPillars = [
   {
-    title: 'Modelo 1D + 1B (Desde 34 m²)',
-    badge: 'Mayor Velocidad de Arriendo',
-    price: 'Desde 2.390 UF',
-    capRate: '6.8% a 7.4% estimado',
-    features: ['Cocina americana equipada', 'Balcón con vista despejada', 'Bajos gastos comunes']
+    kicker: 'Ubicación & Conectividad',
+    big: 'A 1 Cuadra',
+    title: 'Metro Los Quillayes (L4) y servicios consolidados',
+    desc: 'Ubicado en Av. Vicuña Mackenna 11.600, frente a conectividad inmediata con el Metro, clínicas, universidades y centros comerciales, asegurando ocupación constante durante todo el año.',
+    checks: ['Baja tasa de vacancia histórica en el sector', 'Conectividad directa a Providencia y Las Condes', 'Comercio y equipamiento a distancia caminable']
   },
   {
-    title: 'Modelo 2D + 1B (Desde 46 m²)',
-    badge: 'Excelente Perfil de Arrendatarios',
-    price: 'Desde 3.190 UF',
-    capRate: '6.4% a 7.0% estimado',
-    features: ['Dormitorio secundario home office', 'Espacio para lavadora', 'Alta retención de inquilinos']
+    kicker: 'Apalancamiento Inteligente',
+    big: '10% + 60c',
+    title: 'Bono Pie del 10% y hasta 60 cuotas sin interés',
+    desc: 'Estructura financiera diseñada para entrar con bajo capital propio y distribuir el pago del pie en cuotas mensuales en pesos o UF sin interés bancario.',
+    checks: ['Bono Pie comercial de hasta 10%', 'Pie fraccionado en hasta 60 cuotas', 'Evaluación multi-banco para el hipotecario']
   },
   {
-    title: 'Modelo 2D + 2B Mariposa (Desde 58 m²)',
-    badge: 'Máxima Privacidad / Roommates',
-    price: 'Desde 3.750 UF',
-    capRate: '6.2% a 6.8% estimado',
-    features: ['Dos suites independientes', 'Ideal para profesionales jóvenes', 'Plusvalía superior']
+    kicker: 'Seguridad de Flujo y Salida',
+    big: '12 Meses',
+    title: 'Arriendo garantizado y cesión de promesa a costo $0',
+    desc: 'Si escrituras, te respaldamos con 1 año de arriendo garantizado y administración incluida. Si prefieres capturar la plusvalía antes de la entrega, puedes ceder tu promesa sin comisión.',
+    checks: ['Cero vacancia durante el primer año', 'Cesión de derechos liberada de multas ($0)', 'Beneficios tributarios DFL2 vigentes']
   }
 ];
 ---
 
 <BaseLayout 
-  title="Inversión Inmobiliaria | Rentabilidad y Plusvalía con AMA Inmobiliaria"
-  description="Multiplica tu patrimonio invirtiendo en departamentos nuevos en La Florida. Bono Pie 10%, cuotas sin interés y garantía de arriendo en Metro Los Quillayes."
+  title="Inversión Inmobiliaria | Rentabilidad y Plusvalía | AMA Inmobiliaria"
+  description="Multiplica tu patrimonio invirtiendo en AMA Quillayes, La Florida. Bono Pie 10%, hasta 60 cuotas sin interés, garantía de arriendo y cesión a costo $0."
 >
-  <!-- HERO INVERSIONISTAS -->
-  <section class="investor-hero">
-    <div class="investor-hero-bg" style={`background-image: url(${u('/images/ama_quillayes_facade.jpg')});`}>
-      <div class="investor-overlay"></div>
-    </div>
-    <div class="container investor-hero-content">
-      <h1 class="investor-title">
-        Multiplica tu patrimonio con inversión residencial inteligente
-      </h1>
-      <p class="investor-desc">
-        Aprovecha la venta en blanco en Edificio AMA Quillayes: alta plusvalía a pasos del Metro, Bono Pie del 10%, financiamiento en hasta 60 cuotas y respaldo de arriendo.
-      </p>
-      <div class="hero-btns-row">
-        <button 
-          type="button" 
-          class="btn btn-white"
-          onclick="window.openCotizadorModal && window.openCotizadorModal()"
-        >
-          <span>Simular Rentabilidad y Dividendo</span>
-          <span class="arrow">↗</span>
-        </button>
-        <a href={u('/contacto')} class="btn btn-outline-white">
-          <span>Hablar con un Asesor de Inversión</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- MÉTRICAS CLAVE PARA INVERSIONISTAS -->
-  <section class="investor-metrics-strip">
-    <div class="container">
-      <div class="metrics-grid">
-        <div class="metric-item">
-          <strong>10%</strong>
-          <span>Bono Pie Comercial Directo</span>
-        </div>
-        <div class="metric-item">
-          <strong>Hasta 60</strong>
-          <span>Cuotas sin interés en blanco</span>
-        </div>
-        <div class="metric-item">
-          <strong>1 Cuadra</strong>
-          <span>De estación Metro Los Quillayes</span>
-        </div>
-        <div class="metric-item">
-          <strong>12 Meses</strong>
-          <span>Garantía de arriendo asegurado</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PILARES DE VALOR -->
-  <section class="section section-cream">
-    <div class="container">
-      <div class="section-header text-center">
-        <h2 class="section-title">Por qué invertir con AMA Inmobiliaria</h2>
-        <p class="section-desc">
-          Estructuramos cada proyecto para que tu inversión sea segura, rentable y predecible desde el primer momento.
-        </p>
+  <!-- 1. HERO CINEMATOGRÁFICO -->
+  <section class="aurvix-hero ip-hero">
+    <div class="hero-card-banner">
+      <div class="hero-slideshow">
+        <div class="hero-slide active" style={`background-image: url(${u('/images/ama_quillayes_facade.jpg')});`}></div>
       </div>
 
-      <div class="benefits-grid">
-        {investorBenefits.map((b) => (
-          <div class="benefit-card">
-            <div class="benefit-icon">{b.icon}</div>
-            <h3 class="benefit-title">{b.title}</h3>
-            <p class="benefit-desc">{b.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+      <div class="hero-overlay-gradient"></div>
 
-  <!-- TIPOLOGÍAS RECOMENDADAS PARA RENTA -->
-  <section class="section section-white">
-    <div class="container">
-      <div class="section-header text-center">
-        <h2 class="section-title">Tipologías con mayor retorno de inversión</h2>
-        <p class="section-desc">
-          Diseñadas específicamente para la demanda de arriendo contemporánea: distribución abierta, luz natural y terminaciones duraderas.
-        </p>
-      </div>
+      <div class="container hero-banner-content">
+        <div class="hero-text-row">
+          <div class="hero-headline-col">
+            <h1 class="hero-title-aurvix">
+              MULTIPLICA TU PATRIMONIO CON<br />
+              INVERSIÓN INTELIGente
+            </h1>
+            <p class="hero-sub-aurvix">
+              Departamentos en La Florida a pasos del Metro Los Quillayes con <strong>Bono Pie del 10%</strong>, financiamiento del pie en hasta 60 cuotas y respaldo de arriendo el primer año.
+            </p>
 
-      <div class="typology-grid">
-        {investorTypologies.map((t) => (
-          <div class="typology-card">
-            <div class="typology-badge">{t.badge}</div>
-            <h3 class="typology-title">{t.title}</h3>
-            <div class="typology-price">{t.price}</div>
-            <div class="typology-cap">
-              <span>Retorno anual proyectado:</span>
-              <strong>{t.capRate}</strong>
+            <div class="hero-actions-row">
+              <a href="#simulador-inversion" class="btn-hero-primary">
+                <span>Simular Rentabilidad</span>
+                <span class="btn-arrow">↗</span>
+              </a>
+              <a href="#tipologias-renta" class="btn-hero-secondary">
+                <span>Ver Tipologías de Renta</span>
+              </a>
             </div>
-            <ul class="typology-features">
-              {t.features.map((f) => (
-                <li>✓ {f}</li>
-              ))}
-            </ul>
-            <button 
-              type="button" 
-              class="btn btn-petrol btn-block"
-              onclick="window.openCotizadorModal && window.openCotizadorModal()"
-            >
-              Cotizar esta Tipología ↗
-            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de Métricas Petrol al pie del Hero -->
+    <div class="ip-metrics-strip">
+      <div class="container">
+        <div class="ip-metrics-grid">
+          <div class="ip-metric-item">
+            <span class="ip-metric-val">6,8% – 7,4%</span>
+            <span class="ip-metric-label">Cap Rate anual estimado</span>
+          </div>
+          <div class="ip-metric-item">
+            <span class="ip-metric-val">Hasta 60</span>
+            <span class="ip-metric-label">Cuotas de pie sin interés</span>
+          </div>
+          <div class="ip-metric-item">
+            <span class="ip-metric-val">1 Cuadra</span>
+            <span class="ip-metric-label">Estación Metro Los Quillayes (L4)</span>
+          </div>
+          <div class="ip-metric-item">
+            <span class="ip-metric-val">12 Meses</span>
+            <span class="ip-metric-label">Garantía de arriendo asegurado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. TESIS DE INVERSIÓN (SPLIT CARD + FILAS EDITORIALES) -->
+  <section class="ip-section">
+    <div class="container">
+      <div class="ip-head">
+        <h2 class="ip-title">Por qué invertir en AMA Quillayes</h2>
+        <p class="ip-desc">
+          Un activo residencial concebido para maximizar la velocidad de arriendo, cuidar los gastos comunes y sostener su valor en el tiempo.
+        </p>
+      </div>
+
+      <!-- Tarjeta Split de Tesis Patrimonial -->
+      <div class="ip-split" style="margin-bottom: 4rem;">
+        <div class="ip-split-media">
+          <img src={u('/images/ama_amenity_rooftop.jpg')} alt="Vista panorámica y equipamiento AMA Quillayes" />
+        </div>
+
+        <div class="ip-split-info">
+          <div>
+            <span class="ip-kicker">Estrategia Patrimonial AMA</span>
+            <h3 class="ip-card-title">Arquitectura eficiente en una ubicación de alta demanda</h3>
+            <p class="ip-card-text">
+              Respaldado por Grupo SANJOSE, Holding Ernesto Valle (VAIN & ITLS) y Polux Inmobiliaria, el proyecto combina diseño interior duradero y equipamiento de baja mantención para proteger el flujo mensual del inversionista.
+            </p>
+
+            <div class="ip-specs">
+              <div class="ip-spec">
+                <div class="ip-spec-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                </div>
+                <div class="ip-spec-info">
+                  <span class="ip-spec-label">Demanda de arriendo</span>
+                  <strong class="ip-spec-val">Eje Vicuña Mackenna L4</strong>
+                </div>
+              </div>
+
+              <div class="ip-spec">
+                <div class="ip-spec-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                </div>
+                <div class="ip-spec-info">
+                  <span class="ip-spec-label">Bono Pie Comercial</span>
+                  <strong class="ip-spec-val">Hasta 10% de aporte</strong>
+                </div>
+              </div>
+
+              <div class="ip-spec">
+                <div class="ip-spec-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                </div>
+                <div class="ip-spec-info">
+                  <span class="ip-spec-label">Respaldo constructivo</span>
+                  <strong class="ip-spec-val">SANJOSE + VAIN S.A.</strong>
+                </div>
+              </div>
+
+              <div class="ip-spec">
+                <div class="ip-spec-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                </div>
+                <div class="ip-spec-info">
+                  <span class="ip-spec-label">Liquidez pre-entrega</span>
+                  <strong class="ip-spec-val">Cesión a costo $0</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ip-card-footer">
+            <div>
+              <span class="ip-footer-label">Unidades de inversión</span>
+              <div class="ip-footer-value">Desde 2.540 UF</div>
+            </div>
+
+            <div class="ip-actions">
+              <button
+                type="button"
+                class="btn-aurvix-dark"
+                onclick="window.openCotizadorModal && window.openCotizadorModal()"
+              >
+                <span>Solicitar Evaluación</span>
+                <span class="arrow">↗</span>
+              </button>
+              <a href={u('/proyectos/ama-quillayes')} class="ip-btn-ghost">
+                <span>Ficha del Proyecto</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filas Editoriales de Pilares -->
+      <div class="ip-rows">
+        {investmentPillars.map((p) => (
+          <div class="ip-row">
+            <div class="ip-row-meta">
+              <span class="ip-row-label">{p.kicker}</span>
+              <span class="ip-row-big">{p.big}</span>
+            </div>
+            <div>
+              <h3 class="ip-row-title">{p.title}</h3>
+              <p class="ip-row-text">{p.desc}</p>
+              <ul class="ip-row-checks">
+                {p.checks.map((c) => (
+                  <li>{c}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- COTIZADOR Y SIMULADOR DE INVERSIÓN -->
-  <section class="section section-white" id="simulador-inversion">
+  <!-- 3. TIPOLOGÍAS CON MAYOR RETORNO (INTERACTIVE SPLIT CARD + PILL TABS) -->
+  <section class="ip-section is-canvas" id="tipologias-renta">
     <div class="container">
-      <div class="section-header text-center">
-        <span class="badge badge-coral">Financiamiento Inversionista</span>
-        <h2 class="section-title">Simula tu Inversión en AMA Quillayes</h2>
-        <p class="section-desc">
-          Calcula tu dividendo, pie en hasta 60 cuotas sin interés y proyecta el flujo de tu departamento.
+      <div class="ip-head">
+        <h2 class="ip-title">Tipologías recomendadas para renta</h2>
+        <p class="ip-desc">
+          Compara las plantas con mayor velocidad de colocación y retorno anual proyectado en AMA Quillayes.
         </p>
       </div>
 
-      <div class="cotizador-wrap">
-        <Cotizador idPrefix="investor-calc" />
+      <div class="ip-tabs-bar">
+        <div class="ip-tabs-pill" role="tablist" aria-label="Tipologías para inversión">
+          {rentalTypologies.map((t, idx) => (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={idx === 0 ? 'true' : 'false'}
+              class={`ip-tab-btn ${idx === 0 ? 'active' : ''}`}
+              data-inv-tab={idx}
+            >
+              {t.tabLabel}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="ip-split">
+        <div class="ip-split-media" style="background: #FFFFFF;">
+          <img
+            id="inv-plan-img"
+            src={rentalTypologies[0].planImage}
+            alt={rentalTypologies[0].title}
+          />
+        </div>
+
+        <div class="ip-split-info">
+          <div>
+            <span class="ip-kicker" id="inv-kicker">{rentalTypologies[0].kicker}</span>
+            <h3 class="ip-card-title" id="inv-title">{rentalTypologies[0].title}</h3>
+            <p class="ip-card-text" id="inv-desc">{rentalTypologies[0].desc}</p>
+
+            <div class="ip-specs">
+              <div class="ip-spec">
+                <div class="ip-spec-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                </div>
+                <div class="ip-spec-info">
+                  <span class="ip-spec-label" id="inv-spec-label-0">{rentalTypologies[0].specs[0].label}</span>
+                  <strong class="ip-spec-val" id="inv-spec-val-0">{rentalTypologies[0].specs[0].val}</strong>
+                </div>
+              </div>
+
+              <div class="ip-spec">
+                <div class="ip-spec-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                </div>
+                <div class="ip-spec-info">
+                  <span class="ip-spec-label" id="inv-spec-label-1">{rentalTypologies[0].specs[1].label}</span>
+                  <strong class="ip-spec-val" id="inv-spec-val-1">{rentalTypologies[0].specs[1].val}</strong>
+                </div>
+              </div>
+
+              <div class="ip-spec">
+                <div class="ip-spec-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+                </div>
+                <div class="ip-spec-info">
+                  <span class="ip-spec-label" id="inv-spec-label-2">{rentalTypologies[0].specs[2].label}</span>
+                  <strong class="ip-spec-val" id="inv-spec-val-2">{rentalTypologies[0].specs[2].val}</strong>
+                </div>
+              </div>
+
+              <div class="ip-spec">
+                <div class="ip-spec-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                </div>
+                <div class="ip-spec-info">
+                  <span class="ip-spec-label" id="inv-spec-label-3">{rentalTypologies[0].specs[3].label}</span>
+                  <strong class="ip-spec-val" id="inv-spec-val-3">{rentalTypologies[0].specs[3].val}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ip-card-footer">
+            <div>
+              <span class="ip-footer-label">Valor de inversión</span>
+              <div class="ip-footer-value" id="inv-price">{rentalTypologies[0].price}</div>
+            </div>
+
+            <div class="ip-actions">
+              <button
+                type="button"
+                class="btn-aurvix-dark"
+                onclick="window.openCotizadorModal && window.openCotizadorModal()"
+              >
+                <span>Cotizar esta Tipología</span>
+                <span class="arrow">↗</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- BANNER CTA -->
+  <!-- 4. SIMULADOR Y COTIZADOR EN LÍNEA -->
+  <section class="ip-section" id="simulador-inversion">
+    <div class="container">
+      <div class="ip-head">
+        <h2 class="ip-title">Simula tu inversión y dividendo</h2>
+        <p class="ip-desc">
+          Calcula tu pie en hasta 60 cuotas sin interés, aplica el Bono Pie y proyecta tu dividendo mensual en tiempo real.
+        </p>
+      </div>
+
+      <Cotizador idPrefix="investor-calc" />
+    </div>
+  </section>
+
+  <!-- 5. BANNER CTA -->
   <ModernCTA />
 </BaseLayout>
 
-<style>
-  .investor-hero {
-    position: relative;
-    margin-top: -5rem;
-    padding: 12rem 0 6.5rem;
-    min-height: 580px;
-    display: flex;
-    align-items: center;
-    color: #FFFFFF;
-    overflow: hidden;
-  }
+<script define:vars={{ rentalTypologies }}>
+  const invTabs = document.querySelectorAll('[data-inv-tab]');
+  const planImg = document.getElementById('inv-plan-img');
+  const kickerEl = document.getElementById('inv-kicker');
+  const titleEl = document.getElementById('inv-title');
+  const descEl = document.getElementById('inv-desc');
+  const priceEl = document.getElementById('inv-price');
 
-  .investor-hero-bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center 30%;
-    z-index: 1;
-  }
+  invTabs.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const idx = Number(btn.getAttribute('data-inv-tab'));
+      const item = rentalTypologies[idx];
+      if (!item) return;
 
-  .investor-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(15, 23, 42, 0.94) 0%, rgba(15, 23, 42, 0.65) 60%, rgba(15, 23, 42, 0.35) 100%);
-  }
+      invTabs.forEach((b) => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
 
-  .investor-hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 820px;
-  }
+      if (planImg) {
+        planImg.classList.add('fade');
+        setTimeout(() => {
+          planImg.src = item.planImage;
+          planImg.alt = item.title;
+          planImg.classList.remove('fade');
+        }, 160);
+      }
 
-  .pill-tag-cyan {
-    display: inline-block;
-    padding: 0.4rem 1.1rem;
-    background: rgba(26, 166, 183, 0.25);
-    border: 1px solid rgba(26, 166, 183, 0.6);
-    color: #A5F3FC;
-    border-radius: 9999px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-  }
+      if (kickerEl) kickerEl.textContent = item.kicker;
+      if (titleEl) titleEl.textContent = item.title;
+      if (descEl) descEl.textContent = item.desc;
+      if (priceEl) priceEl.textContent = item.price;
 
-  .investor-title {
-    font-size: clamp(2.2rem, 4.4vw, 3.8rem);
-    font-weight: 800;
-    line-height: 1.1;
-    color: #FFFFFF;
-    margin: 0 0 1.5rem;
-    letter-spacing: -0.03em;
-  }
-
-  .investor-desc {
-    font-size: clamp(1rem, 1.3vw, 1.15rem);
-    line-height: 1.65;
-    color: rgba(255, 255, 255, 0.9);
-    margin: 0 0 2.2rem;
-    max-width: 720px;
-  }
-
-  .hero-btns-row {
-    display: flex;
-    gap: 1.1rem;
-    flex-wrap: wrap;
-  }
-
-  .btn-white {
-    background: #FFFFFF;
-    color: #0F172A !important;
-    font-weight: 700;
-    padding: 0.85rem 1.85rem;
-    border-radius: 9999px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    border: none;
-    cursor: pointer;
-  }
-
-  .btn-white:hover {
-    background: #F8FAFC;
-    transform: translateY(-2px);
-  }
-
-  .btn-outline-white {
-    background: rgba(255, 255, 255, 0.15);
-    color: #FFFFFF !important;
-    font-weight: 600;
-    padding: 0.85rem 1.85rem;
-    border-radius: 9999px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(10px);
-  }
-
-  .btn-outline-white:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
-  }
-
-  .investor-metrics-strip {
-    background: #0F172A;
-    color: #FFFFFF;
-    padding: 3rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    text-align: center;
-  }
-
-  .metric-item strong {
-    display: block;
-    font-size: clamp(2rem, 3.2vw, 2.8rem);
-    font-weight: 800;
-    color: var(--color-cyan, #1AA6B7);
-    line-height: 1;
-    margin-bottom: 0.4rem;
-  }
-
-  .metric-item span {
-    font-size: 0.92rem;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 500;
-  }
-
-  .benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 3.5rem;
-  }
-
-  .benefit-card {
-    background: #FFFFFF;
-    border-radius: 20px;
-    padding: 2.2rem;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.04);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .benefit-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.08);
-  }
-
-  .benefit-icon {
-    font-size: 2.2rem;
-    margin-bottom: 1.2rem;
-  }
-
-  .benefit-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #0F172A;
-    margin: 0 0 0.8rem;
-  }
-
-  .benefit-desc {
-    font-size: 0.95rem;
-    color: #4B5563;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .typology-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
-    margin-top: 3.5rem;
-  }
-
-  .typology-card {
-    background: #F8FAFC;
-    border-radius: 24px;
-    padding: 2.5rem 2rem;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    display: flex;
-    flex-direction: column;
-    transition: all 0.25s ease;
-  }
-
-  .typology-card:hover {
-    background: #FFFFFF;
-    box-shadow: 0 20px 40px -12px rgba(15, 23, 42, 0.12);
-    border-color: var(--color-cyan, #1AA6B7);
-    transform: translateY(-4px);
-  }
-
-  .typology-badge {
-    align-self: flex-start;
-    padding: 0.35rem 0.85rem;
-    background: rgba(26, 166, 183, 0.12);
-    color: var(--color-petrol, #0B2545);
-    font-size: 0.78rem;
-    font-weight: 700;
-    border-radius: 9999px;
-    margin-bottom: 1.2rem;
-  }
-
-  .typology-title {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: #0F172A;
-    margin: 0 0 0.8rem;
-  }
-
-  .typology-price {
-    font-size: 1.65rem;
-    font-weight: 800;
-    color: var(--color-cyan, #1AA6B7);
-    margin-bottom: 0.8rem;
-  }
-
-  .typology-cap {
-    background: rgba(0, 0, 0, 0.03);
-    padding: 0.75rem 1rem;
-    border-radius: 12px;
-    font-size: 0.86rem;
-    margin-bottom: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .typology-cap strong {
-    color: #059669;
-  }
-
-  .typology-features {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 2rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .typology-features li {
-    font-size: 0.9rem;
-    color: #4B5563;
-  }
-
-  @media (max-width: 1024px) {
-    .metrics-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-    }
-    .benefits-grid, .typology-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
+      item.specs.forEach((s, i) => {
+        const lEl = document.getElementById(`inv-spec-label-${i}`);
+        const vEl = document.getElementById(`inv-spec-val-${i}`);
+        if (lEl) lEl.textContent = s.label;
+        if (vEl) vEl.textContent = s.val;
+      });
+    });
+  });
+</script>

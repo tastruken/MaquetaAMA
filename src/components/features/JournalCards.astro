@@ -1,71 +1,94 @@
 ---
 // src/components/features/JournalCards.astro
 // Sección de blog e información financiera estilo Aurvix (Our journal)
-import { u } from '../../utils/url';
+import { u } from "../../utils/url";
 
 const rawArticles = [
   {
-    title: "¿Por qué invertir en La Florida? Conectividad y alta plusvalía en Metro Los Quillayes",
+    title:
+      "¿Por qué invertir en La Florida? Conectividad y alta plusvalía en Metro Los Quillayes",
     readTime: "5 min de lectura",
     image: "/images/ama_quillayes_facade.jpg",
-    link: "/blog/por-que-invertir-en-la-florida-quillayes"
+    link: "/blog/por-que-invertir-en-la-florida-quillayes",
   },
   {
-    title: "Cómo financiar tu primer departamento: Guía práctica para pagar el pie en cuotas",
+    title:
+      "Cómo financiar tu primer departamento: Guía práctica para pagar el pie en cuotas",
     readTime: "4 min de lectura",
     image: "/images/ama_interior_living.jpg",
-    link: "/blog/como-financiar-tu-primer-departamento"
+    link: "/blog/como-financiar-tu-primer-departamento",
   },
   {
-    title: "Claves para recibir tu departamento nuevo: Checklist técnico de entrega y garantías",
+    title:
+      "Claves para recibir tu departamento nuevo: Checklist técnico de entrega y garantías",
     readTime: "6 min de lectura",
     image: "/images/ama_quillayes_facade.jpg",
-    link: "/blog/claves-para-recibir-tu-departamento-nuevo"
-  }
+    link: "/blog/claves-para-recibir-tu-departamento-nuevo",
+  },
 ];
 
 const articles = rawArticles.map((art) => ({
   ...art,
   image: u(art.image),
-  link: u(art.link)
+  link: u(art.link),
 }));
 ---
 
 <section class="section journal-section">
   <div class="container">
     <div class="section-header text-center">
-      <h2 class="section-title">Inspiración, finanzas y consejos para tu nuevo hogar</h2>
+      <h2 class="section-title">
+        Inspiración, finanzas y consejos para tu nuevo hogar
+      </h2>
     </div>
 
     <div class="journal-grid">
-      {articles.map((art) => (
-        <article class="journal-card bento-card">
-          <a href={art.link} class="journal-media" aria-label={art.title}>
-            <img src={art.image} alt={art.title} class="journal-img" loading="lazy" />
-          </a>
-          <div class="journal-body">
-            <h3 class="journal-title">
-              <a href={art.link}>{art.title}</a>
-            </h3>
-            <div class="journal-footer">
-              <span class="read-time">{art.readTime}</span>
-              <a href={art.link} class="arrow-circle-btn outline" aria-label={`Leer ${art.title}`}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
+      {
+        articles.map((art) => (
+          <article class="journal-card bento-card">
+            <a href={art.link} class="journal-media" aria-label={art.title}>
+              <img
+                src={art.image}
+                alt={art.title}
+                class="journal-img"
+                loading="lazy"
+              />
+            </a>
+            <div class="journal-body">
+              <h3 class="journal-title">
+                <a href={art.link}>{art.title}</a>
+              </h3>
+              <div class="journal-footer">
+                <span class="read-time">{art.readTime}</span>
+                <a
+                  href={art.link}
+                  class="arrow-circle-btn outline"
+                  aria-label={`Leer ${art.title}`}
+                >
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </a>
+              </div>
             </div>
-          </div>
-        </article>
-      ))}
+          </article>
+        ))
+      }
     </div>
   </div>
 </section>
 
 <style>
   .journal-section {
-    background: #FFFFFF;
+    background: #ffffff;
     padding: 6rem 0;
   }
 
@@ -77,7 +100,7 @@ const articles = rawArticles.map((art) => ({
   }
 
   .journal-card {
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: var(--radius-bento);
     overflow: hidden;
     display: flex;

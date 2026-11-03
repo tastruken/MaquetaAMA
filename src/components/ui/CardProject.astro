@@ -1,6 +1,6 @@
 ---
 // src/components/ui/CardProject.astro
-// Tarjeta de proyecto inmobiliario estilo Luxury Listing Card de Aurvix
+// Tarjeta de proyecto inmobiliario con carrusel de fotos e información lateral
 import { u } from '../../utils/url';
 
 interface Props {
@@ -12,6 +12,7 @@ interface Props {
   status: 'En Blanco' | 'En Verde' | 'Entrega Inmediata';
   badgePromo?: string;
   image?: string;
+  images?: string[];
   dorms?: string;
   baths?: string;
   surface?: string;
@@ -28,83 +29,115 @@ const {
   status,
   badgePromo,
   image = '/images/ama_quillayes_facade.jpg',
+  images = [
+    '/images/ama_quillayes_facade.jpg',
+    '/images/ama_interior_living.jpg',
+    '/images/ama_piloto_cocina_quillayes.jpg',
+    '/images/ama_amenity_rooftop.jpg',
+    '/images/ama_quinchos_rooftop_quillayes.jpg'
+  ],
   dorms = '1 a 3 Dorms',
   baths = '1 a 2 Baños',
   surface = '34 a 72 m²',
   delivery = 'Entrega 2026',
   priceSubtitle = 'Pie en 36 cuotas'
 } = Astro.props;
+
+const slideImages = images.length > 0 ? images : [image];
 ---
 
-<article class="luxury-project-card bento-card">
-  <!-- Imagen Panorámica con Badges Flotantes -->
+<article class="luxury-project-card" data-project-carousel>
+  <!-- Columna Izquierda: Carrusel de Imágenes Edge-to-Edge (Sin enlace ni zoom) -->
   <div class="card-media-wrapper">
-    <a href={u(`/proyectos/${slug}`)} class="card-image-link" aria-label={`Ver detalles de ${title}`}>
-      <img 
-        src={u(image)} 
-        alt={title} 
-        class="card-img" 
-        loading="lazy" 
-      />
-    </a>
-
-    <!-- Badges Flotantes Superiores -->
-    <div class="card-floating-tags">
-      <span class="pill-tag-dark">{status}</span>
-      {badgePromo && <span class="pill-tag-coral">{badgePromo}</span>}
+    <div class="carousel-track">
+      {slideImages.map((imgSrc, idx) => (
+        <div class={`carousel-slide ${idx === 0 ? 'active' : ''}`} data-slide-index={idx}>
+          <img 
+            src={u(imgSrc)} 
+            alt={`${title} - Vista ${idx + 1}`} 
+            class="card-img" 
+            loading={idx === 0 ? 'eager' : 'lazy'} 
+          />
+        </div>
+      ))}
     </div>
 
-    <!-- Botón Favorito / Guardar -->
-    <button type="button" class="btn-fav-circle" aria-label="Guardar proyecto">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-      </svg>
-    </button>
+    {slideImages.length > 1 && (
+      <>
+        <button type="button" class="carousel-arrow prev" data-carousel-prev aria-label="Imagen anterior">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button type="button" class="carousel-arrow next" data-carousel-next aria-label="Siguiente imagen">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+
+        <div class="carousel-dots" role="tablist" aria-label="Selector de imagen">
+          {slideImages.map((_, idx) => (
+            <button
+              type="button"
+              class={`carousel-dot ${idx === 0 ? 'active' : ''}`}
+              data-carousel-dot={idx}
+              aria-label={`Ir a imagen ${idx + 1}`}
+            />
+          ))}
+        </div>
+      </>
+    )}
   </div>
 
-  <!-- Franja de Especificaciones (Specs Strip estilo Aurvix) -->
-  <div class="specs-strip">
-    <div class="spec-item">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"></path>
-      </svg>
-      <span>{dorms}</span>
-    </div>
-    <span class="spec-sep">|</span>
-    <div class="spec-item">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M9 6v14M15 6v14M4 10h16M4 14h16"></path>
-      </svg>
-      <span>{baths}</span>
-    </div>
-    <span class="spec-sep">|</span>
-    <div class="spec-item">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-        <path d="M3 9h18M9 21V9"></path>
-      </svg>
-      <span>{surface}</span>
-    </div>
-  </div>
-
-  <!-- Contenido y Precios -->
+  <!-- Columna Derecha: Barra Lateral de Información y Precios -->
   <div class="card-details">
-    <div class="title-row">
-      <h3 class="card-project-title">
-        <a href={u(`/proyectos/${slug}`)}>{title}</a>
-      </h3>
-      <span class="delivery-year">{delivery}</span>
+    <div class="card-details-top">
+      <!-- Etiquetas de Estado y Entrega en la Barra Lateral -->
+      <div class="sidebar-badges-row">
+        <span class="pill-tag-dark">{status}</span>
+        {badgePromo && <span class="pill-tag-coral">{badgePromo}</span>}
+        <span class="delivery-year">{delivery}</span>
+      </div>
+
+      <h3 class="card-project-title">{title}</h3>
+
+      <div class="location-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span>{location}</span>
+      </div>
+
+      <p class="card-project-summary">
+        Departamentos de 1 y 2 dormitorios con terrazas continuas a lo ancho, diseño contemporáneo de alta eficiencia térmica y conectividad directa a Metro Los Quillayes (L4).
+      </p>
+
+      <!-- Franja de Especificaciones (Specs Strip) -->
+      <div class="specs-strip">
+        <div class="spec-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"></path>
+          </svg>
+          <span>{dorms}</span>
+        </div>
+        <div class="spec-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 6v14M15 6v14M4 10h16M4 14h16"></path>
+          </svg>
+          <span>{baths}</span>
+        </div>
+        <div class="spec-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+            <path d="M3 9h18M9 21V9"></path>
+          </svg>
+          <span>{surface}</span>
+        </div>
+      </div>
     </div>
 
-    <div class="location-row">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-        <circle cx="12" cy="10" r="3"></circle>
-      </svg>
-      <span>{location}</span>
-    </div>
-
-    <!-- Pie con Precio y CTA circular -->
+    <!-- Pie con Precio y Único Botón de Navegación al Proyecto -->
     <div class="card-action-footer">
       <div class="price-container">
         <span class="price-prefix">Desde</span>
@@ -120,40 +153,100 @@ const {
         >
           Cotizar
         </button>
-        <a href={u(`/proyectos/${slug}`)} class="arrow-circle-btn" aria-label={`Ver ficha de ${title}`}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <line x1="7" y1="17" x2="17" y2="7"></line>
-            <polyline points="7 7 17 7 17 17"></polyline>
-          </svg>
+        <a href={u(`/proyectos/${slug}`)} class="btn-ver-proyecto">
+          <span>Ver Proyecto</span>
+          <span aria-hidden="true">↗</span>
         </a>
       </div>
     </div>
   </div>
 </article>
 
+<script>
+  function initProjectCarousels() {
+    const cards = document.querySelectorAll<HTMLElement>('[data-project-carousel]');
+    cards.forEach((card) => {
+      if (card.dataset.bound === 'true') return;
+      card.dataset.bound = 'true';
+
+      const slides = card.querySelectorAll<HTMLElement>('.carousel-slide');
+      const dots = card.querySelectorAll<HTMLElement>('.carousel-dot');
+      const prevBtn = card.querySelector<HTMLElement>('[data-carousel-prev]');
+      const nextBtn = card.querySelector<HTMLElement>('[data-carousel-next]');
+      if (slides.length <= 1) return;
+
+      let current = 0;
+
+      function showSlide(index: number) {
+        slides[current]?.classList.remove('active');
+        dots[current]?.classList.remove('active');
+        current = (index + slides.length) % slides.length;
+        slides[current]?.classList.add('active');
+        dots[current]?.classList.add('active');
+      }
+
+      prevBtn?.addEventListener('click', () => showSlide(current - 1));
+      nextBtn?.addEventListener('click', () => showSlide(current + 1));
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const idx = parseInt(dot.getAttribute('data-carousel-dot') || '0', 10);
+          showSlide(idx);
+        });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProjectCarousels);
+  } else {
+    initProjectCarousels();
+  }
+  document.addEventListener('astro:page-load', initProjectCarousels);
+</script>
+
 <style>
   .luxury-project-card {
-    padding: 0.85rem;
-    border-radius: var(--radius-bento);
+    padding: 0;
+    border-radius: 28px;
     background: #FFFFFF;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    transition: all var(--transition-elastic);
+    border: 1px solid rgba(var(--rgb-petrol), 0.08);
+    box-shadow: var(--shadow-card);
+    display: grid;
+    grid-template-columns: 1.75fr 1fr;
+    gap: 0;
+    align-items: stretch;
+    width: 100%;
+    overflow: hidden;
   }
 
   .card-media-wrapper {
     position: relative;
-    border-radius: 18px;
+    border-radius: 0;
     overflow: hidden;
-    height: 270px;
+    min-height: 620px;
+    height: 100%;
     background-color: var(--color-petrol);
+    user-select: none;
   }
 
-  .card-image-link {
-    display: block;
+  .carousel-track {
+    position: relative;
     width: 100%;
     height: 100%;
+    min-height: 620px;
+  }
+
+  .carousel-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.45s ease;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .card-img {
@@ -161,159 +254,186 @@ const {
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .luxury-project-card:hover .card-img {
-    transform: scale(1.05);
-  }
-
-  .card-floating-tags {
+  /* Controles del Carrusel */
+  .carousel-arrow {
     position: absolute;
-    top: 0.9rem;
-    left: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .carousel-arrow:hover {
+    background: rgba(15, 23, 42, 0.9);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .carousel-arrow.prev {
+    left: 1.25rem;
+  }
+
+  .carousel-arrow.next {
+    right: 1.25rem;
+  }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: width 0.25s ease, background 0.25s ease;
+  }
+
+  .carousel-dot.active {
+    width: 24px;
+    background: #FFFFFF;
+  }
+
+  /* Details (Barra Lateral al Costado de la Imagen) */
+  .card-details {
+    padding: 2.75rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #FFFFFF;
+  }
+
+  .sidebar-badges-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem;
-    z-index: 2;
-    pointer-events: none;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.15rem;
   }
 
   .pill-tag-dark {
-    background: rgba(0, 20, 30, 0.8);
-    backdrop-filter: blur(8px);
+    background: var(--color-petrol);
     color: #FFFFFF;
-    padding: 0.3rem 0.75rem;
+    padding: 0.34rem 0.9rem;
     border-radius: var(--radius-full);
-    font-size: 0.76rem;
-    font-weight: 600;
+    font-size: 0.78rem;
+    font-weight: 700;
     letter-spacing: 0.02em;
-    border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   .pill-tag-coral {
     background: var(--color-coral);
     color: #FFFFFF;
-    padding: 0.3rem 0.75rem;
+    padding: 0.34rem 0.9rem;
     border-radius: var(--radius-full);
-    font-size: 0.76rem;
+    font-size: 0.78rem;
     font-weight: 700;
-    box-shadow: 0 4px 12px rgba(var(--rgb-coral), 0.35);
-  }
-
-  .btn-fav-circle {
-    position: absolute;
-    top: 0.9rem;
-    right: 0.9rem;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-petrol);
-    z-index: 2;
-    transition: all var(--transition-fast);
-  }
-
-  .btn-fav-circle:hover {
-    background: #FFFFFF;
-    color: var(--color-coral);
-    transform: scale(1.08);
-  }
-
-  /* Specs Strip */
-  .specs-strip {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0.6rem 0.75rem;
-    font-size: 0.84rem;
-    color: var(--text-muted);
-    font-weight: 500;
-    border-bottom: 1px solid rgba(var(--rgb-petrol), 0.06);
-  }
-
-  .spec-item {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-  }
-
-  .spec-item svg {
-    color: var(--color-cyan);
-  }
-
-  .spec-sep {
-    color: rgba(var(--rgb-petrol), 0.15);
-  }
-
-  /* Details */
-  .card-details {
-    padding: 1rem 0.6rem 0.5rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
-
-  .title-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem 0.8rem;
-    margin-bottom: 0.4rem;
-  }
-
-  .card-project-title {
-    font-size: 1.35rem;
-    font-weight: var(--font-weight-heavy);
-    color: var(--color-petrol);
-    line-height: 1.2;
-    white-space: nowrap;
-  }
-
-  .card-project-title a {
-    color: inherit;
-  }
-
-  .card-project-title a:hover {
-    color: var(--color-cyan);
   }
 
   .delivery-year {
-    font-size: 0.82rem;
-    font-weight: 600;
+    font-size: 0.78rem;
+    font-weight: 700;
     color: var(--color-petrol);
-    background: rgba(var(--rgb-petrol), 0.05);
-    padding: 0.25rem 0.6rem;
+    background: rgba(var(--rgb-petrol), 0.06);
+    padding: 0.34rem 0.85rem;
     border-radius: var(--radius-full);
     white-space: nowrap;
+  }
+
+  .card-project-title {
+    font-size: clamp(1.85rem, 2.5vw, 2.35rem);
+    font-weight: var(--font-weight-heavy);
+    color: var(--color-petrol);
+    line-height: 1.15;
+    margin: 0 0 0.75rem;
   }
 
   .location-row {
     display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.86rem;
+    align-items: flex-start;
+    gap: 0.45rem;
+    font-size: 0.92rem;
+    line-height: 1.45;
     color: var(--text-soft);
     margin-bottom: 1.25rem;
   }
 
   .location-row svg {
     color: var(--color-cyan);
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .card-project-summary {
+    font-size: 0.96rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+    margin: 0 0 1.65rem;
+  }
+
+  /* Specs Strip */
+  .specs-strip {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 1.35rem 0;
+    font-size: 0.95rem;
+    color: var(--color-petrol);
+    font-weight: 600;
+    border-top: 1px solid rgba(var(--rgb-petrol), 0.08);
+    border-bottom: 1px solid rgba(var(--rgb-petrol), 0.08);
+    margin-bottom: 1.65rem;
+  }
+
+  .spec-item {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .spec-item svg {
+    color: var(--color-cyan);
+    flex-shrink: 0;
   }
 
   /* Action Footer */
   .card-action-footer {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     margin-top: auto;
-    padding-top: 0.75rem;
-    border-top: 1px solid rgba(var(--rgb-petrol), 0.06);
+    padding-top: 0.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
 
   .price-container {
@@ -322,44 +442,75 @@ const {
   }
 
   .price-prefix {
-    font-size: 0.72rem;
-    font-weight: 600;
+    font-size: 0.74rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--text-soft);
   }
 
   .price-number {
-    font-size: 1.45rem;
+    font-size: clamp(1.65rem, 2.2vw, 2rem);
     font-weight: var(--font-weight-heavy);
     color: var(--color-petrol);
-    line-height: 1.1;
+    line-height: 1.15;
   }
 
   .price-subtitle {
-    font-size: 0.76rem;
+    font-size: 0.82rem;
     color: var(--color-cyan);
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .action-buttons-group {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.55rem;
   }
 
   .btn-cotizar-mini {
-    padding: 0.55rem 1rem;
+    padding: 0.72rem 1.25rem;
     border-radius: var(--radius-full);
-    background: rgba(var(--rgb-petrol), 0.05);
+    background: rgba(var(--rgb-petrol), 0.06);
     color: var(--color-petrol);
-    font-size: 0.84rem;
+    font-size: 0.88rem;
     font-weight: 700;
-    transition: all var(--transition-fast);
+    transition: background var(--transition-fast), color var(--transition-fast);
   }
 
   .btn-cotizar-mini:hover {
+    background: rgba(var(--rgb-petrol), 0.12);
+  }
+
+  .btn-ver-proyecto {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.72rem 1.35rem;
+    border-radius: var(--radius-full);
     background: var(--color-petrol);
-    color: #FFFFFF;
+    color: #FFFFFF !important;
+    font-size: 0.88rem;
+    font-weight: 700;
+    transition: background var(--transition-fast);
+  }
+
+  .btn-ver-proyecto:hover {
+    background: var(--color-cyan);
+  }
+
+  @media (max-width: 1024px) {
+    .luxury-project-card {
+      grid-template-columns: 1fr;
+    }
+
+    .card-media-wrapper,
+    .carousel-track {
+      min-height: 400px;
+    }
+
+    .card-details {
+      padding: 2rem 1.5rem;
+    }
   }
 </style>
