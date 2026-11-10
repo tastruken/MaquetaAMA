@@ -97,51 +97,79 @@ const isHomePage = isHomeProp !== undefined ? isHomeProp : (currentPathNorm === 
   }
 
   /* ========================================================
-     BOTONES DESTACADOS EXCLUSIVOS DE LA PÁGINA DE INICIO (#FF8541)
+     BOTONES DESTACADOS GLOBALES EN TODA LA WEB (#FF8541)
      ======================================================== */
-  body.is-home-page .btn-hero-primary {
+  body .btn-hero-primary,
+  body .btn-cta-primary {
     background-color: #FF8541 !important;
+    background: #FF8541 !important;
     color: #FFFFFF !important;
     border-color: #FF8541 !important;
     box-shadow: 0 8px 24px rgba(255, 133, 65, 0.38) !important;
   }
 
-  body.is-home-page .btn-hero-primary:hover {
+  body .btn-hero-primary:hover,
+  body .btn-cta-primary:hover {
     background-color: #F07028 !important;
+    background: #F07028 !important;
     border-color: #F07028 !important;
     transform: translateY(-2px) !important;
     box-shadow: 0 12px 30px rgba(255, 133, 65, 0.48) !important;
   }
 
-  body.is-home-page .btn-hero-primary .btn-arrow {
+  body .btn-hero-primary .btn-arrow,
+  body .btn-cta-primary .cta-arrow-icon {
     color: #FFFFFF !important;
   }
 
-  body.is-home-page .btn-header-cotizar {
+  body .btn-header-cotizar {
     background: #FF8541 !important;
     color: #FFFFFF !important;
     box-shadow: 0 4px 14px rgba(255, 133, 65, 0.32) !important;
   }
 
-  body.is-home-page .btn-header-cotizar:hover {
+  body .btn-header-cotizar:hover {
     background: #F07028 !important;
     box-shadow: 0 6px 18px rgba(255, 133, 65, 0.45) !important;
   }
 
-  body.is-home-page .btn-ver-proyecto {
+  body .btn-ver-proyecto,
+  body .btn-submit-quote,
+  body .hkc-cta-btn,
+  body .tu-cotizar-btn,
+  body .btn-address-primary,
+  body .btn-aurvix-dark,
+  body .quote-lead-form .btn-coral {
+    background-color: #FF8541 !important;
     background: #FF8541 !important;
+    color: #FFFFFF !important;
     border-color: #FF8541 !important;
     box-shadow: 0 4px 14px rgba(255, 133, 65, 0.28) !important;
   }
 
-  body.is-home-page .btn-ver-proyecto:hover {
+  body .btn-ver-proyecto:hover,
+  body .btn-submit-quote:hover,
+  body .hkc-cta-btn:hover,
+  body .tu-cotizar-btn:hover,
+  body .btn-address-primary:hover,
+  body .btn-aurvix-dark:hover,
+  body .quote-lead-form .btn-coral:hover {
+    background-color: #F07028 !important;
     background: #F07028 !important;
+    color: #FFFFFF !important;
     border-color: #F07028 !important;
-    box-shadow: 0 6px 18px rgba(255, 133, 65, 0.4) !important;
+    box-shadow: 0 6px 18px rgba(255, 133, 65, 0.42) !important;
   }
 
-  body.is-home-page .mobile-drawer-cta .btn-petrol {
+  body .btn-aurvix-dark .arrow,
+  body .btn-submit-quote .btn-arrow,
+  body .tu-cotizar-btn .tu-arrow {
+    color: #FFFFFF !important;
+  }
+
+  body .mobile-drawer-cta .btn-petrol {
     background: #FF8541 !important;
     border-color: #FF8541 !important;
+    color: #FFFFFF !important;
   }
 </style>
