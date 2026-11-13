@@ -14,20 +14,22 @@ const { currentPath = Astro.url.pathname } = Astro.props;
 const rawLinks = [
   { name: 'Inicio', path: '/' },
   { name: 'Proyectos', path: '/proyectos/ama-quillayes' },
-  { name: 'Ofertas', path: '/ofertas' },
+  { name: 'Ofertas', path: '/ofertas', hidden: true },
   { name: 'Nosotros', path: '/nosotros' },
-  { name: 'Inversionistas', path: '/inversionistas' },
+  { name: 'Inversionistas', path: '/inversionistas', hidden: true },
   { name: 'Proceso de compra', path: '/proceso-de-compra' },
-  { name: 'Postventa', path: '/postventa' },
+  { name: 'Postventa', path: '/postventa', hidden: true },
   { name: 'Blog', path: '/blog' },
   { name: 'Contacto', path: '/contacto' },
 ];
 
-const navLinks = rawLinks.map((link) => ({
-  name: link.name,
-  href: u(link.path),
-  rawPath: link.path,
-}));
+const navLinks = rawLinks
+  .filter((link) => !link.hidden)
+  .map((link) => ({
+    name: link.name,
+    href: u(link.path),
+    rawPath: link.path,
+  }));
 
 const isActive = (rawPath: string) => {
   const normCurrent = currentPath.replace(base, '') || '/';

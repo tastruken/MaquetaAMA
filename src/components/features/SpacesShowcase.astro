@@ -9,55 +9,33 @@ const spacesData = [
     tabName: 'Living',
     tag: 'TERMINACIÓN PREMIUM',
     title: 'Living & Terraza Integrada',
-    subtitle: 'Amplitud y luminosidad con ventanales termopanel de piso a cielo',
-    description: 'Espacios de concepto abierto que optimizan cada metro cuadrado. Su diseño permite una transición fluida entre el interior y la terraza panorámica con vistas despejadas a la cordillera.',
+    subtitle: 'Amplitud y luminosidad con ventanales termopanel.',
+    description: 'Espacios que optimizan cada metro cuadrado. Su diseño permite una transición fluida entre el interior y exterior, aportando mayor amplitud y luminosidad.',
     image: u('/images/ama_interior_living.jpg'),
     alt: 'Living comedor y terraza integrada Edificio AMA Quillayes',
-    badges: ['Aislación Acústica', 'Luz Natural 100%', 'Conexión a Terraza']
+    badges: ['Piso Fotolaminado', 'Luz Natural']
   },
   {
     id: 'cocina',
-    tabName: 'Cocina Equipada',
+    tabName: 'Cocina',
     tag: 'DISEÑO FUNCIONAL',
-    title: 'Cocina de Concepto Abierto',
-    subtitle: 'Cubiertas de cuarzo noble y equipamiento full eléctrico de bajo consumo',
-    description: 'Espacio contemporáneo pensado para compartir. Incluye encimera vitrocerámica, horno empotrado, campana retráctil de acero inoxidable y mobiliario con cierre suave.',
-    image: u('/images/aurvix_cat_apartments.jpg'),
-    alt: 'Cocina equipada moderna AMA Quillayes',
+    title: 'Cocinas Integradas',
+    subtitle: 'Cubiertas de cuarzo y full equipadas',
+    description: 'Espacio contemporáneo pensado para compartir. Incluye encimera, horno, campana y cubierta de cuarzo.',
+    image: u('/images/ama_piloto_cocina_quillayes.jpg'),
+    alt: 'Cocina integrada equipada AMA Quillayes',
     badges: ['Cubiertas de Cuarzo', 'Full Eléctrica', 'Cierre Suave']
   },
   {
     id: 'dormitorio',
-    tabName: 'Dormitorio Principal en Suite',
+    tabName: 'Dormitorio',
     tag: 'CONFORT & DESCANSO',
-    title: 'Dormitorio Principal en Suite',
-    subtitle: 'Privacidad absoluta con walk-in clóset y baño de vanguardia',
-    description: 'Ambiente acústicamente aislado que garantiza el descanso. Ventanales con marco de PVC termopanel, piso fotolaminado de alto tráfico y distribución optimizada.',
-    image: u('/images/aurvix_cat_modern.jpg'),
-    alt: 'Dormitorio principal en suite AMA Quillayes',
+    title: 'Dormitorio en Suite',
+    subtitle: 'Privacidad absoluta con conexión a terraza.',
+    description: 'Ambiente que garantiza el descanso por medio de ventanales con marco de PVC termopanel, piso fotolaminado de alto tráfico y distribución optimizada.',
+    image: u('/images/ama_dormitorio_suite_quillayes.jpg'),
+    alt: 'Dormitorio en suite AMA Quillayes',
     badges: ['Walk-in Clóset', 'Baño en Suite', 'Ventanales Termopanel']
-  },
-  {
-    id: 'cowork',
-    tabName: 'Cowork',
-    tag: 'VIDA CONTEMPORÁNEA',
-    title: 'Cowork & Lounge de Trabajo',
-    subtitle: 'Espacio colaborativo con internet de alta velocidad y luz natural',
-    description: 'El equilibrio perfecto entre vida personal y profesional. Salas privadas para videollamadas, mesas de trabajo compartido y un ambiente climatizado de alto estándar.',
-    image: u('/images/aurvix_space_living.jpg'),
-    alt: 'Espacio Cowork colaborativo AMA Quillayes',
-    badges: ['Wifi Alta Velocidad', 'Salas de Reunión', 'Climatización']
-  },
-  {
-    id: 'rooftop',
-    tabName: 'Rooftop, Quinchos',
-    tag: 'VISTA PANORÁMICA',
-    title: 'Rooftop & Quinchos en Azotea',
-    subtitle: 'Piscina panorámica y parrillas gourmet frente a la Cordillera de Los Andes',
-    description: 'Un mirador exclusivo en la cúspide del edificio. Diseñado para celebraciones familiares, tardes de piscina y momentos de desconexión con una vista 360° privilegiada.',
-    image: u('/images/ama_amenity_rooftop.jpg'),
-    alt: 'Rooftop, piscina y quinchos panorámicos AMA Quillayes',
-    badges: ['Piscina Panorámica', 'Parrillas Gourmet', 'Vista 360° Cordillera']
   }
 ];
 ---
@@ -68,7 +46,7 @@ const spacesData = [
     <div class="section-header text-center">
       <h2 class="spaces-main-title">Diseño de vanguardia en cada rincón</h2>
       <p class="spaces-main-sub">
-        Explora los ambientes de AMA Quillayes diseñados bajo los más altos estándares de arquitectura y habitabilidad.
+        Descubre la armonía entre diseño, funcionalidad y comodidad.
       </p>
     </div>
 
@@ -127,9 +105,6 @@ const spacesData = [
             <span>Cotizar este Departamento</span>
             <span class="arrow">↗</span>
           </button>
-          <a href="#amenities" class="btn-spaces-secondary">
-            Ver todos los amenities
-          </a>
         </div>
       </div>
     </div>
@@ -140,6 +115,10 @@ const spacesData = [
   .spaces-showcase-section {
     background: #FFFFFF;
     padding: 6rem 0 6.5rem;
+  }
+
+  .section-header.text-center {
+    text-align: center;
   }
 
   .spaces-badge-pill {
@@ -342,25 +321,6 @@ const spacesData = [
   .btn-spaces-primary:hover {
     background: var(--color-cyan, #1AA6B7);
     transform: translateY(-2px);
-  }
-
-  .btn-spaces-secondary {
-    display: inline-flex;
-    align-items: center;
-    background: transparent;
-    color: #0F172A !important;
-    font-weight: 600;
-    font-size: 0.92rem;
-    padding: 0.85rem 1.65rem;
-    border-radius: 9999px;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    text-decoration: none;
-    transition: all 0.25s ease;
-  }
-
-  .btn-spaces-secondary:hover {
-    background: #F8FAFC;
-    border-color: #0F172A;
   }
 
   @media (max-width: 1024px) {

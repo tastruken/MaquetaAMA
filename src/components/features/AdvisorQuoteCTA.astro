@@ -5,10 +5,11 @@ import { u } from '../../utils/url';
 
 interface Props {
   phone?: string;
+  email?: string;
 }
 
-const { phone = '56987654321' } = Astro.props;
-const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Camila, me gustaría cotizar un departamento en AMA Quillayes y recibir asesoría sobre el financiamiento.')}`;
+const { phone = '56985266310', email = 'quillayes@iama.cl' } = Astro.props;
+const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Catalina, me gustaría cotizar un departamento en AMA Quillayes y recibir asesoría sobre el financiamiento.')}`;
 ---
 
 <section class="advisor-cta-section" id="cotizar-asesor">
@@ -73,9 +74,21 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cami
             </select>
           </div>
 
+          <div class="form-field">
+            <label class="form-label" for="aq-renta">Nivel de renta mensual *</label>
+            <select id="aq-renta" name="renta" required class="form-select">
+              <option value="" selected disabled>Selecciona tu tramo de renta</option>
+              <option value="Menos de $1.000.000">Menos de $1.000.000</option>
+              <option value="De $1.000.000 a $1.500.000">De $1.000.000 a $1.500.000</option>
+              <option value="De $1.500.000 a $2.000.000">De $1.500.000 a $2.000.000</option>
+              <option value="De $2.000.000 a $3.000.000">De $2.000.000 a $3.000.000</option>
+              <option value="Más de $3.000.000">Más de $3.000.000</option>
+            </select>
+          </div>
+
           <!-- BOTONES LADO A LADO -->
           <div class="form-actions-wrap">
-            <button type="submit" class="btn-submit-quote">
+            <button type="submit" id="aq-submit-btn" class="btn-submit-quote">
               <span>Solicitar Cotización Oficial</span>
               <span class="btn-arrow" aria-hidden="true">↗</span>
             </button>
@@ -85,7 +98,7 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cami
               target="_blank" 
               rel="noopener noreferrer" 
               class="btn-whatsapp-quote"
-              aria-label="Hablar directo por WhatsApp con Camila"
+              aria-label="Hablar directo por WhatsApp con Catalina Carrasco"
             >
               <span class="wa-icon" aria-hidden="true">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -98,8 +111,9 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cami
 
           <div id="aq-success" class="quote-success-banner" style="display: none;">
             <strong>✓ ¡Solicitud recibida con éxito!</strong>
-            <p>Camila Morales se comunicará contigo al teléfono y correo ingresados para entregarte la cotización formal y asesorarte en tu financiamiento.</p>
+            <p>Catalina Carrasco se comunicará contigo al teléfono y correo ingresados para entregarte la cotización formal y asesorarte en tu financiamiento.</p>
           </div>
+          <div id="aq-error" class="quote-error-banner" style="display: none;"></div>
         </form>
       </div>
 
@@ -107,7 +121,7 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cami
       <div class="advisor-visual-col">
         <img 
           src={u('/images/asesor_comercial_quillayes.jpg')} 
-          alt="Camila Morales - Asesora Comercial AMA Quillayes" 
+          alt="Catalina Carrasco - Asesora Comercial AMA Quillayes" 
           class="advisor-cover-img" 
           loading="lazy" 
         />
@@ -119,18 +133,23 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cami
             “Te acompaño a revisar las opciones de financiamiento, simular tu crédito y ordenar tus cuotas de pie con total transparencia.”
           </p>
           <div class="advisor-meta-row">
-            <div>
-              <h3 class="advisor-full-name">Camila Morales</h3>
-              <span class="advisor-job-title">Asesora Comercial · AMA Quillayes</span>
+            <div class="advisor-meta-info">
+              <h3 class="advisor-full-name">Catalina Carrasco</h3>
+              <div class="advisor-contact-lines">
+                <a href={`tel:+${phone}`} class="advisor-contact-link">+569 8526 6310</a>
+                <a href={`mailto:${email}`} class="advisor-contact-link advisor-contact-email">{email}</a>
+              </div>
+              <span class="advisor-job-title">ASESORA COMERCIAL - QUILLAYES</span>
             </div>
             <a 
               href={whatsappUrl} 
               target="_blank" 
               rel="noopener noreferrer" 
               class="advisor-wa-pill"
-              title="Abrir WhatsApp directo con Camila"
+              title="Abrir WhatsApp directo con Catalina Carrasco"
+              aria-label="Abrir WhatsApp directo con Catalina Carrasco"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.947.814 2.8.814 3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.586-5.766-5.772-5.766zm3.376 8.21c-.14.394-.805.748-1.127.794-.306.044-.707.067-2.038-.484-1.603-.665-2.617-2.316-2.696-2.423-.079-.107-.649-.864-.649-1.647 0-.783.41-1.168.556-1.328.146-.16.321-.2.428-.2.107 0 .214.002.308.006.1.005.234-.038.366.279.136.328.465 1.135.505 1.218.041.082.068.179.014.288-.055.107-.082.175-.164.27-.082.096-.173.214-.247.288-.082.083-.168.172-.072.337.096.164.428.706.918 1.142.631.562 1.164.737 1.328.819.164.082.261.069.358-.041.097-.11.41-.479.52-.644.11-.164.22-.137.369-.082.15.055.952.449 1.116.531.164.082.273.123.314.192.041.069.041.401-.099.795zM12 2C6.477 2 2 6.477 2 12c0 1.891.526 3.66 1.439 5.174L2 22l4.98-1.306C8.423 21.523 10.15 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
               </svg>
             </a>
@@ -142,16 +161,67 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cami
   </div>
 </section>
 
-<script>
-  const quoteForm = document.getElementById('advisor-quote-form') as HTMLFormElement | null;
+<script define:vars={{ email }}>
+  const quoteForm = document.getElementById('advisor-quote-form');
+  const quoteSubmit = document.getElementById('aq-submit-btn');
   const quoteSuccess = document.getElementById('aq-success');
+  const quoteError = document.getElementById('aq-error');
 
   if (quoteForm && quoteSuccess) {
-    quoteForm.addEventListener('submit', (e) => {
+    quoteForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      quoteSuccess.style.display = 'block';
-      quoteForm.reset();
-      quoteSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      const name = document.getElementById('aq-name')?.value.trim() || '';
+      const userEmail = document.getElementById('aq-email')?.value.trim() || '';
+      const phone = document.getElementById('aq-phone')?.value.trim() || '';
+      const tipologia = document.getElementById('aq-tipologia')?.value || '';
+      const renta = document.getElementById('aq-renta')?.value || '';
+
+      quoteSuccess.style.display = 'none';
+      if (quoteError) quoteError.style.display = 'none';
+      if (quoteSubmit) {
+        quoteSubmit.disabled = true;
+        const label = quoteSubmit.querySelector('span');
+        if (label) label.textContent = 'Enviando solicitud...';
+      }
+
+      try {
+        const res = await fetch(`https://formsubmit.co/ajax/${email}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+          },
+          body: JSON.stringify({
+            _subject: `Solicitud de cotización oficial AMA Quillayes · ${name}`,
+            _replyto: userEmail,
+            _template: 'table',
+            Nombre: name,
+            Correo: userEmail,
+            Teléfono: phone,
+            'Tipología de Interés': tipologia,
+            'Nivel de Renta Mensual': renta
+          })
+        });
+
+        if (!res.ok) throw new Error('Error al enviar');
+
+        quoteSuccess.style.display = 'block';
+        quoteForm.reset();
+        quoteSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } catch (_err) {
+        const mailtoBody = `Hola Catalina,\n\nSolicito cotización oficial de AMA Quillayes:\n- Nombre: ${name}\n- Correo: ${userEmail}\n- Teléfono: ${phone}\n- Tipología de interés: ${tipologia}\n- Nivel de renta mensual: ${renta}`;
+        const mailtoHref = `mailto:${email}?subject=${encodeURIComponent(`Cotización Oficial AMA Quillayes - ${name}`)}&body=${encodeURIComponent(mailtoBody)}`;
+        if (quoteError) {
+          quoteError.innerHTML = `No se pudo enviar automáticamente desde el navegador. Escríbenos directo a <a href="${mailtoHref}">${email}</a>.`;
+          quoteError.style.display = 'block';
+        }
+      } finally {
+        if (quoteSubmit) {
+          quoteSubmit.disabled = false;
+          const label = quoteSubmit.querySelector('span');
+          if (label) label.textContent = 'Solicitar Cotización Oficial';
+        }
+      }
     });
   }
 </script>
@@ -355,6 +425,22 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cami
     color: #334155;
   }
 
+  .quote-error-banner {
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #991B1B;
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+  }
+
+  .quote-error-banner a {
+    color: #991B1B;
+    text-decoration: underline;
+  }
+
   /* COLUMNA VISUAL DE LA EJECUTIVA */
   .advisor-visual-col {
     position: relative;
@@ -422,17 +508,51 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cami
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     padding-top: 0.9rem;
     border-top: 1px solid rgba(255, 255, 255, 0.15);
   }
 
+  .advisor-meta-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
   .advisor-full-name {
-    font-size: 1.18rem;
+    font-size: 1.22rem;
     font-weight: 800;
     color: #FFFFFF;
-    margin: 0 0 0.15rem;
+    margin: 0 0 0.2rem;
     line-height: 1.2;
     letter-spacing: -0.01em;
+  }
+
+  .advisor-contact-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .advisor-contact-link {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    line-height: 1.35;
+    width: fit-content;
+    transition: color 0.2s ease;
+  }
+
+  .advisor-contact-link:hover {
+    color: #FFFFFF;
+  }
+
+  .advisor-contact-email {
+    color: #7BE0EC;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   .advisor-job-title {
@@ -444,8 +564,8 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cami
   }
 
   .advisor-wa-pill {
-    width: 42px;
-    height: 42px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background: #25D366;
     color: #FFFFFF;
@@ -453,7 +573,7 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cami
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
     transition: transform 0.2s ease, background 0.2s ease;
     flex-shrink: 0;
   }

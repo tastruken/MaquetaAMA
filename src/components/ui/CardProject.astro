@@ -110,7 +110,7 @@ const slideImages = images.length > 0 ? images : [image];
       </div>
 
       <p class="card-project-summary">
-        Departamentos de 1 y 2 dormitorios con terrazas continuas a lo ancho, diseño contemporáneo de alta eficiencia térmica y conectividad directa a Metro Los Quillayes (L4).
+        Departamentos de 1 y 2 dormitorios con terrazas continuas a lo ancho. Espacios comunes para vivir tu día a día y a pasos de Metro Los Quillayes (L4).
       </p>
 
       <!-- Franja de Especificaciones (Specs Strip) -->
@@ -428,75 +428,87 @@ const slideImages = images.length > 0 ? images : [image];
   /* Action Footer */
   .card-action-footer {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: stretch;
     margin-top: auto;
-    padding-top: 0.5rem;
-    gap: 1rem;
-    flex-wrap: wrap;
+    padding-top: 0.75rem;
+    gap: 1.25rem;
   }
 
   .price-container {
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
 
   .price-prefix {
-    font-size: 0.74rem;
+    font-size: 0.85rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     color: var(--text-soft);
+    margin-bottom: 0.15rem;
   }
 
   .price-number {
-    font-size: clamp(1.65rem, 2.2vw, 2rem);
+    font-size: clamp(2.45rem, 3.4vw, 3.1rem);
     font-weight: var(--font-weight-heavy);
     color: var(--color-petrol);
-    line-height: 1.15;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
   }
 
   .price-subtitle {
-    font-size: 0.82rem;
+    font-size: 1.05rem;
     color: var(--color-cyan);
     font-weight: 700;
+    margin-top: 0.25rem;
   }
 
   .action-buttons-group {
-    display: flex;
-    align-items: center;
-    gap: 0.55rem;
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 0.85rem;
+    width: 100%;
   }
 
   .btn-cotizar-mini {
-    padding: 0.72rem 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.95rem 1.4rem;
     border-radius: var(--radius-full);
     background: rgba(var(--rgb-petrol), 0.06);
     color: var(--color-petrol);
-    font-size: 0.88rem;
+    font-size: 1rem;
     font-weight: 700;
-    transition: background var(--transition-fast), color var(--transition-fast);
+    transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
   }
 
   .btn-cotizar-mini:hover {
     background: rgba(var(--rgb-petrol), 0.12);
+    transform: translateY(-2px);
   }
 
   .btn-ver-proyecto {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.72rem 1.35rem;
+    justify-content: center;
+    gap: 0.45rem;
+    width: 100%;
+    padding: 0.95rem 1.6rem;
     border-radius: var(--radius-full);
     background: var(--color-petrol);
     color: #FFFFFF !important;
-    font-size: 0.88rem;
+    font-size: 1rem;
     font-weight: 700;
-    transition: background var(--transition-fast);
+    transition: background var(--transition-fast), transform var(--transition-fast);
   }
 
   .btn-ver-proyecto:hover {
     background: var(--color-cyan);
+    transform: translateY(-2px);
   }
 
   @media (max-width: 1024px) {

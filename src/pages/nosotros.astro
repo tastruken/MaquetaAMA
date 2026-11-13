@@ -3,7 +3,6 @@
 // Diseño 100% unificado con la estética de Inicio (Template Aurvix / Framer Real Estate)
 
 import BaseLayout from '../layouts/BaseLayout.astro';
-import TrustTicker from '../components/features/TrustTicker.astro';
 import ModernCTA from '../components/features/ModernCTA.astro';
 import { u } from '../utils/url';
 import '../styles/home.css';
@@ -12,52 +11,19 @@ import '../styles/nosotros.css';
 // Estructura Societaria oficial
 const partners = [
   {
-    name: 'Holding Ernesto Valle e Hijos',
-    subsidiary: 'Inmobiliaria Todos los Santos S.A. & VAIN S.A.',
+    name: 'Grupo VAIN',
     badge: '30+ Años de Trayectoria',
-    summary: 'Grupo con más de 30 años de solidez en el rubro inmobiliario y de construcción en Chile.',
-    points: [
-      {
-        bold: 'Inmobiliaria Todos los Santos (2007):',
-        text: 'Brazo de desarrollo y comercialización con más de 5.000 viviendas en la RM.'
-      },
-      {
-        bold: 'Constructora VAIN S.A. (1994):',
-        text: 'Más de 22.000 viviendas y 2.000.000 m² construidos, líder en viviendas de alta calidad y valores accesibles.'
-      }
-    ]
+    summary: 'Grupo con más de 30 años de experiencia en el sector inmobiliario y más de 22.000 viviendas construidas, consolidando una amplia trayectoria en el desarrollo habitacional.'
   },
   {
-    name: 'Constructora San José Andina',
-    subsidiary: 'Grupo SANJOSE (España)',
+    name: 'Grupo San José',
     badge: 'Top 100 Mundial Deloitte',
-    summary: 'Compañía multinacional de origen español con más de 50 años de experiencia constructiva y presencia global desde los 90.',
-    points: [
-      {
-        bold: 'Presencia Internacional:',
-        text: 'Obras en España, EE.UU., Italia, Portugal, Reino Unido, Emiratos Árabes y México en salud, obra civil y residencial de alta complejidad.'
-      },
-      {
-        bold: 'Liderazgo Global:',
-        text: 'Top 100 mundial de constructoras (Global Powers of Construction 2024 de Deloitte) y puesto 147 de ENR Top International Contractors.'
-      }
-    ]
+    summary: 'Constructora multinacional con más de 50 años de trayectoria y 15 años de presencia en Chile. Cuenta con operaciones en más de 10 países y se posiciona entre las 100 constructoras más grandes del mundo.'
   },
   {
     name: 'Polux Inmobiliaria SpA',
-    subsidiary: 'Polux Gestión Inmobiliaria',
     badge: 'Gestión Patrimonial',
-    summary: 'Sociedad fundada en 2023 por Rodrigo Aldunate, Maximiliano Cuadra y Pablo Ramírez, especialistas en fondos y gobiernos corporativos.',
-    points: [
-      {
-        bold: 'Fondos & Equity:',
-        text: 'Gestión en 12 fondos de inversión con más de 1 millón de UF de equity administrado en Chile y Estados Unidos.'
-      },
-      {
-        bold: 'Volumen y Ventas:',
-        text: 'Más de 200.000 m² en densificación en altura, 2.000 unidades vendidas y más de 5 millones de UF en ventas.'
-      }
-    ]
+    summary: 'Equipo especializado en administración patrimonial y desarrollo inmobiliario, cuyos socios cuentan con experiencia en la comercialización de más de 2.000 unidades.'
   }
 ];
 
@@ -111,12 +77,12 @@ const pillars = [
 
 
             <h1 class="hero-title-aurvix">
-              DONDE TODO ENCAJA®<br />
-              ESPACIOS CON ALMA
+              LO ESENCIAL ESTÁ<br />
+              EN EL CENTRO
             </h1>
 
             <p class="hero-sub-aurvix">
-              Una invitación a <strong>elegir con calma y habitar una nueva etapa</strong>. Somos una marca joven, local y con alma, respaldada por la alianza estratégica de gigantes de la construcción nacional e internacional.
+              <em>AMA nace de una idea simple y honesta: hacer más fácil el que tengas tu propio departamento.</em>
             </p>
 
             <!-- Acciones Principales -->
@@ -139,10 +105,7 @@ const pillars = [
     </div>
   </section>
 
-  <!-- 2. CINTA INSTITUCIONAL DE CONFIANZA Y ALIANZAS BANCARIAS -->
-  <TrustTicker />
-
-  <!-- 3. SECCIÓN EDITORIAL: QUIÉNES SOMOS (Split Layout idéntico a Sobre AMA en Inicio) -->
+  <!-- 2. SECCIÓN EDITORIAL: QUIÉNES SOMOS (Split Layout idéntico a Sobre AMA en Inicio) -->
   <section class="section about-split-section">
     <div class="container">
       <div class="about-grid">
@@ -199,10 +162,10 @@ const pillars = [
     </div>
   </section>
 
-  <!-- 4. ESTRUCTURA SOCIETARIA (Tarjetas Bento Blancas estilo Aurvix) -->
+  <!-- 3. ESTRUCTURA SOCIETARIA (Tarjetas en una fila horizontal estilo Aurvix) -->
   <section class="section aurvix-corporate-section" id="estructura-societaria">
     <div class="container">
-      <div class="section-header-split">
+      <div class="section-header-split corporate-header-full">
         <div>
           <h2 class="aurvix-projects-title">Estructura Societaria de Inmobiliaria AMA Quillayes SpA</h2>
         </div>
@@ -212,13 +175,13 @@ const pillars = [
       </div>
 
       <div class="corporate-bento-list">
-        {partners.map((p, idx) => (
-          <div class={`corp-bento-row ${idx === 1 ? "is-reversed" : ""}`}>
-            <!-- Columna 1: Branding y Logo Mockup -->
+        {partners.map((p) => (
+          <div class="corp-bento-row">
+            <!-- Branding y Logo ampliado -->
             <div class="corp-brand-col">
               <div class="corp-logo-mockup">
                 <div class="logo-mark">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                   </svg>
                 </div>
@@ -227,26 +190,10 @@ const pillars = [
               <span class="corp-pill-tag">{p.badge}</span>
             </div>
 
-            <!-- Columna 2: Identidad y Resumen -->
+            <!-- Identidad y Resumen del Socio -->
             <div class="corp-info-col">
-              <div class="corp-names-wrap">
-                <h3 class="corp-title">{p.name}</h3>
-                <span class="corp-subsidiary">{p.subsidiary}</span>
-              </div>
+              <h3 class="corp-title">{p.name}</h3>
               <p class="corp-summary">{p.summary}</p>
-            </div>
-
-            <!-- Columna 3: Hitos / Credenciales destacadas en mini-cards -->
-            <div class="corp-milestones-col">
-              {p.points.map((pt) => (
-                <div class="corp-milestone-tile">
-                  <div class="milestone-accent"></div>
-                  <div class="milestone-body">
-                    <strong class="milestone-title">{pt.bold}</strong>
-                    <span class="milestone-desc">{pt.text}</span>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         ))}

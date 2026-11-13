@@ -5,7 +5,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CardProject from '../components/ui/CardProject.astro';
 import HeroFilterBar from '../components/features/HeroFilterBar.astro';
-import TrustTicker from '../components/features/TrustTicker.astro';
 import BentoOfferings from '../components/features/BentoOfferings.astro';
 import JournalCards from '../components/features/JournalCards.astro';
 import { u } from '../utils/url';
@@ -34,11 +33,13 @@ import '../styles/home.css';
           <!-- Columna Izquierda: Títulos Display de Gran Escala y Botones -->
           <div class="hero-headline-col">
             <h1 class="hero-title-aurvix">
-              ESPACIOS DE VANGUARDIA<br />
-              PARA VIVIR® E INSPIRAR
+              METROS CUADRADOS<br />
+              CON PROPÓSITO.<br />
+              AMA TU NUEVA ETAPA
             </h1>
             <p class="hero-sub-aurvix">
-              Departamentos en La Florida de 1 y 2 dormitorios, con terrazas a lo ancho del departamento y financiamiento de hasta 60 cuotas.
+              Deptos de 1 y 2 Dorms. en La Florida.<br />
+              <em>Financiamiento de hasta 60 cuotas.</em>
             </p>
 
             <!-- Botones de Acción del Hero -->
@@ -91,7 +92,8 @@ import '../styles/home.css';
         <!-- Texto Editorial de Gran Escala -->
         <div class="about-content">
           <h2 class="about-heading">
-            Conectamos a las personas con su hogar ideal a través de un estándar contemporáneo — ayudándote a invertir o vivir con total certeza y respaldo.
+            Lo esencial está en el centro<br />
+            AMA nace de una idea simple y honesta: hacer más fácil el que tengas tu propio departamento.
           </h2>
           <a href={u('/nosotros')} class="btn-aurvix-dark">
             <span>More About Us</span>
@@ -107,19 +109,15 @@ import '../styles/home.css';
   <!-- 6. PROYECTOS DESTACADOS -->
   <section class="section projects-aurvix-section" id="proyectos-activos">
     <div class="container">
-      <div class="section-header-split">
+      <div class="section-header-split projects-header-compact">
         <div>
-          <h2 class="section-title aurvix-projects-title">Construidos con propósito, diseñados para la vida moderna</h2>
+          <h2 class="section-title aurvix-projects-title">Cada metro cuadrado tiene un propósito.</h2>
         </div>
-        <a href={u('/proyectos/ama-quillayes')} class="btn-aurvix-dark">
-          <span>Ver proyecto AMA Quillayes</span>
-          <span class="arrow">↗</span>
-        </a>
       </div>
 
       <div class="featured-projects-grid">
         <CardProject
-          title="AMA Quillayes"
+          title="QUILLAYES"
           slug="ama-quillayes"
           location="Av. Vicuña Mackenna 11.600 / Metro Los Quillayes / La Florida"
           priceFrom="2.540 UF"
@@ -156,13 +154,11 @@ import '../styles/home.css';
   </section>
 
 
-  <!-- 8. SERVICIOS Y PROPUESTA DE VALOR (Idéntico a what_we_offer_cards_1789940642828.png) -->
-  <BentoOfferings />
+  <!-- 8. SERVICIOS Y PROPUESTA DE VALOR (Oculta temporalmente: quitar // para reactivar) -->
+  {
+    // <BentoOfferings />
+  }
 
-
-
-  <!-- 11. CINTA DE ALIANZAS BANCARIAS Y RESPALDO -->
-  <TrustTicker />
 
 
   <!-- 13. JOURNAL / BLOG -->

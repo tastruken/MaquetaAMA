@@ -81,7 +81,10 @@ const currentYear = new Date().getFullYear();
         <p class="col-title">Compañía</p>
         <ul class="col-list">
           <li><a href={u('/nosotros')}>Nuestra Historia</a></li>
-          <li><a href={u('/postventa')}>Portal Postventa</a></li>
+          <li><a href={u('/inversionistas')}>Inversionistas</a></li>
+          {
+            // <li><a href={u('/postventa')}>Portal Postventa</a></li>
+          }
           <li><a href={u('/blog')}>Blog Inmobiliario</a></li>
           <li><a href={u('/contacto')}>Canal de Contacto</a></li>
           <li><a href={u('/terminos-y-condiciones')}>Términos y Condiciones</a></li>
@@ -89,12 +92,12 @@ const currentYear = new Date().getFullYear();
         </ul>
       </div>
 
-      <!-- Columna 4: Sala de Ventas & Ubicación -->
+      <!-- Columna 4: Contáctanos & Ubicación -->
       <div class="footer-links-col">
-        <p class="col-title">Showroom & Ubicación</p>
+        <p class="col-title">Contáctanos</p>
         <ul class="col-list address-list">
           <li>
-            <strong>Sala de Ventas:</strong>
+            <strong>Sala de Informaciones:</strong>
             <span>Av. Vicuña Mackenna 11.600 / Metro Los Quillayes, La Florida</span>
           </li>
           <li>
@@ -107,7 +110,7 @@ const currentYear = new Date().getFullYear();
           </li>
           <li>
             <strong>Correo:</strong>
-            <a href="mailto:quillayes@amainmobiliaria.cl">quillayes@amainmobiliaria.cl</a>
+            <a href="mailto:quillayes@iama.cl">quillayes@iama.cl</a>
           </li>
         </ul>
       </div>
@@ -116,9 +119,6 @@ const currentYear = new Date().getFullYear();
     <!-- Barra Inferior -->
     <div class="footer-copyright-bar">
       <p>&copy; {currentYear} AMA Inmobiliaria. Desarrollos residenciales de vanguardia.</p>
-      <div class="legal-badge-pill">
-        <span>Socio Cámara Chilena de la Construcción</span>
-      </div>
     </div>
   </div>
 </footer>

@@ -480,7 +480,7 @@
    ======================================================== */
 .projects-aurvix-section {
   background: #FFFFFF;
-  padding: 6rem 0;
+  padding: 4.5rem 0 6rem;
 }
 
 .section-header-split {
@@ -492,6 +492,10 @@
   flex-wrap: wrap;
 }
 
+.projects-header-compact {
+  margin-bottom: 1.75rem;
+}
+
 .aurvix-projects-title {
   font-size: clamp(2.3rem, 4.5vw, 3.6rem);
   font-weight: 700;
@@ -499,6 +503,11 @@
   letter-spacing: -0.03em;
   line-height: 1.15;
   margin-top: 1rem;
+}
+
+.projects-header-compact .aurvix-projects-title {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .projects-grid-three {
