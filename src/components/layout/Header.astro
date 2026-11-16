@@ -17,7 +17,7 @@ const rawLinks = [
   { name: 'Ofertas', path: '/ofertas', hidden: true },
   { name: 'Nosotros', path: '/nosotros' },
   { name: 'Inversionistas', path: '/inversionistas', hidden: true },
-  { name: 'Proceso de compra', path: '/proceso-de-compra' },
+  { name: 'Proceso de compra', path: '/proceso-de-compra', hidden: true },
   { name: 'Postventa', path: '/postventa', hidden: true },
   { name: 'Blog', path: '/blog' },
   { name: 'Contacto', path: '/contacto' },
@@ -63,13 +63,12 @@ const isActive = (rawPath: string) => {
         </ul>
       </nav>
 
-      <!-- Acciones directas: Botón Píldora Negro estilo Aurvix -->
+      <!-- Acciones directas: Botón Píldora Naranja estilo Aurvix -->
       <div class="header-actions">
         <button 
           type="button" 
           class="btn-header-cotizar"
-          onclick="window.openCotizadorModal && window.openCotizadorModal()"
-          aria-haspopup="dialog"
+          onclick="window.goToAdvisorQuote && window.goToAdvisorQuote()"
         >
           <span>Cotizar Online</span>
           <span class="btn-arrow">↗</span>
@@ -109,9 +108,9 @@ const isActive = (rawPath: string) => {
         <button 
           type="button" 
           class="btn btn-petrol btn-block"
-          onclick="window.openCotizadorModal && window.openCotizadorModal(); document.getElementById('mobile-menu-drawer').classList.remove('is-open');"
+          onclick="document.getElementById('mobile-menu-drawer')?.classList.remove('is-open'); window.goToAdvisorQuote && window.goToAdvisorQuote();"
         >
-          Simular y Cotizar Online ↗
+          Cotizar Online ↗
         </button>
       </div>
     </div>

@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Cotizador from '../components/features/Cotizador.astro';
 import ModernCTA from '../components/features/ModernCTA.astro';
-import { u } from '../utils/url';
+import { u, uMd, imgSrcSet } from '../utils/url';
 import '../styles/home.css';
 import '../styles/inner-pages.css';
 
@@ -12,8 +12,9 @@ const rentalTypologies = [
     tabLabel: 'Modelo 1D + 1B',
     kicker: 'Mayor Velocidad de Colocación',
     title: 'Modelo 1D + 1B · Renta Intensiva',
-    desc: 'La unidad de mayor rotación y demanda en el eje Vicuña Mackenna. Distribución abierta con cocina equipada, terraza continua a lo ancho y gastos comunes optimizados para maximizar el retorno neto.',
-    planImage: u('/images/plano_mockup_1d1b.jpg'),
+    desc: 'La unidad de mayor rotación y demanda en el eje Vicuña Mackenna. Distribución optimizada con cocina integrada a living comedor, terraza continua a lo ancho y gastos comunes ajustados para maximizar el retorno neto.',
+    planImage: uMd('/images/AMA FOTOS FINAL/IAQ_Dpto_1D 1B.webp'),
+    planSrcset: imgSrcSet('/images/AMA FOTOS FINAL/IAQ_Dpto_1D 1B.webp', 960, 1600),
     price: 'Desde 2.540 UF',
     specs: [
       { label: 'Cap Rate proyectado', val: '6,8% a 7,4% anual' },
@@ -23,27 +24,13 @@ const rentalTypologies = [
     ]
   },
   {
-    id: '2d-1b',
-    tabLabel: 'Modelo 2D + 1B',
-    kicker: 'Permanencia Extendida',
-    title: 'Modelo 2D + 1B · Equilibrio Patrimonial',
-    desc: 'Dormitorio principal amplio más segundo dormitorio versátil para home office o familia joven. Excelente tasa de retención de inquilinos y menor rotación interanual.',
-    planImage: u('/images/plano_mockup_2d1b.jpg'),
-    price: 'Desde 3.190 UF',
-    specs: [
-      { label: 'Cap Rate proyectado', val: '6,4% a 7,0% anual' },
-      { label: 'Superficie total', val: '46,0 a 52,4 m²' },
-      { label: 'Perfil arrendatario', val: 'Parejas y teletrabajo' },
-      { label: 'Garantía incluida', val: '12 meses de arriendo' }
-    ]
-  },
-  {
     id: '2d-2b',
     tabLabel: 'Modelo 2D + 2B Mariposa',
     kicker: 'Máximo Canon Mensual',
     title: 'Modelo 2D + 2B Mariposa · Doble Suite',
-    desc: 'Dos suites simétricas independientes separadas por el área social central. Formato altamente cotizado por profesionales que comparten arriendo con total privacidad.',
-    planImage: u('/images/plano_mockup_2d2b.jpg'),
+    desc: 'Depto estilo mariposa ideal para inversionistas, con cocina integrada a living comedor y dos habitaciones con privacidad conectadas por terraza continua a lo ancho del departamento.',
+    planImage: uMd('/images/AMA FOTOS FINAL/IAQ_Dpto_2D 2B.webp'),
+    planSrcset: imgSrcSet('/images/AMA FOTOS FINAL/IAQ_Dpto_2D 2B.webp', 826, 1377),
     price: 'Desde 3.750 UF',
     specs: [
       { label: 'Cap Rate proyectado', val: '6,2% a 6,8% anual' },
@@ -87,7 +74,7 @@ const investmentPillars = [
   <section class="aurvix-hero ip-hero">
     <div class="hero-card-banner">
       <div class="hero-slideshow">
-        <div class="hero-slide active" style={`background-image: url(${u('/images/ama_quillayes_facade.jpg')});`}></div>
+        <div class="hero-slide active" style={`background-image: url(${u('/images/AMA FOTOS FINAL/fachada-1.webp')});`}></div>
       </div>
 
       <div class="hero-overlay-gradient"></div>
@@ -155,7 +142,14 @@ const investmentPillars = [
       <!-- Tarjeta Split de Tesis Patrimonial -->
       <div class="ip-split" style="margin-bottom: 4rem;">
         <div class="ip-split-media">
-          <img src={u('/images/ama_amenity_rooftop.jpg')} alt="Vista panorámica y equipamiento AMA Quillayes" />
+          <img
+            src={uMd('/images/AMA FOTOS FINAL/piscina-1.webp')}
+            srcset={imgSrcSet('/images/AMA FOTOS FINAL/piscina-1.webp')}
+            sizes="(max-width: 960px) 100vw, 560px"
+            alt="Vista panorámica y equipamiento AMA Quillayes"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
 
         <div class="ip-split-info">
@@ -286,7 +280,12 @@ const investmentPillars = [
           <img
             id="inv-plan-img"
             src={rentalTypologies[0].planImage}
+            srcset={rentalTypologies[0].planSrcset}
+            sizes="(max-width: 960px) 100vw, 540px"
             alt={rentalTypologies[0].title}
+            loading="lazy"
+            decoding="async"
+            style="object-fit: contain; padding: 1.25rem;"
           />
         </div>
 
@@ -349,7 +348,7 @@ const investmentPillars = [
               <button
                 type="button"
                 class="btn-aurvix-dark"
-                onclick="window.openCotizadorModal && window.openCotizadorModal()"
+                onclick="window.goToAdvisorQuote && window.goToAdvisorQuote(document.getElementById('inv-title')?.textContent?.trim())"
               >
                 <span>Cotizar esta Tipología</span>
                 <span class="arrow">↗</span>
@@ -404,6 +403,7 @@ const investmentPillars = [
         planImg.classList.add('fade');
         setTimeout(() => {
           planImg.src = item.planImage;
+          planImg.srcset = item.planSrcset;
           planImg.alt = item.title;
           planImg.classList.remove('fade');
         }, 160);

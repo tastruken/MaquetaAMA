@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { u, uMd, imgSrcSet } from '../../utils/url';
 ---
 
 <BaseLayout 
@@ -8,7 +9,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
   <div class="article-top-bar">
     <div class="container">
-      <a href="/blog" class="back-link">← Volver al Blog</a>
+      <a href={u('/blog')} class="back-link">← Volver al Blog</a>
     </div>
   </div>
 
@@ -20,7 +21,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           Plusvalía y conectividad: Por qué La Florida y el sector Quillayes son foco de inversión
         </h1>
         <div class="article-meta-info">
-          <span>Por: <strong>Estudios Urbanos AMA</strong></span>
+          <span>Por: <strong>AMA Inmobiliaria</strong></span>
           <span class="dot">•</span>
           <span>08 Septiembre 2026</span>
           <span class="dot">•</span>
@@ -29,7 +30,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </header>
 
       <div class="article-featured-img card">
-        <img src="/images/ama_quillayes_facade.jpg" alt="Edificio AMA Quillayes en La Florida" />
+        <img src={uMd('/images/blog/blog-inversion-la-florida.webp')} srcset={imgSrcSet('/images/blog/blog-inversion-la-florida.webp', 960, 1376)} sizes="(max-width: 900px) 100vw, 820px" alt="Conectividad y plusvalía en La Florida junto al Metro Los Quillayes y Cordillera de los Andes" decoding="async" />
       </div>
 
       <div class="article-content card">
@@ -37,9 +38,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           La Florida se ha transformado en uno de los centros neurálgicos de la Región Metropolitana. Su combinación de conectividad de metro, amplia oferta de servicios, centros comerciales consolidados y una fuerte demanda por arriendos la posiciona como la comuna predilecta para inversionistas que buscan rentabilidad y seguridad patrimonial.
         </p>
 
-        <h2>1. El Eje Metro Línea 5 y la Red Intermodal</h2>
+        <h2>1. El Eje Metro Línea 4 y la Red Intermodal</h2>
         <p>
-          El factor más decisivo en la plusvalía inmobiliaria de Santiago sigue siendo la <strong>cercanía a estaciones de Metro</strong>. La estación <strong>Los Quillayes</strong> conecta en pocos minutos con centros de estudio, polos laborales en Providencia y Santiago Centro, y terminales intermodales como Bellavista de La Florida.
+          El factor más decisivo en la plusvalía inmobiliaria de Santiago sigue siendo la <strong>cercanía a estaciones de Metro</strong>. Las estaciones <strong>Los Quillayes</strong> y <strong>Elisa Correa</strong> (Línea 4) brindan una excelente conectividad con centros de estudio, polos laborales en Providencia y Santiago Centro, y terminales intermodales como Bellavista de La Florida.
         </p>
         <p>
           Un departamento ubicado a menos de 400 metros de una estación de metro experimenta una vacancia promedio inferior a 15 días entre arrendatarios.
@@ -52,20 +53,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
         <h2>3. Calidad de vida y equipamiento urbano consolidado</h2>
         <ul>
-          <li><strong>Salud:</strong> Cercanía a Clínica Bupa Santiago, Hospital de La Florida y centros médicos de especialidad.</li>
-          <li><strong>Comercio y Ocio:</strong> A pasos de Mallplaza Vespucio, Mall Florida Center y corredores gastronómicos en Walker Martínez.</li>
+          <li><strong>Salud:</strong> Cercanía al nuevo Hospital Dr. Sótero del Río —la infraestructura de salud pública más grande del país—, al nuevo centro Red de Salud UC Christus, Clínica Bupa Santiago, Hospital de La Florida y centros médicos de especialidad.</li>
+          <li><strong>Comercio y Ocio:</strong> A pasos del nuevo Mall Vivo Outlet La Florida, Mallplaza Vespucio, Mall Florida Center y corredores gastronómicos en Walker Martínez.</li>
           <li><strong>Áreas verdes y naturaleza:</strong> Fácil acceso a Parque Panul, Quebrada de Macul y ciclovías comunales.</li>
         </ul>
 
-        <h2>4. Comprar en blanco: La estrategia de mayor retorno</h2>
+        <h2>4. Comprar en verde: La estrategia de mayor retorno</h2>
         <p>
-          Adquirir un departamento en la etapa inicial de venta en blanco, como en <strong>Edificio AMA Quillayes</strong>, permite asegurar el valor por metro cuadrado más bajo del ciclo de desarrollo, capitalizando toda la plusvalía acumulada entre el inicio de faenas y la entrega final.
+          Adquirir un departamento en la etapa de <strong>venta en verde</strong>, como en <strong>Edificio AMA Quillayes</strong>, permite asegurar un valor por metro cuadrado más conveniente del ciclo de desarrollo, capitalizando la plusvalía acumulada hasta la entrega final.
         </p>
 
         <div class="article-cta-box">
           <h3>Conoce Edificio AMA Quillayes</h3>
-          <p>Unidades desde 2.390 UF con Bono Pie 10% y facilidades de pago en hasta 36 cuotas sin interés.</p>
-          <a href="/proyectos/ama-quillayes" class="btn btn-cyan">
+          <p>Unidades desde 2.540 UF y facilidades de pago en hasta 60 cuotas sin interés.</p>
+          <a href={u('/proyectos/ama-quillayes')} class="btn btn-cyan">
             Ver Ficha del Proyecto
           </a>
         </div>

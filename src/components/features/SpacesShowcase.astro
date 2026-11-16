@@ -1,7 +1,7 @@
 ---
 // src/components/features/SpacesShowcase.astro
 // Showcase interactivo de Espacios y Terminaciones AMA Quillayes
-import { u } from '../../utils/url';
+import { uMd, imgSrcSet } from '../../utils/url';
 
 const spacesData = [
   {
@@ -11,7 +11,8 @@ const spacesData = [
     title: 'Living & Terraza Integrada',
     subtitle: 'Amplitud y luminosidad con ventanales termopanel.',
     description: 'Espacios que optimizan cada metro cuadrado. Su diseño permite una transición fluida entre el interior y exterior, aportando mayor amplitud y luminosidad.',
-    image: u('/images/ama_interior_living.jpg'),
+    image: uMd('/images/AMA FOTOS FINAL/living-1.webp'),
+    srcset: imgSrcSet('/images/AMA FOTOS FINAL/living-1.webp'),
     alt: 'Living comedor y terraza integrada Edificio AMA Quillayes',
     badges: ['Piso Fotolaminado', 'Luz Natural']
   },
@@ -22,7 +23,8 @@ const spacesData = [
     title: 'Cocinas Integradas',
     subtitle: 'Cubiertas de cuarzo y full equipadas',
     description: 'Espacio contemporáneo pensado para compartir. Incluye encimera, horno, campana y cubierta de cuarzo.',
-    image: u('/images/ama_piloto_cocina_quillayes.jpg'),
+    image: uMd('/images/AMA FOTOS FINAL/cocina-1.webp'),
+    srcset: imgSrcSet('/images/AMA FOTOS FINAL/cocina-1.webp'),
     alt: 'Cocina integrada equipada AMA Quillayes',
     badges: ['Cubiertas de Cuarzo', 'Full Eléctrica', 'Cierre Suave']
   },
@@ -33,7 +35,8 @@ const spacesData = [
     title: 'Dormitorio en Suite',
     subtitle: 'Privacidad absoluta con conexión a terraza.',
     description: 'Ambiente que garantiza el descanso por medio de ventanales con marco de PVC termopanel, piso fotolaminado de alto tráfico y distribución optimizada.',
-    image: u('/images/ama_dormitorio_suite_quillayes.jpg'),
+    image: uMd('/images/AMA FOTOS FINAL/dormitorio-1.webp'),
+    srcset: imgSrcSet('/images/AMA FOTOS FINAL/dormitorio-1.webp'),
     alt: 'Dormitorio en suite AMA Quillayes',
     badges: ['Walk-in Clóset', 'Baño en Suite', 'Ventanales Termopanel']
   }
@@ -76,9 +79,12 @@ const spacesData = [
           <img 
             id="spaces-display-img" 
             src={spacesData[0].image} 
+            srcset={spacesData[0].srcset}
+            sizes="(max-width: 960px) 100vw, 660px"
             alt={spacesData[0].alt} 
             class="spaces-img"
             loading="lazy"
+            decoding="async"
           />
           <!-- 3 Badges Flotantes al Pie de la Foto -->
           <div class="spaces-floating-badges" id="spaces-badges-container">
@@ -100,7 +106,7 @@ const spacesData = [
           <button 
             type="button" 
             class="btn-spaces-primary"
-            onclick="window.openCotizadorModal && window.openCotizadorModal()"
+            onclick="window.goToAdvisorQuote && window.goToAdvisorQuote()"
           >
             <span>Cotizar este Departamento</span>
             <span class="arrow">↗</span>
@@ -379,6 +385,7 @@ const spacesData = [
         img.classList.add('fade');
         setTimeout(() => {
           img.src = data.image;
+          img.srcset = data.srcset;
           img.alt = data.alt;
           img.classList.remove('fade');
 

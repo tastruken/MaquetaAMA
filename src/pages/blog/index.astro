@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ModernCTA from '../../components/features/ModernCTA.astro';
-import { u } from '../../utils/url';
+import { u, uMd, imgSrcSet } from '../../utils/url';
 import '../../styles/home.css';
 import '../../styles/inner-pages.css';
 
@@ -12,8 +12,9 @@ const articles = [
     category: 'Financiamiento',
     date: '14 Septiembre 2026',
     readTime: '5 min de lectura',
-    excerpt: 'Conoce los requisitos bancarios actuales, cómo calcular tu dividendo ideal, cómo funciona el pago del pie en hasta 60 cuotas y de qué manera aprovechar el Bono Pie del 10%.',
-    image: u('/images/ama_interior_living.jpg'),
+    excerpt: 'Conoce los requisitos bancarios actuales, cómo calcular tu dividendo ideal, cómo planificar tu crédito hipotecario y cómo funciona el pago del pie en hasta 60 cuotas sin interés.',
+    image: uMd('/images/blog/blog-financiamiento-pie.webp'),
+    srcset: imgSrcSet('/images/blog/blog-financiamiento-pie.webp', 960, 1376),
     specs: [
       { label: 'Categoría', val: 'Financiamiento Hipotecario' },
       { label: 'Lectura', val: '5 minutos' },
@@ -28,7 +29,8 @@ const articles = [
     date: '08 Septiembre 2026',
     readTime: '4 min de lectura',
     excerpt: 'Análisis de rentabilidad por arriendo, consolidación del eje Vicuña Mackenna junto a Metro Línea 4 y proyección de demanda residencial en La Florida.',
-    image: u('/images/ama_quillayes_facade.jpg'),
+    image: uMd('/images/blog/blog-inversion-la-florida.webp'),
+    srcset: imgSrcSet('/images/blog/blog-inversion-la-florida.webp', 960, 1376),
     specs: [
       { label: 'Categoría', val: 'Inversión & Barrios' },
       { label: 'Lectura', val: '4 minutos' },
@@ -43,7 +45,8 @@ const articles = [
     date: '28 Agosto 2026',
     readTime: '6 min de lectura',
     excerpt: 'Todo lo que debes considerar en el recorrido de inspección técnica, los plazos de garantía legal de 3, 5 y 10 años y cómo activar el acompañamiento de postventa.',
-    image: u('/images/ama_amenity_rooftop.jpg'),
+    image: uMd('/images/blog/blog-entrega-llaves.webp'),
+    srcset: imgSrcSet('/images/blog/blog-entrega-llaves.webp', 960, 1376),
     specs: [
       { label: 'Categoría', val: 'Guía del Comprador' },
       { label: 'Lectura', val: '6 minutos' },
@@ -65,7 +68,7 @@ const featured = articles[0];
   <section class="aurvix-hero ip-hero">
     <div class="hero-card-banner">
       <div class="hero-slideshow">
-        <div class="hero-slide active" style={`background-image: url(${u('/images/ama_amenity_rooftop.jpg')});`}></div>
+        <div class="hero-slide active" style={`background-image: url(${u('/images/AMA FOTOS FINAL/piscina-2.webp')});`}></div>
       </div>
 
       <div class="hero-overlay-gradient"></div>
@@ -130,7 +133,7 @@ const featured = articles[0];
       <!-- Split Card de Lectura Principal -->
       <div class="ip-split" style="margin-bottom: 4.5rem;">
         <div class="ip-split-media">
-          <img src={featured.image} alt={featured.title} />
+          <img src={featured.image} srcset={featured.srcset} sizes="(max-width: 960px) 100vw, 560px" alt={featured.title} loading="lazy" decoding="async" />
         </div>
 
         <div class="ip-split-info">
@@ -199,7 +202,7 @@ const featured = articles[0];
         {articles.map((art) => (
           <article class="ip-blog-card" data-article-cat={art.category}>
             <div class="ip-blog-media">
-              <img src={art.image} alt={art.title} />
+              <img src={art.image} srcset={art.srcset} sizes="(max-width: 960px) 100vw, 380px" alt={art.title} loading="lazy" decoding="async" />
             </div>
             <div class="ip-blog-body">
               <div class="ip-blog-meta">

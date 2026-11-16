@@ -16,5 +16,14 @@ export function u(path: string = ''): string {
     return path;
   }
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  return `${base}${cleanPath}`;
+  return `${base}${cleanPath.replace(/ /g, '%20')}`;
+}
+
+export function uMd(path: string = ''): string {
+  const mdPath = path.replace(/-md(?=\.[^.]+$)/, '').replace(/\.[^.]+$/, '-md.webp');
+  return u(mdPath);
+}
+
+export function imgSrcSet(path: string = '', mdWidth: number = 1000, hdWidth: number = 1920): string {
+  return `${uMd(path)} ${mdWidth}w, ${u(path)} ${hdWidth}w`;
 }

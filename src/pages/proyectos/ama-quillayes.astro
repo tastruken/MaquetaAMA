@@ -2,10 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Cotizador from '../../components/features/Cotizador.astro';
 import SpacesShowcase from '../../components/features/SpacesShowcase.astro';
+import Tour360Showcase from '../../components/features/Tour360Showcase.astro';
 import ModernCTA from '../../components/features/ModernCTA.astro';
 import AdvisorQuoteCTA from '../../components/features/AdvisorQuoteCTA.astro';
 import PatternLoops from '../../components/brand/PatternLoops.astro';
-import { u } from '../../utils/url';
+import { u, uMd, imgSrcSet } from '../../utils/url';
 import '../../styles/home.css';
 
 const typologies = [
@@ -19,7 +20,8 @@ const typologies = [
     desc: 'Distribución optimizada, con cocina integrada a living comedor, y terraza continua a lo ancho del departamento.',
     price: 'Desde 2.540 UF',
     tags: ['Ideal Inversionista', 'Renta Alta'],
-    planImage: u('/images/plano_mockup_1d1b.jpg')
+    planImage: uMd('/images/AMA FOTOS FINAL/IAQ_Dpto_1D 1B.webp'),
+    planSrcset: imgSrcSet('/images/AMA FOTOS FINAL/IAQ_Dpto_1D 1B.webp', 960, 1600)
   },
   /*
   {
@@ -45,7 +47,8 @@ const typologies = [
     desc: 'Depto estilo mariposa ideal para inversionistas, con cocina integrada a living comedor, y dos habitaciones con privacidad, conectadas por terraza continua a lo ancho del departamento.',
     price: 'Desde 3.750 UF',
     tags: ['Más Vendido', 'Máxima Privacidad'],
-    planImage: u('/images/plano_mockup_2d2b.jpg')
+    planImage: uMd('/images/AMA FOTOS FINAL/IAQ_Dpto_2D 2B.webp'),
+    planSrcset: imgSrcSet('/images/AMA FOTOS FINAL/IAQ_Dpto_2D 2B.webp', 826, 1377)
   }
   /*
   ,
@@ -67,23 +70,23 @@ const typologies = [
 const featuredAmenities = [
   {
     name: 'Piscina',
-    subtitle: 'Azotea con vista despejada a la Cordillera',
-    image: '/images/ama_amenity_rooftop.jpg'
+    subtitle: 'Piscina central rodeada de áreas verdes y pérgolas',
+    image: '/images/AMA FOTOS FINAL/piscina-1.webp'
   },
   {
     name: 'Pet Zone',
-    subtitle: 'Recreación, paseo y pet spa exterior',
-    image: '/images/ama_pet_zone_quillayes.jpg'
+    subtitle: 'Recreación y circuito exterior para mascotas',
+    image: '/images/AMA FOTOS FINAL/petzone-1.webp'
   },
   {
     name: 'Gimnasio',
-    subtitle: 'Zona cardio, peso libre y entrenamiento funcional',
-    image: '/images/ama_gimnasio_quillayes.jpg'
+    subtitle: 'Zona cardio, spinning, peso libre y entrenamiento funcional',
+    image: '/images/AMA FOTOS FINAL/gym-1.webp'
   },
   {
     name: 'Salón Gourmet',
-    subtitle: 'Espacio equipado para eventos y celebraciones',
-    image: '/images/ama_piloto_cocina_quillayes.jpg'
+    subtitle: 'Espacio equipado para compartir y celebraciones',
+    image: '/images/AMA FOTOS FINAL/cocina-1.webp'
   }
 ];
 
@@ -145,83 +148,83 @@ const locationPoints = [
 const galleryImages = [
   {
     id: 'gal-1',
-    src: '/images/ama_quillayes_facade.jpg',
+    src: '/images/AMA FOTOS FINAL/fachada-1.webp',
     category: 'fachada',
     categoryLabel: 'Fachada',
     title: 'Fachada Principal Av. Vicuña Mackenna',
-    desc: 'Arquitectura contemporánea de vanguardia con amplias terrazas y orientación privilegiada para luz natural.'
+    desc: 'Arquitectura contemporánea en dos torres residenciales con amplias terrazas y excelente iluminación natural.'
   },
   {
     id: 'gal-2',
-    src: '/images/ama_piloto_cocina_quillayes.jpg',
+    src: '/images/AMA FOTOS FINAL/living-1.webp',
     category: 'interiores',
     categoryLabel: 'Interiores',
-    title: 'Cocina Americana y Living con Vista Cordillera',
-    desc: 'Cubierta de cuarzo blanco, mesón isla desayunador, piso gres porcelánico y ventanales con vista a los Andes.'
+    title: 'Living Comedor y Terraza Continua',
+    desc: 'Espacio luminoso con ventanales termopanel, piso fotolaminado y salida directa a terraza con vista a la Cordillera.'
   },
   {
     id: 'gal-3',
-    src: '/images/ama_quinchos_rooftop_quillayes.jpg',
-    category: 'amenities',
-    categoryLabel: 'Espacios Comunes',
-    title: 'Quinchos Gourmet en Rooftop',
-    desc: 'Parrillas tipo gourmet de acero inoxidable, pérgola con iluminación cálida y vista panorámica al atardecer.'
+    src: '/images/AMA FOTOS FINAL/cocina-1.webp',
+    category: 'interiores',
+    categoryLabel: 'Interiores',
+    title: 'Cocina Integrada y Comedor',
+    desc: 'Cubierta de cuarzo, encimera vitrocerámica, horno empotrado, campana y terminaciones contemporáneas.'
   },
   {
     id: 'gal-4',
-    src: '/images/ama_amenity_rooftop.jpg',
-    category: 'amenities',
-    categoryLabel: 'Espacios Comunes',
-    title: 'Piscina Panorámica en Azotea',
-    desc: 'Refrescante piscina en la cubierta superior con vista en 360° a toda la cuenca de Santiago.'
-  },
-  {
-    id: 'gal-5',
-    src: '/images/ama_interior_living.jpg',
-    category: 'interiores',
-    categoryLabel: 'Interiores',
-    title: 'Living Comedor y Balcón Corrido',
-    desc: 'Espacio diáfano con conexión directa a terraza para disfrutar del aire libre en cualquier momento.'
-  },
-  {
-    id: 'gal-6',
-    src: '/images/ama_dormitorio_suite_quillayes.jpg',
+    src: '/images/AMA FOTOS FINAL/dormitorio-1.webp',
     category: 'interiores',
     categoryLabel: 'Interiores',
     title: 'Dormitorio Principal en Suite',
-    desc: 'Gran luminosidad, walk-in clóset integrado y baño en suite con vista panorámica a la Cordillera.'
+    desc: 'Gran luminosidad natural, rincón de escritorio, terminaciones en madera cálida y conexión directa a terraza.'
+  },
+  {
+    id: 'gal-5',
+    src: '/images/AMA FOTOS FINAL/piscina-1.webp',
+    category: 'amenities',
+    categoryLabel: 'Espacios Comunes',
+    title: 'Piscina Central y Solárium',
+    desc: 'Refrescante piscina en el patio central rodeada de reposeras, árboles nativos y áreas de descanso.'
+  },
+  {
+    id: 'gal-6',
+    src: '/images/AMA FOTOS FINAL/piscina-2.webp',
+    category: 'amenities',
+    categoryLabel: 'Espacios Comunes',
+    title: 'Patio Interior, Piscina y Quinchos',
+    desc: 'Explanada común entre ambas torres con piscina familiar, áreas verdes y pérgolas con quinchos.'
   },
   {
     id: 'gal-7',
-    src: '/images/ama_gimnasio_quillayes.jpg',
+    src: '/images/AMA FOTOS FINAL/gym-1.webp',
     category: 'amenities',
     categoryLabel: 'Espacios Comunes',
     title: 'Gimnasio Equipado con Luz Natural',
-    desc: 'Zona de cardio y pesas con ventanales de piso a cielo y vista panorámica a la Cordillera de Los Andes.'
+    desc: 'Zona de cardio, spinning, pesas y entrenamiento funcional con amplios ventanales hacia el exterior.'
   },
   {
     id: 'gal-8',
-    src: '/images/ama_acceso_nocturno.jpg',
-    category: 'fachada',
-    categoryLabel: 'Fachada',
-    title: 'Iluminación Nocturna y Accesos Controlados',
-    desc: 'Seguridad 24/7 con hall de acceso de doble altura y control peatonal y vehicular de última tecnología.'
+    src: '/images/AMA FOTOS FINAL/petzone-1.webp',
+    category: 'amenities',
+    categoryLabel: 'Espacios Comunes',
+    title: 'Pet Zone Exclusiva para Mascotas',
+    desc: 'Circuito canino equipado con obstáculos, sombra natural y bancas para compartir al aire libre con tu mascota.'
   }
 ];
 ---
 
 <BaseLayout 
   title="Edificio AMA Quillayes | Departamentos en La Florida"
-  description="Departamentos de 1, 2 y 3 dormitorios a pasos de Metro Quillayes en La Florida. Paga tu pie en 36 cuotas sin interés y obtén Bono Pie del 10%."
+  description="Departamentos de 1 y 2 dormitorios a pasos de Metro Los Quillayes en La Florida. Venta en Verde desde 2.540 UF con financiamiento del pie en hasta 60 cuotas sin interés."
 >
   <!-- 1. HERO COMPLETO CINEMATOGRÁFICO EDGE-TO-EDGE -->
   <section class="aurvix-hero">
     <div class="hero-card-banner">
       <!-- Slideshow de fondo en alta resolución -->
       <div class="hero-slideshow" id="quillayesHeroSlideshow">
-        <div class="hero-slide active" style={`background-image: url(${u('/images/ama_quillayes_facade.jpg')});`}></div>
-        <div class="hero-slide" style={`background-image: url(${u('/images/ama_interior_living.jpg')});`}></div>
-        <div class="hero-slide" style={`background-image: url(${u('/images/ama_amenity_rooftop.jpg')});`}></div>
+        <div class="hero-slide active" style={`background-image: url(${u('/images/AMA FOTOS FINAL/fachada-1.webp')});`}></div>
+        <div class="hero-slide" style={`background-image: url(${u('/images/AMA FOTOS FINAL/living-1.webp')});`}></div>
+        <div class="hero-slide" style={`background-image: url(${u('/images/AMA FOTOS FINAL/piscina-1.webp')});`}></div>
       </div>
 
       <div class="hero-overlay-gradient"></div>
@@ -244,7 +247,7 @@ const galleryImages = [
               <button 
                 type="button" 
                 class="btn-hero-primary"
-                onclick="window.openCotizadorModal && window.openCotizadorModal()"
+                onclick="window.goToAdvisorQuote && window.goToAdvisorQuote()"
               >
                 <span>Cotizar Online</span>
                 <span class="btn-arrow">↗</span>
@@ -295,7 +298,7 @@ const galleryImages = [
             <button
               type="button"
               class="hkc-cta-btn"
-              onclick="window.openCotizadorModal && window.openCotizadorModal()"
+              onclick="window.goToAdvisorQuote && window.goToAdvisorQuote()"
             >
               COTIZAR PROYECTO
             </button>
@@ -320,7 +323,7 @@ const galleryImages = [
       <div class="hero-slide-dots" id="quillayesHeroDots" aria-label="Controles del slideshow">
         <button type="button" class="slide-dot active" data-slide="0" aria-label="Fachada Exterior"></button>
         <button type="button" class="slide-dot" data-slide="1" aria-label="Living y Terraza"></button>
-        <button type="button" class="slide-dot" data-slide="2" aria-label="Rooftop y Piscina"></button>
+        <button type="button" class="slide-dot" data-slide="2" aria-label="Piscina y Áreas Verdes"></button>
       </div>
     </div>
   </section>
@@ -407,8 +410,14 @@ const galleryImages = [
   </section>
   */}
 
-  <!-- TIPOLOGÍAS Y DISTRIBUCIONES (CUADRO UNIFICADO CON FILTRO Y MOCKUP DE PLANO) -->
-  <section class="section section-cream" id="tipologias">
+  <!-- ESPACIOS Y TERMINACIONES INTERACTIVO (DIAPO 6-7: Showcase por Tabs) -->
+  <SpacesShowcase />
+
+  <!-- RECORRIDO VIRTUAL 360° (DIAPO 6: Tour 360 integrado tras Diseño de vanguardia) -->
+  <Tour360Showcase />
+
+  <!-- TIPOLOGÍAS Y DISTRIBUCIONES (DIAPO 8: CUADRO UNIFICADO CON FILTRO Y PLANTAS 2D) -->
+  <section class="section section-white" id="tipologias">
     <div class="container">
       <div class="section-header text-center">
         <h2 class="section-title">Encuentra la distribución ideal</h2>
@@ -432,16 +441,19 @@ const galleryImages = [
         </div>
       </div>
 
-      <!-- Cuadro Único Unificado (Plano Mockup + Información del Modelo) -->
+      <!-- Cuadro Único Unificado (Plano 2D + Información del Modelo) -->
       <div class="tu-unified-card">
-        <!-- Columna Izquierda: Foto Simple de Mockup del Plano -->
+        <!-- Columna Izquierda: Plano Arquitectónico 2D -->
         <div class="tu-media-col">
           <div class="tu-img-wrap">
             <img
               id="tu-display-img"
               src={typologies[0].planImage}
-              alt={`Plano arquitectónico ${typologies[0].name}`}
+              srcset={typologies[0].planSrcset}
+              sizes="(max-width: 960px) 100vw, 620px"
+              alt={`Plano arquitectónico 2D ${typologies[0].name}`}
               class="tu-plan-img"
+              decoding="async"
             />
           </div>
         </div>
@@ -531,7 +543,7 @@ const galleryImages = [
             <button
               type="button"
               class="btn btn-cyan tu-cotizar-btn"
-              onclick="window.openCotizadorModal && window.openCotizadorModal()"
+              onclick="window.goToAdvisorQuote && window.goToAdvisorQuote(document.getElementById('tu-item-title')?.textContent?.trim())"
             >
               <span>Cotizar Modelo</span>
               <span class="tu-arrow">↗</span>
@@ -542,8 +554,8 @@ const galleryImages = [
     </div>
   </section>
 
-  <!-- COTIZADOR EN VIVO PARA ESTE PROYECTO (LUEGO DE PLANTAS) -->
-  <section class="section section-white" id="cotizador-quillayes">
+  <!-- COTIZADOR EN VIVO PARA ESTE PROYECTO (DIAPO 9: LUEGO DE PLANTAS) -->
+  <section class="section section-canvas" id="cotizador-quillayes">
     <div class="container">
       <div class="section-header text-center">
         <h2 class="section-title">Simula tu dividendo en Quillayes de AMA INMOBILIARIA.</h2>
@@ -558,7 +570,7 @@ const galleryImages = [
     </div>
   </section>
 
-  <!-- AMENITIES ESPECÍFICOS DEL PROYECTO (CON FOTOGRAFÍAS REALES) -->
+  <!-- AMENITIES ESPECÍFICOS DEL PROYECTO (ESPACIOS COMUNES) -->
   <section class="section section-petrol" id="amenities">
     <PatternLoops color="#1AA6B7" opacity={0.05} />
     <div class="container relative-z">
@@ -573,7 +585,15 @@ const galleryImages = [
       <div class="amenities-photo-grid">
         {featuredAmenities.map((item) => (
           <article class="amenity-photo-card">
-            <img src={u(item.image)} alt={item.name} loading="lazy" class="amenity-photo-img" />
+            <img
+              src={uMd(item.image)}
+              srcset={imgSrcSet(item.image)}
+              sizes="(max-width: 768px) 100vw, 340px"
+              alt={item.name}
+              loading="lazy"
+              decoding="async"
+              class="amenity-photo-img"
+            />
             <div class="amenity-photo-overlay">
               <h3 class="amenity-photo-title">{item.name}</h3>
               {/* <p class="amenity-photo-sub">{item.subtitle}</p> */}
@@ -633,10 +653,7 @@ const galleryImages = [
     </div>
   </section>
 
-  <!-- ESPACIOS Y TERMINACIONES INTERACTIVO (Showcase por Tabs) -->
-  <SpacesShowcase />
-
-  <!-- SECCIÓN DE COTIZACIÓN Y ASESORÍA CON EJECUTIVA COMERCIAL -->
+  <!-- SECCIÓN DE COTIZACIÓN Y ASESORÍA CON EJECUTIVA COMERCIAL (DIAPO 10) -->
   <AdvisorQuoteCTA />
 
   <!-- UBICACIÓN DEL PROYECTO (CUADRO UNIFICADO ESTILO HOME / AURVIX - SECCIÓN OSCURA) -->
@@ -759,9 +776,12 @@ const galleryImages = [
           >
             <div class="gal-img-wrapper">
               <img 
-                src={u(img.src)} 
+                src={uMd(img.src)} 
+                srcset={imgSrcSet(img.src)}
+                sizes="(max-width: 768px) 100vw, 440px"
                 alt={img.title} 
                 loading="lazy" 
+                decoding="async"
                 class="gal-photo"
               />
               <div class="gal-overlay">
@@ -994,9 +1014,9 @@ const galleryImages = [
 
   /* BARRA DE MÉTRICAS QUE COMPLETA EL HERO */
   .hero-metrics-bar {
-    background-color: var(--color-petrol);
+    background-color: #021822;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding: 1.35rem 0;
     width: 100%;
     position: relative;
@@ -1247,14 +1267,16 @@ const galleryImages = [
     border-radius: 20px;
     overflow: hidden;
     height: 430px;
-    background: #F8FAFC;
+    background: #FFFFFF;
     border: 1px solid rgba(15, 23, 42, 0.06);
   }
 
   .tu-plan-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 1.25rem;
+    background: #FFFFFF;
     display: block;
     transition: opacity 0.28s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -2438,7 +2460,8 @@ const galleryImages = [
         desc: 'Distribución optimizada, con cocina integrada a living comedor, y terraza continua a lo ancho del departamento.',
         price: 'Desde 2.540 UF',
         tags: ['Ideal Inversionista', 'Renta Alta'],
-        planImage: `${baseUrl}/images/plano_mockup_1d1b.jpg`
+        planImage: `${baseUrl}/images/AMA%20FOTOS%20FINAL/IAQ_Dpto_1D%201B-md.webp`,
+        planSrcset: `${baseUrl}/images/AMA%20FOTOS%20FINAL/IAQ_Dpto_1D%201B-md.webp 960w, ${baseUrl}/images/AMA%20FOTOS%20FINAL/IAQ_Dpto_1D%201B.webp 1600w`
       },
       /*
       {
@@ -2462,7 +2485,8 @@ const galleryImages = [
         desc: 'Depto estilo mariposa ideal para inversionistas, con cocina integrada a living comedor, y dos habitaciones con privacidad, conectadas por terraza continua a lo ancho del departamento.',
         price: 'Desde 3.750 UF',
         tags: ['Más Vendido', 'Máxima Privacidad'],
-        planImage: `${baseUrl}/images/plano_mockup_2d2b.jpg`
+        planImage: `${baseUrl}/images/AMA%20FOTOS%20FINAL/IAQ_Dpto_2D%202B-md.webp`,
+        planSrcset: `${baseUrl}/images/AMA%20FOTOS%20FINAL/IAQ_Dpto_2D%202B-md.webp 826w, ${baseUrl}/images/AMA%20FOTOS%20FINAL/IAQ_Dpto_2D%202B.webp 1377w`
       }
       /*
       ,
@@ -2508,7 +2532,8 @@ const galleryImages = [
         tuImg.classList.add('fade');
         setTimeout(() => {
           tuImg.src = item.planImage;
-          tuImg.alt = `Plano arquitectónico ${item.name}`;
+          tuImg.srcset = item.planSrcset;
+          tuImg.alt = `Plano arquitectónico 2D ${item.name}`;
           tuImg.classList.remove('fade');
 
           if (tuTitle) tuTitle.textContent = item.name;

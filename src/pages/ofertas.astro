@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ModernCTA from '../components/features/ModernCTA.astro';
-import { u } from '../utils/url';
+import { u, uMd, imgSrcSet } from '../utils/url';
 import '../styles/home.css';
 import '../styles/inner-pages.css';
 
@@ -12,7 +12,8 @@ const campaigns = [
     kicker: 'Beneficio Comercial Directo',
     title: 'Bono Pie de hasta un 10%',
     desc: 'Bonificamos hasta un 10% del valor total del departamento para que lo presentes como parte de tu pie bancario, reduciendo al mínimo tu desembolso inicial y facilitando la aprobación hipotecaria.',
-    image: u('/images/ama_quillayes_facade.jpg'),
+    image: uMd('/images/AMA FOTOS FINAL/fachada-1.webp'),
+    srcset: imgSrcSet('/images/AMA FOTOS FINAL/fachada-1.webp'),
     highlightLabel: 'Ahorro directo estimado',
     highlightValue: 'Hasta 400 UF',
     specs: [
@@ -29,7 +30,8 @@ const campaigns = [
     kicker: 'Flexibilidad Financiera',
     title: 'Tu pie en hasta 60 cuotas sin interés',
     desc: 'Fracciona el pago del pie durante el período de construcción y más allá de la entrega, con cuotas mensuales fijas y sin recargos financieros para ordenar tu flujo de caja con tranquilidad.',
-    image: u('/images/ama_interior_living.jpg'),
+    image: uMd('/images/AMA FOTOS FINAL/living-1.webp'),
+    srcset: imgSrcSet('/images/AMA FOTOS FINAL/living-1.webp'),
     highlightLabel: 'Cuota mensual referencial',
     highlightValue: 'Desde $250.000 / mes',
     specs: [
@@ -46,13 +48,14 @@ const campaigns = [
     kicker: 'Especial Inversionistas',
     title: 'Garantía de arriendo por 12 meses',
     desc: 'Aseguramos el flujo mensual de tu inversión durante el primer año desde la recepción del departamento, incluyendo búsqueda de arrendatario calificado y administración profesional.',
-    image: u('/images/ama_amenity_rooftop.jpg'),
+    image: uMd('/images/AMA FOTOS FINAL/piscina-1.webp'),
+    srcset: imgSrcSet('/images/AMA FOTOS FINAL/piscina-1.webp'),
     highlightLabel: 'Flujo garantizado',
     highlightValue: '12 meses continuos',
     specs: [
       { label: 'Duración', val: '1 año desde la entrega' },
       { label: 'Administración', val: 'Gestión integral incluida' },
-      { label: 'Unidades elegibles', val: 'Modelos 1D+1B y 2D+1B' },
+      { label: 'Unidades elegibles', val: 'Modelos 1D+1B y 2D+2B Mariposa' },
       { label: 'Vacancia', val: 'Riesgo cero el primer año' }
     ],
     checks: ['El dividendo se cubre desde el primer mes', 'Selección rigurosa de arrendatario', 'Administración delegada sin estrés']
@@ -63,7 +66,8 @@ const campaigns = [
     kicker: 'Liquidez Patrimonial',
     title: 'Cesión de promesa sin costo ni comisión',
     desc: 'Si compras en etapa temprana para capturar la plusvalía de construcción y decides transferir tu promesa a un tercero antes de escriturar, no cobramos multas ni gastos administrativos.',
-    image: u('/images/ama_piloto_cocina_quillayes.jpg'),
+    image: uMd('/images/AMA FOTOS FINAL/cocina-1.webp'),
+    srcset: imgSrcSet('/images/AMA FOTOS FINAL/cocina-1.webp'),
     highlightLabel: 'Comisión por cesión',
     highlightValue: '$0 Costo Administrativo',
     specs: [
@@ -85,7 +89,7 @@ const campaigns = [
   <section class="aurvix-hero ip-hero">
     <div class="hero-card-banner">
       <div class="hero-slideshow">
-        <div class="hero-slide active" style={`background-image: url(${u('/images/ama_quillayes_facade.jpg')});`}></div>
+        <div class="hero-slide active" style={`background-image: url(${u('/images/AMA FOTOS FINAL/fachada-1.webp')});`}></div>
       </div>
 
       <div class="hero-overlay-gradient"></div>
@@ -175,7 +179,11 @@ const campaigns = [
           <img
             id="camp-img"
             src={campaigns[0].image}
+            srcset={campaigns[0].srcset}
+            sizes="(max-width: 960px) 100vw, 560px"
             alt={campaigns[0].title}
+            loading="lazy"
+            decoding="async"
           />
         </div>
 
@@ -316,6 +324,7 @@ const campaigns = [
         imgEl.classList.add('fade');
         setTimeout(() => {
           imgEl.src = data.image;
+          imgEl.srcset = data.srcset;
           imgEl.alt = data.title;
           imgEl.classList.remove('fade');
         }, 160);

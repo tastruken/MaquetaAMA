@@ -1,35 +1,36 @@
 ---
 // src/components/features/JournalCards.astro
 // Sección de blog e información financiera estilo Aurvix (Our journal)
-import { u } from "../../utils/url";
+import { u, uMd, imgSrcSet } from "../../utils/url";
 
 const rawArticles = [
   {
     title:
       "¿Por qué invertir en La Florida? Conectividad y alta plusvalía en Metro Los Quillayes",
     readTime: "5 min de lectura",
-    image: "/images/ama_quillayes_facade.jpg",
+    image: "/images/blog/blog-inversion-la-florida.webp",
     link: "/blog/por-que-invertir-en-la-florida-quillayes",
   },
   {
     title:
       "Cómo financiar tu primer departamento: Guía práctica para pagar el pie en cuotas",
     readTime: "4 min de lectura",
-    image: "/images/ama_interior_living.jpg",
+    image: "/images/blog/blog-financiamiento-pie.webp",
     link: "/blog/como-financiar-tu-primer-departamento",
   },
   {
     title:
       "Claves para recibir tu departamento nuevo: Checklist técnico de entrega y garantías",
     readTime: "6 min de lectura",
-    image: "/images/ama_quillayes_facade.jpg",
+    image: "/images/blog/blog-entrega-llaves.webp",
     link: "/blog/claves-para-recibir-tu-departamento-nuevo",
   },
 ];
 
 const articles = rawArticles.map((art) => ({
   ...art,
-  image: u(art.image),
+  image: uMd(art.image),
+  srcset: imgSrcSet(art.image, 960, 1376),
   link: u(art.link),
 }));
 ---
@@ -49,9 +50,12 @@ const articles = rawArticles.map((art) => ({
             <a href={art.link} class="journal-media" aria-label={art.title}>
               <img
                 src={art.image}
+                srcset={art.srcset}
+                sizes="(max-width: 992px) 100vw, 420px"
                 alt={art.title}
                 class="journal-img"
                 loading="lazy"
+                decoding="async"
               />
             </a>
             <div class="journal-body">

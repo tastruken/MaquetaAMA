@@ -1,7 +1,7 @@
 ---
 // src/components/ui/CardProject.astro
 // Tarjeta de proyecto inmobiliario con carrusel de fotos e información lateral
-import { u } from '../../utils/url';
+import { u, uMd, imgSrcSet } from '../../utils/url';
 
 interface Props {
   title: string;
@@ -28,19 +28,19 @@ const {
   typology,
   status,
   badgePromo,
-  image = '/images/ama_quillayes_facade.jpg',
+  image = '/images/AMA FOTOS FINAL/fachada-1.webp',
   images = [
-    '/images/ama_quillayes_facade.jpg',
-    '/images/ama_interior_living.jpg',
-    '/images/ama_piloto_cocina_quillayes.jpg',
-    '/images/ama_amenity_rooftop.jpg',
-    '/images/ama_quinchos_rooftop_quillayes.jpg'
+    '/images/AMA FOTOS FINAL/fachada-1.webp',
+    '/images/AMA FOTOS FINAL/living-1.webp',
+    '/images/AMA FOTOS FINAL/cocina-1.webp',
+    '/images/AMA FOTOS FINAL/piscina-1.webp',
+    '/images/AMA FOTOS FINAL/petzone-1.webp'
   ],
-  dorms = '1 a 3 Dorms',
-  baths = '1 a 2 Baños',
-  surface = '34 a 72 m²',
+  dorms = '1 y 2 Dorms',
+  baths = '1 y 2 Baños',
+  surface = '34,5 a 64,8 m²',
   delivery = 'Entrega 2026',
-  priceSubtitle = 'Pie en 36 cuotas'
+  priceSubtitle = 'Pie en hasta 60 cuotas'
 } = Astro.props;
 
 const slideImages = images.length > 0 ? images : [image];
@@ -53,10 +53,13 @@ const slideImages = images.length > 0 ? images : [image];
       {slideImages.map((imgSrc, idx) => (
         <div class={`carousel-slide ${idx === 0 ? 'active' : ''}`} data-slide-index={idx}>
           <img 
-            src={u(imgSrc)} 
+            src={uMd(imgSrc)} 
+            srcset={imgSrcSet(imgSrc)}
+            sizes="(max-width: 960px) 100vw, 60vw"
             alt={`${title} - Vista ${idx + 1}`} 
             class="card-img" 
-            loading={idx === 0 ? 'eager' : 'lazy'} 
+            loading="eager"
+            decoding="async"
           />
         </div>
       ))}
@@ -149,7 +152,7 @@ const slideImages = images.length > 0 ? images : [image];
         <button 
           type="button" 
           class="btn-cotizar-mini"
-          onclick="window.openCotizadorModal && window.openCotizadorModal()"
+          onclick="window.goToAdvisorQuote && window.goToAdvisorQuote()"
         >
           Cotizar
         </button>

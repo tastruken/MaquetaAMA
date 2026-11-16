@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PatternDrops from '../../components/brand/PatternDrops.astro';
+import { u, uMd, imgSrcSet } from '../../utils/url';
 ---
 
 <BaseLayout 
@@ -9,7 +10,7 @@ import PatternDrops from '../../components/brand/PatternDrops.astro';
 >
   <div class="article-top-bar">
     <div class="container">
-      <a href="/blog" class="back-link">← Volver al Blog</a>
+      <a href={u('/blog')} class="back-link">← Volver al Blog</a>
     </div>
   </div>
 
@@ -21,7 +22,7 @@ import PatternDrops from '../../components/brand/PatternDrops.astro';
           ¿Cómo financiar tu primer departamento en Chile? Guía paso a paso
         </h1>
         <div class="article-meta-info">
-          <span>Por: <strong>Equipo de Asesoría Financiera AMA</strong></span>
+          <span>Por: <strong>AMA Inmobiliaria</strong></span>
           <span class="dot">•</span>
           <span>14 Septiembre 2026</span>
           <span class="dot">•</span>
@@ -30,12 +31,12 @@ import PatternDrops from '../../components/brand/PatternDrops.astro';
       </header>
 
       <div class="article-featured-img card">
-        <img src="/images/ama_interior_living.jpg" alt="Interior departamento financiado" />
+        <img src={uMd('/images/blog/blog-financiamiento-pie.webp')} srcset={imgSrcSet('/images/blog/blog-financiamiento-pie.webp', 960, 1376)} sizes="(max-width: 900px) 100vw, 820px" alt="Pareja planificando el financiamiento y pie en cuotas de su primer departamento" decoding="async" />
       </div>
 
       <div class="article-content card">
         <p class="lead-paragraph">
-          Dar el paso hacia la compra de tu primer departamento es uno de los hitos patrimoniales más importantes. Sin embargo, conceptos como el <strong>dividendo mensual</strong>, el <strong>pie bancario</strong>, la <strong>tasa de interés</strong> o el <strong>Bono Pie</strong> suelen generar incertidumbre. En esta guía te explicamos cómo ordenar tus finanzas para concretar tu compra sin sobresaltos.
+          Dar el paso hacia la compra de tu primer departamento es uno de los hitos patrimoniales más importantes. Sin embargo, conceptos como el <strong>crédito hipotecario</strong>, el <strong>dividendo mensual</strong>, el <strong>pie bancario</strong> o la <strong>tasa de interés</strong> suelen generar incertidumbre. En esta guía te explicamos cómo ordenar tus finanzas para concretar tu compra sin sobresaltos.
         </p>
 
         <h2>1. ¿Cuánto ahorro previo necesitas para el pie?</h2>
@@ -43,9 +44,9 @@ import PatternDrops from '../../components/brand/PatternDrops.astro';
           En el sistema financiero chileno, la mayoría de los bancos financian entre el <strong>80% y el 90%</strong> del valor de la propiedad, lo que significa que debes aportar entre un <strong>10% y un 20% de pie</strong>.
         </p>
         <div class="callout-box">
-          <strong>💡 La ventaja de comprar en blanco con AMA Inmobiliaria:</strong>
+          <strong>💡 La ventaja de comprar en venta en verde con AMA Inmobiliaria:</strong>
           <p>
-            Al comprar en etapas tempranas como <strong>AMA Quillayes</strong>, puedes fraccionar el pago del pie en hasta <strong>36 cuotas sin interés</strong> durante todo el proceso constructivo, lo que te permite ahorrar mes a mes sin necesidad de desembolsar todo el dinero al contado.
+            Al comprar en venta en verde en proyectos como <strong>AMA Quillayes</strong>, puedes fraccionar el pago del pie en hasta <strong>60 cuotas sin interés</strong> durante todo el proceso constructivo, lo que te permite ahorrar mes a mes sin necesidad de desembolsar todo el dinero al contado.
           </p>
         </div>
 
@@ -63,9 +64,9 @@ import PatternDrops from '../../components/brand/PatternDrops.astro';
           <li><strong>20 años:</strong> Menor costo financiero total en intereses a lo largo de la vida del crédito.</li>
         </ul>
 
-        <h2>4. ¿Qué es el Bono Pie y cómo te beneficia?</h2>
+        <h2>4. Crédito hipotecario y pago del pie en hasta 60 cuotas</h2>
         <p>
-          El Bono Pie es una bonificación comercial que otorga la inmobiliaria sobre el precio de lista. Por ejemplo, en una propiedad de 3.000 UF con un Bono Pie del 10%, la inmobiliaria absorbe 300 UF, reduciendo de manera sustancial el aporte inicial que debes desembolsar de tu propio bolsillo.
+          En AMA Inmobiliaria facilitamos la compra de tu departamento combinando el financiamiento de tu pie en hasta <strong>60 cuotas sin interés</strong> durante la etapa de venta en verde con la gestión de tu <strong>crédito hipotecario</strong> bancario para la entrega. De esta forma organizas tu aporte inicial en cuotas planificadas antes de comenzar a pagar tu dividendo.
         </p>
 
         <div class="article-cta-box">

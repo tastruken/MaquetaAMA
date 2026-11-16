@@ -1,14 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { u, uMd, imgSrcSet } from '../../utils/url';
 ---
 
 <BaseLayout 
   title="Checklist para Recibir tu Departamento Nuevo | Blog AMA Inmobiliaria"
-  description="Puntos clave que debes inspeccionar al recibir tu departamento nuevo: terminaciones, instalaciones y acta de recepción de postventa."
+  description="Puntos clave que debes inspeccionar al recibir tu departamento nuevo: terminaciones, instalaciones y garantías legales de 3, 5 y 10 años."
 >
   <div class="article-top-bar">
     <div class="container">
-      <a href="/blog" class="back-link">← Volver al Blog</a>
+      <a href={u('/blog')} class="back-link">← Volver al Blog</a>
     </div>
   </div>
 
@@ -20,7 +21,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           Checklist de recepción y garantías: Qué revisar al momento de la entrega
         </h1>
         <div class="article-meta-info">
-          <span>Por: <strong>Departamento de Calidad y Postventa AMA</strong></span>
+          <span>Por: <strong>AMA Inmobiliaria</strong></span>
           <span class="dot">•</span>
           <span>28 Agosto 2026</span>
           <span class="dot">•</span>
@@ -29,7 +30,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </header>
 
       <div class="article-featured-img card">
-        <img src="/images/ama_amenity_rooftop.jpg" alt="Entrega departamento nuevo AMA" />
+        <img src={uMd('/images/blog/blog-entrega-llaves.webp')} srcset={imgSrcSet('/images/blog/blog-entrega-llaves.webp', 960, 1376)} sizes="(max-width: 900px) 100vw, 820px" alt="Llaves y carpeta técnica de inspección en departamento nuevo AMA" decoding="async" />
       </div>
 
       <div class="article-content card">
@@ -60,21 +61,25 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <li>Prueba el citófono con la conserjería del edificio para confirmar audio y apertura remota si corresponde.</li>
         </ul>
 
-        <h2>4. El Acta de Recepción Conforme</h2>
+        <h2>4. Garantías legales de tu departamento (3, 5 y 10 años)</h2>
         <p>
-          Si detectas algún detalle estético menor (por ejemplo, una pincelada de pintura o un ajuste de bisagra), no te preocupes: se anota detalladamente en el <strong>Acta de Observaciones</strong>. Nuestro equipo de postventa programa una visita de rectificación para subsanarlo a la brevedad.
+          Al momento de recibir tu departamento cuentas con el respaldo de las garantías legales establecidas por la <strong>Ley General de Urbanismo y Construcciones (Ley N° 20.016)</strong>, las cuales cubren distintas partidas según su plazo:
         </p>
-        <p>
-          Recuerda que cuentas con el respaldo de la garantía legal de <strong>3 años para terminaciones, 5 años para instalaciones y 10 años para estructura</strong>.
-        </p>
+        <ul>
+          <li><strong>3 años en terminaciones y acabados</strong> (desde la inscripción en el Conservador de Bienes Raíces): cubre puertas, quincallería, ventanas termopanel, muebles de cocina, cubiertas, griferías, revestimientos cerámicos, pisos y pintura.</li>
+          <li><strong>5 años en elementos constructivos e instalaciones</strong> (desde la recepción municipal definitiva): cubre redes de agua potable y alcantarillado, canalizaciones eléctricas, corrientes débiles, ductos de extracción e impermeabilizaciones.</li>
+          <li><strong>10 años en estructura soportante</strong> (desde la recepción municipal definitiva): cubre fallas o defectos que afecten fundaciones, cimientos, muros estructurales, pilares de hormigón, losas, vigas y techumbres principales.</li>
+        </ul>
 
+        {/* OCULTAR SECCION: Comentada temporalmente por solicitud
         <div class="article-cta-box">
           <h3>¿Necesitas soporte técnico o ingresar una solicitud?</h3>
           <p>Visita nuestro portal de postventa y gestiona cualquier requerimiento en línea.</p>
-          <a href="/postventa" class="btn btn-cyan">
+          <a href={u('/postventa')} class="btn btn-cyan">
             Ir a Postventa y Garantías
           </a>
         </div>
+        */}
       </div>
     </div>
   </article>

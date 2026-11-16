@@ -15,12 +15,13 @@ interface Props {
 const {
   title = 'Departamentos Nuevos en Santiago',
   description = 'Descubre proyectos inmobiliarios con diseño de vanguardia, altos estándares y excelente conectividad. AMA Inmobiliaria, calidad que trasciende.',
-  ogImage = '/images/og-ama.jpg',
+  ogImage = '/images/AMA FOTOS FINAL/og-fachada.jpg',
   isHome: isHomeProp
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://tastruken.github.io');
 const fullTitle = title.includes('AMA Inmobiliaria') ? title : `${title} | AMA Inmobiliaria`;
+const advisorQuoteUrl = u('/proyectos/ama-quillayes#cotizar-asesor');
 
 const currentPathNorm = Astro.url.pathname.replace(base, '').replace(/\/$/, '') || '/';
 const isHomePage = isHomeProp !== undefined ? isHomeProp : (currentPathNorm === '/');
@@ -88,6 +89,41 @@ const isHomePage = isHomeProp !== undefined ? isHomeProp : (currentPathNorm === 
     
     <!-- Utilidades Globales -->
     <CotizadorModal />
+    <script is:inline define:vars={{ advisorQuoteUrl }}>
+      window.goToAdvisorQuote = function(tipologiaHint) {
+        var selectTipologia = function(hint) {
+          var sel = document.getElementById('aq-tipologia');
+          if (!sel || !hint) return;
+          var norm = String(hint).toLowerCase();
+          for (var i = 0; i < sel.options.length; i++) {
+            var opt = sel.options[i];
+            if (
+              opt.value.toLowerCase().indexOf(norm) !== -1 ||
+              (norm.indexOf('1d') !== -1 && opt.value.indexOf('1D') !== -1) ||
+              (norm.indexOf('2d') !== -1 && opt.value.indexOf('2D') !== -1)
+            ) {
+              sel.value = opt.value;
+              break;
+            }
+          }
+        };
+
+        var advisorSection = document.getElementById('cotizar-asesor');
+        if (advisorSection) {
+          if (tipologiaHint) selectTipologia(tipologiaHint);
+          advisorSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setTimeout(function() {
+            var nameInput = document.getElementById('aq-name');
+            if (nameInput && nameInput.focus) nameInput.focus({ preventScroll: true });
+          }, 450);
+        } else {
+          if (tipologiaHint) {
+            try { sessionStorage.setItem('amaSelectedTipologia', String(tipologiaHint)); } catch (_e) {}
+          }
+          window.location.href = advisorQuoteUrl;
+        }
+      };
+    </script>
   </body>
 </html>
 

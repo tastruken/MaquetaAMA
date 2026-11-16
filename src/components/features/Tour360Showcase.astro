@@ -1,0 +1,819 @@
+---
+// src/components/features/Tour360Showcase.astro
+// Integración del Recorrido Virtual 360° de AMA Quillayes
+// Permite conectar directamente una URL oficial (Matterport / Kuula / CloudPano)
+// y ofrece mientras tanto un explorador panorámico interactivo por ambientes reales.
+import { u, uMd } from '../../utils/url';
+
+interface VideoItem {
+  title: string;
+  embedUrl: string;
+}
+
+interface Props {
+  // Pega aquí la URL embed oficial del Tour 360 cuando esté disponible (o pásala por prop)
+  tourUrl?: string;
+  youtubeVideos?: VideoItem[];
+}
+
+// Configuración central: al completar TOUR_360_EMBED_URL se renderiza automáticamente el iframe 360° oficial
+const TOUR_360_EMBED_URL = 'https://kuula.co/share/Lp557/collection/7Mv2V?logo=1&info=0&logosize=40&fs=1&vr=1&initload=0&thumbs=1&inst=es';
+const FUTURE_YOUTUBE_VIDEOS: VideoItem[] = [];
+
+const {
+  tourUrl = TOUR_360_EMBED_URL,
+  youtubeVideos = FUTURE_YOUTUBE_VIDEOS,
+} = Astro.props;
+
+const activeTourUrl = tourUrl.trim();
+const hasExternalTour = activeTourUrl.length > 0;
+
+const tourScenes = [
+  {
+    id: 'living',
+    label: 'Living & Terraza',
+    kicker: 'Ambiente 01 · Modelo Piloto',
+    title: 'Living Comedor y Terraza Panorámica',
+    desc: 'Arrastra lateralmente sobre la vista para explorar la luminosidad de los ventanales termopanel y su salida directa a terraza.',
+    image: u('/images/AMA FOTOS FINAL/living-1.webp'),
+    thumb: uMd('/images/AMA FOTOS FINAL/living-1.webp'),
+    hotspots: [
+      { label: 'Explorar Cocina', targetIndex: 1, x: 24, y: 54 },
+      { label: 'Ver Piscina', targetIndex: 3, x: 76, y: 42 },
+    ],
+  },
+  {
+    id: 'cocina',
+    label: 'Cocina Integrada',
+    kicker: 'Ambiente 02 · Equipada',
+    title: 'Cocina Integrada con Cubierta de Cuarzo',
+    desc: 'Recorre la integración entre el comedor diario, encimera vitrocerámica, horno empotrado y el área social del departamento.',
+    image: u('/images/AMA FOTOS FINAL/cocina-1.webp'),
+    thumb: uMd('/images/AMA FOTOS FINAL/cocina-1.webp'),
+    hotspots: [
+      { label: 'Volver al Living', targetIndex: 0, x: 72, y: 52 },
+      { label: 'Ver Dormitorio', targetIndex: 2, x: 28, y: 48 },
+    ],
+  },
+  {
+    id: 'dormitorio',
+    label: 'Dormitorio Suite',
+    kicker: 'Ambiente 03 · Descanso',
+    title: 'Dormitorio en Suite con Conexión Exterior',
+    desc: 'Visualiza la amplitud del dormitorio principal, piso fotolaminado y acceso directo a la terraza.',
+    image: u('/images/AMA FOTOS FINAL/dormitorio-1.webp'),
+    thumb: uMd('/images/AMA FOTOS FINAL/dormitorio-1.webp'),
+    hotspots: [
+      { label: 'Ir al Living', targetIndex: 0, x: 22, y: 58 },
+      { label: 'Ir a Piscina', targetIndex: 3, x: 74, y: 46 },
+    ],
+  },
+  {
+    id: 'piscina',
+    label: 'Piscina & Áreas Verdes',
+    kicker: 'Ambiente 04 · Espacios Comunes',
+    title: 'Piscina Central y Solárium',
+    desc: 'Explora la piscina rodeada de árboles nativos, reposeras y sectores exteriores pensados para disfrutar en comunidad.',
+    image: u('/images/AMA FOTOS FINAL/piscina-1.webp'),
+    thumb: uMd('/images/AMA FOTOS FINAL/piscina-1.webp'),
+    hotspots: [
+      { label: 'Ir a Patio & Quinchos', targetIndex: 4, x: 30, y: 56 },
+      { label: 'Volver al Living', targetIndex: 0, x: 75, y: 62 },
+    ],
+  },
+  {
+    id: 'quinchos',
+    label: 'Patio Central & Quinchos',
+    kicker: 'Ambiente 05 · Comunidad',
+    title: 'Patio Interior, Piscina y Pérgolas de Quinchos',
+    desc: 'Área común central entre ambas torres con piscina, jardines y pérgolas equipadas para compartir en familia.',
+    image: u('/images/AMA FOTOS FINAL/piscina-2.webp'),
+    thumb: uMd('/images/AMA FOTOS FINAL/piscina-2.webp'),
+    hotspots: [
+      { label: 'Ver Piscina', targetIndex: 3, x: 68, y: 48 },
+      { label: 'Volver al Piloto', targetIndex: 0, x: 26, y: 60 },
+    ],
+  },
+];
+---
+
+<section class="section tour360-section" id="tour-360">
+  <div class="container">
+    <div class="section-header text-center tour360-header">
+      <h2 class="section-title">Recorre cada espacio en 360°</h2>
+      <p class="section-desc">
+        {hasExternalTour
+          ? 'Explora libremente el departamento piloto y sus terminaciones mediante nuestro recorrido inmersivo 360°.'
+          : 'Explora los distintos ambientes del piloto y los espacios comunes en un recorrido panorámico interactivo antes de visitar nuestra sala de ventas.'}
+      </p>
+    </div>
+
+    <div class="tour360-card" id="tour360-card">
+      {hasExternalTour ? (
+        <div class="tour360-iframe-shell" id="tour360-stage">
+          <iframe
+            src={activeTourUrl}
+            title="Tour Virtual 360° Edificio AMA Quillayes"
+            class="tour360-iframe"
+            allow="xr-spatial-tracking; gyroscope; accelerometer; fullscreen"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      ) : (
+        <div class="tour360-viewer-shell" id="tour360-stage" tabindex="0" aria-label="Visor interactivo de ambientes AMA Quillayes">
+          <!-- Escenario panorámico interactivo -->
+          <div class="tour360-viewport" id="tour360-viewport">
+            <img
+              id="tour360-img"
+              src={tourScenes[0].image}
+              alt={tourScenes[0].title}
+              class="tour360-pano-img"
+              draggable="false"
+            />
+            <div class="tour360-vignette" aria-hidden="true"></div>
+
+            <!-- Barra HUD superior -->
+            <div class="tour360-hud-top">
+              <div class="tour360-badge-live">
+                <span class="tour360-gyro-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <ellipse cx="12" cy="12" rx="10" ry="4"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                  </svg>
+                </span>
+                <span>Tour Interactivo 360° · Arrastra para explorar</span>
+              </div>
+
+              <div class="tour360-hud-controls">
+                <span class="tour360-azimuth-chip" id="tour360-azimuth">0° · Panorama</span>
+                <button
+                  type="button"
+                  id="tour360-autorotate-btn"
+                  class="tour360-tool-btn is-active"
+                  aria-pressed="true"
+                  title="Pausar o activar paneo automático"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/>
+                    <path d="M21 3v5h-5"/>
+                  </svg>
+                  <span id="tour360-autorotate-label">Auto-paneo</span>
+                </button>
+                <button
+                  type="button"
+                  id="tour360-fullscreen-btn"
+                  class="tour360-tool-btn"
+                  title="Ver en pantalla completa"
+                  aria-label="Ver recorrido en pantalla completa"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 3 21 3 21 9"/>
+                    <polyline points="9 21 3 21 3 15"/>
+                    <line x1="21" y1="3" x2="14" y2="10"/>
+                    <line x1="3" y1="21" x2="10" y2="14"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Hotspots navegables sobre la escena -->
+            <div class="tour360-hotspots-layer" id="tour360-hotspots">
+              {tourScenes[0].hotspots.map((hs) => (
+                <button
+                  type="button"
+                  class="tour360-hotspot"
+                  data-target-scene={hs.targetIndex}
+                  style={`left: ${hs.x}%; top: ${hs.y}%;`}
+                >
+                  <span class="hotspot-pulse"></span>
+                  <span class="hotspot-label">{hs.label}</span>
+                </button>
+              ))}
+            </div>
+
+            <!-- Info flotante inferior sobre el ambiente activo -->
+            <div class="tour360-hud-bottom">
+              <div class="tour360-scene-info">
+                <span class="tour360-scene-kicker" id="tour360-scene-kicker">{tourScenes[0].kicker}</span>
+                <h3 class="tour360-scene-title" id="tour360-scene-title">{tourScenes[0].title}</h3>
+                <p class="tour360-scene-desc" id="tour360-scene-desc">{tourScenes[0].desc}</p>
+              </div>
+
+              <button
+                type="button"
+                class="btn-tour-cta"
+                onclick="window.goToAdvisorQuote && window.goToAdvisorQuote()"
+              >
+                <span>Agendar Visita o Cotizar</span>
+                <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Selector inferior de ambientes -->
+          <div class="tour360-scenes-bar" role="tablist" aria-label="Ambientes del recorrido virtual">
+            <div class="tour360-scenes-track">
+              {tourScenes.map((scene, idx) => (
+                <button
+                  type="button"
+                  role="tab"
+                  class={`tour360-scene-btn ${idx === 0 ? 'active' : ''}`}
+                  data-scene-index={idx}
+                  aria-selected={idx === 0 ? 'true' : 'false'}
+                >
+                  <img src={scene.thumb} alt="" class="scene-thumb" loading="lazy" decoding="async" />
+                  <span class="scene-name">{scene.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+
+    {youtubeVideos.length > 0 && (
+      <div class="tour360-videos-block">
+        <div class="videos-header text-center">
+          <h3 class="videos-title">Videos del Proyecto</h3>
+        </div>
+        <div class="videos-grid">
+          {youtubeVideos.map((vid) => (
+            <div class="video-card">
+              <iframe
+                src={vid.embedUrl}
+                title={vid.title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .tour360-section {
+    background: #F8FAFC;
+    padding: 5.5rem 0 6rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.05);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+  }
+
+  .tour360-header.text-center {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .tour360-header .section-title {
+    margin: 0 0 0.85rem;
+  }
+
+  .tour360-header .section-desc {
+    margin: 0 auto;
+    max-width: 680px;
+  }
+
+  .tour360-card {
+    background: #FFFFFF;
+    border-radius: 28px;
+    padding: 1.25rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 22px 54px -14px rgba(15, 23, 42, 0.12);
+  }
+
+  .tour360-iframe-shell {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #0F172A;
+  }
+
+  .tour360-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  .tour360-viewer-shell {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .tour360-viewport {
+    position: relative;
+    width: 100%;
+    height: 540px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #0B1320;
+    cursor: grab;
+    user-select: none;
+    touch-action: pan-y;
+  }
+
+  .tour360-viewport:active {
+    cursor: grabbing;
+  }
+
+  .tour360-pano-img {
+    width: 128%;
+    height: 112%;
+    max-width: none;
+    object-fit: cover;
+    position: absolute;
+    left: -14%;
+    top: -6%;
+    transform: translate3d(0, 0, 0);
+    transition: opacity 0.28s ease;
+    pointer-events: none;
+  }
+
+  .tour360-pano-img.is-fading {
+    opacity: 0.35;
+  }
+
+  .tour360-vignette {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(9, 18, 32, 0.56) 0%,
+      rgba(9, 18, 32, 0.05) 30%,
+      rgba(9, 18, 32, 0.15) 62%,
+      rgba(9, 18, 32, 0.86) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .tour360-hud-top {
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+    right: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    z-index: 3;
+  }
+
+  .tour360-badge-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: rgba(15, 23, 42, 0.78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #FFFFFF;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .tour360-gyro-icon {
+    color: #7BE0EC;
+    display: flex;
+    align-items: center;
+  }
+
+  .tour360-hud-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tour360-azimuth-chip {
+    background: rgba(15, 23, 42, 0.72);
+    backdrop-filter: blur(8px);
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.45rem 0.85rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tour360-tool-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(15, 23, 42, 0.78);
+    backdrop-filter: blur(8px);
+    color: #FFFFFF;
+    padding: 0.45rem 0.9rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .tour360-tool-btn:hover,
+  .tour360-tool-btn.is-active {
+    background: var(--color-cyan, #1AA6B7);
+    border-color: var(--color-cyan, #1AA6B7);
+  }
+
+  .tour360-hotspots-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .tour360-hotspots-layer :global(.tour360-hotspot) {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(255, 255, 255, 0.94);
+    color: #0F172A;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    padding: 0.42rem 0.85rem 0.42rem 0.55rem;
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+
+  .tour360-hotspots-layer :global(.tour360-hotspot:hover) {
+    transform: translate(-50%, -50%) scale(1.06);
+    background: #1AA6B7;
+    color: #FFFFFF;
+  }
+
+  .tour360-hotspots-layer :global(.hotspot-pulse) {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #1AA6B7;
+    box-shadow: 0 0 0 4px rgba(26, 166, 183, 0.25);
+    flex-shrink: 0;
+  }
+
+  .tour360-hotspots-layer :global(.tour360-hotspot:hover .hotspot-pulse) {
+    background: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.25);
+  }
+
+  .tour360-hud-bottom {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    z-index: 3;
+    flex-wrap: wrap;
+  }
+
+  .tour360-scene-info {
+    max-width: 620px;
+  }
+
+  .tour360-scene-kicker {
+    display: inline-block;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #7BE0EC;
+    margin-bottom: 0.3rem;
+  }
+
+  .tour360-scene-title {
+    margin: 0 0 0.35rem;
+    font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+    font-weight: 800;
+    color: #FFFFFF;
+    line-height: 1.15;
+  }
+
+  .tour360-scene-desc {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.84);
+  }
+
+  .btn-tour-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #FFFFFF;
+    color: #0F172A;
+    font-size: 0.9rem;
+    font-weight: 800;
+    padding: 0.85rem 1.5rem;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .btn-tour-cta:hover {
+    background: var(--color-cyan, #1AA6B7);
+    color: #FFFFFF;
+    transform: translateY(-2px);
+  }
+
+  .tour360-scenes-bar {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .tour360-scenes-track {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .tour360-scene-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.5rem 0.75rem 0.5rem 0.5rem;
+    border-radius: 14px;
+    border: 1px solid #E2E8F0;
+    background: #F8FAFC;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+  }
+
+  .tour360-scene-btn:hover {
+    border-color: rgba(26, 166, 183, 0.45);
+    background: #FFFFFF;
+  }
+
+  .tour360-scene-btn.active {
+    background: #0F172A;
+    border-color: #0F172A;
+    color: #FFFFFF;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.16);
+  }
+
+  .scene-thumb {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .scene-name {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: inherit;
+    line-height: 1.25;
+  }
+
+  .tour360-videos-block {
+    margin-top: 2.5rem;
+  }
+
+  .videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .video-card {
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: #0F172A;
+  }
+
+  .video-card iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  @media (max-width: 960px) {
+    .tour360-viewport,
+    .tour360-iframe-shell {
+      height: 440px;
+    }
+    .tour360-scenes-track {
+      grid-template-columns: repeat(5, minmax(165px, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .tour360-section {
+      padding: 4rem 0 4.5rem;
+    }
+    .tour360-card {
+      padding: 0.85rem;
+      border-radius: 22px;
+    }
+    .tour360-viewport,
+    .tour360-iframe-shell {
+      height: 390px;
+      border-radius: 16px;
+    }
+    .tour360-hud-bottom {
+      left: 1rem;
+      right: 1rem;
+      bottom: 1rem;
+      gap: 0.85rem;
+    }
+    .tour360-scene-desc {
+      display: none;
+    }
+    .btn-tour-cta {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script define:vars={{ tourScenes, hasExternalTour }}>
+  function initTour360Showcase() {
+    if (hasExternalTour) return;
+
+    const viewport = document.getElementById('tour360-viewport');
+    const img = document.getElementById('tour360-img');
+    const hotspotsLayer = document.getElementById('tour360-hotspots');
+    const kickerEl = document.getElementById('tour360-scene-kicker');
+    const titleEl = document.getElementById('tour360-scene-title');
+    const descEl = document.getElementById('tour360-scene-desc');
+    const azimuthEl = document.getElementById('tour360-azimuth');
+    const autoBtn = document.getElementById('tour360-autorotate-btn');
+    const fullBtn = document.getElementById('tour360-fullscreen-btn');
+    const sceneBtns = document.querySelectorAll('.tour360-scene-btn');
+
+    if (!viewport || !img || viewport.dataset.bound === 'true') return;
+    viewport.dataset.bound = 'true';
+
+    let panX = 0; // porcentaje relativo -10 a 10
+    let panY = 0; // porcentaje -4 a 4
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let autoRotate = true;
+    let autoDir = 1;
+    let rafId = null;
+
+    function updateTransform() {
+      img.style.transform = `translate3d(${panX.toFixed(2)}%, ${panY.toFixed(2)}%, 0)`;
+      if (azimuthEl) {
+        const deg = Math.round(((panX + 10) / 20) * 360);
+        azimuthEl.textContent = `${deg}° · Panorama`;
+      }
+    }
+
+    function selectScene(index) {
+      const scene = tourScenes[index];
+      if (!scene) return;
+
+      sceneBtns.forEach((b) => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      const activeBtn = document.querySelector(`.tour360-scene-btn[data-scene-index="${index}"]`);
+      if (activeBtn) {
+        activeBtn.classList.add('active');
+        activeBtn.setAttribute('aria-selected', 'true');
+      }
+
+      img.classList.add('is-fading');
+      setTimeout(() => {
+        img.src = scene.image;
+        img.alt = scene.title;
+        panX = 0;
+        panY = 0;
+        updateTransform();
+        img.classList.remove('is-fading');
+
+        if (kickerEl) kickerEl.textContent = scene.kicker;
+        if (titleEl) titleEl.textContent = scene.title;
+        if (descEl) descEl.textContent = scene.desc;
+
+        if (hotspotsLayer) {
+          hotspotsLayer.innerHTML = scene.hotspots
+            .map(
+              (hs) =>
+                `<button type="button" class="tour360-hotspot" data-target-scene="${hs.targetIndex}" style="left: ${hs.x}%; top: ${hs.y}%;"><span class="hotspot-pulse"></span><span class="hotspot-label">${hs.label}</span></button>`
+            )
+            .join('');
+          bindHotspots();
+        }
+      }, 160);
+    }
+
+    function bindHotspots() {
+      if (!hotspotsLayer) return;
+      hotspotsLayer.querySelectorAll('.tour360-hotspot').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const targetIdx = parseInt(btn.getAttribute('data-target-scene') || '0', 10);
+          selectScene(targetIdx);
+        });
+      });
+    }
+
+    function animate() {
+      if (autoRotate && !isDragging) {
+        panX += 0.035 * autoDir;
+        if (panX >= 9.5) {
+          panX = 9.5;
+          autoDir = -1;
+        } else if (panX <= -9.5) {
+          panX = -9.5;
+          autoDir = 1;
+        }
+        updateTransform();
+      }
+      rafId = requestAnimationFrame(animate);
+    }
+
+    viewport.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('button')) return;
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      viewport.setPointerCapture(e.pointerId);
+    });
+
+    viewport.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      startX = e.clientX;
+      startY = e.clientY;
+      panX = Math.max(-10, Math.min(10, panX + (dx / viewport.clientWidth) * 28));
+      panY = Math.max(-4, Math.min(4, panY + (dy / viewport.clientHeight) * 14));
+      updateTransform();
+    });
+
+    const endDrag = () => {
+      isDragging = false;
+    };
+    viewport.addEventListener('pointerup', endDrag);
+    viewport.addEventListener('pointercancel', endDrag);
+
+    sceneBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.getAttribute('data-scene-index') || '0', 10);
+        selectScene(idx);
+      });
+    });
+
+    if (autoBtn) {
+      autoBtn.addEventListener('click', () => {
+        autoRotate = !autoRotate;
+        autoBtn.classList.toggle('is-active', autoRotate);
+        autoBtn.setAttribute('aria-pressed', autoRotate ? 'true' : 'false');
+      });
+    }
+
+    if (fullBtn) {
+      fullBtn.addEventListener('click', () => {
+        if (document.fullscreenElement) {
+          document.exitFullscreen().catch(() => {});
+        } else if (viewport.requestFullscreen) {
+          viewport.requestFullscreen().catch(() => {});
+        }
+      });
+    }
+
+    bindHotspots();
+    updateTransform();
+    rafId = requestAnimationFrame(animate);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTour360Showcase);
+  } else {
+    initTour360Showcase();
+  }
+  document.addEventListener('astro:page-load', initTour360Showcase);
+</script>

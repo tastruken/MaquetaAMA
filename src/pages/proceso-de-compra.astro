@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FAQAccordion from '../components/features/FAQAccordion.astro';
 import ModernCTA from '../components/features/ModernCTA.astro';
-import { u } from '../utils/url';
+import { u, uMd, imgSrcSet } from '../utils/url';
 import '../styles/home.css';
 import '../styles/inner-pages.css';
 
@@ -12,15 +12,16 @@ const purchaseStages = [
     phase: 'Etapa Inicial',
     milestone: 'Cotización Formal',
     title: 'Selección de tipología y simulación financiera',
-    desc: 'Explora los modelos de 1, 2 y 3 dormitorios en AMA Quillayes y simula junto a un ejecutivo tu plan de pie y dividendo proyectado con total transparencia.',
-    image: u('/images/ama_interior_living.jpg'),
+    desc: 'Explora los modelos de 1 y 2 dormitorios en AMA Quillayes y simula junto a un ejecutivo tu plan de pie y dividendo proyectado con total transparencia.',
+    image: uMd('/images/AMA FOTOS FINAL/living-1.webp'),
+    srcset: imgSrcSet('/images/AMA FOTOS FINAL/living-1.webp'),
     footerLabel: 'Tiempo estimado',
     footerVal: 'Inmediato · 100% Online o Sala',
     specs: [
       { label: 'Modalidad', val: 'Online o Sala de Ventas' },
       { label: 'Entregable', val: 'Cotización formal en UF' },
       { label: 'Pre-evaluación', val: 'Sin costo ni compromiso' },
-      { label: 'Unidades', val: '1D, 2D y 3D disponibles' }
+      { label: 'Unidades', val: '1D+1B y 2D+2B disponibles' }
     ],
     details: [
       'Asesoría personalizada en sala de ventas o videollamada',
@@ -34,7 +35,8 @@ const purchaseStages = [
     milestone: 'Póliza de Garantía',
     title: 'Reserva de unidad y firma de Promesa de Compraventa',
     desc: 'Congela el valor y las condiciones comerciales de tu departamento mediante la reserva y posterior firma de Promesa, respaldada al 100% por póliza de seguro de venta en verde.',
-    image: u('/images/ama_quillayes_facade.jpg'),
+    image: uMd('/images/AMA FOTOS FINAL/fachada-1.webp'),
+    srcset: imgSrcSet('/images/AMA FOTOS FINAL/fachada-1.webp'),
     footerLabel: 'Protección legal',
     footerVal: 'Póliza Ley Venta en Verde',
     specs: [
@@ -55,7 +57,8 @@ const purchaseStages = [
     milestone: 'Hasta 60 Cuotas',
     title: 'Abono del pie en cuotas mensuales sin interés',
     desc: 'Durante el desarrollo de la obra, pagas tu pie de manera programada en hasta 60 cuotas sin interés, complementado con el Bono Pie comercial del 10%.',
-    image: u('/images/ama_piloto_cocina_quillayes.jpg'),
+    image: uMd('/images/AMA FOTOS FINAL/cocina-1.webp'),
+    srcset: imgSrcSet('/images/AMA FOTOS FINAL/cocina-1.webp'),
     footerLabel: 'Financiamiento directo',
     footerVal: 'Hasta 60 cuotas · 0% interés',
     specs: [
@@ -76,7 +79,8 @@ const purchaseStages = [
     milestone: 'Multi-Banco',
     title: 'Tramitación y aprobación de tu crédito hipotecario',
     desc: 'Previo a la recepción final del edificio, nuestro equipo gestiona tu evaluación simultánea con las principales instituciones financieras para asegurar la mejor tasa y plazo.',
-    image: u('/images/ama_amenity_rooftop.jpg'),
+    image: uMd('/images/AMA FOTOS FINAL/piscina-1.webp'),
+    srcset: imgSrcSet('/images/AMA FOTOS FINAL/piscina-1.webp'),
     footerLabel: 'Inicio de gestión',
     footerVal: '4 a 6 meses pre-entrega',
     specs: [
@@ -97,7 +101,8 @@ const purchaseStages = [
     milestone: 'Entrega de Llaves',
     title: 'Escrituración, recepción técnica y entrega de llaves',
     desc: 'Firmada la escritura en notaría e inscrita la propiedad, realizamos junto a ti la inspección técnica detallada de tu departamento y la entrega oficial de llaves.',
-    image: u('/images/ama_acceso_nocturno.jpg'),
+    image: uMd('/images/AMA FOTOS FINAL/dormitorio-1.webp'),
+    srcset: imgSrcSet('/images/AMA FOTOS FINAL/dormitorio-1.webp'),
     footerLabel: 'Respaldo continuo',
     footerVal: 'Garantías Ley N° 20.016',
     specs: [
@@ -123,7 +128,7 @@ const purchaseStages = [
   <section class="aurvix-hero ip-hero">
     <div class="hero-card-banner">
       <div class="hero-slideshow">
-        <div class="hero-slide active" style={`background-image: url(${u('/images/ama_interior_living.jpg')});`}></div>
+        <div class="hero-slide active" style={`background-image: url(${u('/images/AMA FOTOS FINAL/living-1.webp')});`}></div>
       </div>
 
       <div class="hero-overlay-gradient"></div>
@@ -211,7 +216,11 @@ const purchaseStages = [
           <img
             id="stage-img"
             src={purchaseStages[0].image}
+            srcset={purchaseStages[0].srcset}
+            sizes="(max-width: 960px) 100vw, 560px"
             alt={purchaseStages[0].title}
+            loading="lazy"
+            decoding="async"
           />
         </div>
 
@@ -274,7 +283,7 @@ const purchaseStages = [
               <button
                 type="button"
                 class="btn-aurvix-dark"
-                onclick="window.openCotizadorModal && window.openCotizadorModal()"
+                onclick="window.goToAdvisorQuote && window.goToAdvisorQuote()"
               >
                 <span>Cotizar mi Unidad</span>
                 <span class="arrow">↗</span>
@@ -354,6 +363,7 @@ const purchaseStages = [
         imgEl.classList.add('fade');
         setTimeout(() => {
           imgEl.src = stage.image;
+          imgEl.srcset = stage.srcset;
           imgEl.alt = stage.title;
           imgEl.classList.remove('fade');
         }, 160);
