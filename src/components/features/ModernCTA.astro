@@ -1,7 +1,7 @@
 ---
 // src/components/features/ModernCTA.astro
 // Banner CTA de alta conversión para Showroom & Asesoría
-import { uMd, imgSrcSet } from '../../utils/url';
+import { uMd, imgSrcSet, AMA_WHATSAPP_PHONE } from '../../utils/url';
 
 interface Props {
   badge?: string;
@@ -20,7 +20,7 @@ const {
   primaryBtnText = 'Simular y Cotizar Online',
   whatsappBtnText = 'Escribir por WhatsApp',
   whatsappMessage = 'Hola, me gustaría agendar una visita al Showroom y conocer el departamento piloto de AMA Quillayes.',
-  phone = '56987654321'
+  phone = AMA_WHATSAPP_PHONE
 } = Astro.props;
 
 const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(whatsappMessage)}`;

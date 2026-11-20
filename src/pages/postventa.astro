@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ModernCTA from '../components/features/ModernCTA.astro';
-import { u } from '../utils/url';
+import { u, AMA_WHATSAPP_PHONE, AMA_PHONE_DISPLAY } from '../utils/url';
 import '../styles/home.css';
 import '../styles/inner-pages.css';
 
@@ -193,7 +193,7 @@ const faqs = [
                 </div>
                 <div class="ip-spec-info">
                   <span class="ip-spec-label">Central de propietarios (Lun–Vie 09:00 a 18:00)</span>
-                  <strong class="ip-spec-val"><a href="tel:+56987654321">+56 9 8765 4321</a></strong>
+                  <strong class="ip-spec-val"><a href={`tel:+${AMA_WHATSAPP_PHONE}`}>{AMA_PHONE_DISPLAY}</a></strong>
                 </div>
               </div>
 

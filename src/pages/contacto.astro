@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FAQAccordion from '../components/features/FAQAccordion.astro';
 import ModernCTA from '../components/features/ModernCTA.astro';
-import { u } from '../utils/url';
+import { u, AMA_WHATSAPP_PHONE, AMA_PHONE_DISPLAY } from '../utils/url';
 import '../styles/home.css';
 import '../styles/inner-pages.css';
 ---
@@ -37,7 +37,7 @@ import '../styles/inner-pages.css';
                 <span class="btn-arrow">↗</span>
               </a>
               <a
-                href="https://wa.me/56987654321?text=Hola,%20quisiera%20recibir%20información%20sobre%20AMA%20Quillayes"
+                href={`https://wa.me/${AMA_WHATSAPP_PHONE}?text=Hola,%20quisiera%20recibir%20información%20sobre%20AMA%20Quillayes`}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn-hero-secondary"
@@ -115,7 +115,7 @@ import '../styles/inner-pages.css';
                 </div>
                 <div class="ip-spec-info">
                   <span class="ip-spec-label">Correo Comercial</span>
-                  <strong class="ip-spec-val"><a href="mailto:contacto@amainmobiliaria.cl">contacto@amainmobiliaria.cl</a></strong>
+                  <strong class="ip-spec-val"><a href="mailto:quillayes@iama.cl">quillayes@iama.cl</a></strong>
                 </div>
               </div>
 
@@ -125,7 +125,7 @@ import '../styles/inner-pages.css';
                 </div>
                 <div class="ip-spec-info">
                   <span class="ip-spec-label">Teléfono y WhatsApp</span>
-                  <strong class="ip-spec-val"><a href="tel:+56987654321">+56 9 8765 4321</a></strong>
+                  <strong class="ip-spec-val"><a href={`tel:+${AMA_WHATSAPP_PHONE}`}>{AMA_PHONE_DISPLAY}</a></strong>
                 </div>
               </div>
             </div>
@@ -148,7 +148,7 @@ import '../styles/inner-pages.css';
 
             <div class="ip-actions">
               <a
-                href="https://wa.me/56987654321?text=Hola,%20quisiera%20hacer%20una%20consulta%20a%20AMA%20Inmobiliaria"
+                href={`https://wa.me/${AMA_WHATSAPP_PHONE}?text=Hola,%20quisiera%20hacer%20una%20consulta%20a%20AMA%20Inmobiliaria`}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="ip-btn-ghost"
@@ -191,7 +191,7 @@ import '../styles/inner-pages.css';
                 <option value="Cotizar departamento AMA Quillayes">Cotizar departamento en AMA Quillayes</option>
                 <option value="Consultar facilidades de pago de pie">Consultar facilidades de pago de pie (60 cuotas)</option>
                 <option value="Asesoría para inversionistas">Asesoría para inversionistas (rentabilidad)</option>
-                <option value="Agendar visita a Sala de Ventas">Agendar visita a Sala de Ventas</option>
+                <option value="Agendar visita a Sala de Informaciones">Agendar visita a Sala de Informaciones</option>
                 <option value="Postventa y Garantías">Postventa y Garantías</option>
                 <option value="Otra consulta">Otra consulta general</option>
               </select>

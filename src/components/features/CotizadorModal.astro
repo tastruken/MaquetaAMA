@@ -1,38 +1,144 @@
 ---
-import Cotizador from './Cotizador.astro';
+import { PLAN_OK_COTIZADOR_URL } from '../../utils/url';
 ---
 
-<div id="global-cotizador-modal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
-  <div class="modal-dialog">
-    <button 
-      type="button" 
-      id="close-cotizador-modal" 
-      class="modal-close-btn" 
-      aria-label="Cerrar cotizador"
-    >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-    </button>
-    <Cotizador isModal={true} idPrefix="modal-calc" />
+<div id="global-cotizador-modal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="planok-modal-title">
+  <div class="modal-dialog planok-modal-dialog">
+    <div class="planok-modal-header">
+      <div class="planok-modal-heading">
+        <span class="planok-modal-kicker">Cotizador Oficial en Línea</span>
+        <h3 id="planok-modal-title" class="planok-modal-title">AMA Quillayes · Plan OK</h3>
+      </div>
+
+      <div class="planok-modal-actions">
+        <a
+          href={PLAN_OK_COTIZADOR_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="planok-external-link"
+        >
+          <span>Abrir en pestaña aparte</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+
+        <button
+          type="button"
+          id="close-cotizador-modal"
+          class="modal-close-btn"
+          aria-label="Cerrar cotizador oficial"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="planok-frame-wrap">
+      <div id="planok-loading" class="planok-loading" aria-live="polite">
+        <span class="planok-spinner" aria-hidden="true"></span>
+        <span>Cargando cotizador oficial...</span>
+      </div>
+
+      <iframe
+        id="planok-cotizador-iframe"
+        data-src={PLAN_OK_COTIZADOR_URL}
+        title="Cotización Oficial - Edificio AMA Quillayes"
+        allow="fullscreen; clipboard-write"
+        allowfullscreen
+      ></iframe>
+    </div>
   </div>
 </div>
 
 <style>
+  #global-cotizador-modal .modal-dialog.planok-modal-dialog {
+    max-width: 1120px;
+    width: min(95vw, 1120px);
+    height: min(90vh, 840px);
+    max-height: 90vh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #FFFFFF;
+  }
+
+  .planok-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1.35rem;
+    background: #0F172A;
+    color: #FFFFFF;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+  }
+
+  .planok-modal-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.12rem;
+    min-width: 0;
+  }
+
+  .planok-modal-kicker {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5EEAD4;
+  }
+
+  .planok-modal-title {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.2;
+  }
+
+  .planok-modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .planok-external-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF !important;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .planok-external-link:hover {
+    background: var(--color-coral);
+    border-color: var(--color-coral);
+    color: #FFFFFF !important;
+  }
+
   .modal-close-btn {
-    position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
-    z-index: 20;
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background-color: rgba(var(--rgb-petrol), 0.1);
-    color: var(--color-petrol);
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #FFFFFF;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
+    cursor: pointer;
     transition: all var(--transition-fast);
   }
 
@@ -41,19 +147,112 @@ import Cotizador from './Cotizador.astro';
     color: #FFFFFF;
     transform: rotate(90deg);
   }
+
+  .planok-frame-wrap {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    background: #F8FAFC;
+  }
+
+  .planok-loading {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: #475569;
+    font-size: 0.92rem;
+    font-weight: 600;
+    background: #F8FAFC;
+    transition: opacity 0.2s ease;
+  }
+
+  .planok-loading.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .planok-spinner {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 3px solid rgba(26, 166, 183, 0.2);
+    border-top-color: #1AA6B7;
+    animation: planok-spin 0.85s linear infinite;
+  }
+
+  @keyframes planok-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  #planok-cotizador-iframe {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    background: transparent;
+  }
+
+  @media (max-width: 640px) {
+    #global-cotizador-modal .modal-dialog.planok-modal-dialog {
+      width: 96vw;
+      height: 92vh;
+      max-height: 92vh;
+    }
+
+    .planok-modal-header {
+      padding: 0.75rem 1rem;
+    }
+
+    .planok-external-link span:first-child {
+      display: none;
+    }
+
+    .planok-external-link {
+      padding: 0.45rem 0.7rem;
+    }
+  }
 </style>
 
 <script>
   const modal = document.getElementById('global-cotizador-modal');
   const closeBtn = document.getElementById('close-cotizador-modal');
+  const iframe = document.getElementById('planok-cotizador-iframe') as HTMLIFrameElement | null;
+  const loading = document.getElementById('planok-loading');
+
+  if (iframe) {
+    iframe.addEventListener('load', () => {
+      if (iframe.getAttribute('src') && loading) {
+        loading.classList.add('is-hidden');
+      }
+    });
+  }
 
   window.openCotizadorModal = function() {
+    if (iframe) {
+      const targetUrl = iframe.getAttribute('data-src');
+      if (targetUrl && !iframe.getAttribute('src')) {
+        if (loading) loading.classList.remove('is-hidden');
+        iframe.setAttribute('src', targetUrl);
+      }
+    }
+
     if (modal) {
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
     }
   };
+
+  (window as any).openPlanOkModal = window.openCotizadorModal;
 
   window.closeCotizadorModal = function() {
     if (modal) {

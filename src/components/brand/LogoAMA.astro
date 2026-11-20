@@ -9,68 +9,31 @@ const { variant = 'cyan-white', height = 48, class: className = '' } = Astro.pro
 
 // Colores según Brandbook (Págs. 5, 11 y 12)
 let letterColor = '#1AA6B7'; // cyan por defecto
-let subtextColor = '#002D40'; // petrol
 
 if (variant === 'petrol') {
   letterColor = '#002D40';
-  subtextColor = '#002D40';
 } else if (variant === 'white') {
   letterColor = '#FFFFFF';
-  subtextColor = '#FFFFFF';
-} else if (variant === 'cyan') {
+} else if (variant === 'cyan' || variant === 'cyan-white') {
   letterColor = '#1AA6B7';
-  subtextColor = '#FFFFFF';
-} else if (variant === 'cyan-white') {
-  letterColor = '#1AA6B7';
-  subtextColor = '#FFFFFF';
 }
 ---
 
 <div class={`brand-logo-container ${className}`} style={`height: ${height}px;`}>
   <svg 
-    viewBox="0 0 280 86" 
+    viewBox="0 0 344 111" 
     fill="none" 
     xmlns="http://www.w3.org/2000/svg"
     style={`height: ${height}px; width: auto;`}
     role="img"
     aria-label="AMA Inmobiliaria"
   >
-    <!-- Letra A Izquierda -->
-    <path 
-      d="M16 60 L45 8 L54 8 L83 60 L69 60 L62 47 L36 47 L30 60 Z M41 36 L58 36 L49 19 Z" 
-      fill={letterColor} 
+    <!-- Logotipo oficial AMA extraído del Brandbook AMA Inmobiliaria -->
+    <path
+      fill={letterColor}
+      fill-rule="evenodd"
+      d="M38.96 7.44 L59.02 7.44 L97.79 109.81 L78.13 109.81 L67.02 79.10 L30.15 79.10 L18.90 109.81 L0.06 109.81 Z M60.92 62.58 L48.59 28.59 L36.12 62.58 Z M284.83 7.44 L304.89 7.44 L343.65 109.81 L324.00 109.81 L312.88 79.10 L276.02 79.10 L264.76 109.81 L245.92 109.81 Z M306.78 62.58 L294.45 28.59 L281.98 62.58 Z M219.91 13.72 C202.22 0.00 180.62 10.44 171.40 28.65 L171.36 28.62 L171.33 28.65 C162.11 10.44 140.50 0.00 122.81 13.72 C118.25 17.26 111.36 25.43 111.36 33.39 L111.36 110.06 L128.87 110.06 L128.87 36.11 C128.87 32.86 131.79 28.85 134.90 27.26 C148.17 20.46 154.22 35.83 160.52 43.56 C151.87 60.33 133.56 74.42 146.61 95.59 C153.27 106.39 162.41 110.63 171.36 110.40 C180.31 110.63 189.46 106.39 196.12 95.59 C209.17 74.42 190.86 60.33 182.21 43.56 C188.51 35.83 194.56 20.46 207.83 27.26 C210.94 28.85 213.86 32.86 213.86 36.11 L213.86 110.06 L231.37 110.06 L231.37 33.39 C231.37 25.43 224.47 17.26 219.91 13.72 M183.62 84.77 C182.27 91.76 176.93 95.02 171.36 95.13 C165.79 95.02 160.45 91.76 159.10 84.77 C158.12 79.67 159.58 74.39 162.63 70.20 L171.36 58.19 L180.10 70.20 C183.15 74.39 184.61 79.67 183.62 84.77"
     />
-
-    <!-- Letra M Central con gota/bucle orgánico característico (Brandbook Pág 5) -->
-    <path 
-      d="M88 60 L88 28 C88 15 99 7 114 7 C124 7 132 12 138 21 C143 12 152 7 162 7 C177 7 188 15 188 28 L188 60 L174 60 L174 29 C174 21 169 17 161 17 C152 17 146 22 146 31 L146 60 L130 60 L130 31 C130 22 124 17 115 17 C107 17 102 21 102 29 L102 60 Z" 
-      fill={letterColor} 
-    />
-    <!-- Gota interior de la M -->
-    <path 
-      d="M138 28 C132 37 127 43 127 49 C127 55 132 60 138 60 C144 60 149 55 149 49 C149 43 144 37 138 28 Z M138 52 C135 52 133 50 133 48 C133 44 136 40 138 36 C140 40 143 44 143 48 C143 50 141 52 138 52 Z" 
-      fill={letterColor} 
-    />
-
-    <!-- Letra A Derecha -->
-    <path 
-      d="M193 60 L222 8 L231 8 L260 60 L246 60 L239 47 L213 47 L207 60 Z M218 36 L235 36 L226 19 Z" 
-      fill={letterColor} 
-    />
-
-    <!-- Subtexto corporativo "I N M O B I L I A R I A" con tracking oficial -->
-    <text 
-      x="138" 
-      y="80" 
-      fill={subtextColor}
-      font-size="9.5" 
-      font-family="'Gilroy', 'Plus Jakarta Sans', sans-serif" 
-      font-weight="600" 
-      letter-spacing="0.48em" 
-      text-anchor="middle"
-    >
-      INMOBILIARIA
-    </text>
   </svg>
 </div>
 

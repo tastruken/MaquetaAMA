@@ -768,35 +768,40 @@
 .corp-logo-mockup {
   display: flex !important;
   align-items: center !important;
-  justify-content: center !important;
-  gap: 0.85rem !important;
+  justify-content: flex-start !important;
   width: 100% !important;
-  min-height: 112px !important;
-  padding: 1.35rem 1.75rem !important;
-  background: #F8FAFC !important;
-  border: 1.5px dashed #CBD5E1 !important;
-  border-radius: 16px !important;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03) !important;
-  transition: all 0.2s ease !important;
+  height: 88px !important;
+  padding: 0 !important;
+  margin-bottom: 0.25rem !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
-.corp-bento-row:hover .corp-logo-mockup {
-  border-color: #1AA6B7 !important;
-  background: #F2FBFC !important;
+.corp-partner-logo {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  mix-blend-mode: multiply !important;
+  flex-shrink: 1 !important;
 }
 
-.corp-logo-mockup .logo-mark {
-  color: #1AA6B7 !important;
-  display: flex !important;
-  align-items: center !important;
+.corp-partner-logo.is-single-wide {
+  max-height: 66px !important;
+  max-width: 78% !important;
 }
 
-.corp-logo-mockup .logo-name {
-  font-size: 1.1rem !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.2em !important;
-  color: #0F172A !important;
-  text-transform: uppercase !important;
+.corp-partner-logo.is-single-strip {
+  max-height: 54px !important;
+  max-width: 90% !important;
+}
+
+.corp-partner-logo.is-tall {
+  max-height: 82px !important;
+  max-width: 75% !important;
 }
 
 /* Identidad y Resumen */

@@ -1,11 +1,13 @@
 ---
+import { AMA_WHATSAPP_PHONE } from '../../utils/url';
+
 interface Props {
   phone?: string;
   message?: string;
 }
 
 const { 
-  phone = '56987654321', 
+  phone = AMA_WHATSAPP_PHONE, 
   message = 'Hola, me gustaría cotizar e informarme sobre los proyectos de AMA Inmobiliaria.' 
 } = Astro.props;
 

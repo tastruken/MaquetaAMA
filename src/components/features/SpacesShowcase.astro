@@ -13,8 +13,7 @@ const spacesData = [
     description: 'Espacios que optimizan cada metro cuadrado. Su diseño permite una transición fluida entre el interior y exterior, aportando mayor amplitud y luminosidad.',
     image: uMd('/images/AMA FOTOS FINAL/living-1.webp'),
     srcset: imgSrcSet('/images/AMA FOTOS FINAL/living-1.webp'),
-    alt: 'Living comedor y terraza integrada Edificio AMA Quillayes',
-    badges: ['Piso Fotolaminado', 'Luz Natural']
+    alt: 'Living comedor y terraza integrada Edificio AMA Quillayes'
   },
   {
     id: 'cocina',
@@ -25,8 +24,7 @@ const spacesData = [
     description: 'Espacio contemporáneo pensado para compartir. Incluye encimera, horno, campana y cubierta de cuarzo.',
     image: uMd('/images/AMA FOTOS FINAL/cocina-1.webp'),
     srcset: imgSrcSet('/images/AMA FOTOS FINAL/cocina-1.webp'),
-    alt: 'Cocina integrada equipada AMA Quillayes',
-    badges: ['Cubiertas de Cuarzo', 'Full Eléctrica', 'Cierre Suave']
+    alt: 'Cocina integrada equipada AMA Quillayes'
   },
   {
     id: 'dormitorio',
@@ -37,8 +35,7 @@ const spacesData = [
     description: 'Ambiente que garantiza el descanso por medio de ventanales con marco de PVC termopanel, piso fotolaminado de alto tráfico y distribución optimizada.',
     image: uMd('/images/AMA FOTOS FINAL/dormitorio-1.webp'),
     srcset: imgSrcSet('/images/AMA FOTOS FINAL/dormitorio-1.webp'),
-    alt: 'Dormitorio en suite AMA Quillayes',
-    badges: ['Walk-in Clóset', 'Baño en Suite', 'Ventanales Termopanel']
+    alt: 'Dormitorio en suite AMA Quillayes'
   }
 ];
 ---
@@ -86,12 +83,6 @@ const spacesData = [
             loading="lazy"
             decoding="async"
           />
-          <!-- 3 Badges Flotantes al Pie de la Foto -->
-          <div class="spaces-floating-badges" id="spaces-badges-container">
-            {spacesData[0].badges.map((b) => (
-              <span class="space-float-badge">{b}</span>
-            ))}
-          </div>
         </div>
       </div>
 
@@ -101,17 +92,6 @@ const spacesData = [
         <h3 class="spaces-item-title" id="spaces-item-title">{spacesData[0].title}</h3>
         <p class="spaces-item-subtitle" id="spaces-item-sub">{spacesData[0].subtitle}</p>
         <p class="spaces-item-desc" id="spaces-item-desc">{spacesData[0].description}</p>
-
-        <div class="spaces-actions-group">
-          <button 
-            type="button" 
-            class="btn-spaces-primary"
-            onclick="window.goToAdvisorQuote && window.goToAdvisorQuote()"
-          >
-            <span>Cotizar este Departamento</span>
-            <span class="arrow">↗</span>
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -235,29 +215,6 @@ const spacesData = [
     transform: scale(1.02);
   }
 
-  .spaces-floating-badges {
-    position: absolute;
-    bottom: 1.25rem;
-    left: 1.25rem;
-    right: 1.25rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    z-index: 2;
-  }
-
-  .space-float-badge {
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    color: #0F172A;
-    font-size: 0.78rem;
-    font-weight: 700;
-    padding: 0.35rem 0.85rem;
-    border-radius: 9999px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-
   /* Columna Derecha de Información */
   .spaces-info-col {
     display: flex;
@@ -298,35 +255,7 @@ const spacesData = [
     font-size: 0.98rem;
     color: #4B5563;
     line-height: 1.65;
-    margin: 0 0 2.25rem;
-  }
-
-  .spaces-actions-group {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .btn-spaces-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    background: #0F172A;
-    color: #FFFFFF !important;
-    font-weight: 700;
-    font-size: 0.92rem;
-    padding: 0.85rem 1.65rem;
-    border-radius: 9999px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.2);
-    transition: all 0.25s ease;
-  }
-
-  .btn-spaces-primary:hover {
-    background: var(--color-cyan, #1AA6B7);
-    transform: translateY(-2px);
+    margin: 0;
   }
 
   @media (max-width: 1024px) {
@@ -359,7 +288,6 @@ const spacesData = [
   function setupSpacesShowcase() {
     const tabs = document.querySelectorAll('.space-tab-btn');
     const img = document.getElementById('spaces-display-img');
-    const badgesContainer = document.getElementById('spaces-badges-container');
     const tagEl = document.getElementById('spaces-item-tag');
     const titleEl = document.getElementById('spaces-item-title');
     const subEl = document.getElementById('spaces-item-sub');
@@ -388,13 +316,6 @@ const spacesData = [
           img.srcset = data.srcset;
           img.alt = data.alt;
           img.classList.remove('fade');
-
-          // Actualizar badges
-          if (badgesContainer) {
-            badgesContainer.innerHTML = data.badges
-              .map((b) => `<span class="space-float-badge">${b}</span>`)
-              .join('');
-          }
 
           // Actualizar textos
           if (tagEl) tagEl.textContent = data.tag;

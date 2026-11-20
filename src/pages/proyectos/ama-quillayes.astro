@@ -118,16 +118,16 @@ const locationPoints = [
   {
     icon: 'mall',
     category: 'Comercio',
-    name: 'Mallplaza Vespucio & Florida Center',
-    time: '8 min en Metro / auto',
-    distance: 'Retail, cines, gastronomía y servicios'
+    name: 'Mall Vivo Outlet, Mallplaza Vespucio & Florida Center',
+    time: '6 a 8 min en auto / Metro',
+    distance: 'Retail, outlet, cines, gastronomía y servicios'
   },
   {
     icon: 'hospital',
     category: 'Salud',
-    name: 'Hospital La Florida & Clínica Bupa',
-    time: '7 min en auto',
-    distance: 'Centro de urgencias y salud integral'
+    name: 'Hospital La Florida, Clínica Bupa, Nuevo Hospital Sótero del Río & Clínica UC Christus',
+    time: '5 a 7 min en auto',
+    distance: 'Red hospitalaria, urgencias y salud integral'
   },
   {
     icon: 'education',
@@ -304,9 +304,11 @@ const galleryImages = [
             </button>
 
             <a
-              href="#cotizador-quillayes"
+              href={u('/ama-brochure2.pdf')}
+              download="Brochure-AMA-Quillayes.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               class="hkc-brochure-link"
-              onclick="window.openCotizadorModal && window.openCotizadorModal(); return false;"
             >
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -409,6 +411,98 @@ const galleryImages = [
     </div>
   </section>
   */}
+
+  <!-- AMENITIES ESPECÍFICOS DEL PROYECTO (ESPACIOS COMUNES LUEGO DEL HERO) -->
+  <section class="section section-petrol" id="amenities">
+    <PatternLoops color="#1AA6B7" opacity={0.05} />
+    <div class="container relative-z">
+      <div class="section-header">
+        <h2 class="section-title text-cream">Espacios Comunes para tu día a día</h2>
+        <p class="section-desc text-muted-cream">
+          <em>AMA tu día a día con áreas diseñadas para el descanso, la actividad y la vida en comunidad</em>
+        </p>
+      </div>
+
+      <!-- 4 Tarjetas Fotográficas Principales (Click para ampliar en visor HD) -->
+      <div class="amenities-photo-grid">
+        {featuredAmenities.map((item, idx) => (
+          <article
+            class="amenity-photo-card"
+            data-lightbox-group="amenities"
+            data-index={idx}
+            data-src={u(item.image)}
+            data-title={item.name}
+            tabindex="0"
+            role="button"
+            aria-label={`Ampliar imagen de ${item.name}`}
+          >
+            <img
+              src={uMd(item.image)}
+              srcset={imgSrcSet(item.image)}
+              sizes="(max-width: 768px) 100vw, 340px"
+              alt={item.name}
+              loading="lazy"
+              decoding="async"
+              class="amenity-photo-img"
+            />
+            <div class="amenity-photo-overlay">
+              <h3 class="amenity-photo-title">{item.name}</h3>
+              {/* <p class="amenity-photo-sub">{item.subtitle}</p> */}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Barra Inferior Unificada de Equipamiento Complementario -->
+      <div class="amenities-extra-bar">
+        {extraAmenities.map((item) => (
+          <div class="extra-bar-col">
+            <span class="extra-bar-icon" aria-hidden="true">
+              {item.icon === 'grill' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+                </svg>
+              )}
+              {item.icon === 'cowork' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="18" height="12" x="3" y="4" rx="2" ry="2"/>
+                  <line x1="2" x2="22" y1="20" y2="20"/>
+                </svg>
+              )}
+              {item.icon === 'nature' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                  <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                </svg>
+              )}
+              {item.icon === 'ecommerce' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+                  <path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>
+                </svg>
+              )}
+              {item.icon === 'laundry' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="18" height="20" x="3" y="2" rx="2"/><circle cx="12" cy="13" r="5"/>
+                  <line x1="7" x2="7.01" y1="6" y2="6"/><line x1="10" x2="10.01" y1="6" y2="6"/>
+                </svg>
+              )}
+              {item.icon === 'bike' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/>
+                  <path d="M12 17.5V14l-3-3 4-3 2 3h2"/>
+                </svg>
+              )}
+            </span>
+            <div class="extra-bar-text">
+              <strong class="extra-bar-name">{item.name}</strong>
+              {/* <span class="extra-bar-sub">{item.sub}</span> */}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- ESPACIOS Y TERMINACIONES INTERACTIVO (DIAPO 6-7: Showcase por Tabs) -->
   <SpacesShowcase />
@@ -566,89 +660,6 @@ const galleryImages = [
 
       <div class="cotizador-wrap">
         <Cotizador idPrefix="quillayes-page-calc" showHeader={false} />
-      </div>
-    </div>
-  </section>
-
-  <!-- AMENITIES ESPECÍFICOS DEL PROYECTO (ESPACIOS COMUNES) -->
-  <section class="section section-petrol" id="amenities">
-    <PatternLoops color="#1AA6B7" opacity={0.05} />
-    <div class="container relative-z">
-      <div class="section-header">
-        <h2 class="section-title text-cream">Espacios Comunes para tu día a día</h2>
-        <p class="section-desc text-muted-cream">
-          <em>AMA tu día a día con áreas diseñadas para el descanso, la actividad y la vida en comunidad</em>
-        </p>
-      </div>
-
-      <!-- 4 Tarjetas Fotográficas Principales -->
-      <div class="amenities-photo-grid">
-        {featuredAmenities.map((item) => (
-          <article class="amenity-photo-card">
-            <img
-              src={uMd(item.image)}
-              srcset={imgSrcSet(item.image)}
-              sizes="(max-width: 768px) 100vw, 340px"
-              alt={item.name}
-              loading="lazy"
-              decoding="async"
-              class="amenity-photo-img"
-            />
-            <div class="amenity-photo-overlay">
-              <h3 class="amenity-photo-title">{item.name}</h3>
-              {/* <p class="amenity-photo-sub">{item.subtitle}</p> */}
-            </div>
-          </article>
-        ))}
-      </div>
-
-      <!-- Barra Inferior Unificada de Equipamiento Complementario -->
-      <div class="amenities-extra-bar">
-        {extraAmenities.map((item) => (
-          <div class="extra-bar-col">
-            <span class="extra-bar-icon" aria-hidden="true">
-              {item.icon === 'grill' && (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
-                </svg>
-              )}
-              {item.icon === 'cowork' && (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <rect width="18" height="12" x="3" y="4" rx="2" ry="2"/>
-                  <line x1="2" x2="22" y1="20" y2="20"/>
-                </svg>
-              )}
-              {item.icon === 'nature' && (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
-                  <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
-                </svg>
-              )}
-              {item.icon === 'ecommerce' && (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
-                  <path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>
-                </svg>
-              )}
-              {item.icon === 'laundry' && (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <rect width="18" height="20" x="3" y="2" rx="2"/><circle cx="12" cy="13" r="5"/>
-                  <line x1="7" x2="7.01" y1="6" y2="6"/><line x1="10" x2="10.01" y1="6" y2="6"/>
-                </svg>
-              )}
-              {item.icon === 'bike' && (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/>
-                  <path d="M12 17.5V14l-3-3 4-3 2 3h2"/>
-                </svg>
-              )}
-            </span>
-            <div class="extra-bar-text">
-              <strong class="extra-bar-name">{item.name}</strong>
-              {/* <span class="extra-bar-sub">{item.sub}</span> */}
-            </div>
-          </div>
-        ))}
       </div>
     </div>
   </section>
@@ -1472,6 +1483,16 @@ const galleryImages = [
     background: #091322;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.35s ease;
+  }
+
+  .amenity-photo-card:hover,
+  .amenity-photo-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: rgba(123, 224, 236, 0.55);
+    box-shadow: 0 22px 44px rgba(0, 0, 0, 0.42);
+    outline: none;
   }
 
   .amenity-photo-img {
@@ -1489,6 +1510,7 @@ const galleryImages = [
   .amenity-photo-overlay {
     position: absolute;
     inset: 0;
+    z-index: 2;
     background: linear-gradient(
       to top,
       rgba(9, 18, 32, 0.94) 0%,
@@ -1499,6 +1521,7 @@ const galleryImages = [
     flex-direction: column;
     justify-content: flex-end;
     padding: 1.5rem 1.35rem;
+    pointer-events: none;
   }
 
   .amenity-photo-title {
@@ -1611,7 +1634,8 @@ const galleryImages = [
   }
 
   .cotizador-wrap {
-    max-width: 1040px;
+    width: 100%;
+    max-width: 100%;
     margin: 0 auto;
   }
 
@@ -2075,9 +2099,9 @@ const galleryImages = [
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    color: rgba(255, 255, 255, 0.8);
+    background: rgba(15, 23, 42, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #FFFFFF;
     cursor: pointer;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     backdrop-filter: blur(12px);
@@ -2085,8 +2109,8 @@ const galleryImages = [
   }
 
   .lightbox-close-btn:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.5);
     color: #FFFFFF;
     transform: scale(1.06);
   }
@@ -2139,9 +2163,9 @@ const galleryImages = [
     width: 52px;
     height: 52px;
     border-radius: 50%;
-    background: rgba(0, 24, 34, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    color: rgba(255, 255, 255, 0.85);
+    background: rgba(15, 23, 42, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #FFFFFF;
     cursor: pointer;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     backdrop-filter: blur(12px);
@@ -2150,11 +2174,11 @@ const galleryImages = [
   }
 
   .lightbox-nav-btn:hover {
-    background: rgba(26, 166, 183, 0.28);
-    border-color: rgba(123, 224, 236, 0.7);
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.5);
     color: #FFFFFF;
     transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(26, 166, 183, 0.35);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   }
 
   .lightbox-nav-btn:active {
@@ -2177,8 +2201,8 @@ const galleryImages = [
     justify-content: center;
     padding: 0.35rem 0.95rem;
     border-radius: 999px;
-    background: rgba(0, 24, 34, 0.65);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(15, 23, 42, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
@@ -2187,7 +2211,7 @@ const galleryImages = [
   .lightbox-counter {
     font-size: 0.82rem;
     font-weight: 600;
-    color: #7BE0EC;
+    color: #FFFFFF;
     letter-spacing: 0.14em;
     font-variant-numeric: tabular-nums;
   }
@@ -2311,16 +2335,18 @@ const galleryImages = [
     const activeImg = document.getElementById('lightbox-active-img') as HTMLImageElement | null;
     const activeCounter = document.getElementById('lightbox-counter');
 
-    const cards = Array.from(document.querySelectorAll('.gallery-item-card')) as HTMLElement[];
+    const galleryCards = Array.from(document.querySelectorAll('.gallery-item-card')) as HTMLElement[];
+    const amenityCards = Array.from(document.querySelectorAll('[data-lightbox-group="amenities"]')) as HTMLElement[];
+    let activeCards: HTMLElement[] = galleryCards;
     let currentIdx = 0;
 
     function updateLightbox(idx: number) {
-      if (!cards.length || !activeImg) return;
-      if (idx < 0) idx = cards.length - 1;
-      if (idx >= cards.length) idx = 0;
+      if (!activeCards.length || !activeImg) return;
+      if (idx < 0) idx = activeCards.length - 1;
+      if (idx >= activeCards.length) idx = 0;
       currentIdx = idx;
 
-      const card = cards[currentIdx];
+      const card = activeCards[currentIdx];
       const src = card.getAttribute('data-src') || '';
       const title = card.getAttribute('data-title') || '';
 
@@ -2335,12 +2361,13 @@ const galleryImages = [
 
       if (activeCounter) {
         const padCurrent = String(currentIdx + 1).padStart(2, '0');
-        const padTotal = String(cards.length).padStart(2, '0');
+        const padTotal = String(activeCards.length).padStart(2, '0');
         activeCounter.textContent = `${padCurrent} / ${padTotal}`;
       }
     }
 
-    function openLightbox(idx: number) {
+    function openLightbox(idx: number, groupCards: HTMLElement[] = galleryCards) {
+      activeCards = groupCards.length ? groupCards : galleryCards;
       updateLightbox(idx >= 0 ? idx : 0);
       if (lightbox) {
         lightbox.classList.add('is-open');
@@ -2357,17 +2384,22 @@ const galleryImages = [
       }
     }
 
-    cards.forEach((card, idx) => {
-      if (card.dataset.bound) return;
-      card.dataset.bound = 'true';
-      card.addEventListener('click', () => openLightbox(idx));
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openLightbox(idx);
-        }
+    function bindLightboxGroup(groupCards: HTMLElement[]) {
+      groupCards.forEach((card, idx) => {
+        if (card.dataset.bound) return;
+        card.dataset.bound = 'true';
+        card.addEventListener('click', () => openLightbox(idx, groupCards));
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLightbox(idx, groupCards);
+          }
+        });
       });
-    });
+    }
+
+    bindLightboxGroup(galleryCards);
+    bindLightboxGroup(amenityCards);
 
     if (lightboxClose && !(lightboxClose as HTMLElement).dataset.bound) {
       (lightboxClose as HTMLElement).dataset.bound = 'true';

@@ -13,16 +13,40 @@ const partners = [
   {
     name: 'Grupo VAIN',
     badge: '30+ Años de Trayectoria',
+    logoLayout: 'single',
+    logos: [
+      {
+        src: '/images/socios/vain-1994.svg',
+        alt: 'VAIN 1994 Constructora',
+        variant: 'single-wide',
+      },
+    ],
     summary: 'Grupo con más de 30 años de experiencia en el sector inmobiliario y más de 22.000 viviendas construidas, consolidando una amplia trayectoria en el desarrollo habitacional.'
   },
   {
     name: 'Grupo San José',
     badge: 'Top 100 Mundial Deloitte',
+    logoLayout: 'single',
+    logos: [
+      {
+        src: '/images/socios/grupo-sanjose.jpg',
+        alt: 'Grupo SANJOSE',
+        variant: 'single-strip',
+      },
+    ],
     summary: 'Constructora multinacional con más de 50 años de trayectoria y 15 años de presencia en Chile. Cuenta con operaciones en más de 10 países y se posiciona entre las 100 constructoras más grandes del mundo.'
   },
   {
     name: 'Polux Inmobiliaria SpA',
     badge: 'Gestión Patrimonial',
+    logoLayout: 'single',
+    logos: [
+      {
+        src: '/images/socios/polux-gestion.png',
+        alt: 'Polux Gestión Inmobiliaria',
+        variant: 'tall',
+      },
+    ],
     summary: 'Equipo especializado en administración patrimonial y desarrollo inmobiliario, cuyos socios cuentan con experiencia en la comercialización de más de 2.000 unidades.'
   }
 ];
@@ -192,15 +216,18 @@ const projectAmenities = [
       <div class="corporate-bento-list">
         {partners.map((p) => (
           <div class="corp-bento-row">
-            <!-- Branding y Logo ampliado -->
+            <!-- Branding y Logos Oficiales -->
             <div class="corp-brand-col">
-              <div class="corp-logo-mockup">
-                <div class="logo-mark">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                  </svg>
-                </div>
-                <span class="logo-name">LOGO</span>
+              <div class={`corp-logo-mockup is-${p.logoLayout}`}>
+                {p.logos.map((logo) => (
+                  <img
+                    src={u(logo.src)}
+                    alt={logo.alt}
+                    class={`corp-partner-logo is-${logo.variant}`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ))}
               </div>
               <span class="corp-pill-tag">{p.badge}</span>
             </div>
