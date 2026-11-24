@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PatternDrops from '../../components/brand/PatternDrops.astro';
+import AmitaTip from '../../components/features/AmitaTip.astro';
 import { u, uMd, imgSrcSet } from '../../utils/url';
 ---
 
@@ -43,12 +44,16 @@ import { u, uMd, imgSrcSet } from '../../utils/url';
         <p>
           En el sistema financiero chileno, la mayoría de los bancos financian entre el <strong>80% y el 90%</strong> del valor de la propiedad, lo que significa que debes aportar entre un <strong>10% y un 20% de pie</strong>.
         </p>
-        <div class="callout-box">
-          <strong>💡 La ventaja de comprar en venta en verde con AMA Inmobiliaria:</strong>
+        <AmitaTip
+          image="/images/amita/amita-billetera.webp"
+          alt="Amita organizando el ahorro para el pie en su billetera"
+          label="Tip de Amita · Pie en cuotas"
+          title="La ventaja de comprar en venta en verde con AMA Inmobiliaria"
+        >
           <p>
             Al comprar en venta en verde en proyectos como <strong>AMA Quillayes</strong>, puedes fraccionar el pago del pie en hasta <strong>60 cuotas sin interés</strong> durante todo el proceso constructivo, lo que te permite ahorrar mes a mes sin necesidad de desembolsar todo el dinero al contado.
           </p>
-        </div>
+        </AmitaTip>
 
         <h2>2. ¿Cómo calcular la renta mínima requerida?</h2>
         <p>
@@ -68,6 +73,17 @@ import { u, uMd, imgSrcSet } from '../../utils/url';
         <p>
           En AMA Inmobiliaria facilitamos la compra de tu departamento combinando el financiamiento de tu pie en hasta <strong>60 cuotas sin interés</strong> durante la etapa de venta en verde con la gestión de tu <strong>crédito hipotecario</strong> bancario para la entrega. De esta forma organizas tu aporte inicial en cuotas planificadas antes de comenzar a pagar tu dividendo.
         </p>
+
+        <AmitaTip
+          image="/images/amita/amita-idea.webp"
+          alt="Amita con una ampolleta de idea sobre financiamiento"
+          label="Dato útil de Amita"
+          title="Compara 30 y 60 cuotas antes de elegir tu plan"
+        >
+          <p>
+            Probar distintos porcentajes de pie y plazos en nuestro simulador te ayudará a encontrar una cuota mensual cómoda que se ajuste a tu presupuesto familiar.
+          </p>
+        </AmitaTip>
 
         <div class="article-cta-box">
           <h3>¿Quieres simular tu dividendo y pie exacto?</h3>

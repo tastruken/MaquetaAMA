@@ -1,86 +1,112 @@
 ---
 // src/components/features/AdvisorQuoteCTA.astro
 // Sección de Cotización con Formulario a la izquierda y Fotografía de la Ejecutiva unificada a la derecha
-import { u, PLAN_OK_COTIZADOR_URL, AMA_WHATSAPP_PHONE } from '../../utils/url';
+import { u, PLAN_OK_COTIZADOR_URL, AMA_WHATSAPP_PHONE } from "../../utils/url";
 
 interface Props {
   phone?: string;
   email?: string;
 }
 
-const { phone = AMA_WHATSAPP_PHONE, email = 'quillayes@iama.cl' } = Astro.props;
-const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Catalina, me gustaría cotizar un departamento en AMA Quillayes y recibir asesoría sobre el financiamiento.')}`;
+const { phone = AMA_WHATSAPP_PHONE, email = "quillayes@iama.cl" } = Astro.props;
+const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent("Hola Catalina, me gustaría cotizar un departamento en AMA Quillayes y recibir asesoría sobre el financiamiento.")}`;
 ---
 
 <section class="advisor-cta-section" id="cotizar-asesor">
   <div class="container">
     <div class="advisor-split-card">
-      
       <!-- COLUMNA IZQUIERDA: FORMULARIO DE COTIZACIÓN -->
       <div class="advisor-form-col">
         <div class="form-header">
-          <span class="advisor-kicker">Atención Personalizada · AMA Quillayes</span>
+          <span class="advisor-kicker">
+            Atención Personalizada · AMA Quillayes
+          </span>
           <h2 class="form-title">Cotiza tu departamento con un asesor</h2>
           <p class="form-subtitle">
-            Recibe la cotización formal con lista de precios oficial, opciones de pie en cuotas sin interés y beneficios comerciales vigentes.
+            Recibe la cotización formal con lista de precios oficial, opciones
+            de pie en cuotas sin interés y beneficios comerciales vigentes.
           </p>
         </div>
 
         <form class="advisor-form" id="advisor-quote-form">
           <div class="form-field">
-            <label class="form-label" for="aq-name">Nombre y Apellido *</label>
-            <input 
-              type="text" 
-              id="aq-name" 
-              name="name" 
-              required 
-              placeholder="Ej: Ignacio Morales" 
-              class="form-input" 
+            <label class="form-label" for="aq-name">
+              Nombre y Apellido *
+            </label>
+            <input
+              type="text"
+              id="aq-name"
+              name="name"
+              required
+              placeholder="Ej: Ignacio Morales"
+              class="form-input"
             />
           </div>
 
           <div class="form-row-two">
             <div class="form-field">
-              <label class="form-label" for="aq-email">Correo Electrónico *</label>
-              <input 
-                type="email" 
-                id="aq-email" 
-                name="email" 
-                required 
-                placeholder="tu@correo.cl" 
-                class="form-input" 
+              <label class="form-label" for="aq-email">
+                Correo Electrónico *
+              </label>
+              <input
+                type="email"
+                id="aq-email"
+                name="email"
+                required
+                placeholder="tu@correo.cl"
+                class="form-input"
               />
             </div>
             <div class="form-field">
-              <label class="form-label" for="aq-phone">Teléfono / WhatsApp *</label>
-              <input 
-                type="tel" 
-                id="aq-phone" 
-                name="phone" 
-                required 
-                placeholder="+56 9 1234 5678" 
-                class="form-input" 
+              <label class="form-label" for="aq-phone">
+                Teléfono / WhatsApp *
+              </label>
+              <input
+                type="tel"
+                id="aq-phone"
+                name="phone"
+                required
+                placeholder="+56 9 1234 5678"
+                class="form-input"
               />
             </div>
           </div>
 
           <div class="form-field">
-            <label class="form-label" for="aq-tipologia">Tipología de Interés</label>
+            <label class="form-label" for="aq-tipologia">
+              Tipología de Interés
+            </label>
             <select id="aq-tipologia" name="tipologia" class="form-select">
-              <option value="Modelo 1D + 1B (Desde 2.540 UF)">Modelo 1D + 1B · Desde 2.540 UF (Ideal Renta)</option>
-              <option value="Modelo 2D + 2B Mariposa (Desde 3.750 UF)">Modelo 2D + 2B Mariposa · Desde 3.750 UF (Doble Suite)</option>
-              <option value="Cualquiera / Asesoría Integral">No estoy seguro / Busco asesoría para elegir</option>
+              <option value="Modelo 1D + 1B (Desde 2.540 UF)">
+                Modelo 1D + 1B · Desde 2.540 UF (Ideal Renta)
+              </option>
+              <option value="Modelo 2D + 2B Mariposa (Desde 3.750 UF)">
+                Modelo 2D + 2B Mariposa · Desde 3.750 UF (Doble Suite)
+              </option>
+              <option value="Cualquiera / Asesoría Integral">
+                No estoy seguro / Busco asesoría para elegir
+              </option>
             </select>
           </div>
 
           <div class="form-field">
-            <label class="form-label" for="aq-renta">Nivel de renta mensual *</label>
+            <label class="form-label" for="aq-renta">
+              Nivel de renta mensual *
+            </label>
             <select id="aq-renta" name="renta" required class="form-select">
-              <option value="" selected disabled>Selecciona tu tramo de renta</option>
+              <option value="" selected disabled>
+                Selecciona tu tramo de renta
+              </option>
               <option value="Menos de $1.000.000">Menos de $1.000.000</option>
-              <option value="De $1.000.000 a $1.500.000">De $1.000.000 a $1.500.000</option>
-              <option value="De $1.500.000 a $2.000.000">De $1.500.000 a $2.000.000</option>
-              <option value="De $2.000.000 a $3.000.000">De $2.000.000 a $3.000.000</option>
+              <option value="De $1.000.000 a $1.500.000">
+                De $1.000.000 a $1.500.000
+              </option>
+              <option value="De $1.500.000 a $2.000.000">
+                De $1.500.000 a $2.000.000
+              </option>
+              <option value="De $2.000.000 a $3.000.000">
+                De $2.000.000 a $3.000.000
+              </option>
               <option value="Más de $3.000.000">Más de $3.000.000</option>
             </select>
           </div>
@@ -89,7 +115,9 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
           <div class="form-actions-wrap">
             <button type="submit" id="aq-submit-btn" class="btn-submit-quote">
               <span>Enviar</span>
-              <span class="btn-arrow" aria-hidden="true">↗</span>
+              <span class="btn-arrow" aria-hidden="true">
+                ↗
+              </span>
             </button>
 
             <!-- Botón conectado al cotizador oficial de Plan OK -->
@@ -103,147 +131,178 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
               onclick="if (window.openCotizadorModal) { event.preventDefault(); window.openCotizadorModal(); }"
             >
               <span>Cotización Oficial</span>
-              <span class="btn-arrow" aria-hidden="true">↗</span>
+              <span class="btn-arrow" aria-hidden="true">
+                ↗
+              </span>
             </a>
           </div>
 
-          <div id="aq-success" class="quote-success-banner" style="display: none;">
+          <div
+            id="aq-success"
+            class="quote-success-banner"
+            style="display: none;"
+          >
             <strong>✓ ¡Solicitud recibida con éxito!</strong>
-            <p>Catalina Carrasco se comunicará contigo al teléfono y correo ingresados para entregarte la cotización formal y asesorarte en tu financiamiento.</p>
+            <p>
+              Catalina Carrasco se comunicará contigo al teléfono y correo
+              ingresados para entregarte la cotización formal y asesorarte en tu
+              financiamiento.
+            </p>
           </div>
-          <div id="aq-error" class="quote-error-banner" style="display: none;"></div>
+          <div
+            id="aq-error"
+            class="quote-error-banner"
+            style="display: none;"
+          ></div>
         </form>
       </div>
 
       <!-- COLUMNA DERECHA: FOTOGRAFÍA DE LA EJECUTIVA UNIFICADA A LOS BORDES -->
       <div class="advisor-visual-col">
-        <img 
-          src={u('/images/asesor_comercial_quillayes.jpg')} 
-          alt="Catalina Carrasco - Asesora Comercial AMA Quillayes" 
-          class="advisor-cover-img" 
-          loading="lazy" 
+        <img
+          src={u("/images/asesor_comercial_quillayes.jpg")}
+          alt="Catalina Carrasco - Asesora Comercial AMA Quillayes"
+          class="advisor-cover-img"
+          loading="lazy"
         />
         <div class="advisor-overlay-gradient"></div>
 
         <!-- Barra inferior unificada a los bordes de la tarjeta -->
         <div class="advisor-unified-footer">
           <p class="advisor-quote-text">
-            “Te acompaño a revisar las opciones de financiamiento, simular tu crédito y ordenar tus cuotas de pie con total transparencia.”
+            “Te acompaño a revisar las opciones de financiamiento, simular tu
+            crédito y ordenar tus cuotas de pie con total transparencia.”
           </p>
           <div class="advisor-meta-row">
             <div class="advisor-meta-info">
               <h3 class="advisor-full-name">Catalina Carrasco</h3>
               <div class="advisor-contact-lines">
-                <a href={`tel:+${phone}`} class="advisor-contact-link">+569 8526 6310</a>
-                <a href={`mailto:${email}`} class="advisor-contact-link advisor-contact-email">{email}</a>
+                <a href={`tel:+${phone}`} class="advisor-contact-link">
+                  +569 8526 6310
+                </a>
+                <a
+                  href={`mailto:${email}`}
+                  class="advisor-contact-link advisor-contact-email"
+                >
+                  {email}
+                </a>
               </div>
-              <span class="advisor-job-title">ASESORA COMERCIAL - QUILLAYES</span>
+              <span class="advisor-job-title">
+                ASESORA COMERCIAL - QUILLAYES
+              </span>
             </div>
-            <a 
-              href={whatsappUrl} 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               class="advisor-wa-pill"
               title="Abrir WhatsApp directo con Catalina Carrasco"
               aria-label="Abrir WhatsApp directo con Catalina Carrasco"
             >
-              <svg width="38" height="38" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" aria-hidden="true">
-                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.947.814 2.8.814 3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.586-5.766-5.772-5.766zm3.376 8.21c-.14.394-.805.748-1.127.794-.306.044-.707.067-2.038-.484-1.603-.665-2.617-2.316-2.696-2.423-.079-.107-.649-.864-.649-1.647 0-.783.41-1.168.556-1.328.146-.16.321-.2.428-.2.107 0 .214.002.308.006.1.005.234-.038.366.279.136.328.465 1.135.505 1.218.041.082.068.179.014.288-.055.107-.082.175-.164.27-.082.096-.173.214-.247.288-.082.083-.168.172-.072.337.096.164.428.706.918 1.142.631.562 1.164.737 1.328.819.164.082.261.069.358-.041.097-.11.41-.479.52-.644.11-.164.22-.137.369-.082.15.055.952.449 1.116.531.164.082.273.123.314.192.041.069.041.401-.099.795zM12 2C6.477 2 2 6.477 2 12c0 1.891.526 3.66 1.439 5.174L2 22l4.98-1.306C8.423 21.523 10.15 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
+              <svg
+                width="38"
+                height="38"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                aria-hidden="true"
+              >
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.947.814 2.8.814 3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.586-5.766-5.772-5.766zm3.376 8.21c-.14.394-.805.748-1.127.794-.306.044-.707.067-2.038-.484-1.603-.665-2.617-2.316-2.696-2.423-.079-.107-.649-.864-.649-1.647 0-.783.41-1.168.556-1.328.146-.16.321-.2.428-.2.107 0 .214.002.308.006.1.005.234-.038.366.279.136.328.465 1.135.505 1.218.041.082.068.179.014.288-.055.107-.082.175-.164.27-.082.096-.173.214-.247.288-.082.083-.168.172-.072.337.096.164.428.706.918 1.142.631.562 1.164.737 1.328.819.164.082.261.069.358-.041.097-.11.41-.479.52-.644.11-.164.22-.137.369-.082.15.055.952.449 1.116.531.164.082.273.123.314.192.041.069.041.401-.099.795zM12 2C6.477 2 2 6.477 2 12c0 1.891.526 3.66 1.439 5.174L2 22l4.98-1.306C8.423 21.523 10.15 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" />
               </svg>
             </a>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
 <script define:vars={{ email }}>
-  const quoteForm = document.getElementById('advisor-quote-form');
-  const quoteSubmit = document.getElementById('aq-submit-btn');
-  const quoteSuccess = document.getElementById('aq-success');
-  const quoteError = document.getElementById('aq-error');
+  const quoteForm = document.getElementById("advisor-quote-form");
+  const quoteSubmit = document.getElementById("aq-submit-btn");
+  const quoteSuccess = document.getElementById("aq-success");
+  const quoteError = document.getElementById("aq-error");
 
   try {
-    const savedTip = sessionStorage.getItem('amaSelectedTipologia');
-    const aqTip = document.getElementById('aq-tipologia');
+    const savedTip = sessionStorage.getItem("amaSelectedTipologia");
+    const aqTip = document.getElementById("aq-tipologia");
     if (savedTip && aqTip) {
       const norm = savedTip.toLowerCase();
       for (const opt of aqTip.options) {
         if (
           opt.value.toLowerCase().includes(norm) ||
-          (norm.includes('1d') && opt.value.includes('1D')) ||
-          (norm.includes('2d') && opt.value.includes('2D'))
+          (norm.includes("1d") && opt.value.includes("1D")) ||
+          (norm.includes("2d") && opt.value.includes("2D"))
         ) {
           aqTip.value = opt.value;
           break;
         }
       }
-      sessionStorage.removeItem('amaSelectedTipologia');
+      sessionStorage.removeItem("amaSelectedTipologia");
     }
   } catch (_e) {}
 
-  if (window.location.hash === '#cotizar-asesor') {
+  if (window.location.hash === "#cotizar-asesor") {
     setTimeout(() => {
-      const nameInput = document.getElementById('aq-name');
+      const nameInput = document.getElementById("aq-name");
       if (nameInput) nameInput.focus({ preventScroll: true });
     }, 350);
   }
 
   if (quoteForm && quoteSuccess) {
-    quoteForm.addEventListener('submit', async (e) => {
+    quoteForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const name = document.getElementById('aq-name')?.value.trim() || '';
-      const userEmail = document.getElementById('aq-email')?.value.trim() || '';
-      const phone = document.getElementById('aq-phone')?.value.trim() || '';
-      const tipologia = document.getElementById('aq-tipologia')?.value || '';
-      const renta = document.getElementById('aq-renta')?.value || '';
+      const name = document.getElementById("aq-name")?.value.trim() || "";
+      const userEmail = document.getElementById("aq-email")?.value.trim() || "";
+      const phone = document.getElementById("aq-phone")?.value.trim() || "";
+      const tipologia = document.getElementById("aq-tipologia")?.value || "";
+      const renta = document.getElementById("aq-renta")?.value || "";
 
-      quoteSuccess.style.display = 'none';
-      if (quoteError) quoteError.style.display = 'none';
+      quoteSuccess.style.display = "none";
+      if (quoteError) quoteError.style.display = "none";
       if (quoteSubmit) {
         quoteSubmit.disabled = true;
-        const label = quoteSubmit.querySelector('span');
-        if (label) label.textContent = 'Enviando solicitud...';
+        const label = quoteSubmit.querySelector("span");
+        if (label) label.textContent = "Enviando solicitud...";
       }
 
       try {
         const res = await fetch(`https://formsubmit.co/ajax/${email}`, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
+            "Content-Type": "application/json",
+            Accept: "application/json",
           },
           body: JSON.stringify({
             _subject: `Solicitud de cotización oficial AMA Quillayes · ${name}`,
             _replyto: userEmail,
-            _template: 'table',
+            _template: "table",
             Nombre: name,
             Correo: userEmail,
             Teléfono: phone,
-            'Tipología de Interés': tipologia,
-            'Nivel de Renta Mensual': renta
-          })
+            "Tipología de Interés": tipologia,
+            "Nivel de Renta Mensual": renta,
+          }),
         });
 
-        if (!res.ok) throw new Error('Error al enviar');
+        if (!res.ok) throw new Error("Error al enviar");
 
-        quoteSuccess.style.display = 'block';
+        quoteSuccess.style.display = "block";
         quoteForm.reset();
-        quoteSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        quoteSuccess.scrollIntoView({ behavior: "smooth", block: "nearest" });
       } catch (_err) {
         const mailtoBody = `Hola Catalina,\n\nSolicito cotización oficial de AMA Quillayes:\n- Nombre: ${name}\n- Correo: ${userEmail}\n- Teléfono: ${phone}\n- Tipología de interés: ${tipologia}\n- Nivel de renta mensual: ${renta}`;
         const mailtoHref = `mailto:${email}?subject=${encodeURIComponent(`Cotización Oficial AMA Quillayes - ${name}`)}&body=${encodeURIComponent(mailtoBody)}`;
         if (quoteError) {
           quoteError.innerHTML = `No se pudo enviar automáticamente desde el navegador. Escríbenos directo a <a href="${mailtoHref}">${email}</a>.`;
-          quoteError.style.display = 'block';
+          quoteError.style.display = "block";
         }
       } finally {
         if (quoteSubmit) {
           quoteSubmit.disabled = false;
-          const label = quoteSubmit.querySelector('span');
-          if (label) label.textContent = 'Enviar';
+          const label = quoteSubmit.querySelector("span");
+          if (label) label.textContent = "Enviar";
         }
       }
     });
@@ -253,14 +312,14 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
 <style>
   .advisor-cta-section {
     padding: 5rem 0 6rem;
-    background: #FFFFFF;
+    background: #ffffff;
     scroll-margin-top: 96px;
   }
 
   .advisor-split-card {
     display: grid;
     grid-template-columns: 1.22fr 1fr;
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 28px;
     border: 1px solid rgba(15, 23, 42, 0.09);
     box-shadow: 0 24px 54px -12px rgba(15, 23, 42, 0.1);
@@ -274,7 +333,7 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: #FFFFFF;
+    background: #ffffff;
   }
 
   .form-header {
@@ -287,14 +346,14 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #1AA6B7;
+    color: #1aa6b7;
     margin-bottom: 0.65rem;
   }
 
   .form-title {
     font-size: clamp(1.9rem, 2.7vw, 2.5rem);
     font-weight: 800;
-    color: #0F172A;
+    color: #0f172a;
     letter-spacing: -0.025em;
     line-height: 1.15;
     margin: 0 0 0.85rem;
@@ -302,7 +361,7 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
 
   .form-subtitle {
     font-size: 0.96rem;
-    color: #64748B;
+    color: #64748b;
     line-height: 1.6;
     margin: 0;
   }
@@ -338,8 +397,8 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
     width: 100%;
     font-family: inherit;
     font-size: 0.95rem;
-    color: #0F172A;
-    background: #F8FAFC;
+    color: #0f172a;
+    background: #f8fafc;
     border: 1px solid rgba(15, 23, 42, 0.12);
     border-radius: 14px;
     padding: 0.88rem 1.1rem;
@@ -349,8 +408,8 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
   .form-input:focus,
   .form-select:focus {
     outline: none;
-    background: #FFFFFF;
-    border-color: #1AA6B7;
+    background: #ffffff;
+    border-color: #1aa6b7;
     box-shadow: 0 0 0 4px rgba(26, 166, 183, 0.12);
   }
 
@@ -371,19 +430,21 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
     min-height: 48px;
     padding: 0.9rem 1.55rem;
     border-radius: 9999px;
-    background: #0F172A;
-    color: #FFFFFF;
+    background: #0f172a;
+    color: #ffffff;
     font-weight: 700;
     font-size: 0.92rem;
     border: none;
     cursor: pointer;
     white-space: nowrap;
     box-shadow: 0 6px 18px rgba(15, 23, 42, 0.2);
-    transition: background 0.2s ease, transform 0.2s ease;
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
   }
 
   .btn-submit-quote:hover {
-    background: #1AA6B7;
+    background: #1aa6b7;
     transform: translateY(-2px);
     box-shadow: 0 10px 24px rgba(26, 166, 183, 0.28);
   }
@@ -407,8 +468,8 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
     min-height: 48px;
     padding: 0.88rem 1.5rem;
     border-radius: 9999px;
-    background: #FFFFFF;
-    color: #0F172A !important;
+    background: #ffffff;
+    color: #0f172a !important;
     font-size: 0.92rem;
     font-weight: 700;
     font-family: inherit;
@@ -420,9 +481,9 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
   }
 
   .btn-official-quote:hover {
-    border-color: #1AA6B7;
-    color: #1AA6B7;
-    background: #F8FAFC;
+    border-color: #1aa6b7;
+    color: #1aa6b7;
+    background: #f8fafc;
     transform: translateY(-2px);
   }
 
@@ -431,7 +492,7 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
     border-radius: 14px;
     background: rgba(26, 166, 183, 0.1);
     border: 1px solid rgba(26, 166, 183, 0.35);
-    color: #0F172A;
+    color: #0f172a;
     font-size: 0.92rem;
     line-height: 1.55;
     margin-top: 0.5rem;
@@ -439,7 +500,7 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
 
   .quote-success-banner strong {
     display: block;
-    color: #0F172A;
+    color: #0f172a;
     font-size: 0.98rem;
     margin-bottom: 0.35rem;
   }
@@ -454,14 +515,14 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
     border-radius: 14px;
     background: rgba(239, 68, 68, 0.1);
     border: 1px solid rgba(239, 68, 68, 0.35);
-    color: #991B1B;
+    color: #991b1b;
     font-size: 0.88rem;
     font-weight: 600;
     margin-top: 0.5rem;
   }
 
   .quote-error-banner a {
-    color: #991B1B;
+    color: #991b1b;
     text-decoration: underline;
   }
 
@@ -484,7 +545,7 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 15%;
+    object-position: center 12%;
     display: block;
     transition: transform 0.6s ease;
   }
@@ -497,10 +558,10 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
     position: absolute;
     inset: 0;
     background: linear-gradient(
-      180deg, 
-      rgba(8, 22, 32, 0) 0%, 
-      rgba(8, 22, 32, 0.05) 30%, 
-      rgba(8, 22, 32, 0.62) 58%, 
+      180deg,
+      rgba(8, 22, 32, 0) 0%,
+      rgba(8, 22, 32, 0.05) 30%,
+      rgba(8, 22, 32, 0.62) 58%,
       rgba(8, 22, 32, 0.92) 78%,
       #081622 100%
     );
@@ -513,7 +574,7 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
     z-index: 2;
     width: 100%;
     padding: 2.25rem 2.5rem 2.5rem;
-    color: #FFFFFF;
+    color: #ffffff;
     background: transparent;
     border-top: 1px solid rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(10px);
@@ -546,7 +607,7 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
   .advisor-full-name {
     font-size: 1.22rem;
     font-weight: 800;
-    color: #FFFFFF;
+    color: #ffffff;
     margin: 0 0 0.2rem;
     line-height: 1.2;
     letter-spacing: -0.01em;
@@ -570,11 +631,11 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
   }
 
   .advisor-contact-link:hover {
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   .advisor-contact-email {
-    color: #7BE0EC;
+    color: #7be0ec;
     text-decoration: underline;
     text-underline-offset: 3px;
   }
@@ -584,28 +645,30 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent('Hola Cata
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: #1AA6B7;
+    color: #1aa6b7;
   }
 
   .advisor-wa-pill {
     width: 68px;
     height: 68px;
     border-radius: 50%;
-    background: #25D366;
-    color: #FFFFFF;
+    background: #25d366;
+    color: #ffffff;
     border: 2px solid rgba(255, 255, 255, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
     box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
-    transition: transform 0.2s ease, background 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease;
     flex-shrink: 0;
   }
 
   .advisor-wa-pill:hover {
     transform: scale(1.08);
-    background: #20BA5A;
+    background: #20ba5a;
   }
 
   @media (max-width: 992px) {

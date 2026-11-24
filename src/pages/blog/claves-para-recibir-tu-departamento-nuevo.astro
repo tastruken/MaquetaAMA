@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import AmitaTip from '../../components/features/AmitaTip.astro';
 import { u, uMd, imgSrcSet } from '../../utils/url';
 ---
 
@@ -38,6 +39,17 @@ import { u, uMd, imgSrcSet } from '../../utils/url';
           El día de la entrega de tu departamento nuevo es una ocasión memorable. En <strong>AMA Inmobiliaria</strong> nos esforzamos para que este hito sea una experiencia transparente, profesional y bien documentada. Aquí te compartimos nuestro checklist técnico para que revises cada rincón con total seguridad.
         </p>
 
+        <AmitaTip
+          image="/images/amita/amita-checklist.webp"
+          alt="Amita con una tabla de checklist y lápiz revisando la entrega"
+          label="Checklist de Amita"
+          title="Lleva esta guía paso a paso el día de tu recepción"
+        >
+          <p>
+            Tómate tu tiempo en cada ambiente, prueba llaves, enchufes y ventanas, y anota cualquier observación directamente en el acta de entrega.
+          </p>
+        </AmitaTip>
+
         <h2>1. Puertas, ventanas y quincallería</h2>
         <ul>
           <li><strong>Apertura y cierre:</strong> Comprueba que las puertas abran y cierren sin rozar el piso y que las cerraduras funcionen con suavidad.</li>
@@ -70,6 +82,17 @@ import { u, uMd, imgSrcSet } from '../../utils/url';
           <li><strong>5 años en elementos constructivos e instalaciones</strong> (desde la recepción municipal definitiva): cubre redes de agua potable y alcantarillado, canalizaciones eléctricas, corrientes débiles, ductos de extracción e impermeabilizaciones.</li>
           <li><strong>10 años en estructura soportante</strong> (desde la recepción municipal definitiva): cubre fallas o defectos que afecten fundaciones, cimientos, muros estructurales, pilares de hormigón, losas, vigas y techumbres principales.</li>
         </ul>
+
+        <AmitaTip
+          image="/images/amita/amita-llave.webp"
+          alt="Amita sosteniendo una llave dorada celebrando la entrega"
+          label="¡Bienvenido a casa!"
+          title="Recibe tus llaves con total tranquilidad"
+        >
+          <p>
+            Cada etapa de tu departamento cuenta con respaldo técnico y garantías legales claras para que disfrutes tu nueva etapa sin preocupaciones.
+          </p>
+        </AmitaTip>
 
         {/* OCULTAR SECCION: Comentada temporalmente por solicitud
         <div class="article-cta-box">

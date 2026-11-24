@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ModernCTA from '../../components/features/ModernCTA.astro';
+import AmitaTip from '../../components/features/AmitaTip.astro';
 import { u, uMd, imgSrcSet } from '../../utils/url';
 import '../../styles/home.css';
 import '../../styles/inner-pages.css';
@@ -179,6 +180,19 @@ const featured = articles[0];
         <p class="ip-desc">
           Filtra por temática para profundizar en cada etapa de tu decisión inmobiliaria.
         </p>
+      </div>
+
+      <div style="max-width: 780px; margin: 0 auto 2rem;">
+        <AmitaTip
+          image="/images/amita/amita-saludo.webp"
+          alt="Amita saludando a los lectores del blog AMA Inmobiliaria"
+          label="Hola, soy Amita"
+          title="Te acompaño con consejos simples en cada guía"
+        >
+          <p>
+            Explora nuestras notas sobre financiamiento, barrios y entrega de llaves para resolver tus dudas y dar el paso hacia tu departamento con total confianza.
+          </p>
+        </AmitaTip>
       </div>
 
       <div class="ip-tabs-bar">

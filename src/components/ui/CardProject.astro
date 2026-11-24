@@ -18,6 +18,7 @@ interface Props {
   surface?: string;
   delivery?: string;
   priceSubtitle?: string;
+  brochureUrl?: string;
 }
 
 const {
@@ -40,7 +41,8 @@ const {
   baths = '1 y 2 Baños',
   surface = '34,5 a 64,8 m²',
   delivery = 'Entrega 2026',
-  priceSubtitle = 'Pie en hasta 60 cuotas'
+  priceSubtitle = 'Pie en hasta 60 cuotas',
+  brochureUrl = '/ama-brochure2.pdf'
 } = Astro.props;
 
 const slideImages = images.length > 0 ? images : [image];
@@ -161,6 +163,23 @@ const slideImages = images.length > 0 ? images : [image];
           <span aria-hidden="true">↗</span>
         </a>
       </div>
+
+      {brochureUrl && (
+        <a
+          href={u(brochureUrl)}
+          download="Brochure-AMA-Quillayes.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-card-brochure"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span>Descargar Brochure Oficial (PDF)</span>
+        </a>
+      )}
     </div>
   </div>
 </article>
@@ -512,6 +531,34 @@ const slideImages = images.length > 0 ? images : [image];
   .btn-ver-proyecto:hover {
     background: var(--color-cyan);
     transform: translateY(-2px);
+  }
+
+  .btn-card-brochure {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.85rem 1.25rem;
+    border-radius: var(--radius-full);
+    border: 1.5px solid rgba(26, 166, 183, 0.45);
+    background: rgba(26, 166, 183, 0.07);
+    color: var(--color-petrol);
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .btn-card-brochure svg {
+    color: var(--color-cyan);
+    flex-shrink: 0;
+  }
+
+  .btn-card-brochure:hover {
+    background: rgba(26, 166, 183, 0.14);
+    border-color: var(--color-cyan);
+    transform: translateY(-1px);
   }
 
   @media (max-width: 1024px) {

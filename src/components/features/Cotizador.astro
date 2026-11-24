@@ -130,7 +130,7 @@ const { isModal = false, idPrefix = 'cotizador', showHeader = isModal } = Astro.
             <div class="summary-meta-line">
               <span class="uf-reference-chip">
                 <span>UF ref.:</span>
-                <strong id={`${idPrefix}-uf-chip-val`}>$39.000 CLP</strong>
+                <strong id={`${idPrefix}-uf-chip-val`}>$41.399 CLP</strong>
               </span>
               <span class="dividendo-disclaimer">*Tasa anual ref. 3,6%</span>
             </div>
@@ -154,7 +154,28 @@ const { isModal = false, idPrefix = 'cotizador', showHeader = isModal } = Astro.
               <strong id={`${idPrefix}-pie-cuota-row-val`}>9.38 UF (~$365.625)</strong>
             </div>
             <div class="breakdown-row highlight-row">
-              <span>Renta mínima sugerida:</span>
+              <span class="renta-label-group">
+                <span>Renta mínima sugerida:</span>
+                <span class="renta-help-wrap">
+                  <button
+                    type="button"
+                    id={`${idPrefix}-renta-help-btn`}
+                    class="renta-help-btn"
+                    aria-label="Cómo se calcula la renta mínima sugerida"
+                    aria-expanded="false"
+                    aria-controls={`${idPrefix}-renta-tooltip`}
+                  >
+                    ?
+                  </button>
+                  <span
+                    id={`${idPrefix}-renta-tooltip`}
+                    class="renta-tooltip"
+                    role="tooltip"
+                  >
+                    Se calcula como <strong>4 veces el dividendo estimado</strong> (regla bancaria sugerida donde el dividendo no supera el <strong>25% de tu renta líquida</strong>). Puedes complementar renta.
+                  </span>
+                </span>
+              </span>
               <strong id={`${idPrefix}-renta-sugerida`}>~$2.516.000</strong>
             </div>
           </div>
@@ -549,11 +570,86 @@ const { isModal = false, idPrefix = 'cotizador', showHeader = isModal } = Astro.
   }
 
   .highlight-row {
+    position: relative;
     grid-column: span 2;
     background: #FFFFFF;
     padding: 0.58rem 0.85rem;
     border-radius: 12px;
     border: 1px dashed rgba(26, 166, 183, 0.55);
+  }
+
+  .renta-label-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+  }
+
+  .renta-help-wrap {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .renta-help-btn {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(26, 166, 183, 0.55);
+    background: rgba(26, 166, 183, 0.12);
+    color: #0F172A;
+    font-size: 0.72rem;
+    font-weight: 800;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .renta-help-btn:hover,
+  .renta-help-btn:focus-visible,
+  .highlight-row.is-help-open .renta-help-btn {
+    background: var(--color-cyan, #1AA6B7);
+    border-color: var(--color-cyan, #1AA6B7);
+    color: #FFFFFF;
+    outline: none;
+  }
+
+  .renta-tooltip {
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 9px);
+    width: min(300px, 100%);
+    padding: 0.68rem 0.85rem;
+    border-radius: 12px;
+    background: #0F172A;
+    color: #FFFFFF;
+    font-size: 0.77rem;
+    font-weight: 400;
+    line-height: 1.45;
+    box-shadow: 0 14px 30px -8px rgba(15, 23, 42, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(4px);
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+    z-index: 25;
+  }
+
+  .renta-tooltip strong {
+    color: #5EEAD4;
+    font-weight: 700;
+  }
+
+  .renta-help-wrap:hover .renta-tooltip,
+  .renta-help-btn:focus-visible + .renta-tooltip,
+  .highlight-row.is-help-open .renta-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
   }
 
   .quote-lead-form {
@@ -664,7 +760,9 @@ const { isModal = false, idPrefix = 'cotizador', showHeader = isModal } = Astro.
 
 <script define:vars={{ idPrefix }}>
   (function initCotizador() {
-    let ufValue = 39000; // Valor referencial de respaldo de la UF en CLP
+    const FALLBACK_UF = 41399; // Valor referencial de respaldo de la UF en CLP
+    const UF_CACHE_KEY = 'ama_uf_cache_v1';
+    let ufValue = FALLBACK_UF;
     const ANNUAL_RATE = 0.036; // Tasa anual referencial 3.6%
     const MONTHLY_RATE = Math.pow(1 + ANNUAL_RATE, 1 / 12) - 1;
     const TARGET_EMAIL = 'quillayes@iama.cl';
@@ -692,6 +790,8 @@ const { isModal = false, idPrefix = 'cotizador', showHeader = isModal } = Astro.
     const elPieMonto = document.getElementById(`${idPrefix}-pie-monto`);
     const elCreditoMonto = document.getElementById(`${idPrefix}-credito-monto`);
     const elRentaSugerida = document.getElementById(`${idPrefix}-renta-sugerida`);
+    const rentaHelpBtn = document.getElementById(`${idPrefix}-renta-help-btn`);
+    const rentaRow = rentaHelpBtn ? rentaHelpBtn.closest('.highlight-row') : null;
     const formLead = document.getElementById(`${idPrefix}-lead-form`);
     const submitBtn = document.getElementById(`${idPrefix}-submit-btn`);
     const successMsg = document.getElementById(`${idPrefix}-success-msg`);
@@ -756,25 +856,129 @@ const { isModal = false, idPrefix = 'cotizador', showHeader = isModal } = Astro.
       if (elRentaSugerida) elRentaSugerida.textContent = `~$${minIncomeClp.toLocaleString('es-CL')}`;
     }
 
-    // Actualiza automáticamente la UF del día desde mindicador.cl (datos Banco Central de Chile)
+    // Actualiza automáticamente la UF del día con caché diario y respaldo multi-API
+    function getChileTodayKey() {
+      try {
+        return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Santiago' }).format(new Date());
+      } catch (_err) {
+        return new Date().toISOString().slice(0, 10);
+      }
+    }
+
+    function readUfCache() {
+      try {
+        const raw = window.localStorage.getItem(UF_CACHE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (typeof parsed?.value === 'number' && parsed.value > 30000 && parsed.value < 100000) {
+          return parsed;
+        }
+      } catch (_err) {
+        // Ignore storage errors (private mode / quota)
+      }
+      return null;
+    }
+
+    function writeUfCache(dateKey, value) {
+      try {
+        window.localStorage.setItem(UF_CACHE_KEY, JSON.stringify({ date: dateKey, value }));
+      } catch (_err) {
+        // Ignore storage errors
+      }
+    }
+
+    function applyLiveUf(liveUf, isToday) {
+      ufValue = liveUf;
+      const formattedUf = `$${ufValue.toLocaleString('es-CL')} CLP`;
+      if (elUfChipVal) elUfChipVal.textContent = isToday ? `${formattedUf} (hoy)` : formattedUf;
+      if (elUfRowVal) elUfRowVal.textContent = formattedUf;
+      calculate();
+    }
+
+    async function fetchProviderUf(url, extractValue, timeoutMs = 4000) {
+      const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      const timerId = controller ? window.setTimeout(() => controller.abort(), timeoutMs) : null;
+      try {
+        const res = await fetch(url, controller ? { signal: controller.signal } : undefined);
+        if (!res.ok) return null;
+        const data = await res.json();
+        const rawVal = extractValue(data);
+        return typeof rawVal === 'number' && Number.isFinite(rawVal) && rawVal > 30000 && rawVal < 100000
+          ? Math.round(rawVal)
+          : null;
+      } catch (_err) {
+        return null;
+      } finally {
+        if (timerId !== null) window.clearTimeout(timerId);
+      }
+    }
+
+    async function fetchBestLiveUf() {
+      const providers = [
+        {
+          url: 'https://api.boostr.cl/economy/indicator/uf.json',
+          extract: (d) => d?.data?.value
+        },
+        {
+          url: 'https://findic.cl/api/uf',
+          extract: (d) => d?.serie?.[0]?.valor
+        },
+        {
+          url: 'https://mindicador.cl/api/uf',
+          extract: (d) => d?.serie?.[0]?.valor
+        }
+      ];
+
+      for (const provider of providers) {
+        const val = await fetchProviderUf(provider.url, provider.extract);
+        if (val) return val;
+      }
+      return null;
+    }
+
     function syncLiveUf() {
+      const todayKey = getChileTodayKey();
+      const cached = readUfCache();
+
+      if (cached) {
+        if (cached.date === todayKey) {
+          applyLiveUf(cached.value, true);
+          return;
+        }
+        applyLiveUf(cached.value, false);
+      }
+
       if (!window.__amaUfPromise) {
-        window.__amaUfPromise = fetch('https://mindicador.cl/api/uf')
-          .then((res) => (res.ok ? res.json() : null))
-          .then((data) => {
-            const latest = data?.serie?.[0]?.valor;
-            return typeof latest === 'number' && latest > 30000 ? Math.round(latest) : null;
-          })
-          .catch(() => null);
+        window.__amaUfPromise = fetchBestLiveUf().then((liveUf) => {
+          if (liveUf) {
+            writeUfCache(todayKey, liveUf);
+          } else {
+            window.__amaUfPromise = null;
+          }
+          return liveUf;
+        });
       }
 
       window.__amaUfPromise.then((liveUf) => {
         if (!liveUf) return;
-        ufValue = liveUf;
-        const formattedUf = `$${ufValue.toLocaleString('es-CL')} CLP`;
-        if (elUfChipVal) elUfChipVal.textContent = `${formattedUf} (hoy)`;
-        if (elUfRowVal) elUfRowVal.textContent = formattedUf;
-        calculate();
+        applyLiveUf(liveUf, true);
+      });
+    }
+
+    if (rentaHelpBtn && rentaRow) {
+      const setHelpOpen = (open) => {
+        rentaRow.classList.toggle('is-help-open', open);
+        rentaHelpBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      };
+      rentaHelpBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setHelpOpen(!rentaRow.classList.contains('is-help-open'));
+      });
+      document.addEventListener('click', (e) => {
+        if (!rentaRow.contains(e.target)) setHelpOpen(false);
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setHelpOpen(false);
       });
     }
 
